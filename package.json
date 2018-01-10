@@ -5,10 +5,8 @@
 	"version": "$(cat version.num)",
 	"scripts": {
 		"precommit": "lint-staged",
-		"eslint-check":
-			"eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-		"dockerbuild":
-			"yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
+		"eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+		"dockerbuild": "yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
 	},
 	"devDependencies": {
 		"autoprefixer": "^7.2.4",
@@ -30,12 +28,28 @@
 		"prettierrc": "^0.0.0-5"
 	},
 	"lint-staged": {
-		"src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
+		"src/**/*.{js,jsx,json,css}": [
+			"prettier --single-quote --write",
+			"git add"
+		]
 	},
 	"babel": {
-		"presets": ["react-app"]
+		"presets": [
+			"react-app"
+		]
 	},
-	"repository":
-		"https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
-	"license": "MIT"
+	"repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
+	"license": "MIT",
+	"dependencies": {
+		"history": "^4.7.2",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
+		"react-redux": "^5.0.6",
+		"react-router-dom": "^4.2.2",
+		"react-router-redux": "^4.0.8",
+		"redux": "^3.7.2",
+		"redux-thunk": "^2.2.0",
+		"reselect": "^3.0.1",
+		"superagent": "^3.8.2"
+	}
 }
