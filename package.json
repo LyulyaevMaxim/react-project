@@ -1,0 +1,41 @@
+{
+	"name": "react-project",
+	"description": "Fast and effective environment for web development",
+	"author": "Maxim Buslaev",
+	"version": "$(cat version.num)",
+	"scripts": {
+		"precommit": "lint-staged",
+		"eslint-check":
+			"eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+		"dockerbuild":
+			"yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
+	},
+	"devDependencies": {
+		"autoprefixer": "^7.2.4",
+		"babel-eslint": "^8.2.1",
+		"eslint": "^4.15.0",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-config-react-app": "^2.0.1",
+		"eslint-config-standard": "^11.0.0-beta.0",
+		"eslint-plugin-flowtype": "^2.41.0",
+		"eslint-plugin-import": "^2.8.0",
+		"eslint-plugin-jsx-a11y": "^6.0.3",
+		"eslint-plugin-node": "^5.2.1",
+		"eslint-plugin-prettier": "^2.4.0",
+		"eslint-plugin-promise": "^3.6.0",
+		"eslint-plugin-react": "^7.5.1",
+		"eslint-plugin-standard": "^3.0.1",
+		"lint-staged": "^6.0.0",
+		"prettier": "^1.10.0",
+		"prettierrc": "^0.0.0-5"
+	},
+	"lint-staged": {
+		"src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
+	},
+	"babel": {
+		"presets": ["react-app"]
+	},
+	"repository":
+		"https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
+	"license": "MIT"
+}
