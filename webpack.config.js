@@ -7,7 +7,12 @@ module.exports = {
 		print: './src/print.js'
 	},
 	devtool: 'inline-source-map',
-	plugins: [new CleanWebpackPlugin(['dist'])],
+	devServer: {
+		contentBase: './dist'
+	},
+	plugins: [
+		// new CleanWebpackPlugin(['dist'])
+	],
 	output: {
 		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist')

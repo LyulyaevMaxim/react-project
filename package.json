@@ -4,12 +4,14 @@
 	"author": "Maxim Buslaev",
 	"version": "$(cat version.num)",
 	"scripts": {
-		"precommit": "lint-staged",
+		"watch": "webpack --progress --watch",
+		"start": "webpack-dev-server --open",
+		"build": "webpack && cp src/index.html dist/index.html",
+		"dockerbuild":
+			"yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
 		"eslint-check":
 			"eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-		"build": "webpack --mode production && cp src/index.html dist/index.html",
-		"dockerbuild":
-			"yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
+		"precommit": "lint-staged"
 	},
 	"dependencies": {
 		"history": "^4.7.2",
@@ -43,11 +45,14 @@
 		"file-loader": "^1.1.6",
 		"lint-staged": "^6.0.0",
 		"lodash": "^4.17.4",
+		"path": "^0.12.7",
 		"prettier": "^1.10.0",
 		"prettierrc": "^0.0.0-5",
 		"style-loader": "^0.19.1",
-		"webpack": "^4.0.0-alpha.4",
-		"webpack-cli": "^2.0.2"
+		"webpack": "^3.10.0",
+		"webpack-cli": "^2.0.2",
+		"webpack-dev-server": "^2.10.1",
+		"yargs": "yargs/yargs"
 	},
 	"lint-staged": {
 		"src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
