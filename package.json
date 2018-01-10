@@ -1,16 +1,30 @@
 {
 	"name": "react-project",
-	"description": "Fast and effective environment for web development",
+	"description": "Fast and effective environment for frontend development",
 	"author": "Maxim Buslaev",
 	"version": "$(cat version.num)",
 	"scripts": {
 		"precommit": "lint-staged",
 		"eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+		"build": "webpack --mode production",
 		"dockerbuild": "yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
+	},
+	"dependencies": {
+		"history": "^4.7.2",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
+		"react-redux": "^5.0.6",
+		"react-router-dom": "^4.2.2",
+		"react-router-redux": "^4.0.8",
+		"redux": "^3.7.2",
+		"redux-thunk": "^2.2.0",
+		"reselect": "^3.0.1",
+		"superagent": "^3.8.2"
 	},
 	"devDependencies": {
 		"autoprefixer": "^7.2.4",
 		"babel-eslint": "^8.2.1",
+		"css-loader": "^0.28.8",
 		"eslint": "^4.15.0",
 		"eslint-config-prettier": "^2.9.0",
 		"eslint-config-react-app": "^2.0.1",
@@ -23,9 +37,14 @@
 		"eslint-plugin-promise": "^3.6.0",
 		"eslint-plugin-react": "^7.5.1",
 		"eslint-plugin-standard": "^3.0.1",
+		"file-loader": "^1.1.6",
 		"lint-staged": "^6.0.0",
+		"lodash": "^4.17.4",
 		"prettier": "^1.10.0",
-		"prettierrc": "^0.0.0-5"
+		"prettierrc": "^0.0.0-5",
+		"style-loader": "^0.19.1",
+		"webpack": "^4.0.0-alpha.4",
+		"webpack-cli": "^2.0.2"
 	},
 	"lint-staged": {
 		"src/**/*.{js,jsx,json,css}": [
@@ -39,17 +58,5 @@
 		]
 	},
 	"repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
-	"license": "MIT",
-	"dependencies": {
-		"history": "^4.7.2",
-		"react": "^16.2.0",
-		"react-dom": "^16.2.0",
-		"react-redux": "^5.0.6",
-		"react-router-dom": "^4.2.2",
-		"react-router-redux": "^4.0.8",
-		"redux": "^3.7.2",
-		"redux-thunk": "^2.2.0",
-		"reselect": "^3.0.1",
-		"superagent": "^3.8.2"
-	}
+	"license": "MIT"
 }
