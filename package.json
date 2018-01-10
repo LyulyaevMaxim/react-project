@@ -5,9 +5,11 @@
 	"version": "$(cat version.num)",
 	"scripts": {
 		"precommit": "lint-staged",
-		"eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-		"build": "webpack --mode production",
-		"dockerbuild": "yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
+		"eslint-check":
+			"eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+		"build": "webpack --mode production && cp src/index.html dist/index.html",
+		"dockerbuild":
+			"yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
 	},
 	"dependencies": {
 		"history": "^4.7.2",
@@ -24,6 +26,7 @@
 	"devDependencies": {
 		"autoprefixer": "^7.2.4",
 		"babel-eslint": "^8.2.1",
+		"clean-webpack-plugin": "^0.1.17",
 		"css-loader": "^0.28.8",
 		"eslint": "^4.15.0",
 		"eslint-config-prettier": "^2.9.0",
@@ -47,16 +50,12 @@
 		"webpack-cli": "^2.0.2"
 	},
 	"lint-staged": {
-		"src/**/*.{js,jsx,json,css}": [
-			"prettier --single-quote --write",
-			"git add"
-		]
+		"src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
 	},
 	"babel": {
-		"presets": [
-			"react-app"
-		]
+		"presets": ["react-app"]
 	},
-	"repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
+	"repository":
+		"https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
 	"license": "MIT"
 }
