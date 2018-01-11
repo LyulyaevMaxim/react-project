@@ -4,11 +4,15 @@ const webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		app: './src/index.js'
+		app: './src/index.js',
+		another: './src/another-module.js'
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: 'Production'
+		}),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'common' // Specify the common bundle's name.
 		})
 	],
 	output: {
