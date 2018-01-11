@@ -1,5 +1,5 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -7,9 +7,9 @@ module.exports = {
 		app: './src/index.js'
 	},
 	plugins: [
-		// new HtmlWebpackPlugin({
-		// 	title: 'Production'
-		// })
+		new HtmlWebpackPlugin({
+			title: 'Production'
+		})
 	],
 	output: {
 		filename: '[name].bundle.js',
