@@ -1,8 +1,10 @@
 {
+    "printWidth": 100,
+	"tabWidth": 2,
 	"useTabs": true,
 	"singleQuote": true,
-	"trailingComma": "none",
-	"tabWidth": 2,
 	"noSemi": false,
-	"semicolons": false
+	"semicolons": false,
+	"trailingComma": "none",
+	"semi": false
 }
