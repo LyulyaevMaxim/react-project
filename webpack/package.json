@@ -1,0 +1,25 @@
+{
+  "name": "react-project",
+  "description": "Webpack Configuration",
+  "author": "Maxim Buslaev",
+  "scripts": {
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.9",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.30.1",
+    "path": "^0.12.7",
+    "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0",
+    "webpack-cli": "^2.0.4",
+    "webpack-dev-server": "^2.11.0",
+    "webpack-merge": "^4.1.1",
+    "yargs": "yargs/yargs"
+  },
+  "repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
+  "license": "MIT"
+}

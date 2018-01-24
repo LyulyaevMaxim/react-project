@@ -6,13 +6,19 @@ const webpack = require('webpack')
 module.exports = merge(common, {
 	devtool: 'inline-source-map',
 	devServer: {
-		contentBase: './dist',
+		contentBase: '../dist',
 		hot: true
 	},
-	plugins: [new webpack.NamedModulesPlugin(), new webpack.HotModuleReplacementPlugin()],
+	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('development')
+		}),
+		new webpack.NamedModulesPlugin(),
+		new webpack.HotModuleReplacementPlugin()
+	],
 	output: {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, '../dist')
 	}
 })

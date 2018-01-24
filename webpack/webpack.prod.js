@@ -8,21 +8,21 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = merge(common, {
 	devtool: 'source-map',
 	plugins: [
-		new CleanWebpackPlugin(['dist/']),
+		new CleanWebpackPlugin(['../dist/']),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('production')
+		}),
 		new webpack.HashedModuleIdsPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor'
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			name: 'manifest' // Specify the common bundle's name.
+			name: 'manifest'
 		}),
-		new UglifyJSPlugin({ sourceMap: true }),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('production')
-		})
+		new UglifyJSPlugin({ sourceMap: true })
 	],
 	output: {
 		filename: '[name].[chunkhash].bundle.js',
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, '../dist')
 	}
 })

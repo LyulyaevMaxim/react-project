@@ -4,13 +4,13 @@ const webpack = require('webpack')
 
 module.exports = {
 	entry: {
-		polyfills: './src/polyfills.js',
-		index: './src/index.js',
+		polyfills: '../src/polyfills.js',
+		index: '../src/index.js',
 		vendor: ['lodash']
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: 'src/index.html',
+			template: '../src/index.html',
 			excludeChunks: ['polyfills']
 		})
 	],
