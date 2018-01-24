@@ -4,11 +4,14 @@ const merge = require('webpack-merge')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const common = require('./webpack.common.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const root = path.resolve(__dirname, '../')
 
 module.exports = merge(common, {
 	devtool: 'source-map',
 	plugins: [
-		new CleanWebpackPlugin(['../dist/']),
+		new CleanWebpackPlugin([`${root}/dist`], {
+			allowExternal: true
+		}),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
@@ -23,6 +26,6 @@ module.exports = merge(common, {
 	],
 	output: {
 		filename: '[name].[chunkhash].bundle.js',
-		path: path.resolve(__dirname, '../dist')
+		path: `${root}/dist`
 	}
 })

@@ -2,21 +2,21 @@
 	font-family: 'PT Sans';
 	font-style: normal;
 	font-weight: 400;
-	src: url('./pt-sans-regular.woff2') format('woff2');
+	src: url('../fonts/pt-sans-regular.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'PT Sans';
 	font-style: italic;
 	font-weight: 400;
-	src: url('./pt-sans-italic.woff2') format('woff2');
+	src: url('../fonts/pt-sans-italic.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'PT Sans';
 	font-style: normal;
 	font-weight: 700;
-	src: url('./pt-sans-bold.woff2') format('woff2');
+	src: url('../fonts/pt-sans-bold.woff2') format('woff2');
 }
 
 .hello {
@@ -29,7 +29,7 @@
 	display: block;
 	width: 100px;
 	height: 100px;
-	background-image: url('./icon.png');
+	background-image: url('../img/icon.png');
 	background-size: cover;
 }
 

@@ -2,11 +2,12 @@ const path = require('path')
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
 const webpack = require('webpack')
+const root = path.resolve(__dirname, '../')
 
 module.exports = merge(common, {
 	devtool: 'inline-source-map',
 	devServer: {
-		contentBase: '../dist',
+		contentBase: `${root}/dist`,
 		hot: true
 	},
 	plugins: [
@@ -19,6 +20,6 @@ module.exports = merge(common, {
 	output: {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
-		path: path.resolve(__dirname, '../dist')
+		path: `${root}/dist`
 	}
 })

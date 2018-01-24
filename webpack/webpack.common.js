@@ -1,16 +1,18 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const root = path.resolve(__dirname, '../')
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
 	entry: {
-		polyfills: '../src/polyfills.js',
-		index: '../src/index.js',
+		polyfills: `${root}/src/polyfills.js`,
+		index: `${root}/src/index.js`,
 		vendor: ['lodash']
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: '../src/index.html',
+			template: `${root}/src/index.html`,
 			excludeChunks: ['polyfills']
 		})
 	],
@@ -19,15 +21,18 @@ module.exports = {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
+				include: `${root}/src/css`,
+				use: ['cache-loader', 'style-loader', 'css-loader']
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
-				use: ['file-loader']
+				include: `${root}/src/img`,
+				use: isDev ? ['cache-loader', 'file-loader'] : ['file-loader']
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/,
-				use: ['file-loader']
+				include: `${root}/src/fonts`,
+				use: isDev ? ['cache-loader', 'file-loader'] : ['file-loader']
 			}
 		]
 	}

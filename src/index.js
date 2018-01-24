@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import printMe from './print.js'
-import './style.css'
-import Icon from './icon.png'
+import './css/style.css'
+import Icon from './img/icon.png'
 import { square } from './math.js'
 
 if (process.env.NODE_ENV === 'development') {
