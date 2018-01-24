@@ -4,9 +4,6 @@ const common = require('./webpack.common.js')
 const webpack = require('webpack')
 
 module.exports = merge(common, {
-	entry: {
-		index: './src/index.js'
-	},
 	devtool: 'inline-source-map',
 	devServer: {
 		contentBase: './dist',
@@ -15,7 +12,7 @@ module.exports = merge(common, {
 	plugins: [new webpack.NamedModulesPlugin(), new webpack.HotModuleReplacementPlugin()],
 	output: {
 		filename: '[name].bundle.js',
-		chunkFilename: '[name].bundle.js', // определяет имя файлов, не входящих в chunk
+		chunkFilename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	}
 })

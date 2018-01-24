@@ -1,13 +1,17 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
+	entry: {
+		polyfills: './src/polyfills.js',
+		index: './src/index.js',
+		vendor: ['lodash']
+	},
 	plugins: [
-		new CleanWebpackPlugin(['dist/']),
 		new HtmlWebpackPlugin({
-			title: 'Production'
+			template: 'src/index.html',
+			excludeChunks: ['polyfills']
 		})
 	],
 	output: {},

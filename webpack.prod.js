@@ -3,14 +3,12 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const common = require('./webpack.common.js')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = merge(common, {
-	entry: {
-		index: './src/index.js',
-		vendor: ['lodash']
-	},
 	devtool: 'source-map',
 	plugins: [
+		new CleanWebpackPlugin(['dist/']),
 		new webpack.HashedModuleIdsPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor'
@@ -24,7 +22,7 @@ module.exports = merge(common, {
 		})
 	],
 	output: {
-		filename: '[name].[chunkhash].js',
+		filename: '[name].[chunkhash].bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	}
 })
