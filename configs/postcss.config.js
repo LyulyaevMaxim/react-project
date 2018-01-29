@@ -26,4 +26,3 @@ module.exports = ({ file, options, env }) => {
 		}
 	}
 }
-// 'easy-import': { extensions: ['.sss'] }

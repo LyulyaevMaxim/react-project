@@ -1,7 +1,11 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 const root = path.resolve(__dirname, '../')
+const isDev = process.env.NODE_ENV === 'development'
+const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
 	entry: {
@@ -13,7 +17,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: `${root}/src/index.html`,
 			excludeChunks: ['polyfills']
-		})
+		}),
+		new ExtractTextPlugin('[name].css')
 	],
 	output: {},
 	module: {
@@ -21,24 +26,33 @@ module.exports = {
 			{
 				test: /\.css$/,
 				include: `${root}/src/css`,
-				use: [
+				use: ExtractTextPlugin.extract({
 					// 'cache-loader',
-					'style-loader',
-					{
-						loader: 'css-loader',
+					fallback: {
+						loader: 'style-loader',
 						options: {
-							importLoaders: 1
-							// minimize: isDev ? false : true //cssnano
-							/* sourceMap: true, */
-							// modules: true,
-							// localIdentName: '[path][name]__[local]--[hash:base64:5]'
+							singleton: true,
+							sourceMap: isDev ? true : false
 						}
 					},
-					{
-						loader: 'postcss-loader',
-						options: { config: { path: `${root}/configs/postcss.config.js` } }
-					}
-				]
+					use: [
+						{
+							loader: 'css-loader',
+							options: {
+								importLoaders: 1,
+								sourceMap: isDev ? true : false
+							}
+						},
+						{
+							loader: 'postcss-loader',
+							options: {
+								ident: 'postcss',
+								config: { path: `${root}/configs/postcss.config.js` },
+								sourceMap: isDev ? 'inline' : false
+							}
+						}
+					]
+				})
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
