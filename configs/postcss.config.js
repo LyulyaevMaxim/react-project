@@ -21,7 +21,9 @@ module.exports = ({ file, options, env }) => {
 		// exec: true,
 		plugins: {
 			'postcss-import': {},
+			precss: {},
 			'postcss-cssnext': {},
+			'css-mqpacker': { sort: true },
 			cssnano: isProd ? cssnano : false
 		}
 	}

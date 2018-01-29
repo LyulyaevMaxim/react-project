@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="StylintProjectComponent">
+    <option name="stylintConfigFile" value="$PROJECT_DIR$/configs/.stylelintrc" />
+    <option name="stylintExecutable" value="$PROJECT_DIR$/webpack/node_modules/stylelint/bin/stylelint.js" />
+    <option name="treatAllIssuesAsWarnings" value="true" />
+    <option name="highlightWholeLine" value="true" />
+    <option name="showColumnNumber" value="true" />
+    <option name="pluginEnabled" value="true" />
+  </component>
+</project>

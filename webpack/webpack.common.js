@@ -9,13 +9,13 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
 	entry: {
-		polyfills: `${root}/src/polyfills.js`,
-		index: `${root}/src/index.js`,
+		polyfills: `${root}/src/js/polyfills.js`,
+		index: `${root}/src/js/index.js`,
 		vendor: ['lodash']
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: `${root}/src/index.html`,
+			template: `${root}/src/html/index.html`,
 			excludeChunks: ['polyfills']
 		}),
 		new ExtractTextPlugin('[name].css')
@@ -24,7 +24,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
+				test: /\.scss$/,
 				include: `${root}/src/css`,
 				use: ExtractTextPlugin.extract({
 					// 'cache-loader',
@@ -50,6 +50,12 @@ module.exports = {
 								config: { path: `${root}/configs/postcss.config.js` },
 								sourceMap: isDev ? 'inline' : false
 							}
+						},
+						{
+							loader: 'stylefmt-loader',
+							options: {
+								//config: `${root}/configs/.stylelintrc`
+							}
 						}
 					]
 				})
@@ -57,14 +63,14 @@ module.exports = {
 			{
 				test: /\.(png|svg|jpg|gif)$/,
 				include: `${root}/src/img`,
-				use:
-					process.env.NODE_ENV === 'development' ? ['cache-loader', 'file-loader'] : ['file-loader']
+				use: ['file-loader']
+				// process.env.NODE_ENV === 'development' ? ['cache-loader', 'file-loader'] : ['file-loader']
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/,
 				include: `${root}/src/fonts`,
-				use:
-					process.env.NODE_ENV === 'development' ? ['cache-loader', 'file-loader'] : ['file-loader']
+				use: ['file-loader']
+				// process.env.NODE_ENV === 'development' ? ['cache-loader', 'file-loader'] : ['file-loader']
 			}
 		],
 		noParse: function(content) {
