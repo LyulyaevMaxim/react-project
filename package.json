@@ -5,7 +5,7 @@
   "version": "$(cat version.num)",
   "scripts": {
     "dockerbuild": "yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
-    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "eslint-check": "eslint --print-config configs/.eslintrc.js | eslint-config-prettier-check",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -22,27 +22,24 @@
     "superagent": "^3.8.2"
   },
   "devDependencies": {
-    "autoprefixer": "^7.2.5",
     "babel-eslint": "^8.2.1",
     "babel-polyfill": "^6.26.0",
-    "eslint": "^4.15.0",
+    "eslint": "^4.16.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-config-standard": "^11.0.0-beta.0",
-    "eslint-plugin-flowtype": "^2.41.0",
+    "eslint-plugin-flowtype": "^2.42.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-react": "^7.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "lint-staged": "^6.0.0",
+    "lint-staged": "^6.1.0",
     "lodash": "^4.17.4",
     "prettier": "^1.10.2",
-    "prettierrc": "^0.0.0-5",
-    "whatwg-fetch": "^2.0.3",
-    "yargs": "yargs/yargs"
+    "prettierrc": "^0.0.0-5"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [

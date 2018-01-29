@@ -23,6 +23,9 @@ function component() {
 	element.appendChild(btn)
 	element.classList.add('hello')
 
+	const obj = { test: 'test' }
+	console.log(obj.test)
+
 	// Note that because a network request is involved, some indication
 	// of loading would need to be shown in a production-level site/app.
 	btn.onclick = e =>

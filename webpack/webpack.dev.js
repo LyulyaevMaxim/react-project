@@ -10,13 +10,7 @@ module.exports = merge(common, {
 		contentBase: `${root}/dist`,
 		hot: true
 	},
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('development')
-		}),
-		new webpack.NamedModulesPlugin(),
-		new webpack.HotModuleReplacementPlugin()
-	],
+	plugins: [new webpack.NamedModulesPlugin(), new webpack.HotModuleReplacementPlugin()],
 	output: {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',

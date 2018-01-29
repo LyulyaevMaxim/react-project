@@ -12,9 +12,6 @@ module.exports = merge(common, {
 		new CleanWebpackPlugin([`${root}/dist`], {
 			allowExternal: true
 		}),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('production')
-		}),
 		new webpack.HashedModuleIdsPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor'

@@ -1,27 +1,10 @@
-@font-face {
-	font-family: 'PT Sans';
-	font-style: normal;
-	font-weight: 400;
-	src: url('../fonts/pt-sans-regular.woff2') format('woff2');
-}
-
-@font-face {
-	font-family: 'PT Sans';
-	font-style: italic;
-	font-weight: 400;
-	src: url('../fonts/pt-sans-italic.woff2') format('woff2');
-}
-
-@font-face {
-	font-family: 'PT Sans';
-	font-style: normal;
-	font-weight: 700;
-	src: url('../fonts/pt-sans-bold.woff2') format('woff2');
-}
+/* can consume `node_modules`, `web_modules` or local modules */
+/* @import "normalize.css" == @import "../node_modules/normalize.css/normalize.css"; *!*/
+@import "../fonts/fonts.css";
+@import "sub/style3.css";
 
 .hello {
 	font-family: 'PT Sans';
-	color: red;
 }
 
 .hello::before {
@@ -36,5 +19,5 @@
 .hello::after {
 	content: 'Other text';
 	font-family: 'Times New Roman', Times, serif;
-	display: block;
+	display: flex;
 }
