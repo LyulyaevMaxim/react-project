@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 
 const root = path.resolve(__dirname, '../')
 const isDev = process.env.NODE_ENV === 'development'
@@ -33,6 +34,10 @@ module.exports = {
 						collapseBooleanAttributes: true
 					},
 			excludeChunks: ['polyfills']
+		}),
+		new ScriptExtHtmlWebpackPlugin({
+			//асинхронная загрузка скриптов
+			defaultAttribute: 'defer'
 		}),
 		new ExtractTextPlugin('[name].css')
 	],
