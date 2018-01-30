@@ -25,7 +25,6 @@ module.exports = {
 				test: /\.scss$/,
 				include: `${root}/src/css`,
 				use: ExtractTextPlugin.extract({
-					// 'cache-loader',
 					fallback: {
 						loader: 'style-loader',
 						options: {
@@ -58,9 +57,17 @@ module.exports = {
 				})
 			},
 			{
-				test: /\.(woff|woff2|eot|ttf|otf)$/,
+				test: /\.(woff2|woff)$/,
 				include: `${root}/src/fonts`,
-				use: ['file-loader']
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+							outputPath: 'fonts/'
+						}
+					}
+				]
 			}
 		],
 		noParse: function(content) {

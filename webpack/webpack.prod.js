@@ -27,7 +27,12 @@ module.exports = merge(common, {
 				test: /\.(png|svg|jpg|gif)$/,
 				include: `${root}/src/img`,
 				use: [
-					'file-loader',
+					{
+						loader: 'file-loader',
+						options: {
+							outputPath: 'img/'
+						}
+					},
 					{
 						loader: 'image-webpack-loader',
 						options: {
