@@ -16,6 +16,15 @@ module.exports = merge(common, {
 		new webpack.HotModuleReplacementPlugin()
 		// new StyleLintPlugin({ configFile: `${root}/configs/.stylelintrc` })
 	],
+	module: {
+		rules: [
+			{
+				test: /\.(png|svg|jpg|gif)$/,
+				include: `${root}/src/img`,
+				use: ['file-loader']
+			}
+		]
+	},
 	output: {
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',

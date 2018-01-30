@@ -21,6 +21,42 @@ module.exports = merge(common, {
 		}),
 		new UglifyJSPlugin({ sourceMap: true })
 	],
+	module: {
+		rules: [
+			{
+				test: /\.(png|svg|jpg|gif)$/,
+				include: `${root}/src/img`,
+				use: [
+					'file-loader',
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							svgo: {
+								plugins: [{ removeTitle: true }, { convertPathData: false }]
+							},
+							mozjpeg: {
+								progressive: true,
+								quality: 65
+							},
+							pngquant: {
+								quality: '65-90',
+								speed: 4
+							},
+							optipng: {
+								enabled: false //disable optiPNG
+							},
+							gifsicle: {
+								enabled: false
+							},
+							webp: {
+								enabled: false
+							}
+						}
+					}
+				]
+			}
+		]
+	},
 	output: {
 		filename: '[name].[chunkhash].bundle.js',
 		path: `${root}/dist`
