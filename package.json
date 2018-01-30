@@ -4,6 +4,7 @@
   "author": "Maxim Buslaev",
   "version": "$(cat version.num)",
   "scripts": {
+    "github": "gh-pages -d dist",
     "dockerbuild": "yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
+    "gh-pages": "^1.1.0",
     "lodash": "^4.17.4",
     "whatwg-fetch": "^2.0.3"
   },
