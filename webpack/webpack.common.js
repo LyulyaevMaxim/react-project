@@ -45,6 +45,23 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						// cacheDirectory: true,
+						presets: ['@babel/preset-env', '@babel/preset-react'],
+						plugins: [
+							'@babel/plugin-proposal-object-rest-spread',
+							'@babel/plugin-syntax-dynamic-import',
+							'@babel/plugin-proposal-class-properties'
+							/*, 'transform-runtime'*/
+						]
+					}
+				}
+			},
+			{
 				test: /\.scss$/,
 				include: `${root}/src/css`,
 				use: ExtractTextPlugin.extract({
@@ -92,9 +109,9 @@ module.exports = {
 					}
 				]
 			}
-		],
-		noParse: function(content) {
-			return /jquery|lodash/.test(content)
-		}
+		]
+		//, noParse: function(content) {
+		// return /jquery|lodash/.test(content)
+		// }
 	}
 }

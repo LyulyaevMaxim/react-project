@@ -1,51 +1,20 @@
-import _ from 'lodash'
-import printMe from './print.js'
-import '../css/style.scss'
-import Icon from '../img/icon.png'
-import { square } from './math.js'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+// import { ConnectedRouter } from 'react-router-redux'
+// import { Route, Switch } from 'react-router-dom'
+import { store, history } from './store'
+import App from './app'
 
-if (process.env.NODE_ENV === 'development') {
-	console.log('Development mode')
-}
-
-if (process.env.NODE_ENV === 'production') {
-	console.log('Production mode')
-}
-
-function component() {
-	var element = document.createElement('div')
-	var btn = document.createElement('button')
-	var br = document.createElement('br')
-
-	btn.innerHTML = 'Click me and check the console!'
-	element.innerHTML = _.join(['<p>Hello, webpack ' + square(2) + '</p>'], ' ')
-	element.appendChild(br)
-	element.appendChild(btn)
-	element.classList.add('hello')
-
-	const obj = { test: 'test' }
-	console.log(obj.test)
-
-	// Note that because a network request is involved, some indication
-	// of loading would need to be shown in a production-level site/app.
-	btn.onclick = e =>
-		import(/* webpackChunkName: "print" */ './print').then(module => {
-			var print = module.default
-			print()
-		})
-
-	// Add the image to our existing div.
-	var myIcon = new Image()
-	myIcon.src = Icon
-
-	element.appendChild(myIcon)
-
-	return element
-}
-document.body.appendChild(component())
-
-if (module.hot) {
-	module.hot.accept('./print.js', function() {
-		printMe()
-	})
-}
+ReactDOM.render(
+	<Provider store={store}>
+		<App />
+		{/*<ConnectedRouter history={history}>
+		<Switch>
+			<Route path="/" exact component={App} />
+			<Route path="/404" component={App} />
+		</Switch>
+		</ConnectedRouter> */}
+	</Provider>,
+	document.getElementById('root')
+)

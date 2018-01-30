@@ -24,7 +24,11 @@
     "babel-polyfill": "^6.26.0",
     "gh-pages": "^1.1.0",
     "lodash": "^4.17.4",
+    "moment": "^2.20.1",
     "postcss-css-reset": "^1.0.2",
+    "prop-types": "^15.6.0",
+    "react-perf-devtool": "^3.0.2",
+    "redux-logger": "^3.0.6",
     "whatwg-fetch": "^2.0.3"
   },
   "repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
