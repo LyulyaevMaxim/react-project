@@ -24,6 +24,7 @@
     "babel-polyfill": "^6.26.0",
     "gh-pages": "^1.1.0",
     "lodash": "^4.17.4",
+    "postcss-css-reset": "^1.0.2",
     "whatwg-fetch": "^2.0.3"
   },
   "repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
