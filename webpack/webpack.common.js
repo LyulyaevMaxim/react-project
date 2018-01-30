@@ -13,7 +13,25 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
+			filename: 'index.html',
 			template: `${root}/src/html/index.html`,
+			inject: true,
+			cache: true,
+			minify: isDev
+				? false
+				: {
+						minifyJS: true,
+						minifyCSS: true,
+						removeComments: true,
+						removeAttributeQuotes: true,
+						removeEmptyAttributes: true,
+						removeScriptTypeAttributes: true,
+						collapseWhitespace: true,
+						keepClosingSlash: true,
+						sortAttributes: true,
+						sortClassName: true,
+						collapseBooleanAttributes: true
+					},
 			excludeChunks: ['polyfills']
 		}),
 		new ExtractTextPlugin('[name].css')
