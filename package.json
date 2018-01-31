@@ -8,6 +8,7 @@
     "dockerbuild": "yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "global": "^4.3.2",
     "history": "^4.7.2",
     "react": "^16.2.0",
@@ -21,7 +22,6 @@
     "superagent": "^3.8.2"
   },
   "devDependencies": {
-    "babel-polyfill": "^6.26.0",
     "gh-pages": "^1.1.0",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",

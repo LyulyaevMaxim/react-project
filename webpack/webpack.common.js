@@ -9,8 +9,7 @@ const isDev = process.env.NODE_ENV === 'development'
 module.exports = {
 	entry: {
 		polyfills: `${root}/src/js/polyfills.js`,
-		index: `${root}/src/js/index.js`,
-		vendor: ['lodash']
+		index: `${root}/src/js/index.js`
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
