@@ -13,6 +13,12 @@ module.exports = {
 		hot: 'react-hot-loader/patch',
 		index: `${root}/src/js/index.js`
 	},
+	resolve: {
+		alias: {
+			CSS: path.resolve(__dirname, '../src/css/'),
+			Templates: path.resolve(__dirname, 'src/templates/')
+		}
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
@@ -39,7 +45,11 @@ module.exports = {
 		new ScriptExtHtmlWebpackPlugin({
 			defaultAttribute: 'defer'
 		}),
-		new ExtractTextPlugin('[name].css')
+		new ExtractTextPlugin({
+			filename: 'css/[name].[contenthash].css',
+			disable: isDev
+			// '[name].css'
+		})
 	],
 	output: {},
 	module: {

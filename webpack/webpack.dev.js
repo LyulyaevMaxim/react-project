@@ -9,10 +9,9 @@ module.exports = merge(common, {
 	// devtool: 'eval-source-map',
 	devtool: 'eval',
 	devServer: {
-		contentBase: './dist',
 		hot: true,
 		clientLogLevel: 'info',
-		// https: true,
+		https: true,
 		noInfo: true,
 		open: true,
 		openPage: '?token=123',

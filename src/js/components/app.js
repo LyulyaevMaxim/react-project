@@ -6,7 +6,8 @@ import { hot } from 'react-hot-loader'
 // import { setAuthorization } from './actions/auth.js';
 // import _ from 'lodash'
 // import Icon from '../img/icon.png'
-import '../../css/index.scss'
+// import '../../css/index.scss'
+import 'CSS/index.scss'
 
 class App extends Component {
 	static propTypes = {
@@ -33,7 +34,7 @@ class App extends Component {
 
 		return (
 			<React.Fragment>
-				<h1>Hello, world!!</h1>
+				<h1>Hello, world!</h1>
 				<ExampleComponent />
 				<button onClick={handleClick}>Проверка динамического импорта</button>
 			</React.Fragment>
