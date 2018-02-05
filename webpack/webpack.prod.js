@@ -4,6 +4,7 @@ const merge = require('webpack-merge')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const common = require('./webpack.common.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const root = path.resolve(__dirname, '../')
 
@@ -18,16 +19,29 @@ module.exports = merge(common, {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor',
 			minChunks: module => {
-				if (/babel-polyfill|whatwg-fetch|core-js|object-assign/.test(module.resource)) return false
+				if (
+					/babel-polyfill|core-js|regenerator-runtime|whatwg-fetch|object-assign/.test(
+						module.resource
+					)
+				)
+					return false
 				return typeof module.context === 'string'
 					? module.context.indexOf('node_modules') !== -1
 					: false
 			}
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			name: 'manifest'
+			name: 'manifest',
+			minChunks: Infinity
 		}),
 		new UglifyJSPlugin({ sourceMap: true }),
+		new CompressionPlugin({
+			asset: '[path].gz[query]',
+			algorithm: 'gzip',
+			test: /\.js$|\.html$/,
+			threshold: 10240,
+			minRatio: 0.8
+		}),
 		new BundleAnalyzerPlugin()
 	],
 	module: {

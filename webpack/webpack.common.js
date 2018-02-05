@@ -35,7 +35,6 @@ module.exports = {
 			excludeChunks: ['polyfills']
 		}),
 		new ScriptExtHtmlWebpackPlugin({
-			//асинхронная загрузка скриптов
 			defaultAttribute: 'defer'
 		}),
 		new ExtractTextPlugin('[name].css')
@@ -109,8 +108,5 @@ module.exports = {
 				]
 			}
 		]
-		//, noParse: function(content) {
-		// return /jquery|lodash/.test(content)
-		// }
 	}
 }
