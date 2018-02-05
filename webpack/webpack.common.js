@@ -7,8 +7,10 @@ const root = path.resolve(__dirname, '../')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
+	//[`${root}/src/js/polyfills.js`, 'react-hot-loader/patch', `${root}/src/js/index.js`],
 	entry: {
 		polyfills: `${root}/src/js/polyfills.js`,
+		hot: 'react-hot-loader/patch',
 		index: `${root}/src/js/index.js`
 	},
 	plugins: [
@@ -48,12 +50,13 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						// cacheDirectory: true,
+						cacheDirectory: true,
 						presets: ['@babel/preset-env', '@babel/preset-react'],
 						plugins: [
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
-							'@babel/plugin-proposal-class-properties'
+							'@babel/plugin-proposal-class-properties',
+							'react-hot-loader/babel'
 							/*, 'transform-runtime'*/
 						]
 					}

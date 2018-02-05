@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { hot } from 'react-hot-loader'
 // import { bindActionCreators } from 'redux'
 // import { setAuthorization } from './actions/auth.js';
 // import _ from 'lodash'
 // import Icon from '../img/icon.png'
-import '../css/index.scss'
+import '../../css/index.scss'
 
 class App extends Component {
 	static propTypes = {
@@ -32,7 +33,8 @@ class App extends Component {
 
 		return (
 			<React.Fragment>
-				<h1>Hello, world!</h1>
+				<h1>Hello, world!!</h1>
+				<ExampleComponent />
 				<button onClick={handleClick}>Проверка динамического импорта</button>
 			</React.Fragment>
 		)
@@ -44,6 +46,10 @@ class App extends Component {
 	// }
 }
 
+function ExampleComponent() {
+	return <p>1</p>
+}
+
 const mapStateToProps = state => ({ auth: state.auth })
 // const mapDispatchToProps = dispatch => bindActionCreators({ setAuthorization }, dispatch)
-export default connect(mapStateToProps /*, mapDispatchToProps*/)(App)
+export default hot(module)(connect(mapStateToProps /*, mapDispatchToProps*/)(App))
