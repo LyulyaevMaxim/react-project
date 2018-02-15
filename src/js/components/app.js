@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { hot } from 'react-hot-loader'
 import { bindActionCreators } from 'redux'
 import { setAuthorization } from '~actions/auth.js'
+import Icon from '~img/icon.png'
 import '~css/index.scss'
 
 class App extends Component {
@@ -37,6 +38,8 @@ class App extends Component {
 			<React.Fragment>
 				<h1>Hello, world!</h1>
 				<ExampleComponent />
+				<img src={Icon} alt="" />
+				<div className="hello" />
 				<button onClick={handleClick}>Проверка динамического импорта</button>
 			</React.Fragment>
 		)

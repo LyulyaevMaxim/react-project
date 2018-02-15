@@ -1,4 +1,4 @@
-import { AUTH_SET } from '../constants'
+import { AUTH_SET } from '~constants'
 
 const initialState = {
 	loadingToken: null,

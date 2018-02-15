@@ -2,7 +2,6 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-
 const root = path.resolve(__dirname, '../')
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -10,6 +9,7 @@ module.exports = {
 	resolve: {
 		alias: {
 			['~css']: path.resolve(__dirname, '../src/css/'),
+			['~img']: path.resolve(__dirname, '../src/img/'),
 			['~actions']: path.resolve(__dirname, '../src/js/actions'),
 			['~utils']: path.resolve(__dirname, '../src/js/utils'),
 			['~constants']: path.resolve(__dirname, '../src/js/constants.js')
