@@ -11,8 +11,7 @@ module.exports = merge(common, {
 		hot: 'react-hot-loader/patch',
 		index: `${root}/src/js/index.js`
 	},
-	// devtool: 'eval-source-map',
-	devtool: 'eval',
+	devtool: 'eval', //'eval-source-map'
 	devServer: {
 		hot: true,
 		clientLogLevel: 'info',

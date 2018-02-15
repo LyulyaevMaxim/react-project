@@ -9,7 +9,10 @@ const isDev = process.env.NODE_ENV === 'development'
 module.exports = {
 	resolve: {
 		alias: {
-			CSS: path.resolve(__dirname, '../src/css/')
+			['~css']: path.resolve(__dirname, '../src/css/'),
+			['~actions']: path.resolve(__dirname, '../src/js/actions'),
+			['~utils']: path.resolve(__dirname, '../src/js/utils'),
+			['~constants']: path.resolve(__dirname, '../src/js/constants.js')
 		}
 	},
 	plugins: [

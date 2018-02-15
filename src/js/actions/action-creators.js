@@ -1,4 +1,4 @@
-import { REQUEST, SUCCESS, ERROR } from '../constants'
+import { REQUEST, SUCCESS, ERROR } from '~constants'
 import agent from 'superagent'
 
 export const requestCreator = (dispatch, action) => {

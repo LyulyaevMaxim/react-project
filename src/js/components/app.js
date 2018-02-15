@@ -2,18 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { hot } from 'react-hot-loader'
-// import { bindActionCreators } from 'redux'
-// import { setAuthorization } from './actions/auth.js';
-// import _ from 'lodash'
-// import Icon from '../img/icon.png'
-// import '../../css/index.scss'
-import 'CSS/index.scss'
+import { bindActionCreators } from 'redux'
+import { setAuthorization } from '~actions/auth.js'
+import '~css/index.scss'
 
 class App extends Component {
 	static propTypes = {
 		// location: PropTypes.object.isRequired,
-		auth: PropTypes.object.isRequired
-		// setAuthorization: PropTypes.func.isRequired
+		auth: PropTypes.object.isRequired,
+		setAuthorization: PropTypes.func
 	}
 	render() {
 		/* const { loadingToken, token } = this.props.auth
@@ -45,10 +42,10 @@ class App extends Component {
 		)
 	}
 
-	// componentDidMount() {
-	// const token = this.props.location.search.slice('?token='.length)
-	// this.props.setAuthorization(token)
-	// }
+	componentDidMount() {
+		// const token = this.props.location.search.slice('?token='.length)
+		this.props.setAuthorization('token')
+	}
 }
 
 function ExampleComponent() {
@@ -56,5 +53,6 @@ function ExampleComponent() {
 }
 
 const mapStateToProps = state => ({ auth: state.auth })
-// const mapDispatchToProps = dispatch => bindActionCreators({ setAuthorization }, dispatch)
-export default hot(module)(connect(mapStateToProps /*, mapDispatchToProps*/)(App))
+const mapDispatchToProps = dispatch => bindActionCreators({ setAuthorization }, dispatch)
+
+export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(App))
