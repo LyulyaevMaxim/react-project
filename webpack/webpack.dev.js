@@ -6,6 +6,11 @@ const webpack = require('webpack')
 const root = path.resolve(__dirname, '../')
 
 module.exports = merge(common, {
+	entry: {
+		polyfills: `${root}/src/js/polyfills.js`,
+		hot: 'react-hot-loader/patch',
+		index: `${root}/src/js/index.js`
+	},
 	// devtool: 'eval-source-map',
 	devtool: 'eval',
 	devServer: {
@@ -29,6 +34,24 @@ module.exports = merge(common, {
 				test: /\.(png|svg|jpg|gif)$/,
 				include: `${root}/src/img`,
 				use: ['file-loader']
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						cacheDirectory: true,
+						presets: ['@babel/preset-env', '@babel/preset-react'],
+						plugins: [
+							'@babel/plugin-proposal-object-rest-spread',
+							'@babel/plugin-syntax-dynamic-import',
+							'@babel/plugin-proposal-class-properties',
+							'react-hot-loader/babel'
+							/*, 'transform-runtime'*/
+						]
+					}
+				}
 			}
 		]
 	},

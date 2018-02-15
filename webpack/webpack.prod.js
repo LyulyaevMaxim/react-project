@@ -9,6 +9,10 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const root = path.resolve(__dirname, '../')
 
 module.exports = merge(common, {
+	entry: {
+		polyfills: `${root}/src/js/polyfills.js`,
+		index: `${root}/src/js/index.js`
+	},
 	devtool: 'source-map',
 	plugins: [
 		new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') }),
@@ -41,11 +45,32 @@ module.exports = merge(common, {
 			test: /\.js$|\.html$/,
 			threshold: 10240,
 			minRatio: 0.8
-		}),
-		new BundleAnalyzerPlugin()
+		})
+		//new BundleAnalyzerPlugin()
 	],
 	module: {
 		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						cacheDirectory: true,
+						presets: ['@babel/preset-env', '@babel/preset-react'],
+						plugins: [
+							'@babel/plugin-proposal-object-rest-spread',
+							'@babel/plugin-syntax-dynamic-import',
+							'@babel/plugin-proposal-class-properties',
+							//- оптимизации
+							'transform-react-remove-prop-types',
+							'closure-elimination',
+							'@babel/plugin-transform-react-constant-elements',
+							'@babel/plugin-transform-react-inline-elements'
+						]
+					}
+				}
+			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
 				include: `${root}/src/img`,

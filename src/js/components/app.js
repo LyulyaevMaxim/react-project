@@ -26,11 +26,15 @@ class App extends Component {
 
 		// Первый клик по кнопке создаст сетевой запрос, запрашивающий код требуемого модуля
 		// После скачивания модуль запустится
-		const handleClick = () =>
+		const handleClick = event =>
 			import('./print').then(module => {
 				var print = module.default
 				print()
 			})
+
+		function demo(input) {
+			return input.map(item => item + 1).map(item => item + 2)
+		}
 
 		return (
 			<React.Fragment>

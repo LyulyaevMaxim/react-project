@@ -7,16 +7,9 @@ const root = path.resolve(__dirname, '../')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
-	//[`${root}/src/js/polyfills.js`, 'react-hot-loader/patch', `${root}/src/js/index.js`],
-	entry: {
-		polyfills: `${root}/src/js/polyfills.js`,
-		hot: 'react-hot-loader/patch',
-		index: `${root}/src/js/index.js`
-	},
 	resolve: {
 		alias: {
-			CSS: path.resolve(__dirname, '../src/css/'),
-			Templates: path.resolve(__dirname, 'src/templates/')
+			CSS: path.resolve(__dirname, '../src/css/')
 		}
 	},
 	plugins: [
@@ -48,30 +41,11 @@ module.exports = {
 		new ExtractTextPlugin({
 			filename: 'css/[name].[contenthash].css',
 			disable: isDev
-			// '[name].css'
 		})
 	],
 	output: {},
 	module: {
 		rules: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						cacheDirectory: true,
-						presets: ['@babel/preset-env', '@babel/preset-react'],
-						plugins: [
-							'@babel/plugin-proposal-object-rest-spread',
-							'@babel/plugin-syntax-dynamic-import',
-							'@babel/plugin-proposal-class-properties',
-							'react-hot-loader/babel'
-							/*, 'transform-runtime'*/
-						]
-					}
-				}
-			},
 			{
 				test: /\.scss$/,
 				include: `${root}/src/css`,
