@@ -9,9 +9,10 @@
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
+    "core-js": "^2.5.3",
     "global": "^4.3.2",
     "history": "^4.7.2",
+    "intl": "^1.2.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0-beta.21",
@@ -21,7 +22,8 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.2",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "gh-pages": "^1.1.0",
@@ -30,8 +32,7 @@
     "postcss-css-reset": "^1.0.2",
     "prop-types": "^15.6.0",
     "react-perf-devtool": "^3.0.2",
-    "redux-logger": "^3.0.6",
-    "whatwg-fetch": "^2.0.3"
+    "redux-logger": "^3.0.6"
   },
   "repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
   "license": "MIT"
