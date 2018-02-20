@@ -1,6 +1,8 @@
-// import '../css/sub/style2.scss'
-console.log('The print.js module has loaded! See the network tab')
+import React from 'react'
+import { hot } from 'react-hot-loader'
 
-export default function printMe() {
-	console.log('Button Clicked: Here\'s "some text"!')
+function printMe() {
+	return <p>Это динамически загруженная функция</p>
 }
+
+export default hot(module)(printMe)

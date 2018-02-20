@@ -1,62 +1,50 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { hot } from "react-hot-loader";
-import { bindActionCreators } from "redux";
-import { setAuthorization } from "~actions/auth.js";
-// import Icon from "~img/icon.png";
-// import '~css/index.scss'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { hot } from 'react-hot-loader'
+import { bindActionCreators } from 'redux'
+import { Route, Switch } from 'react-router-dom'
+import { setAuthorization } from '~actions/auth.js'
+import { getData } from '~actions/data.js'
+import '~css/index.scss'
+import loadable from 'loadable-components'
+const AsyncHello = loadable(() => import('./print.js'))
 
 class App extends Component {
-  static propTypes = {
-    // location: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired,
-    setAuthorization: PropTypes.func
-  };
-  render() {
-    /* const { loadingToken, token } = this.props.auth
-		 if (loadingToken !== false || token === '')
-		 	return <h1>&quot;Token&quot; не был передан</h1>*/
+	static propTypes = {
+		location: PropTypes.object.isRequired,
+		auth: PropTypes.object.isRequired,
+		setAuthorization: PropTypes.func,
+		getData: PropTypes.func
+	}
+	render() {
+		const { loadingToken, token } = this.props.auth
+		if (loadingToken !== false || token === '') return <h1>&quot;Token&quot; не был передан</h1>
 
-    if (process.env.NODE_ENV === "development") {
-      console.log("Development mode");
-    }
+		return (
+			<React.Fragment>
+				<h1>Hello, world!</h1>
+				<div className="hello" />
+				<Switch>
+					<Route path="/hello" exact component={AsyncHello} />
+				</Switch>
+				<button>Проверка динамического импорта</button>
+			</React.Fragment>
+		)
+	}
 
-    // Первый клик по кнопке создаст сетевой запрос, запрашивающий код требуемого модуля
-    // После скачивания модуль запустится
-    const handleClick = event =>
-      import("./print").then(module => {
-        var print = module.default;
-        print();
-      });
+	componentDidMount() {
+		this.authorization()
+	}
 
-    function demo(input) {
-      return input.map(item => item + 1).map(item => item + 2);
-    }
-
-    return (
-      <React.Fragment>
-        <h1>Hello, world!</h1>
-        <ExampleComponent />
-        {/* <img src={Icon} alt="" /> */}
-        <div className="hello" />
-        <button onClick={handleClick}>Проверка динамического импорта</button>
-      </React.Fragment>
-    );
-  }
-
-  componentDidMount() {
-    // const token = this.props.location.search.slice('?token='.length)
-    this.props.setAuthorization("token");
-  }
+	authorization = async () => {
+		const token = this.props.location.search.slice('?token='.length)
+		await this.props.setAuthorization({ token })
+		await this.props.getData({ token: this.props.auth.token })
+	}
 }
 
-function ExampleComponent() {
-  return <p>1</p>;
-}
+const mapStateToProps = state => ({ auth: state.auth, location: state.routing.location })
+const mapDispatchToProps = dispatch => bindActionCreators({ setAuthorization, getData }, dispatch)
 
-const mapStateToProps = state => ({ auth: state.auth });
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ setAuthorization }, dispatch);
-
-export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(App));
+export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(App))

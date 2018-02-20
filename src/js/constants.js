@@ -3,4 +3,4 @@ export const AUTH_SET = 'AUTH_SET'
 
 export const REQUEST = '_REQUEST'
 export const SUCCESS = '_SUCCESS'
-export const ERROR = '_ERROR'
+export const FAIL = '_FAIL'
