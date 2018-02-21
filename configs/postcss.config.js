@@ -12,7 +12,7 @@ module.exports = ({ file, options, env }) => {
 	}
 	return {
 		plugins: {
-			'postcss-import': {	},
+			'postcss-import': {},
 			precss: {},
 			'postcss-cssnext': {},
 			'css-mqpacker': { sort: true },
