@@ -9,8 +9,7 @@
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.0.0-beta.40",
-    "core-js": "^2.5.3",
+    "@babel/runtime": "^7.0.0-beta.40",
     "global": "^4.3.2",
     "history": "^4.7.2",
     "intl": "^1.2.5",

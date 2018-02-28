@@ -62,13 +62,22 @@ module.exports = merge(common, {
 							'@babel/preset-react'
 						],
 						plugins: [
+							[
+								'@babel/plugin-transform-runtime',
+								{
+									helpers: false,
+									polyfill: false,
+									regenerator: true,
+									moduleName: '@babel/runtime'
+								}
+							],
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
-							'@babel/plugin-proposal-class-properties'
-							// 'transform-react-remove-prop-types',
-							// 'closure-elimination',
-							// '@babel/plugin-transform-react-constant-elements',
-							// '@babel/plugin-transform-react-inline-elements'
+							'@babel/plugin-proposal-class-properties',
+							'transform-react-remove-prop-types',
+							'closure-elimination',
+							'@babel/plugin-transform-react-constant-elements',
+							'@babel/plugin-transform-react-inline-elements'
 						]
 					}
 				}

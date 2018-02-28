@@ -54,12 +54,19 @@ module.exports = merge(common, {
 							'@babel/preset-react'
 						],
 						plugins: [
-							//'@babel/plugin-transform-runtime',
+							[
+								'@babel/plugin-transform-runtime',
+								{
+									helpers: false,
+									polyfill: false,
+									regenerator: true,
+									moduleName: '@babel/runtime'
+								}
+							],
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',
 							'react-hot-loader/babel'
-							/*, 'transform-runtime'*/
 						]
 					}
 				}

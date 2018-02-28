@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@babel/polyfill@^7.0.0-beta.40":
+"@babel/runtime@^7.0.0-beta.40":
   version "7.0.0-beta.40"
-  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.0.0-beta.40.tgz#90f447aa04ab54c317dcf0ccb8cb11ad4228fea0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.40.tgz#8e3b8f1d2d8639d010e991a7e99c1d9ef578f886"
   dependencies:
     core-js "^2.5.3"
     regenerator-runtime "^0.11.1"
