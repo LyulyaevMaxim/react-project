@@ -14,6 +14,7 @@
     "history": "^4.7.2",
     "intl": "^1.2.5",
     "loadable-components": "^1.1.1",
+    "normalizr": "^3.2.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0-beta.21",

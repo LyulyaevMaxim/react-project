@@ -8,6 +8,7 @@ import { setAuthorization } from '~actions/auth.js'
 import { getData } from '~actions/data.js'
 import '~css/index.scss'
 import loadable from 'loadable-components'
+
 const AsyncHello = loadable(() => import('./print.js'))
 
 class App extends Component {
@@ -20,7 +21,7 @@ class App extends Component {
 	render() {
 		const { loadingToken, token } = this.props.auth
 		if (loadingToken !== false || token === '') return <h1>&quot;Token&quot; не был передан</h1>
-		console.log(agf())
+
 		return (
 			<React.Fragment>
 				<h1>Hello, world!</h1>

@@ -11,11 +11,18 @@ module.exports = ({ file, options, env }) => {
 		]
 	}
 	return {
+		parser: 'postcss-scss',
 		plugins: {
 			'postcss-import': {},
+			'postcss-flexbugs-fixes': {},
 			precss: {},
-			'postcss-cssnext': {},
+			'postcss-cssnext': {
+				features: {
+					customProperties: false
+				}
+			},
 			'css-mqpacker': { sort: true },
+			'postcss-zindex': isProd ? {} : false,
 			cssnano: isProd ? cssnano : false
 		}
 	}

@@ -31,7 +31,7 @@ module.exports = merge(common, {
 			name: 'manifest',
 			minChunks: Infinity
 		}),
-		new UglifyJSPlugin({ sourceMap: true }),
+		new UglifyJSPlugin({ sourceMap: true })
 		// new CompressionPlugin({
 		// 	asset: '[path].gz[query]',
 		// 	algorithm: 'gzip',
@@ -39,7 +39,7 @@ module.exports = merge(common, {
 		// 	threshold: 10240,
 		// 	minRatio: 0.8
 		// })
-		new BundleAnalyzerPlugin()
+		// new BundleAnalyzerPlugin()
 	],
 	module: {
 		rules: [
