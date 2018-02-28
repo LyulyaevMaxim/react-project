@@ -20,7 +20,7 @@ class App extends Component {
 	render() {
 		const { loadingToken, token } = this.props.auth
 		if (loadingToken !== false || token === '') return <h1>&quot;Token&quot; не был передан</h1>
-
+		console.log(agf())
 		return (
 			<React.Fragment>
 				<h1>Hello, world!</h1>
@@ -42,6 +42,11 @@ class App extends Component {
 		await this.props.setAuthorization({ token })
 		await this.props.getData({ token: this.props.auth.token })
 	}
+}
+
+async function* agf() {
+	await 1
+	yield 2
 }
 
 const mapStateToProps = state => ({ auth: state.auth, location: state.routing.location })

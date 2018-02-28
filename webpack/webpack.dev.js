@@ -51,7 +51,8 @@ module.exports = merge(common, {
 									}
 								}
 							],
-							'@babel/preset-react'
+							'@babel/preset-react',
+							'@babel/preset-stage-0'
 						],
 						plugins: [
 							[
