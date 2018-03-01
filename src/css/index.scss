@@ -9,20 +9,19 @@
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  width: 0px;
+}
+$theme: dark;
+
 :root {
   --mainColor: gold;
+  --largeFontSize: 24px;
 
-  @media ($mobile <= width <= 1400px) {
+  @media (--desktop) {
     --mainColor: green;
+    --largeFontSize: 36px;
   }
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
 body > app-container {
@@ -40,7 +39,48 @@ body > app-container {
   }
 }
 
+block-for-items {
+  display: flex;
+  margin: 20px 5px;
+
+  item-block {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d073b7;
+    height: 100px;
+
+    &:not(:first-child, :last-child) {
+      margin-left: -1px;
+      background-color: yellow;
+    }
+
+    &:matches(:first-child, :last-child) {
+      background-color: yellowgreen;
+    }
+  }
+}
+
+@for $i from 1 through 5 {
+  block-for-items.grow item-block:nth-child(#{$i}) {
+    width: calc($i*10%);
+  }
+}
+
+//by 2 для приращения счётчика на 2
+@for $i from 1 through 5 by 2 {
+  block-for-items.grow item-block:nth-child(#{$i}) {
+    height: calc(100px + $i*10px);
+  }
+}
+
 .hello {
+  @if $theme == dark {
+    color: black;
+  } @else {
+    color: gainsboro;
+  }
+
   p {
     margin: 0;
     font-size: 18px;
@@ -66,9 +106,18 @@ body > app-container {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: calc(var(--largeFontSize) * 1.5);
   line-height: 1.8;
   color: var(--mainColor);
+
+  @media (--mobile) {
+    background: color-mod(var(--mainColor) alpha(50%));
+  }
+
+  @media (--desktop) {
+    background: color(#3ac162 l(80%));
+    border: 1px solid color(#3ac162 a(90%));
+  }
 }
 
 

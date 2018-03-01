@@ -26,6 +26,12 @@ class App extends Component {
 			<React.Fragment>
 				<h1>Hello, world!</h1>
 				<div className="hello" />
+				<block-for-items class="grow">
+					<item-block>1</item-block>
+					<item-block>2</item-block>
+					<item-block>3</item-block>
+					<item-block>4</item-block>
+				</block-for-items>
 				<Switch>
 					<Route path="/hello" exact component={AsyncHello} />
 				</Switch>
