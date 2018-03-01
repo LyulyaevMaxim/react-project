@@ -41,7 +41,7 @@ module.exports = {
 			defaultAttribute: 'defer'
 		}),
 		new ExtractTextPlugin({
-			filename: '[name].[contenthash].css',
+			filename: 'css/[name].[contenthash].css',
 			disable: isDev
 		})
 	],

@@ -90,7 +90,8 @@ module.exports = merge(common, {
 					{
 						loader: 'file-loader',
 						options: {
-							outputPath: 'img/'
+							outputPath: 'img',
+							publicPath: '../img/'
 						}
 					},
 					{
@@ -108,7 +109,7 @@ module.exports = merge(common, {
 								speed: 4
 							},
 							optipng: {
-								enabled: false //disable optiPNG
+								enabled: false
 							},
 							gifsicle: {
 								enabled: false
@@ -123,7 +124,7 @@ module.exports = merge(common, {
 		]
 	},
 	output: {
-		filename: '[name].[chunkhash].bundle.js',
+		filename: 'js/[name].[chunkhash].bundle.js',
 		path: `${root}/dist`
 	}
 })
