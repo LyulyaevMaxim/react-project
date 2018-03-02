@@ -4,6 +4,6 @@ RUN mkdir -p /frontend
 WORKDIR /frontend
 COPY ./server ./
 RUN yarn
-COPY ./build ./build/
+COPY ./dist ./build/
 CMD [ "node", "server.js"]
 
