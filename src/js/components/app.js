@@ -5,7 +5,7 @@ import { hot } from 'react-hot-loader'
 import { bindActionCreators } from 'redux'
 import { Route, Switch } from 'react-router-dom'
 import { setAuthorization } from '~actions/auth.js'
-import { getData } from '~actions/data.js'
+import * as dataActions from '~actions/data.js'
 import '~css/index.scss'
 import loadable from 'loadable-components'
 
@@ -18,6 +18,20 @@ class App extends Component {
 		setAuthorization: PropTypes.func,
 		getData: PropTypes.func
 	}
+
+	async componentDidMount() {
+		this.authorization()
+		this.props.getData()
+		await this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })
+		await this.props.getData()
+		this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })
+	}
+
+	authorization = async () => {
+		const token = '72d1de32-9664-488c-bea6-f5fe5cfcebf0' //this.props.location.search.slice('?token='.length)
+		await this.props.setAuthorization({ token })
+	}
+
 	render() {
 		const { loadingToken, token } = this.props.auth
 		if (loadingToken !== false || token === '') return <h1>&quot;Token&quot; не был передан</h1>
@@ -39,24 +53,10 @@ class App extends Component {
 			</React.Fragment>
 		)
 	}
-
-	componentDidMount() {
-		this.authorization()
-	}
-
-	authorization = async () => {
-		const token = this.props.location.search.slice('?token='.length)
-		await this.props.setAuthorization({ token })
-		await this.props.getData({ token: this.props.auth.token })
-	}
-}
-
-async function* agf() {
-	await 1
-	yield 2
 }
 
 const mapStateToProps = state => ({ auth: state.auth, location: state.routing.location })
-const mapDispatchToProps = dispatch => bindActionCreators({ setAuthorization, getData }, dispatch)
+const mapDispatchToProps = dispatch =>
+	bindActionCreators({ setAuthorization, ...dataActions }, dispatch)
 
 export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(App))

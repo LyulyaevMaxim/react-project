@@ -1,13 +1,22 @@
 import { requestCreator } from './action-creators'
-import { API_URL } from '~constants'
+import { API_URL, GET_REQUEST, POST_REQUEST } from '~constants'
 
-export function getData({ token }) {
-	return async dispatch => {
-		return requestCreator(dispatch, {
+export function getData() {
+	return dispatch =>
+		requestCreator(dispatch, {
 			type: 'GET_DATA',
-			requestType: 'get',
-			API_URL: `${API_URL}/getData`,
-			auth: `Bearer ${token}`
+			requestUrl: '/userapi/user/get',
+			requestType: GET_REQUEST,
+			sendObject: { mode: 'dev' }
 		})
-	}
+}
+
+export function sberLoginUpdate({ login, password }) {
+	return dispatch =>
+		requestCreator(dispatch, {
+			type: 'SBER_LOGIN_UPDATE',
+			requestUrl: '/userapi/user/sberlogin/update',
+			requestType: POST_REQUEST,
+			sendObject: { login, password }
+		})
 }

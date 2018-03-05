@@ -1,59 +1,36 @@
-import { REQUEST, SUCCESS, FAIL, GET_REQUEST, POST_REQUEST } from '../constants'
-import agent from 'superagent'
+import { REQUEST, SUCCESS, FAIL, GET_REQUEST, POST_REQUEST, API_URL } from '../constants'
+import axios from 'axios'
 
-export const requestCreator = (dispatch, action) => {
-	const { type, requestType, API_URL, auth, sendObject, other } = action
+export function axiosInitialization({ token }) {
+	axios.defaults.baseURL = API_URL
+	axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}
 
-	dispatch({
-		type: type + REQUEST
-	})
+export async function requestCreator(dispatch, action) {
+	const { type, requestType, requestUrl: url, sendObject, other } = action
 
-	if (requestType === POST_REQUEST)
-		return agent
-			.post(API_URL)
-			.type('application/json')
-			.set('Authorization', auth)
-			.send(sendObject)
-			.then(result => {
-				if (result.error) throw new Error(result.error.msg)
-				return new Promise(function(resolve, reject) {
-					dispatch({
-						type: type + SUCCESS,
-						payload: result.body,
-						other
-					})
-					resolve(result.body)
-				})
-			})
-			.catch(error => {
-				dispatch({
-					type: type + FAIL,
-					error: error.message
-				})
-			})
+	dispatch({ type: type + REQUEST })
 
-	if (requestType === GET_REQUEST)
-		return agent
-		.get(API_URL)
-		.accept('application/json')
-		.set('Authorization', auth)
-		.query(sendObject)
-		.then(result => {
-			if (result.error) throw new Error(result.error.msg)
-			return new Promise(function(resolve, reject) {
-				dispatch({
-					type: type + SUCCESS,
-					payload: result.body,
-					other
-				})
-				resolve(result.body)
-			})
-		})
-		.catch(error => {
-			dispatch({
-				type: type + FAIL,
-				error: error.message
-			})
-		})
+	let method, data, params
+	switch (requestType) {
+		case GET_REQUEST: {
+			method = 'get'
+			params = { ...sendObject }
+			break
+		}
+		case POST_REQUEST: {
+			method = 'post'
+			data = { ...sendObject }
+			break
+		}
 
+		default: {
+			console.log('Неизвестный тип запроса')
+			return
+		}
+	}
+
+	await axios({ method, url, data, params })
+		.then(result => dispatch({ type: type + SUCCESS, payload: result.body, other }))
+		.catch(error => dispatch({ type: type + FAIL, error: error.message }))
 }

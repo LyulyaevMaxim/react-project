@@ -1,4 +1,4 @@
-export const API_URL = ''
+export const API_URL = 'https://sbqr.lad24.ru'
 export const AUTH_SET = 'AUTH_SET'
 
 export const REQUEST = '_REQUEST'
