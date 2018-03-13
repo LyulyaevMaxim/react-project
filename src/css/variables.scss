@@ -27,7 +27,9 @@ $desktop: 1024px;
 $big-desktop: 1440px;
 
 @custom-media --mobile (width < $tablet);
+@custom-media --min-tablet (width >= $tablet);
 @custom-media --tablet ($tablet <= width < $desktop);
+@custom-media --min-desktop (width >= $desktop);
 @custom-media --desktop ($desktop <= width < $big-desktop);
 @custom-media --big-desktop (width >= $big-desktop);
 

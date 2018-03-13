@@ -18,7 +18,8 @@ module.exports = merge(common, {
 		noInfo: true,
 		open: false,
 		openPage: '?token=123',
-		overlay: true
+		overlay: true,
+		host: '0.0.0.0'
 	},
 	plugins: [
 		new webpack.DefinePlugin({
@@ -48,7 +49,9 @@ module.exports = merge(common, {
 								{
 									targets: {
 										browsers: ['last 2 versions', 'IE >= 11']
-									}
+									},
+									modules: false,
+									useBuiltIns: 'usage'
 								}
 							],
 							'@babel/preset-react',

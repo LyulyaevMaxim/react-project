@@ -8,6 +8,7 @@ import { setAuthorization } from '~actions/auth.js'
 import * as dataActions from '~actions/data.js'
 import { helloSaga } from '~actions/sagas.js'
 import '~css/index.scss'
+import { formatDate } from '~utils/date.js'
 import loadable from 'loadable-components'
 
 const AsyncHello = loadable(() => import('./print.js'))

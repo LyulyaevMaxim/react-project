@@ -16,6 +16,7 @@ module.exports = merge(common, {
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
+		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
 		new CleanWebpackPlugin([`${root}/dist`], {
 			allowExternal: true
 		}),
@@ -48,7 +49,9 @@ module.exports = merge(common, {
 								{
 									targets: {
 										browsers: ['last 2 versions', 'IE >= 11']
-									}
+									},
+									modules: false,
+									useBuiltIns: 'usage'
 								}
 							],
 							'@babel/preset-react',
