@@ -11,9 +11,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.40",
     "axios": "^0.18.0",
-    "global": "^4.3.2",
     "history": "^4.7.2",
-    "intl": "^1.2.5",
     "loadable-components": "^1.1.1",
     "normalizr": "^3.2.4",
     "react": "^16.2.0",
@@ -23,9 +21,9 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
+    "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1",
-    "whatwg-fetch": "^2.0.3"
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "gh-pages": "^1.1.0",

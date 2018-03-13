@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import { Route, Switch } from 'react-router-dom'
 import { setAuthorization } from '~actions/auth.js'
 import * as dataActions from '~actions/data.js'
+import { helloSaga } from '~actions/sagas.js'
 import '~css/index.scss'
 import loadable from 'loadable-components'
 
@@ -27,9 +28,14 @@ class App extends Component {
 		this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })
 	}
 
-	authorization = async () => {
+	authorization = () => {
 		const token = '72d1de32-9664-488c-bea6-f5fe5cfcebf0' //this.props.location.search.slice('?token='.length)
-		await this.props.setAuthorization({ token })
+		this.props.setAuthorization({ token })
+	}
+
+	testSaga = () => {
+		const { sagaMiddleware } = this.props
+		sagaMiddleware.run(helloSaga)
 	}
 
 	render() {
@@ -49,7 +55,7 @@ class App extends Component {
 				<Switch>
 					<Route path="/hello" exact component={AsyncHello} />
 				</Switch>
-				<button>Проверка динамического импорта</button>
+				<button onClick={this.testSaga}>Проверка динамического импорта</button>
 			</React.Fragment>
 		)
 	}
