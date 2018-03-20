@@ -1,0 +1,97 @@
+@import "../variables.scss";
+@import "./subsribe-form.scss";
+@import "./footer-menu.scss";
+@import "./footer-info.scss";
+
+footer {
+  position: relative;
+  background-color: #3c3f52;
+  padding-top: 85px;
+
+  & > h3,
+  .footer-subsribe-form,
+  .footer-menu,
+  footer-info {
+    @media (--max-desktop) {
+      padding-left: 20px;
+      padding-right: 19px;
+    }
+  }
+
+  & > h3 {
+    text-align: center;
+    color: $color-white;
+    line-height: 35px;
+    font-size: 24px;
+
+    @media (--min-desktop) {
+      line-height: 63px;
+      font-size: 36px;
+      margin-right: 13px;
+    }
+  }
+
+  @media (--min-desktop) {
+    &::before {
+      content: '';
+      width: 350px;
+      height: 350px;
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translate(45%, -49%);
+      border: 72px solid #ff6d10;
+      border-radius: 50%;
+    }
+  }
+
+  @media ($desktop <= width < 1500px) {
+    & > .footer-menu {
+      margin-left: 60px;
+      margin-right: 60px;
+    }
+
+    & > footer-info {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+  }
+
+  @media (width >= 1500px) {
+    & > .footer-menu {
+      margin-left: 222px;
+      margin-right: 222px;
+    }
+
+    & > footer-info {
+      padding-left: 222px;
+      padding-right: 222px;
+    }
+  }
+
+  & > h3 + .footer-subsribe-form {
+    margin-top: 43px;
+
+    @media (--min-desktop) {
+      margin-top: 41px;
+    }
+  }
+
+  .footer-subsribe-form + .footer-menu {
+    margin-top: 55px;
+
+    @media (--min-desktop) {
+      margin-top: 89px;
+    }
+  }
+
+  .footer-menu + footer-info {
+    margin-top: 44px;
+
+    @media (--min-desktop) {
+      margin-top: 67px;
+    }
+  }
+}
+

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { hot } from 'react-hot-loader'
@@ -11,7 +11,11 @@ import '~css/index.scss'
 import { formatDate } from '~utils/date.js'
 import loadable from 'loadable-components'
 
-const AsyncHello = loadable(() => import('./print.js'))
+const Header = loadable(() => import('./header'))
+const Footer = loadable(() => import('./footer'))
+const FormDemo = loadable(() => import('./form-demo'))
+const SwitchesDemo = loadable(() => import('./switches-demo'))
+const TableDemo = loadable(() => import('./table-demo'))
 
 class App extends Component {
 	static propTypes = {
@@ -19,6 +23,31 @@ class App extends Component {
 		auth: PropTypes.object.isRequired,
 		setAuthorization: PropTypes.func,
 		getData: PropTypes.func
+	}
+
+	render() {
+		const { loadingToken, token } = this.props.auth
+		if (loadingToken !== false || token === '') return <h1>&quot;Token&quot; не был передан</h1>
+
+		return (
+			<Fragment>
+				<Header />
+				<FormDemo />
+				<SwitchesDemo />
+				<TableDemo />
+				<block-for-items class="grow">
+					<item-block>1</item-block>
+					<item-block>2</item-block>
+					<item-block>3</item-block>
+					<item-block>4</item-block>
+				</block-for-items>
+				{/*	<Switch>
+					<Route path="/hello" exact component={AsyncHello} />
+				</Switch>*/}
+				{/*<button onClick={this.testSaga}>Проверка динамического импорта</button>*/}
+				<Footer />
+			</Fragment>
+		)
 	}
 
 	async componentDidMount() {
@@ -37,28 +66,6 @@ class App extends Component {
 	testSaga = () => {
 		const { sagaMiddleware } = this.props
 		sagaMiddleware.run(helloSaga)
-	}
-
-	render() {
-		const { loadingToken, token } = this.props.auth
-		if (loadingToken !== false || token === '') return <h1>&quot;Token&quot; не был передан</h1>
-
-		return (
-			<React.Fragment>
-				<h1>Hello, world!</h1>
-				<div className="hello" />
-				<block-for-items class="grow">
-					<item-block>1</item-block>
-					<item-block>2</item-block>
-					<item-block>3</item-block>
-					<item-block>4</item-block>
-				</block-for-items>
-				<Switch>
-					<Route path="/hello" exact component={AsyncHello} />
-				</Switch>
-				<button onClick={this.testSaga}>Проверка динамического импорта</button>
-			</React.Fragment>
-		)
 	}
 }
 

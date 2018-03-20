@@ -1,0 +1,154 @@
+footer-info {
+	display: grid;
+	background-color: rgba(49, 51, 66, 0.6);
+	padding-top: 29px;
+	padding-bottom: 31px;
+
+	@media (--max-tablet) {
+		grid-template: "logo callback" "partners partners" "company company";
+	}
+
+	@media (--tablet) {
+		grid-template: "logo partners callback" "company company company";
+	}
+
+	@media (--min-desktop) {
+		display: flex;
+		padding-top: 35px;
+		padding-bottom: 35px;
+		align-items: center;
+	}
+
+	footer-info-partners {
+		@media (--max-tablet) {
+			margin-top: 35px;
+		}
+
+		@media (--min-desktop) {
+			margin-left: auto;
+		}
+	}
+
+	footer-info-company {
+		@media (--max-desktop) {
+			margin-top: 25px;
+		}
+
+		@media (--min-desktop) {
+			margin-left: 26px;
+		}
+
+	}
+
+	footer-info-callback {
+		@media (--min-desktop) {
+			margin-left: 25px;
+			margin-right: 25px;
+		}
+
+		@media (--big-desktop) {
+			margin-left: 71px;
+		}
+	}
+}
+
+footer-info-logo {
+	grid-area: logo;
+	display: inline-block;
+	width: 85px;
+	height: 25px;
+	min-width: 85px;
+	min-height: 25px;
+	//background-image: url("../../img/logo-lad-white.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+
+	@media (--min-desktop) {
+		min-width: 88px;
+		min-height: 26px;
+	}
+}
+
+footer-info-company {
+	grid-area: company;
+	display: inline-block;
+	& > p {
+		line-height: 16px;
+		font-size: 12px;
+		color: #6D6F85;
+
+		& + p {
+			margin-top: 1px;
+		}
+	}
+}
+
+footer-info-callback {
+	grid-area: callback;
+	display: flex;
+
+	& > a {
+		color: $color-white;
+		text-decoration: none;
+		margin-left: auto;
+		margin-right: 13px;
+		font-size: 16px;
+		line-height: 1.5;
+		width: max-content;
+
+		@media (--desktop) {
+			font-size: 20px;
+		}
+
+		@media (--big-desktop) {
+			line-height: 42px;
+			font-size: 24px;
+		}
+	}
+}
+
+footer-info-partners {
+	grid-area: partners;
+	display: inline-flex;
+
+	@media (--tablet) {
+		justify-content: center;
+	}
+
+	& > span {
+		line-height: 16px;
+		font-size: 12px;
+		color: #797B91;
+
+		@media (--max-desktop) {
+			display: none;
+		}
+
+		@media (--min-desktop) {
+			width: min-content;
+		}
+
+	}
+}
+
+footer-info-partner {
+	display: inline-block;
+	min-width: 40px;
+	min-height: 40px;
+	border-radius: 50%;
+	background-color: #797B91;
+
+	& + footer-info-partner {
+		margin-left: 20px;
+
+		@media (--min-desktop) {
+			margin-left: 13px;
+		}
+	}
+
+	& + span {
+		@media (--min-desktop) {
+			margin-left: 11px;
+		}
+	}
+}

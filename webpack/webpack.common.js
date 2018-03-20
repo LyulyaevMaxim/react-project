@@ -12,13 +12,15 @@ module.exports = {
 			['~img']: path.resolve(__dirname, '../src/img/'),
 			['~actions']: path.resolve(__dirname, '../src/js/actions'),
 			['~utils']: path.resolve(__dirname, '../src/js/utils'),
-			['~constants']: path.resolve(__dirname, '../src/js/constants.js')
+			['~constants']: path.resolve(__dirname, '../src/js/constants.js'),
+			['~modules']: path.resolve(__dirname, '../src/js/modules')
 		}
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: `${root}/src/html/index.html`,
+			favicon: `${path.resolve(__dirname, '../src/img/')}/favicon/favicon.ico`,
 			inject: true,
 			cache: true,
 			minify: isDev
@@ -50,7 +52,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.scss$/,
-				include: `${root}/src/css`,
+				// include: `${root}/src/css`,
 				use: ExtractTextPlugin.extract({
 					fallback: {
 						loader: 'style-loader',
@@ -93,6 +95,19 @@ module.exports = {
 							name: '[name].[ext]',
 							outputPath: 'fonts/'
 						}
+					}
+				]
+			},
+			{
+				test: /\.(ico)$/,
+				// include: `${root}/src/img/favicon`,
+				use: [
+					{
+						loader: 'file-loader?name=[name].[ext]'
+						/*options: {
+							name: '[name].[ext]',
+							outputPath: 'img/?name=[name].[ext]'
+						}*/
 					}
 				]
 			}

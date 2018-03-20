@@ -6,6 +6,7 @@ const common = require('./webpack.common.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const root = path.resolve(__dirname, '../')
+const distPath = `${root}/server/dist`
 
 module.exports = merge(common, {
 	entry: {
@@ -17,7 +18,7 @@ module.exports = merge(common, {
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
 		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
-		new CleanWebpackPlugin([`${root}/dist`], {
+		new CleanWebpackPlugin([distPath], {
 			allowExternal: true
 		}),
 		new webpack.HashedModuleIdsPlugin(),
@@ -96,6 +97,7 @@ module.exports = merge(common, {
 								plugins: [{ removeTitle: true }, { convertPathData: false }]
 							},
 							mozjpeg: {
+								enabled: false, //пока не заработает с loadable-components
 								progressive: true,
 								quality: 65
 							},
@@ -120,6 +122,6 @@ module.exports = merge(common, {
 	},
 	output: {
 		filename: 'js/[name].[chunkhash].bundle.js',
-		path: `${root}/dist`
+		path: distPath
 	}
 })

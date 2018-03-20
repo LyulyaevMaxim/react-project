@@ -2,6 +2,7 @@ const Hapi = require('hapi')
 const Inert = require('inert')
 const path = require('path')
 const prefix = '/'
+const distPath = './dist'
 
 const server = new Hapi.Server({
 	port: process.env.PORT || 5000,
@@ -16,7 +17,7 @@ server.route([
 		path: '/{param*}',
 		options: {
 			handler: (request, h) => {
-				return h.file(path.join(process.cwd(), 'build', 'index.html'))
+				return h.file(path.join(process.cwd(), distPath, 'index.html'))
 			}
 		}
 	},
@@ -25,7 +26,7 @@ server.route([
 		path: prefix + 'fonts/{param*}',
 		options: {
 			handler: (request, h) => {
-				return h.file(path.join(process.cwd(), './build', request.path))
+				return h.file(path.join(process.cwd(), distPath, request.path))
 			}
 		}
 	},
@@ -38,7 +39,7 @@ server.route([
 				if (result.indexOf('vendor') >= 0 && result.indexOf('.map') < 0) {
 					// result += '.gz'
 				}
-				return h.file(path.join(process.cwd(), './build', result))
+				return h.file(path.join(process.cwd(), distPath, result))
 			}
 		}
 	},
@@ -47,7 +48,7 @@ server.route([
 		path: prefix + 'img/{param*}',
 		options: {
 			handler: (request, h) => {
-				return h.file(path.join(process.cwd(), './build', request.path))
+				return h.file(path.join(process.cwd(), distPath, request.path))
 			}
 		}
 	},
@@ -62,7 +63,7 @@ server.route([
 					arr.splice(0, 2)
 					result = '/' + arr.join('/')
 				}
-				return h.file(path.join(process.cwd(), './build', result))
+				return h.file(path.join(process.cwd(), distPath, result))
 			}
 		}
 	}

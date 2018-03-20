@@ -1,7 +1,7 @@
 {
   "name": "react-project",
   "description": "Webpack Configuration",
-  "author": "Maxim Buslaev",
+  "author": "Maxim Lyulyaev",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --env.dev  --config webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js"

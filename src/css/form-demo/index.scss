@@ -1,0 +1,17 @@
+@import "../variables.scss";
+
+form.demo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 50px 20px;
+
+  @media (--min-desktop) {
+    padding-left: 14vw;
+    padding-right: 14vw;
+  }
+
+  & > * {
+    margin-bottom: 15px;
+  }
+}

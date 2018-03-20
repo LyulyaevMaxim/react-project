@@ -1,0 +1,41 @@
+block-for-table {
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+block-for-table > table > tbody > tr > td,
+block-for-table > table > tbody > tr > th {
+  &.number-column {
+    width: 47px;
+    text-align: center;
+  }
+
+  &.name-column {
+    width: calc(100% - 18% - 300px);
+    margin-left: 1.91%;
+  }
+
+  &.used-quantity-column {
+    width: 95px;
+    margin-left: 1.91%;
+  }
+
+  &.quantity-column {
+    width: 80px;
+    margin-left: 1.91%;
+  }
+
+  &.discount-column {
+    width: 50px;
+    margin-left: 3.9325%;
+  }
+
+  &.time-column {
+    width: 66px;
+    margin-left: 2.584%;
+  }
+}
+
+block-for-table > table > tbody > tr > td.discount-column::after {
+  content: '%';
+}

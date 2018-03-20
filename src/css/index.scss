@@ -12,7 +12,14 @@
 *::-webkit-scrollbar {
   width: 0px;
 }
-$theme: dark;
+
+img:not([alt]) {
+  border: 2px dashed red;
+}
+
+a {
+  text-decoration: none;
+}
 
 :root {
   --mainColor: gold;
@@ -73,6 +80,7 @@ block-for-items {
     height: calc(100px + $i*10px);
   }
 }
+$theme: dark;
 
 .hello {
   @if $theme == dark {
@@ -110,7 +118,7 @@ h1 {
   line-height: 1.8;
   color: var(--mainColor);
 
-  @media (--mobile) {
+  @media (--max-tablet) {
     background: color-mod(var(--mainColor) alpha(50%));
   }
 

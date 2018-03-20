@@ -1,0 +1,156 @@
+equipment-product {
+	display: grid;
+	padding-bottom: 27px;
+
+	@media (--max-desktop) {
+		grid-template: "title . cart-request" "price . .";
+		grid-template-columns: auto 1fr max-content;
+		grid-row-gap: 8px;
+		grid-column-gap: 12px;
+	}
+
+	@media (--min-desktop) {
+		grid-template: "logo . title . price . cart-request";
+		grid-template-columns: max-content 19px auto 17px max-content 20px max-content;
+		align-items: center;
+	}
+
+	&-title {
+		grid-area: title;
+		display: block;
+		line-height: 22px;
+		font-size: 14px;
+		color: #333333;
+
+	}
+
+	&-price {
+		grid-area: price;
+		display: block;
+		line-height: 20px;
+		font-size: 16px;
+		color: #333333;
+
+		&::after {
+			content: url('../../img/icon-ruble-black.svg');
+			display: inline-block;
+			width: 12px;
+			height: 11px;
+			margin-left: 4px;
+		}
+	}
+
+	&:first-of-type &-logo {
+		&::before {
+			content: '';
+			display: block;
+			border-radius: 50%;
+			border: 2px solid #22253D;
+			width: 100%;
+			height: 100%;
+			clip-path: circle(47px at 70px -13px);
+			margin-top: -1px;
+		}
+	}
+
+	& + & {
+		border-top: 1px solid #D8DCE6;
+
+		@media (--max-desktop) {
+			padding-top: 26px;
+		}
+
+		@media (--min-desktop) {
+			padding-top: 22px;
+		}
+	}
+}
+
+
+.equipment-product-cart {
+	grid-area: cart-request;
+	display: block;
+	width: 40px;
+	height: 40px;
+	background-color: #FF7800;
+	border-radius: 50%;
+	background-image: url("../../img/icon-cart-white.svg");
+	background-position: 44% 50%;
+	background-repeat: no-repeat;
+	background-size: 21px 20px;
+
+	@media (--max-desktop) {
+		margin-top: 8px;
+	}
+}
+
+.equipment-product-request {
+	grid-area: cart-request;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 20px;
+	font-size: 14px;
+	font-weight: $FontBold;
+	text-align: center;
+	color: $color-white;
+	width: 160px;
+	height: 40px;
+	border: 1px solid #FF7800;
+	background-color: #FF7800;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+
+equipment-product-logo {
+	grid-area: logo;
+	display: block;
+	width: 56px;
+	height: 56px;
+	border: 1px solid #D8DCE6;
+	border-radius: 50%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+
+	@media (--max-desktop) {
+		display: none;
+	}
+
+	&.scanner {
+		background-image: url('../../img/equipment-scanner.svg');
+		background-position: 39% 50%;
+	}
+
+	&.bank-terminal {
+		background-image: url('../../img/equipment-bank-terminal.svg');
+	}
+
+	&.atol {
+		background-image: url('../../img/equipment-atol.svg');
+	}
+
+	&.weigher-1 {
+		background-image: url('../../img/equipment-weigher-1.svg');
+	}
+
+	&.weigher-2 {
+		background-image: url('../../img/equipment-weigher-2.svg');
+	}
+
+	&.weigher-3 {
+		background-image: url('../../img/equipment-weigher-3.svg');
+	}
+
+	&.printer-1 {
+		background-image: url('../../img/equipment-printer-1.svg');
+	}
+
+	&.printer-2 {
+		background-image: url('../../img/equipment-printer-2.svg');
+	}
+
+	&.money-box {
+		background-image: url('../../img/equipment-money-box.svg');
+	}
+}
