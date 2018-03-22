@@ -52,7 +52,6 @@ module.exports = {
 		rules: [
 			{
 				test: /\.scss$/,
-				// include: `${root}/src/css`,
 				use: ExtractTextPlugin.extract({
 					fallback: {
 						loader: 'style-loader',
@@ -95,19 +94,6 @@ module.exports = {
 							name: '[name].[ext]',
 							outputPath: 'fonts/'
 						}
-					}
-				]
-			},
-			{
-				test: /\.(ico)$/,
-				// include: `${root}/src/img/favicon`,
-				use: [
-					{
-						loader: 'file-loader?name=[name].[ext]'
-						/*options: {
-							name: '[name].[ext]',
-							outputPath: 'img/?name=[name].[ext]'
-						}*/
 					}
 				]
 			}

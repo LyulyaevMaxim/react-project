@@ -4,6 +4,7 @@ const common = require('./webpack.common.js')
 const webpack = require('webpack')
 // const StyleLintPlugin = require('stylelint-webpack-plugin')
 const root = path.resolve(__dirname, '../')
+const initialPath = require('../src/js/constants.json').initialPath
 
 module.exports = merge(common, {
 	entry: {
@@ -14,10 +15,11 @@ module.exports = merge(common, {
 	devServer: {
 		hot: true,
 		clientLogLevel: 'info',
-		https: false,
+		https: true,
 		noInfo: true,
-		open: false,
-		openPage: '?token=123',
+		open: true,
+		publicPath: `/${initialPath}`,
+		openPage: `${initialPath}?token=123&extraToken=a8gh92`,
 		overlay: true,
 		host: '0.0.0.0'
 	},
@@ -48,25 +50,29 @@ module.exports = merge(common, {
 								'@babel/preset-env',
 								{
 									targets: {
-										browsers: ['last 2 versions', 'IE >= 11']
+										browsers: ['last 1 versions']
 									},
-									/*modules: false,
-									useBuiltIns: 'usage'*/
+									modules: false,
+									loose: true,
+									spec: true,
+									useBuiltIns: 'usage',
+									forceAllTransforms: true
+									// debug: true
 								}
 							],
 							'@babel/preset-react',
 							'@babel/preset-stage-0'
 						],
 						plugins: [
-							[
+							/*[
 								'@babel/plugin-transform-runtime',
 								{
 									helpers: false,
-									polyfill: false,
+									polyfill: true,
 									regenerator: true,
 									moduleName: '@babel/runtime'
 								}
-							],
+							],*/
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',

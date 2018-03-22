@@ -7,7 +7,8 @@ export function axiosInitialization({ token }) {
 }
 
 export async function requestCreator(dispatch, action) {
-	const { type, requestType, requestUrl: url, sendObject, other } = action
+	const { type, requestType, requestUrl: url, resultField = 'body',
+		headers = {},sendObject, other } = action
 
 	dispatch({ type: type + REQUEST })
 
@@ -30,7 +31,7 @@ export async function requestCreator(dispatch, action) {
 		}
 	}
 
-	await axios({ method, url, data, params })
-		.then(result => dispatch({ type: type + SUCCESS, payload: result.body, other }))
+	await axios({ method, url, data, params, headers })
+		.then(result => dispatch({ type: type + SUCCESS, payload: result[resultField], other }))
 		.catch(error => dispatch({ type: type + FAIL, error: error.message }))
 }

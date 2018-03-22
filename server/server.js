@@ -1,7 +1,7 @@
 const Hapi = require('hapi')
 const Inert = require('inert')
 const path = require('path')
-const prefix = '/'
+const prefix = `/${require('../src/js/constants.json').initialPath}`
 const distPath = './dist'
 
 const server = new Hapi.Server({
@@ -17,7 +17,7 @@ server.route([
 		path: '/{param*}',
 		options: {
 			handler: (request, h) => {
-				return h.file(path.join(process.cwd(), distPath, 'index.html'))
+				return h.file(path.join(process.cwd(), `${distPath}/index.html`))
 			}
 		}
 	},
@@ -27,6 +27,7 @@ server.route([
 		options: {
 			handler: (request, h) => {
 				return h.file(path.join(process.cwd(), distPath, request.path))
+				// return h.file(path.join(process.cwd(), `${distPath}/fonts/${request.params.param}`))
 			}
 		}
 	},
@@ -35,11 +36,7 @@ server.route([
 		path: prefix + 'js/{param*}',
 		options: {
 			handler: (request, h) => {
-				let result = request.path
-				if (result.indexOf('vendor') >= 0 && result.indexOf('.map') < 0) {
-					// result += '.gz'
-				}
-				return h.file(path.join(process.cwd(), distPath, result))
+				return h.file(path.join(process.cwd(), `${distPath}/js/${request.params.param}`))
 			}
 		}
 	},
@@ -48,7 +45,7 @@ server.route([
 		path: prefix + 'img/{param*}',
 		options: {
 			handler: (request, h) => {
-				return h.file(path.join(process.cwd(), distPath, request.path))
+				return h.file(path.join(process.cwd(), `${distPath}/img/${request.params.param}`))
 			}
 		}
 	},
@@ -57,13 +54,14 @@ server.route([
 		path: prefix + 'css/{param*}',
 		options: {
 			handler: (request, h) => {
-				let result = request.path
+				/*let result = request.path
 				const arr = result.split('/')
 				if (arr.length > 3) {
 					arr.splice(0, 2)
 					result = '/' + arr.join('/')
 				}
-				return h.file(path.join(process.cwd(), distPath, result))
+				return h.file(path.join(process.cwd(), distPath, result))*/
+				return h.file(path.join(process.cwd(), `${distPath}/css/${request.params.param}`))
 			}
 		}
 	}

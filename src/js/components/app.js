@@ -4,12 +4,15 @@ import { connect } from 'react-redux'
 import { hot } from 'react-hot-loader'
 import { bindActionCreators } from 'redux'
 import { Route, Switch } from 'react-router-dom'
-import { setAuthorization } from '~actions/auth.js'
+import { Link } from 'react-router-dom'
+import * as authActions from '~actions/auth.js'
 import * as dataActions from '~actions/data.js'
 import { helloSaga } from '~actions/sagas.js'
 import '~css/index.scss'
 import { formatDate } from '~utils/date.js'
 import loadable from 'loadable-components'
+
+const path = require('../constants.json').initialPath
 
 const Header = loadable(() => import('./header'))
 const Footer = loadable(() => import('./footer'))
@@ -32,19 +35,18 @@ class App extends Component {
 		return (
 			<Fragment>
 				<Header />
-				<FormDemo />
+				<Link to={`/${path}forms`}>Показать поля ввода с валидацией (вместо таблицы)</Link>
+				<Switch>
+					<Route path={`/${path}`} exact component={TableDemo} />
+					<Route path={`/${path}forms`} component={FormDemo} />
+				</Switch>
 				<SwitchesDemo />
-				<TableDemo />
 				<block-for-items class="grow">
 					<item-block>1</item-block>
 					<item-block>2</item-block>
 					<item-block>3</item-block>
 					<item-block>4</item-block>
 				</block-for-items>
-				{/*	<Switch>
-					<Route path="/hello" exact component={AsyncHello} />
-				</Switch>*/}
-				{/*<button onClick={this.testSaga}>Проверка динамического импорта</button>*/}
 				<Footer />
 			</Fragment>
 		)
@@ -59,18 +61,23 @@ class App extends Component {
 	}
 
 	authorization = () => {
-		const token = '72d1de32-9664-488c-bea6-f5fe5cfcebf0' //this.props.location.search.slice('?token='.length)
-		this.props.setAuthorization({ token })
+		const params = this.props.location.search.substring(1).split('&')
+		let token, extraToken
+		params.map(el => {
+			if (el.match('token')) token = el.slice('token='.length)
+			else if (el.match('extraToken')) extraToken = el.slice('extraToken='.length)
+		})
+		this.props.setAuthorization({ token, extraToken })
 	}
 
-	testSaga = () => {
+	/*testSaga = () => {
 		const { sagaMiddleware } = this.props
 		sagaMiddleware.run(helloSaga)
-	}
+	}*/
 }
 
-const mapStateToProps = state => ({ auth: state.auth, location: state.routing.location })
+const mapStateToProps = ({ auth, routing: { location } }) => ({ auth, location })
 const mapDispatchToProps = dispatch =>
-	bindActionCreators({ setAuthorization, ...dataActions }, dispatch)
+	bindActionCreators({ ...authActions, ...dataActions }, dispatch)
 
 export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(App))

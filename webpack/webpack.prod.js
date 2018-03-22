@@ -49,17 +49,20 @@ module.exports = merge(common, {
 								'@babel/preset-env',
 								{
 									targets: {
-										browsers: ['last 2 versions', 'IE >= 11']
+										browsers: ['last 1 versions']
 									},
+									useBuiltIns: 'usage',
 									modules: false,
-									useBuiltIns: 'usage'
+									loose: true,
+									spec: true,
+									forceAllTransforms: true
 								}
 							],
 							'@babel/preset-react',
 							'@babel/preset-stage-0'
 						],
 						plugins: [
-							[
+							/*[
 								'@babel/plugin-transform-runtime',
 								{
 									helpers: false,
@@ -67,7 +70,7 @@ module.exports = merge(common, {
 									regenerator: true,
 									moduleName: '@babel/runtime'
 								}
-							],
+							],*/
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',

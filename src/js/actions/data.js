@@ -2,11 +2,13 @@ import { requestCreator } from './action-creators'
 import { API_URL, GET_REQUEST, POST_REQUEST } from '~constants'
 
 export function getData() {
-	return dispatch =>
+	return (dispatch, getState) =>
 		requestCreator(dispatch, {
 			type: 'GET_DATA',
 			requestUrl: '/userapi/user/get',
 			requestType: GET_REQUEST,
+			headers: { 'X-Authorization': getState().auth.extraToken },
+			resultField: 'data',
 			sendObject: { mode: 'dev' }
 		})
 }
