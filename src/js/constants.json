@@ -1,3 +1,15 @@
 {
-  "initialPath": "custom-path/"
+  "LOCAL_STORAGE_NAME": "REACT_PROJECT",
+  "API_URL": "https://example.server.ru",
+  "initialPath": "custom-path/",
+  "REQUEST": "_REQUEST",
+  "SUCCESS": "_SUCCESS",
+  "CACHE": "_CACHE",
+  "FAIL": "_FAIL",
+  "GET_REQUEST": "GET_REQUEST",
+  "POST_REQUEST": "POST_REQUEST",
+  "AUTH_SET": "AUTH_SET",
+  "AUTH_RESET": "AUTH_RESET",
+  "GET_SHOPS": "GET_SHOPS",
+  "GET_PRODUCTS": "GET_PRODUCTS"
 }

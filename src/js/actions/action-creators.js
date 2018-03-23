@@ -1,4 +1,4 @@
-import { REQUEST, SUCCESS, FAIL, GET_REQUEST, POST_REQUEST, API_URL } from '../constants'
+import { REQUEST, SUCCESS, FAIL, GET_REQUEST, POST_REQUEST, API_URL } from '~constants'
 import axios from 'axios'
 
 export function axiosInitialization({ token }) {
@@ -7,8 +7,15 @@ export function axiosInitialization({ token }) {
 }
 
 export async function requestCreator(dispatch, action) {
-	const { type, requestType, requestUrl: url, resultField = 'body',
-		headers = {},sendObject, other } = action
+	const {
+		type,
+		requestType,
+		requestUrl: url,
+		resultField = 'body',
+		headers = {},
+		sendObject,
+		other
+	} = action
 
 	dispatch({ type: type + REQUEST })
 
@@ -26,7 +33,7 @@ export async function requestCreator(dispatch, action) {
 		}
 
 		default: {
-			console.log('Неизвестный тип запроса')
+			console.log(`${requestType} - неизвестный тип запроса`)
 			return
 		}
 	}

@@ -12,7 +12,7 @@ module.exports = {
 			['~img']: path.resolve(__dirname, '../src/img/'),
 			['~actions']: path.resolve(__dirname, '../src/js/actions'),
 			['~utils']: path.resolve(__dirname, '../src/js/utils'),
-			['~constants']: path.resolve(__dirname, '../src/js/constants.js'),
+			['~constants']: path.resolve(__dirname, '../src/js/constants.json'),
 			['~modules']: path.resolve(__dirname, '../src/js/modules')
 		}
 	},

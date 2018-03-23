@@ -9,8 +9,6 @@ import * as dataActions from '~actions/data.js'
 import MainPage from './main-page'
 import '~css/index.scss'
 
-const path = require('../constants.json').initialPath
-
 class App extends Component {
 	static propTypes = {
 		location: PropTypes.object.isRequired,
@@ -21,6 +19,7 @@ class App extends Component {
 
 	render() {
 		const { loadingToken, token } = this.props.auth
+		const path = require('../constants.json').initialPath
 		if (loadingToken !== false || token === '') return <h1>&quot;Token&quot; не был передан</h1>
 
 		return (
