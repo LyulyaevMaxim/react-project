@@ -18,10 +18,17 @@ module.exports = merge(common, {
 		https: true,
 		noInfo: true,
 		open: false,
-		publicPath: `/${initialPath}`,
+		contentBase: `${root}/dist`,
+		// publicPath: `/${initialPath}`,
 		openPage: `${initialPath}?token=123&extraToken=a8gh92`,
 		overlay: true,
-		host: '0.0.0.0'
+		host: '0.0.0.0',
+		historyApiFallback: true
+		//чтобы избавиться от No 'Access-Control-Allow-Origin'
+		// proxy: {
+		// '*': `http://0.0.0.0:8080/`
+		// '/api/*': 'https://0.0.0.0:8080'
+		// }
 	},
 	plugins: [
 		new webpack.DefinePlugin({
@@ -85,6 +92,7 @@ module.exports = merge(common, {
 	},
 	output: {
 		filename: '[name].bundle.js',
-		path: `${root}/dist`
+		path: `${root}/dist`,
+		publicPath: `/`
 	}
 })

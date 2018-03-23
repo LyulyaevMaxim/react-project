@@ -4,19 +4,12 @@ import { connect } from 'react-redux'
 import { hot } from 'react-hot-loader'
 import { bindActionCreators } from 'redux'
 import { Route, Switch } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import * as authActions from '~actions/auth.js'
 import * as dataActions from '~actions/data.js'
-import loadable from 'loadable-components'
+import MainPage from './main-page'
 import '~css/index.scss'
 
 const path = require('../constants.json').initialPath
-
-const Header = loadable(() => import('./header'))
-const Footer = loadable(() => import('./footer'))
-const FormDemo = loadable(() => import('./form-demo'))
-const SwitchesDemo = loadable(() => import('./switches-demo'))
-const TableDemo = loadable(() => import('./table-demo'))
 
 class App extends Component {
 	static propTypes = {
@@ -32,18 +25,10 @@ class App extends Component {
 
 		return (
 			<Fragment>
-				<Header />
-				<nav>
-					<Link to={`/${path}`}>Table</Link>
-					<Link to={`/${path}forms`}>Forms</Link>
-					<Link to={`/${path}switches`}>Switches</Link>
-				</nav>
 				<Switch>
-					<Route path={`/${path}`} exact component={TableDemo} />
-					<Route path={`/${path}forms`} component={FormDemo} />
-					<Route path={`/${path}switches`} component={SwitchesDemo} />
+					<Route path={`/`} exact render={() => <h1>Упс.. 404</h1>} />
+					<Route path={`/${path}`} component={MainPage} />
 				</Switch>
-				<Footer />
 			</Fragment>
 		)
 	}
@@ -66,11 +51,6 @@ class App extends Component {
 		})
 		this.props.setAuthorization({ token, extraToken })
 	}
-
-	/*testSaga = () => {
-		const { sagaMiddleware } = this.props
-		sagaMiddleware.run(helloSaga)
-	}*/
 }
 
 const mapStateToProps = ({ auth, routing: { location } }) => ({ auth, location })
