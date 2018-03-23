@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import '~css/switches/index.scss'
+import PropTypes from 'prop-types'
+import { hot } from 'react-hot-loader'
+import './index.scss'
 
 class Switches extends Component {
+	static propTypes = {
+		calcMinHeight: PropTypes.bool
+	}
+
 	state = {
 		activeIndex: 0
 	}
@@ -9,16 +15,18 @@ class Switches extends Component {
 	handleSwitch = ({ index }) => this.setState({ activeIndex: index })
 
 	componentDidMount() {
-		const all = this.equipmentBlocks.querySelectorAll('switchable-block')
-		let maxHeight = 0
-		all.forEach(({ scrollHeight }) => {
-			if (scrollHeight > maxHeight) maxHeight = scrollHeight
-		})
-		this.equipmentBlocks.style.minHeight = `${maxHeight}px`
+		if (this.props.calcMinHeight) {
+			/*const all = this.equipmentBlocks.querySelectorAll('switchable-block')
+			let maxHeight = 0
+			all.forEach(({ scrollHeight }) => {
+				if (scrollHeight > maxHeight) maxHeight = scrollHeight
+			})
+			this.equipmentBlocks.style.minHeight = `${maxHeight}px`*/
+		}
 	}
 
 	render() {
-		const { data, title, className } = this.props
+		const { data, className } = this.props
 		const { activeIndex } = this.state
 		const switches = data.map(({ title }, index) => {
 			const handleClick = () => this.handleSwitch({ index })
@@ -36,11 +44,10 @@ class Switches extends Component {
 
 		return (
 			<switches-container class={className}>
-				{!!title.length && <h2 className="switches-container-title">{title}</h2>}
 				<switches-content>
 					<aside>{switches}</aside>
-					<main ref={e => (this.equipmentBlocks = e)}>
-						{data.map(({ content }, index) => {
+					<section ref={e => (this.equipmentBlocks = e)}>
+						{data.map(({ content, className }, index) => {
 							return (
 								<Fragment key={`equipment-${index}`}>
 									{switches[index]}
@@ -50,15 +57,15 @@ class Switches extends Component {
 										id={`equipment-${index}`}
 										defaultChecked={!index}
 									/>
-									<switchable-block>{content}</switchable-block>
+									<switchable-block class={className}>{content}</switchable-block>
 								</Fragment>
 							)
 						})}
-					</main>
+					</section>
 				</switches-content>
 			</switches-container>
 		)
 	}
 }
 
-export default Switches
+export default hot(module)(Switches)

@@ -1,4 +1,4 @@
-import { API_URL, AUTH_SET, REQUEST, SUCCESS, FAIL } from '~constants'
+import { AUTH_SET, REQUEST, SUCCESS, FAIL } from '~constants'
 import { axiosInitialization } from './action-creators'
 
 export function setAuthorization({ token }) {

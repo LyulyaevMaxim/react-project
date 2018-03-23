@@ -9,7 +9,7 @@ class Input extends Component {
 	}
 
 	render() {
-		const { pattern, value: propValue, ...props } = this.props
+		const { pattern, getValue, value: propValue, ...props } = this.props
 		const { value: stateValue } = this.state
 		const className = (props.className ? props.className + ' ' : '') + this.state.className
 
@@ -69,18 +69,18 @@ class Input extends Component {
 
 	handleFocusOut = event => {
 		const { value } = this.state
-		const { pattern, onChange } = this.props
+		const { pattern, getValue } = this.props
 
 		if (value === '') {
 			this.setState({ className: 'empty' })
-			if (typeof onChange === 'function') onChange({ value: '' })
+			if (typeof getValue === 'function') getValue({ value: '' })
 			return
 		}
 
 		if (pattern) {
 			if (value.match(pattern)) {
 				this.setState({ className: 'valid' })
-				if (typeof onChange === 'function') onChange({ value })
+				if (typeof getValue === 'function') getValue({ value })
 			} else {
 				this.setState({ className: 'invalid' })
 			}

@@ -4,15 +4,24 @@ import { hot } from 'react-hot-loader'
 import '~css/form-demo/index.scss'
 
 const Input = loadable(() => import('~modules/input'))
+const Textarea = loadable(() => import('~modules/textarea'))
 
-class formDemo extends Component {
-	state = { value: '' }
+class FormDemo extends Component {
+	state = { textareaValue: '', customInput: '' }
 
-	handleInputChange = ({ value }) => {
-		this.setState({ value })
+	handleChange = ({ field, value }) => {
+		this.setState({ [field]: value })
 	}
 
 	render() {
+		const { textareaValue, customInput } = this.state
+		const textareaHandle = ({ value }) => {
+			this.handleChange({ field: 'textareaValue', value })
+		}
+		const customInputHandle = ({ value }) => {
+			this.handleChange({ field: 'customInput', value })
+		}
+
 		return (
 			<form className="demo">
 				<Input
@@ -46,13 +55,19 @@ class formDemo extends Component {
 						pattern="\d{1,}"
 						settings="isNumbers"
 						placeholder="Отправляем число наружу"
+						getValue={customInputHandle}
 						onChange={this.handleInputChange}
 					/>
-					<p>Значение input'a: {this.state.value}</p>
+					<p>Значение input'a: {customInput}</p>
+				</div>
+
+				<div>
+					<Textarea {...{ getValue: textareaHandle, placeholder: 'Растягивающийся textarea' }} />
+					<p>Значение textarea: {textareaValue}</p>
 				</div>
 			</form>
 		)
 	}
 }
 
-export default hot(module)(formDemo)
+export default hot(module)(FormDemo)

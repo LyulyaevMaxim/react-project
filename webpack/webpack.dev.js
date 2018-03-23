@@ -17,7 +17,7 @@ module.exports = merge(common, {
 		clientLogLevel: 'info',
 		https: true,
 		noInfo: true,
-		open: true,
+		open: false,
 		publicPath: `/${initialPath}`,
 		openPage: `${initialPath}?token=123&extraToken=a8gh92`,
 		overlay: true,

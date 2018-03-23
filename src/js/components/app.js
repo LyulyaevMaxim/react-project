@@ -7,10 +7,8 @@ import { Route, Switch } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import * as authActions from '~actions/auth.js'
 import * as dataActions from '~actions/data.js'
-import { helloSaga } from '~actions/sagas.js'
-import '~css/index.scss'
-import { formatDate } from '~utils/date.js'
 import loadable from 'loadable-components'
+import '~css/index.scss'
 
 const path = require('../constants.json').initialPath
 
@@ -35,26 +33,25 @@ class App extends Component {
 		return (
 			<Fragment>
 				<Header />
-				<Link to={`/${path}forms`}>Показать поля ввода с валидацией (вместо таблицы)</Link>
+				<nav>
+					<Link to={`/${path}`}>Table</Link>
+					<Link to={`/${path}forms`}>Forms</Link>
+					<Link to={`/${path}switches`}>Switches</Link>
+				</nav>
 				<Switch>
 					<Route path={`/${path}`} exact component={TableDemo} />
 					<Route path={`/${path}forms`} component={FormDemo} />
+					<Route path={`/${path}switches`} component={SwitchesDemo} />
 				</Switch>
-				<SwitchesDemo />
-				<block-for-items class="grow">
-					<item-block>1</item-block>
-					<item-block>2</item-block>
-					<item-block>3</item-block>
-					<item-block>4</item-block>
-				</block-for-items>
 				<Footer />
 			</Fragment>
 		)
 	}
 
 	async componentDidMount() {
-		this.authorization()
-		this.props.getData()
+		const { authorization, props: { getData } } = this
+		authorization()
+		getData()
 		await this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })
 		await this.props.getData()
 		this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })

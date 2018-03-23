@@ -1,0 +1,13 @@
+.maxwell-textarea {
+  width: 25vw;
+  padding: 20px;
+  border-color: #dad5d3;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
