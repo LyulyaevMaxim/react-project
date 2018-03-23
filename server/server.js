@@ -1,7 +1,7 @@
 const Hapi = require('hapi')
 const Inert = require('inert')
 const path = require('path')
-const prefix = `/${require('../src/js/constants.json').initialPath}`
+// const prefix = `/${require('../src/js/constants.json').initialPath}`
 const distPath = './dist'
 
 const server = new Hapi.Server({

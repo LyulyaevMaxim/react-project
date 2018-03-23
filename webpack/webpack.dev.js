@@ -24,11 +24,6 @@ module.exports = merge(common, {
 		overlay: true,
 		host: '0.0.0.0',
 		historyApiFallback: true
-		//чтобы избавиться от No 'Access-Control-Allow-Origin'
-		// proxy: {
-		// '*': `http://0.0.0.0:8080/`
-		// '/api/*': 'https://0.0.0.0:8080'
-		// }
 	},
 	plugins: [
 		new webpack.DefinePlugin({
