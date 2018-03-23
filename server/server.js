@@ -17,51 +17,32 @@ server.route([
 		path: '/{param*}',
 		options: {
 			handler: (request, h) => {
-				return h.file(path.join(process.cwd(), `${distPath}/index.html`))
-			}
-		}
-	},
-	{
-		method: 'GET',
-		path: prefix + 'fonts/{param*}',
-		options: {
-			handler: (request, h) => {
-				return h.file(path.join(process.cwd(), distPath, request.path))
-				// return h.file(path.join(process.cwd(), `${distPath}/fonts/${request.params.param}`))
-			}
-		}
-	},
-	{
-		method: 'GET',
-		path: prefix + 'js/{param*}',
-		options: {
-			handler: (request, h) => {
-				return h.file(path.join(process.cwd(), `${distPath}/js/${request.params.param}`))
-			}
-		}
-	},
-	{
-		method: 'GET',
-		path: prefix + 'img/{param*}',
-		options: {
-			handler: (request, h) => {
-				return h.file(path.join(process.cwd(), `${distPath}/img/${request.params.param}`))
-			}
-		}
-	},
-	{
-		method: 'GET',
-		path: prefix + 'css/{param*}',
-		options: {
-			handler: (request, h) => {
-				/*let result = request.path
-				const arr = result.split('/')
-				if (arr.length > 3) {
-					arr.splice(0, 2)
-					result = '/' + arr.join('/')
+				let extension = request.params.param.substr(-2)
+				if (extension === 'js') {
+					let fileName = request.params.param.split('/').pop()
+					return h.file(path.join(process.cwd(), `${distPath}/js/${fileName}`))
 				}
-				return h.file(path.join(process.cwd(), distPath, result))*/
-				return h.file(path.join(process.cwd(), `${distPath}/css/${request.params.param}`))
+
+				extension = request.params.param.substr(-3)
+				if (extension === 'css') {
+					let fileName = request.params.param.split('/').pop()
+					return h.file(path.join(process.cwd(), `${distPath}/css/${fileName}`))
+				}
+
+				if (extension === 'svg' || extension === 'jpg' || extension === 'png') {
+					let fileName = request.params.param.split('/').pop()
+					return h.file(path.join(process.cwd(), `${distPath}/img/${fileName}`))
+				}
+
+				if (
+					request.params.param.substr(5) === 'woff2' ||
+					request.params.param.substr(4) === 'woff'
+				) {
+					let fileName = request.params.param.split('/').pop()
+					return h.file(path.join(process.cwd(), `${distPath}/fonts/${fileName}`))
+				}
+
+				return h.file(path.join(process.cwd(), `${distPath}/index.html`))
 			}
 		}
 	}
