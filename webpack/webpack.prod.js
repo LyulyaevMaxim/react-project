@@ -4,6 +4,7 @@ const merge = require('webpack-merge')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const common = require('./webpack.common.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const LodashWebpackOptimize = require('lodash-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const root = path.resolve(__dirname, '../')
 const distPath = `${root}/server/dist`
@@ -16,6 +17,9 @@ module.exports = merge(common, {
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
+		}),
+		new LodashWebpackOptimize({
+			chaining: false
 		}),
 		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
 		new CleanWebpackPlugin([distPath], {
@@ -32,8 +36,8 @@ module.exports = merge(common, {
 			name: 'manifest',
 			minChunks: Infinity
 		}),
-		new UglifyJSPlugin({ sourceMap: true })
-		// new BundleAnalyzerPlugin()
+		new UglifyJSPlugin({ sourceMap: true }),
+		new BundleAnalyzerPlugin()
 	],
 	module: {
 		rules: [
@@ -62,15 +66,6 @@ module.exports = merge(common, {
 							'@babel/preset-stage-0'
 						],
 						plugins: [
-							/*[
-								'@babel/plugin-transform-runtime',
-								{
-									helpers: false,
-									polyfill: false,
-									regenerator: true,
-									moduleName: '@babel/runtime'
-								}
-							],*/
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',
