@@ -12,7 +12,6 @@
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.40",
     "axios": "^0.18.0",
     "history": "^4.7.2",
     "loadable-components": "^1.1.1",
@@ -27,7 +26,6 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
-    "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1"
   },
@@ -36,9 +34,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "postcss-css-reset": "^1.0.2",
-    "prop-types": "^15.6.0",
-    "react-perf-devtool": "^3.0.2",
-    "redux-logger": "^3.0.6"
+    "prop-types": "^15.6.0"
   },
   "repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
   "license": "MIT"

@@ -65,12 +65,15 @@ module.exports = {
 							loader: 'css-loader',
 							options: {
 								importLoaders: 1,
+								modules: true,
+								localIdentName: '[local]-[hash:base64:4]',
 								sourceMap: isDev ? true : false
 							}
 						},
 						{
 							loader: 'postcss-loader',
 							options: {
+								ident: 'postcss',
 								config: { path: `${root}/configs/postcss.config.js` },
 								sourceMap: isDev ? 'inline' : false
 							}

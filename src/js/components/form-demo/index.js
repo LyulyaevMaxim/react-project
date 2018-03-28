@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import loadable from 'loadable-components'
 import { hot } from 'react-hot-loader'
-import '~css/form-demo/index.scss'
+import styles from '~css/form-demo/index.scss'
 
 const Input = loadable(() => import('~modules/input'))
 const Textarea = loadable(() => import('~modules/textarea'))
@@ -23,7 +23,7 @@ class FormDemo extends Component {
 		}
 
 		return (
-			<form className="demo">
+			<form className={styles.form}>
 				<Input
 					placeholder="Иванов Иван Иванович"
 					pattern="[A-zА-я]{2,}[\ ][A-zА-я]{2,}[\ ][A-zА-я]{2,}"

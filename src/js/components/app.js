@@ -35,10 +35,10 @@ class App extends Component {
 	async componentDidMount() {
 		const { authorization, props: { getData } } = this
 		authorization()
-		getData()
-		await this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })
+		// getData()
+	/*	await this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })
 		await this.props.getData()
-		this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })
+		this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })*/
 	}
 
 	authorization = () => {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { patternPhone, patternInn, patternNumber, patternLetter } from './patterns'
-import './input.scss'
+import { hot } from 'react-hot-loader'
+import styles from './input.scss'
 
 class Input extends Component {
 	state = {
@@ -9,15 +10,24 @@ class Input extends Component {
 	}
 
 	render() {
-		const { pattern, getValue, value: propValue, ...props } = this.props
-		const { value: stateValue } = this.state
-		const className = (props.className ? props.className + ' ' : '') + this.state.className
+		const {
+			pattern,
+			getValue,
+			value: propValue = '',
+			className: propsClass = '',
+			...props
+		} = this.props
+		const { value: stateValue, className: stateClass } = this.state
 
 		return (
 			<input
 				{...props}
-				value={typeof propValue !== 'undefined' ? propValue : stateValue}
-				className={`maxwell-input ${className}`}
+				value={propValue.length ? propValue : stateValue}
+				className={
+					`${styles['maxwell-input']}` +
+					(propsClass.length ? ` ${propsClass}` : '') +
+					(stateClass.length ? ` ${styles[stateClass]}` : '')
+				}
 				onChange={this.handleChange}
 				onBlur={this.handleFocusOut}
 			/>
@@ -91,4 +101,4 @@ class Input extends Component {
 	}
 }
 
-export default Input
+export default hot(module)(Input)

@@ -46,7 +46,7 @@ body > app-container {
   }
 }
 
-block-for-items {
+/*block-for-items {
   display: flex;
   margin: 20px 5px;
 
@@ -79,8 +79,9 @@ block-for-items {
   block-for-items.grow item-block:nth-child(#{$i}) {
     height: calc(100px + $i*10px);
   }
-}
-$theme: dark;
+}*/
+
+/*$theme: dark;
 
 .hello {
   @if $theme == dark {
@@ -111,21 +112,21 @@ $theme: dark;
     display: flex;
     z-index: 5500;
   }
-}
+}*/
 
 h1 {
   font-size: calc(var(--largeFontSize) * 1.5);
   line-height: 1.8;
-  color: var(--mainColor);
+  //color: var(--mainColor);
 
-  @media (--max-tablet) {
+  /*@media (--max-tablet) {
     background: color-mod(var(--mainColor) alpha(50%));
-  }
+  }*/
 
-  @media (--desktop) {
+  /*@media (--desktop) {
     background: color(#3ac162 l(80%));
     border: 1px solid color(#3ac162 a(90%));
-  }
+  }*/
 }
 
 

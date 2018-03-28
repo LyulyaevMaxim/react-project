@@ -2,11 +2,11 @@ import React from 'react'
 import { hot } from 'react-hot-loader'
 import SubsribeForm from './subsribe-form'
 import Menu from './menu'
-import '~css/footer/index.scss'
+import styles from '~css/footer/index.scss'
 
 function Footer() {
 	return (
-		<footer>
+		<footer className={styles.footer}>
 			<h3>Акции и новости — всё в нашей рассылке</h3>
 			<SubsribeForm />
 			<Menu />

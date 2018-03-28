@@ -1,70 +1,72 @@
-.footer-menu {
-	position: relative;
-	padding-top: 40px;
-	display: grid;
-	justify-content: space-evenly;
-	grid-column-gap: 6.25vw;
-	grid-row-gap: 34px;
+@import '../variables.scss';
 
-	@media (width < 500px) {
-		grid-template-columns: repeat(2, minmax(130px, max-content));
-	}
+.menu {
+  position: relative;
+  padding-top: 40px;
+  display: grid;
+  justify-content: space-evenly;
+  grid-column-gap: 6.25vw;
+  grid-row-gap: 34px;
 
-	@media (500px <= width < $big-desktop) {
-		grid-template-columns: repeat(3, minmax(130px, max-content));
-	}
+  @media (width < 500px) {
+    grid-template-columns: repeat(2, minmax(130px, max-content));
+  }
 
-	@media (--big-desktop) {
-		grid-template-columns: repeat(6, minmax(130px, max-content));
-	}
+  @media (500px <= width < $big-desktop) {
+    grid-template-columns: repeat(3, minmax(130px, max-content));
+  }
 
-	@media (--min-desktop) {
-		padding-top: 33px;
-		grid-column-gap: initial;
-		justify-content: space-between;
-	}
+  @media (--big-desktop) {
+    grid-template-columns: repeat(6, minmax(130px, max-content));
+  }
 
-	&::before {
-		content: '';
-		display: block;
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100vw;
-		height: 2px;
-		background-color: rgba(79, 81, 101, 0.5);
+  @media (--min-desktop) {
+    padding-top: 33px;
+    grid-column-gap: initial;
+    justify-content: space-between;
+  }
 
-		@media (--min-desktop) {
-			width: 100%;
-		}
-	}
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 2px;
+    background-color: rgba(79, 81, 101, 0.5);
 
-	a {
-		line-height: 1;
-		font-size: 12px;
-		color: rgba(255, 255, 255, 0.5);
-		text-decoration: none;
+    @media (--min-desktop) {
+      width: 100%;
+    }
+  }
 
-		@media (--min-desktop) {
-			font-size: 14px;
-		}
-	}
+  a {
+    line-height: 1;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
 
-	li:first-child a {
-		line-height: 19px;
-		font-size: 14px;
-		letter-spacing: 1.2px;
-		text-transform: uppercase;
-		color: $color-white;
-	}
+    @media (--min-desktop) {
+      font-size: 14px;
+    }
+  }
 
-	li {
-		&:first-child + li {
-			margin-top: 15px;
-		}
+  li:first-child a {
+    line-height: 19px;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: $color-white;
+  }
 
-		& + li {
-			margin-top: 11px;
-		}
-	}
+  li {
+    &:first-child + li {
+      margin-top: 15px;
+    }
+
+    & + li {
+      margin-top: 11px;
+    }
+  }
 }

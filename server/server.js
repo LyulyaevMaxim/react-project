@@ -1,7 +1,7 @@
 const Hapi = require('hapi')
 const Inert = require('inert')
 const path = require('path')
-// const prefix = `/${require('../src/js/constants.json').initialPath}`
+const prefix = '/' //`/${require('../src/js/constants.json').initialPath}`
 const distPath = './dist'
 
 const server = new Hapi.Server({
@@ -14,7 +14,7 @@ const server = new Hapi.Server({
 server.route([
 	{
 		method: 'GET',
-		path: '/{param*}',
+		path: prefix + '{param*}',
 		options: {
 			handler: (request, h) => {
 				let extension = request.params.param.substr(-2)
@@ -35,8 +35,8 @@ server.route([
 				}
 
 				if (
-					request.params.param.substr(5) === 'woff2' ||
-					request.params.param.substr(4) === 'woff'
+					request.params.param.substr(-5) === 'woff2' ||
+					request.params.param.substr(-4) === 'woff'
 				) {
 					let fileName = request.params.param.split('/').pop()
 					return h.file(path.join(process.cwd(), `${distPath}/fonts/${fileName}`))

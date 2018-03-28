@@ -1,30 +1,31 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
-import HeaderMenu from './header-menu'
-import '~css/header/index.scss'
+import styles from '~css/header/index.scss'
 
-function Header() {
+function Header({ path, components }) {
+	console.log(components)
+	const links = [
+		{ title: 'Главная', href: `${path}` },
+		{ title: 'Таблица', href: `${path}table` },
+		{ title: 'Форма', href: `${path}form` }
+	]
 	return (
-		<header>
-			<header-logo>
-				<a href="#" target="_blank" className="evotor" />
-				<a href="#" target="_blank" className="lad" />
-			</header-logo>
-			<header-city>
-				<a href="#">Нижний Новгород</a>
-			</header-city>
-			<header-callback>
-				<a href="tel:88007758525">8 800 775 85 25</a>
-				<p>горячая линия</p>
-			</header-callback>
-			<header-recommend>
-				<a href="#">Рекомендуй</a>
-			</header-recommend>
-			<header-cart>
-				<header-cart-icon amount="1" />
-				<span>Подарок</span>
-			</header-cart>
-			<HeaderMenu />
+		<header className={styles['header']}>
+			<nav className={styles['header-nav']}>
+				{links.map(({ title, href }, index) => (
+					<NavLink
+						to={href}
+						className={styles['header-nav-link']}
+						activeClassName={styles['active']}
+						onMouseOver={components[index].load}
+						exact
+						key={title}
+					>
+						{title}
+					</NavLink>
+				))}
+			</nav>
 		</header>
 	)
 }

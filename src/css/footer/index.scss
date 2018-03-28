@@ -1,16 +1,15 @@
 @import "../variables.scss";
-@import "./subsribe-form.scss";
-@import "./footer-menu.scss";
 @import "./footer-info.scss";
+//@import "./subsribe-form.scss";
 
-footer {
+.footer {
   position: relative;
   background-color: #3c3f52;
   padding-top: 85px;
 
   & > h3,
-  .footer-subsribe-form,
-  .footer-menu,
+  .subsribe-form,
+  .menu,
   footer-info {
     @media (--max-desktop) {
       padding-left: 20px;
@@ -47,7 +46,7 @@ footer {
   }
 
   @media ($desktop <= width < 1500px) {
-    & > .footer-menu {
+    & > .menu {
       margin-left: 60px;
       margin-right: 60px;
     }
@@ -59,7 +58,7 @@ footer {
   }
 
   @media (width >= 1500px) {
-    & > .footer-menu {
+    & > .menu {
       margin-left: 222px;
       margin-right: 222px;
     }
@@ -70,7 +69,7 @@ footer {
     }
   }
 
-  & > h3 + .footer-subsribe-form {
+  & > h3 + .subsribe-form {
     margin-top: 43px;
 
     @media (--min-desktop) {
@@ -78,7 +77,7 @@ footer {
     }
   }
 
-  .footer-subsribe-form + .footer-menu {
+  .subsribe-form + .menu {
     margin-top: 55px;
 
     @media (--min-desktop) {
@@ -86,7 +85,7 @@ footer {
     }
   }
 
-  .footer-menu + footer-info {
+  .menu + footer-info {
     margin-top: 44px;
 
     @media (--min-desktop) {

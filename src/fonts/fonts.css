@@ -1,7 +1,7 @@
 @font-face {
 	font-family: 'Museo Sans';
 	font-style: normal;
-	font-weight: 100;
+	font-weight: 100;;
 	src: url('../fonts/museo-sans-thin.woff2') format('woff2'), url('../fonts/museo-sans-thin.woff') format('woff');
 }
 

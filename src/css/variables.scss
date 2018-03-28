@@ -38,7 +38,7 @@ $big-desktop: 1440px;
 @custom-media --big-desktop (width >= $big-desktop);
 
 // ----------- PADDINGS/MARGINS -----------
-$margin-320: 22px;
-$margin-768: 34px;
-$margin-1024: 42px;
-$margin-1440: 56px;
+$margin-mobile: 20px;
+$margin-tablet: 34px;
+$margin-desktop: 76px;
+$margin-big-desktop: 14vw;

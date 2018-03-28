@@ -1,17 +1,14 @@
 @import "../variables.scss";
 
-form.demo {
-  display: flex;
-  flex-wrap: wrap;
+.form {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
   justify-content: space-between;
-  padding: 50px 20px;
+  grid-gap: 20px;
+  padding: 50px $margin-mobile;
 
   @media (--min-desktop) {
-    padding-left: 14vw;
-    padding-right: 14vw;
-  }
-
-  & > * {
-    margin-bottom: 15px;
+    padding-left: $margin-desktop;
+    padding-right: $margin-desktop;
   }
 }
