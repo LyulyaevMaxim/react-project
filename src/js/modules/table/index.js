@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TableLine from './tableLine'
 import Pagination from './pagination'
+import TableBody from './table-body'
+import { hot } from 'react-hot-loader'
 import './index.scss'
 
 class Table extends Component {
@@ -17,10 +18,10 @@ class Table extends Component {
 	}
 
 	render() {
-		const { columns, data } = this.props
+		const { columns, data, className, TablePopup } = this.props
 		if (!data['list'].length)
 			return (
-				<block-for-table>
+				<block-for-table {...{ class: className }}>
 					<no-data-label>
 						<p>Нет данных</p>
 					</no-data-label>
@@ -31,7 +32,7 @@ class Table extends Component {
 		const totalPages = Math.ceil(data['list'].length / pageSize)
 		const { changeActivePage, changePageSize } = this
 		return (
-			<block-for-table>
+			<block-for-table {...{ class: className }}>
 				<Pagination
 					{...{
 						changeActivePage,
@@ -42,37 +43,10 @@ class Table extends Component {
 					}}
 				/>
 				<table>
-					<tbody>
-						{this.getTableHeader({ columns })}
-						{this.getTableBody({ page, pageSize, columns })}
-					</tbody>
+					<TableBody {...{ data, page, pageSize, columns, TablePopup }} />
 				</table>
 			</block-for-table>
 		)
-	}
-
-	getTableHeader = ({ columns }) => (
-		<tr className="table-header">
-			{columns.map(({ className, label }, index) => (
-				<th key={`th-${index}`} className={className}>
-					{label}
-				</th>
-			))}
-		</tr>
-	)
-
-	getTableBody = ({ page, pageSize, columns }) => {
-		const { data: { data, list }, TablePopup } = this.props
-		const table = []
-		for (let i = pageSize * (page - 1); i < page * pageSize && i < list.length; i++) {
-			table.push(
-				<TableLine
-					{...{ lineIndex: i + 1, data: data[list[i]], columns, TablePopup }}
-					key={`line-${i}`}
-				/>
-			)
-		}
-		return table
 	}
 
 	changeActivePage = ({ page }) => {
@@ -80,8 +54,8 @@ class Table extends Component {
 	}
 
 	changePageSize = ({ pageSize }) => {
-		this.setState({ pageSize })
+		this.setState({ pageSize, page: 1 })
 	}
 }
 
-export default Table
+export default hot(module)(Table)

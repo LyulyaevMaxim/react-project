@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styles from './table-line.scss'
 
 class TableLine extends Component {
 	static propTypes = {
@@ -15,13 +16,17 @@ class TableLine extends Component {
 	render() {
 		const { lineIndex, columns: [first, ...columns], data, TablePopup } = this.props
 		const { isOpen } = this.state
-
+		const onClick = typeof TablePopup === 'undefined' ? () => {} : this.handleClick
+		const className =
+			typeof TablePopup !== 'undefined'
+				? `${styles['with-popup']} ${isOpen ? styles['is-open'] : ''}`
+				: ''
 		return (
-			<tr onClick={this.handleClick} className={isOpen ? 'is-open' : ''}>
-				<td className={first.className}>{lineIndex}</td>
+			<tr {...{ onClick, className }} className={styles['tr']}>
+				<td className={`${styles['td']} ${first.className}`}>{lineIndex}</td>
 				{columns.map(({ className, field, fieldFormat }, i) => (
-					<td className={className} key={`column-${i}`}>
-						{typeof fieldFormat === 'function' ? fieldFormat(data[field]) : data[field]}
+					<td className={`${styles['td']} ${className}`} key={`column-${i}`}>
+						{this.getTd({ field, fieldFormat, data })}
 					</td>
 				))}
 				{isOpen && <Popup {...{ data, TablePopup }} handleSubmit={this.changeState} />}
@@ -36,6 +41,15 @@ class TableLine extends Component {
 
 	changeState = () => {
 		this.setState({ isOpen: !this.state.isOpen })
+	}
+
+	getTd = ({ field, fieldFormat, data }) => {
+		if (typeof fieldFormat === 'function') {
+			if (typeof field !== 'undefined') return fieldFormat(data[field])
+			return fieldFormat(data)
+		} else {
+			return data[field]
+		}
 	}
 }
 

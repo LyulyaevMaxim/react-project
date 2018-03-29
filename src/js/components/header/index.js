@@ -4,10 +4,9 @@ import { hot } from 'react-hot-loader'
 import styles from '~css/header/index.scss'
 
 function Header({ path, components }) {
-	console.log(components)
 	const links = [
 		{ title: 'Главная', href: `${path}` },
-		{ title: 'Таблица', href: `${path}table` },
+		{ title: 'Таблица', href: `${path}table`},
 		{ title: 'Форма', href: `${path}form` }
 	]
 	return (

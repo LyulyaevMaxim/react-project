@@ -1,41 +1,76 @@
-block-for-table {
+@import "../variables.scss";
+@import "../mixin.scss";
+
+.table {
   padding-left: 5vw;
   padding-right: 5vw;
 }
 
-block-for-table > table > tbody > tr > td,
-block-for-table > table > tbody > tr > th {
-  &.number-column {
-    width: 47px;
-    text-align: center;
-  }
+.number-column {
+  width: 47px;
+  text-align: center;
+}
 
-  &.name-column {
-    width: calc(100% - 18% - 300px);
-    margin-left: 1.91%;
-  }
+.code-column {
+  width: 100px;
+  margin-left: 4%;
+}
 
-  &.used-quantity-column {
-    width: 95px;
-    margin-left: 1.91%;
-  }
+.discount-column {
+  width: 50px;
+  margin-left: 4%;
+}
 
-  &.quantity-column {
-    width: 80px;
-    margin-left: 1.91%;
-  }
+.sum-column {
+  width: 13%;
+  margin-left: 4%;
 
-  &.discount-column {
-    width: 50px;
-    margin-left: 3.9325%;
-  }
+  & > span {
+    display: inline-flex;
+    align-items: center;
 
-  &.time-column {
-    width: 66px;
-    margin-left: 2.584%;
+    &::after {
+      content: url('../../img/icon-ruble-black.svg');
+      display: block;
+      width: 11px;
+      padding-top: 1.4px;
+      margin-left: 2px;
+    }
   }
 }
 
-block-for-table > table > tbody > tr > td.discount-column::after {
-  content: '%';
+.status-column {
+  width: 196px;
 }
+
+.time-column {
+  width: 105px;
+  //margin-left: 2.584%;
+}
+
+.operation-status {
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    margin-right: 11px;
+    border-radius: 50%;
+  }
+
+  &.orange::before {
+    background-color: #ffc875;
+  }
+
+  &.green::before {
+    background-color: $color-green-light;
+  }
+
+  &.red::before {
+    background-color: $color-pink;
+  }
+}
+

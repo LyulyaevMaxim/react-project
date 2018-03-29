@@ -13,6 +13,20 @@
   width: 0px;
 }
 
+img,
+video,
+audio {
+  max-width: 100%;
+  height: auto;
+}
+
+label,
+button,
+a,
+select {
+  cursor: pointer;
+}
+
 img:not([alt]) {
   border: 2px dashed red;
 }
@@ -39,6 +53,7 @@ body > app-container {
   max-width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
+  //@include border-radius(10px);
 
   & > main {
     flex: 1 0 auto;
@@ -100,10 +115,7 @@ body > app-container {
     display: block;
     width: 100px;
     height: 100px;
-    background-image: url("../img/icon.png");
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-size: cover;
+    @include back-img(icon.png);
     z-index: 5000;
   }
 
