@@ -1,20 +1,19 @@
 .maxwell-input {
   display: flex;
-  box-sizing: border-box;
   padding-left: 20px;
   padding-right: 20px;
-  min-width: 27vw;
+  width: 100%;
   height: 50px;
-  background-color: white;
   border: 1px solid #dad5d3;
   border-radius: 5px;
   padding-left: 16px;
   font-size: 18px;
   line-height: 21px;
   box-shadow: none;
+  background-color: white;
   background-repeat: no-repeat;
   transition: border-color 0.5s, padding 0.5s;
-  //composes: baseButton from "./base_button.css";
+
   &:focus {
     outline: none;
   }

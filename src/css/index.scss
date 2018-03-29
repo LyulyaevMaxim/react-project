@@ -25,6 +25,10 @@ button,
 a,
 select {
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 img:not([alt]) {
@@ -33,6 +37,11 @@ img:not([alt]) {
 
 a {
   text-decoration: none;
+}
+
+p {
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 :root {

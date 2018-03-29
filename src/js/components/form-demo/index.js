@@ -7,19 +7,27 @@ const Input = loadable(() => import('~modules/input'))
 const Textarea = loadable(() => import('~modules/textarea'))
 
 class FormDemo extends Component {
-	state = { textareaValue: '', customInput: '' }
+	state = { textareaValue: '', customInput: '', toSendTextArea: '' }
 
 	handleChange = ({ field, value }) => {
 		this.setState({ [field]: value })
 	}
 
-	render() {
-		const { textareaValue, customInput } = this.state
-		const textareaHandle = ({ value }) => {
-			this.handleChange({ field: 'textareaValue', value })
+	handleKeyPressTextArea = ({ value, event }) => {
+		if (event.key === 'Enter' && !event.shiftKey && value !== '') {
+			event.preventDefault()
+			event.target.value = ''
+			this.setState({ toSendTextArea: value })
 		}
+	}
+
+	render() {
+		const { textareaValue, customInput, toSendTextArea } = this.state
 		const customInputHandle = ({ value }) => {
 			this.handleChange({ field: 'customInput', value })
+		}
+		const textareaHandle = ({ value }) => {
+			this.handleChange({ field: 'textareaValue', value })
 		}
 
 		return (
@@ -62,8 +70,18 @@ class FormDemo extends Component {
 				</div>
 
 				<div>
-					<Textarea {...{ getValue: textareaHandle, placeholder: 'Растягивающийся textarea' }} />
-					<p>Значение textarea: {textareaValue}</p>
+					<Textarea
+						{...{
+							getValue: textareaHandle,
+							placeholder: 'Растягивающийся textarea',
+							onKeyPress: this.handleKeyPressTextArea,
+							className: 'custom-textarea'
+						}}
+					/>
+					<p>Значение, введённое в textarea:</p>
+					<p>{!!textareaValue ? textareaValue : 'Пусто'}</p>
+					<p>Значение, отправленное из textarea:</p>
+					<p>{!!toSendTextArea ? toSendTextArea : 'Пусто'}</p>
 				</div>
 			</form>
 		)

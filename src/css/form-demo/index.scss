@@ -2,7 +2,7 @@
 
 .form {
   display: grid;
-  grid-template-columns: repeat(3, max-content);
+  grid-template-columns: repeat(3, 30%);
   justify-content: space-between;
   grid-gap: 20px;
   padding: 50px $margin-mobile;
@@ -10,5 +10,9 @@
   @media (--min-desktop) {
     padding-left: $margin-desktop;
     padding-right: $margin-desktop;
+  }
+
+  & > * > * + * {
+    margin-top: 10px;
   }
 }
