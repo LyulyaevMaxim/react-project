@@ -3,10 +3,10 @@ import { hot } from 'react-hot-loader'
 import loadable from 'loadable-components'
 import { Route, Switch } from 'react-router-dom'
 
-const Header = loadable(() => import('../header'))
-const Content = loadable(() => import('../content'))
-const Form = loadable(() => import('../form-demo'))
-const Table = loadable(() => import('../table-demo'))
+const Header = loadable(() => import(/* webpackChunkName: "header" */ '../header'))
+const Content = loadable(() => import(/* webpackChunkName: "content" */ '../content'))
+const Form = loadable(() => import(/* webpackChunkName: "form" */ '../form-demo'))
+const Table = loadable(() => import(/* webpackChunkName: "table" */ '../table-demo'))
 
 function MainPage({ match: { path } }) {
 	return (

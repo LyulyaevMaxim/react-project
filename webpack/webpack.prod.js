@@ -29,6 +29,7 @@ module.exports = merge(common, {
 			allowExternal: true
 		}),
 		new webpack.HashedModuleIdsPlugin(),
+		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor',
 			minChunks: module => {
