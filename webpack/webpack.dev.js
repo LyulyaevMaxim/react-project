@@ -69,6 +69,16 @@ module.exports = merge(common, {
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',
+							[
+								'react-css-modules',
+								{
+									webpackHotModuleReloading: true,
+									generateScopedName: '[local]-[hash:base64:4]',
+									filetypes: {
+										'.scss': { syntax: 'postcss-scss' }
+									}
+								}
+							],
 							'react-hot-loader/babel'
 						]
 					}

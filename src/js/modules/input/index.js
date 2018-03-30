@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { patternPhone, patternInn, patternNumber, patternLetter } from './patterns'
-import CSSModules from 'react-css-modules'
 import { hot } from 'react-hot-loader'
+import './input.scss'
 
-@CSSModules(require('./input.scss'), { allowMultiple: true, handleNotFoundStyleName: 'log' })
 class Input extends Component {
 	state = {
 		value: '',

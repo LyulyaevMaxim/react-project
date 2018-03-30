@@ -66,10 +66,11 @@ module.exports = {
 						{
 							loader: 'css-loader',
 							options: {
-								importLoaders: 1,
+								importLoaders: 2,
 								modules: true,
 								localIdentName: '[local]-[hash:base64:4]',
-								sourceMap: isDev ? true : false
+								sourceMap: isDev ? true : false,
+								camelCase: true
 							}
 						},
 						{

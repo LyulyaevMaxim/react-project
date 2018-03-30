@@ -70,6 +70,13 @@ module.exports = merge(common, {
 							'@babel/preset-stage-0'
 						],
 						plugins: [
+							[
+								'react-css-modules',
+								{
+									generateScopedName: '[local]-[hash:base64:4]',
+									filetypes: { '.scss': { syntax: 'postcss-scss' } }
+								}
+							],
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',
