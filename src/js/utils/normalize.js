@@ -1,5 +1,5 @@
 import { normalize, schema } from 'normalizr'
-import { omit } from 'lodash'
+// import { omit } from 'lodash/omit'
 
 export function normalizeEntity({ data, entities, key = 'id' }) {
 	const entity = new schema.Entity(entities, {}, { idAttribute: key })

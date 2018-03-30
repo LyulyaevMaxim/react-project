@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { patternPhone, patternInn, patternNumber, patternLetter } from './patterns'
+import CSSModules from 'react-css-modules'
 import { hot } from 'react-hot-loader'
-import styles from './input.scss'
 
+@CSSModules(require('./input.scss'), { allowMultiple: true, handleNotFoundStyleName: 'log' })
 class Input extends Component {
 	state = {
 		value: '',
@@ -23,10 +24,10 @@ class Input extends Component {
 			<input
 				{...props}
 				value={propValue.length ? propValue : stateValue}
-				className={
-					`${styles['maxwell-input']}` +
+				styleName={
+					'maxwell-input' +
 					(propsClass.length ? ` ${propsClass}` : '') +
-					(stateClass.length ? ` ${styles[stateClass]}` : '')
+					(stateClass.length ? ` ${stateClass}` : '')
 				}
 				onChange={this.handleChange}
 				onBlur={this.handleFocusOut}

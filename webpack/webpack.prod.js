@@ -19,7 +19,10 @@ module.exports = merge(common, {
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
 		new LodashWebpackOptimize({
-			chaining: false
+			chaining: false,
+			//для работы с react-css-modules
+			shorthands: true,
+			collections: true
 		}),
 		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
 		new CleanWebpackPlugin([distPath], {
@@ -36,8 +39,8 @@ module.exports = merge(common, {
 			name: 'manifest',
 			minChunks: Infinity
 		}),
-		new UglifyJSPlugin({ sourceMap: true }),
-		new BundleAnalyzerPlugin()
+		new UglifyJSPlugin({ sourceMap: true })
+		// new BundleAnalyzerPlugin()
 	],
 	module: {
 		rules: [

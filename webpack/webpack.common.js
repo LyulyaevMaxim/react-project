@@ -44,6 +44,8 @@ module.exports = {
 		}),
 		new ExtractTextPlugin({
 			filename: 'css/[name].[contenthash].css',
+			allChunks: true, //все css-modules собираются в 1 файл вместо <styles/>
+			ignoreOrder: true, //для css-modules
 			disable: isDev
 		})
 	],
