@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router-dom'
 import * as authActions from '~actions/auth.js'
 import * as dataActions from '~actions/data.js'
 import MainPage from './main-page'
-require('~css/index.scss')
+import '~css/index.scss'
 
 class App extends Component {
 	static propTypes = {

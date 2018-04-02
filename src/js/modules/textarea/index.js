@@ -12,13 +12,13 @@ function Textarea({ getValue, onKeyPress, className, ...props }) {
 	const handleKeyPress = event => {
 		const { value } = event.target
 		onKeyPress({ value, event })
-
 	}
 
 	return (
-		<div styleName='maxwell-textarea-container'>
+		<div styleName="maxwell-textarea-container">
 			<TextareaAutosize
-				styleName={`maxwell-textarea ${className}`}
+				styleName="maxwell-textarea"
+				className={className}
 				placeholder=""
 				defaultValue=""
 				rows={3}

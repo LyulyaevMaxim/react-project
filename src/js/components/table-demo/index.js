@@ -6,24 +6,23 @@ import { data } from './data'
 import '~css/table-demo/index.scss'
 
 function TableDemo() {
+	const styles = require('~css/table-demo/index.scss')
 	const columns = [
-		{ label: '№', styleName: 'number-column', field: '' },
+		{ label: '№', styleName: styles['number-column'], field: '' },
 		{
 			label: 'Код операции',
-			styleName: 'code-column',
-			field: 'docId',
-			fieldFormat: docId =>
+			styleName: styles['code-column'],
+			fieldFormat: ({ docId }) =>
 				docId.length >= 12 ? `${docId.substr(0, 6)}...${docId.substr(-6)}` : docId
 		},
 		{
 			label: 'Скидка',
-			styleName: 'discount-column',
-			field: 'receiptDiscount',
-			fieldFormat: discount => `${discount}%`
+			styleName: styles['discount-column'],
+			fieldFormat: ({ receiptDiscount: discount }) => `${discount}%`
 		},
 		{
 			label: 'Оплачено',
-			styleName: 'sum-column',
+			styleName: styles['sum-column'],
 			fieldFormat: ({ totalSum, payedSum }) =>
 				totalSum !== payedSum ? (
 					<Fragment>
@@ -35,9 +34,8 @@ function TableDemo() {
 		},
 		{
 			label: 'Статус',
-			styleName: 'status-column',
-			field: 'status',
-			fieldFormat: status => {
+			styleName: styles['status-column'],
+			fieldFormat: ({ status }) => {
 				let label, className, type
 				switch (status) {
 					case 1: {
@@ -128,9 +126,8 @@ function TableDemo() {
 		},
 		{
 			label: 'Дата',
-			styleName: 'time-column',
-			field: 'updated',
-			fieldFormat: date => dateToDMYHM({ date })
+			styleName: styles['time-column'],
+			fieldFormat: ({ updated: date }) => dateToDMYHM({ date })
 		}
 	]
 	return (
@@ -138,7 +135,7 @@ function TableDemo() {
 			{...{
 				data,
 				columns,
-				styleName: 'table'
+				styleName: styles['table']
 			}}
 		/>
 	)

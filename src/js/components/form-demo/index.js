@@ -22,6 +22,7 @@ class FormDemo extends Component {
 	}
 
 	render() {
+		const styles = require('~css/form-demo/index.scss')
 		const { textareaValue, customInput, toSendTextArea } = this.state
 		const customInputHandle = ({ value }) => {
 			this.handleChange({ field: 'customInput', value })
@@ -75,7 +76,7 @@ class FormDemo extends Component {
 							getValue: textareaHandle,
 							placeholder: 'Растягивающийся textarea',
 							onKeyPress: this.handleKeyPressTextArea,
-							className: 'custom-textarea'
+							className: styles['custom-textarea']
 						}}
 					/>
 					<p>Значение, введённое в textarea:</p>

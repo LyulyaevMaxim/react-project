@@ -21,11 +21,13 @@ class TableLine extends Component {
 			typeof TablePopup !== 'undefined' ? `with-popup ${isOpen ? 'is-open' : ''}` : ''
 
 		return (
-			<tr {...{ onClick }} styleName={`tr ${styleName}`}>
-				<td styleName={`td ${first.className}`}>{lineIndex}</td>
+			<tr {...{ onClick }} styleName="tr" className={styleName}>
+				<td styleName="td" className={first.styleName}>
+					{lineIndex}
+				</td>
 
-				{columns.map(({ className, field, fieldFormat }, i) => (
-					<td styleName={`td ${className}`} key={`column-${i}`}>
+				{columns.map(({ styleName, field, fieldFormat }, i) => (
+					<td styleName="td" className={styleName} key={`column-${i}`}>
 						{this.getTd({ field, fieldFormat, data })}
 					</td>
 				))}

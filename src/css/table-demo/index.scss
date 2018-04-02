@@ -2,8 +2,13 @@
 @import "../mixin.scss";
 
 .table {
+  padding-top: 40px;
   padding-left: 5vw;
   padding-right: 5vw;
+
+  & > pagination-block + table {
+    margin-top: 30px;
+  }
 }
 
 .number-column {
