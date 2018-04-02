@@ -40,7 +40,7 @@ module.exports = merge(common, {
 			name: 'manifest',
 			minChunks: Infinity
 		}),
-		new UglifyJSPlugin({ sourceMap: true })
+		new UglifyJSPlugin({ sourceMap: true }),
 		// new BundleAnalyzerPlugin()
 	],
 	module: {
@@ -93,10 +93,10 @@ module.exports = merge(common, {
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',
-							'transform-react-remove-prop-types',
 							'closure-elimination',
 							'@babel/plugin-transform-react-constant-elements',
-							'@babel/plugin-transform-react-inline-elements'
+							'@babel/plugin-transform-react-inline-elements',
+							'transform-react-remove-prop-types'
 						]
 					}
 				}
