@@ -66,6 +66,15 @@ module.exports = merge(common, {
 							'@babel/preset-stage-0'
 						],
 						plugins: [
+							[
+								'module-resolver',
+								{
+									root: [path.resolve(__dirname, '../')],
+									alias: {
+										'~css': '../src/css'
+									}
+								}
+							],
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',
@@ -73,10 +82,13 @@ module.exports = merge(common, {
 								'react-css-modules',
 								{
 									webpackHotModuleReloading: true,
+									handleMissingStyleName: 'warn',
 									generateScopedName: '[local]-[hash:base64:4]',
 									filetypes: {
 										'.scss': { syntax: 'postcss-scss' }
-									}
+									},
+									// attributeNames: { activeStyleName: 'activeClassName' },
+									exclude: 'node_modules'
 								}
 							],
 							'react-hot-loader/babel'

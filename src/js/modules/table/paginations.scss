@@ -109,18 +109,4 @@ pagination-page-buttons {
   }
 }
 
-block-for-table {
-  pagination-pagesize + pagination-page {
-    margin-left: auto;
-  }
 
-  pagination-pagesize pagination-pagesize-buttons {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  pagination-page pagination-page-buttons {
-    margin-left: 8px;
-    margin-right: 8px;
-  }
-}

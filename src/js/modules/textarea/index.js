@@ -1,7 +1,7 @@
 import React from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import { hot } from 'react-hot-loader'
-import styles from './index.scss'
+import './index.scss'
 
 function Textarea({ getValue, onKeyPress, className, ...props }) {
 	const handleFocusOut = event => {
@@ -16,9 +16,9 @@ function Textarea({ getValue, onKeyPress, className, ...props }) {
 	}
 
 	return (
-		<div className={styles['maxwell-textarea-container']}>
+		<div styleName='maxwell-textarea-container'>
 			<TextareaAutosize
-				className={`${styles['maxwell-textarea']} ${className}`}
+				styleName={`maxwell-textarea ${className}`}
 				placeholder=""
 				defaultValue=""
 				rows={3}

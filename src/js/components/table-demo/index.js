@@ -1,30 +1,29 @@
 import React, { Fragment } from 'react'
-import { connect } from 'react-redux'
 import { hot } from 'react-hot-loader'
 import Table from '~modules/table'
 import { dateToDMYHM } from '~utils/date'
 import { data } from './data'
-import styles from '~css/table-demo/index.scss'
+import '~css/table-demo/index.scss'
 
 function TableDemo() {
 	const columns = [
-		{ label: '№', className: styles['number-column'], field: '' },
+		{ label: '№', styleName: 'number-column', field: '' },
 		{
 			label: 'Код операции',
-			className: styles['code-column'],
+			styleName: 'code-column',
 			field: 'docId',
 			fieldFormat: docId =>
 				docId.length >= 12 ? `${docId.substr(0, 6)}...${docId.substr(-6)}` : docId
 		},
 		{
 			label: 'Скидка',
-			className: styles['discount-column'],
+			styleName: 'discount-column',
 			field: 'receiptDiscount',
 			fieldFormat: discount => `${discount}%`
 		},
 		{
 			label: 'Оплачено',
-			className: styles['sum-column'],
+			styleName: 'sum-column',
 			fieldFormat: ({ totalSum, payedSum }) =>
 				totalSum !== payedSum ? (
 					<Fragment>
@@ -36,7 +35,7 @@ function TableDemo() {
 		},
 		{
 			label: 'Статус',
-			className: styles['status-column'],
+			styleName: 'status-column',
 			field: 'status',
 			fieldFormat: status => {
 				let label, className, type
@@ -124,12 +123,12 @@ function TableDemo() {
 						break
 					}
 				}
-				return <div className={`${styles['operation-status']} ${styles[className]}`}>{label}</div>
+				return <div styleName={`operation-status ${className}`}>{label}</div>
 			}
 		},
 		{
 			label: 'Дата',
-			className: styles['time-column'],
+			styleName: 'time-column',
 			field: 'updated',
 			fieldFormat: date => dateToDMYHM({ date })
 		}
@@ -139,7 +138,7 @@ function TableDemo() {
 			{...{
 				data,
 				columns,
-				className: styles['table']
+				styleName: 'table'
 			}}
 		/>
 	)

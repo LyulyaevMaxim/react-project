@@ -1,4 +1,4 @@
-block-for-table {
+.block-for-table {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -11,7 +11,7 @@ block-for-table {
   }
 }
 
-block-for-table > table {
+.block-for-table > table {
   display: block;
   border: none;
   overflow: hidden;
@@ -19,11 +19,11 @@ block-for-table > table {
   width: 100%;
 }
 
-block-for-table > table > tbody {
+.block-for-table > table > tbody {
   display: block;
 }
 
-block-for-table no-data-label {
+.block-for-table no-data-label {
   display: block;
   position: relative;
   margin: auto;
@@ -43,5 +43,21 @@ block-for-table no-data-label {
     font-size: 36px;
     font-weight: 500;
     color: rgba(79, 79, 79, 0.5);
+  }
+}
+
+.block-for-table {
+  pagination-pagesize + pagination-page {
+    margin-left: auto;
+  }
+
+  pagination-pagesize pagination-pagesize-buttons {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  pagination-page pagination-page-buttons {
+    margin-left: 8px;
+    margin-right: 8px;
   }
 }

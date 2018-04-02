@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styles from './table-line.scss'
+import './table-line.scss'
 
 class TableLine extends Component {
 	static propTypes = {
@@ -17,18 +17,19 @@ class TableLine extends Component {
 		const { lineIndex, columns: [first, ...columns], data, TablePopup } = this.props
 		const { isOpen } = this.state
 		const onClick = typeof TablePopup === 'undefined' ? () => {} : this.handleClick
-		const className =
-			typeof TablePopup !== 'undefined'
-				? `${styles['with-popup']} ${isOpen ? styles['is-open'] : ''}`
-				: ''
+		const styleName =
+			typeof TablePopup !== 'undefined' ? `with-popup ${isOpen ? 'is-open' : ''}` : ''
+
 		return (
-			<tr {...{ onClick, className }} className={styles['tr']}>
-				<td className={`${styles['td']} ${first.className}`}>{lineIndex}</td>
+			<tr {...{ onClick }} styleName={`tr ${styleName}`}>
+				<td styleName={`td ${first.className}`}>{lineIndex}</td>
+
 				{columns.map(({ className, field, fieldFormat }, i) => (
-					<td className={`${styles['td']} ${className}`} key={`column-${i}`}>
+					<td styleName={`td ${className}`} key={`column-${i}`}>
 						{this.getTd({ field, fieldFormat, data })}
 					</td>
 				))}
+
 				{isOpen && <Popup {...{ data, TablePopup }} handleSubmit={this.changeState} />}
 			</tr>
 		)
@@ -59,7 +60,7 @@ Popup.propTypes = {
 
 function Popup({ TablePopup, ...props }) {
 	return (
-		<td className="table-popup">
+		<td styleName="table-popup">
 			<TablePopup {...props} />
 		</td>
 	)

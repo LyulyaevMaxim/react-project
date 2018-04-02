@@ -1,22 +1,23 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
-import styles from '~css/header/index.scss'
+import getClassName from 'babel-plugin-react-css-modules/dist/browser/getClassName'
+import '~css/header/index.scss'
 
 function Header({ path, components }) {
 	const links = [
 		{ title: 'Главная', href: `${path}` },
-		{ title: 'Таблица', href: `${path}table`},
+		{ title: 'Таблица', href: `${path}table` },
 		{ title: 'Форма', href: `${path}form` }
 	]
 	return (
-		<header className={styles['header']}>
-			<nav className={styles['header-nav']}>
+		<header styleName="header">
+			<nav styleName="header-nav">
 				{links.map(({ title, href }, index) => (
 					<NavLink
 						to={href}
-						className={styles['header-nav-link']}
-						activeClassName={styles['active']}
+						styleName="header-nav-link"
+						// activeClassName={getClassName('active', require('~css/header/index.scss') )}
 						onMouseOver={components[index].load}
 						exact
 						key={title}

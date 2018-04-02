@@ -18,10 +18,10 @@ class Table extends Component {
 	}
 
 	render() {
-		const { columns, data, className, TablePopup } = this.props
+		const { columns, data, styleName, TablePopup } = this.props
 		if (!data['list'].length)
 			return (
-				<block-for-table {...{ class: className }}>
+				<block-for-table styleName={`block-for-table ${styleName}`}>
 					<no-data-label>
 						<p>Нет данных</p>
 					</no-data-label>
@@ -32,7 +32,7 @@ class Table extends Component {
 		const totalPages = Math.ceil(data['list'].length / pageSize)
 		const { changeActivePage, changePageSize } = this
 		return (
-			<block-for-table {...{ class: className }}>
+			<section styleName={`block-for-table ${styleName}`}>
 				<Pagination
 					{...{
 						changeActivePage,
@@ -45,7 +45,7 @@ class Table extends Component {
 				<table>
 					<TableBody {...{ data, page, pageSize, columns, TablePopup }} />
 				</table>
-			</block-for-table>
+			</section>
 		)
 	}
 

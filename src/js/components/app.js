@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router-dom'
 import * as authActions from '~actions/auth.js'
 import * as dataActions from '~actions/data.js'
 import MainPage from './main-page'
-import '~css/index.scss'
+require('~css/index.scss')
 
 class App extends Component {
 	static propTypes = {
@@ -36,7 +36,7 @@ class App extends Component {
 		const { authorization, props: { getData } } = this
 		authorization()
 		// getData()
-	/*	await this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })
+		/*	await this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })
 		await this.props.getData()
 		this.props.sberLoginUpdate({ login: 'QREVOT-api', password: 'QREVOT' })*/
 	}

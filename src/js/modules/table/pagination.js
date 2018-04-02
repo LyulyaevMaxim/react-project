@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './paginations.scss'
+import './paginations.scss'
 
 Pagination.propTypes = {
 	changeActivePage: PropTypes.func.isRequired,
@@ -33,7 +33,7 @@ function PageSize({ changePageSize, pageSize }) {
 				{options.map(el => (
 					<button
 						onClick={() => changePageSize({ pageSize: el })}
-						className={pageSize === el ? styles['active'] : ''}
+						styleName={pageSize === el ? 'active' : ''}
 						key={el}
 					>
 						{el}
@@ -62,7 +62,7 @@ function PaginationPage({ changeActivePage, pageSize, totalPages, page }) {
 				buttons.push(
 					<button
 						onClick={handleClick}
-						className={page === i ? styles['active'] : ''}
+						styleName={page === i ? 'active' : ''}
 						page={i}
 						key={`page-${i}`}
 					>
@@ -76,7 +76,7 @@ function PaginationPage({ changeActivePage, pageSize, totalPages, page }) {
 		buttons.push(
 			<button
 				onClick={handleClick}
-				className={page === 1 ? styles['active'] : ''}
+				styleName={page === 1 ? 'active' : ''}
 				page={1}
 				key={`page-${1}`}
 			>
@@ -86,12 +86,12 @@ function PaginationPage({ changeActivePage, pageSize, totalPages, page }) {
 		switch (page) {
 			case 2: {
 				buttons.push(
-					<button className={styles['active']} key={`page-${2}`}>
+					<button styleName="active" key={`page-${2}`}>
 						{2}
 					</button>
 				)
 				buttons.push(
-					<button className={styles['disable']} key={`page-other-right`}>
+					<button styleName="disable" key={`page-other-right`}>
 						...
 					</button>
 				)
@@ -100,12 +100,12 @@ function PaginationPage({ changeActivePage, pageSize, totalPages, page }) {
 
 			case totalPages - 1: {
 				buttons.push(
-					<button className={styles['disable']} key={`page-other-left`}>
+					<button styleName="disable" key={`page-other-left`}>
 						...
 					</button>
 				)
 				buttons.push(
-					<button className={styles['active']} key={`page-${totalPages - 1}`}>
+					<button styleName="active" key={`page-${totalPages - 1}`}>
 						{totalPages - 1}
 					</button>
 				)
@@ -116,25 +116,25 @@ function PaginationPage({ changeActivePage, pageSize, totalPages, page }) {
 			default: {
 				if (page > 2 && page < totalPages - 1) {
 					buttons.push(
-						<button className={styles['disable']} key={`page-other-left`}>
+						<button styleName="disable" key={`page-other-left`}>
 							...
 						</button>
 					)
 
 					buttons.push(
-						<button className={styles['active']} key={`page-${page}`}>
+						<button styleName="active" key={`page-${page}`}>
 							{page}
 						</button>
 					)
 
 					buttons.push(
-						<button className={styles['disable']} key={`page-other-right`}>
+						<button styleName="disable" key={`page-other-right`}>
 							...
 						</button>
 					)
 				} else {
 					buttons.push(
-						<button className={styles['disable']} key={`page-other`}>
+						<button styleName="disable" key={`page-other`}>
 							...
 						</button>
 					)
@@ -145,7 +145,7 @@ function PaginationPage({ changeActivePage, pageSize, totalPages, page }) {
 		buttons.push(
 			<button
 				onClick={handleClick}
-				className={page === totalPages ? styles['active'] : ''}
+				styleName={page === totalPages ? 'active' : ''}
 				page={totalPages}
 				key={`page-${totalPages}`}
 			>
@@ -157,9 +157,9 @@ function PaginationPage({ changeActivePage, pageSize, totalPages, page }) {
 	}
 
 	return (
-		<pagination-page class={totalPages <= 1 ? styles['disable'] : ''}>
+		<pagination-page styleName={totalPages <= 1 ? 'disable' : ''}>
 			<button
-				className={`${styles['pagination-back']} ${page > 1 ? '' : styles['disable']}`}
+				styleName={`pagination-back ${page > 1 ? '' : 'disable'}`}
 				onClick={handleClick}
 				page={page - 1}
 			>
@@ -167,7 +167,7 @@ function PaginationPage({ changeActivePage, pageSize, totalPages, page }) {
 			</button>
 			<pagination-page-buttons>{paginationButtons({ page, totalPages })}</pagination-page-buttons>
 			<button
-				className={`${styles['pagination-next']} ${page < totalPages ? '' : styles['disable']}`}
+				styleName={`pagination-next ${page < totalPages ? '' : 'disable'}`}
 				onClick={handleClick}
 				page={page + 1}
 			>

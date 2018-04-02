@@ -10,6 +10,12 @@
   }
 }
 
+.h1 {
+}
+
+.h3 {
+}
+
 @for $i from 1 through 6 {
   .h$i + p {
     margin-top: calc(10px + $i*2px);
