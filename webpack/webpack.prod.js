@@ -71,10 +71,23 @@ module.exports = merge(common, {
 						],
 						plugins: [
 							[
+								'module-resolver',
+								{
+									root: [path.resolve(__dirname, '../')],
+									alias: {
+										'~css': '../src/css'
+									}
+								}
+							],
+							[
 								'react-css-modules',
 								{
 									generateScopedName: '[local]-[hash:base64:4]',
-									filetypes: { '.scss': { syntax: 'postcss-scss' } }
+									filetypes: {
+										'.scss': { syntax: 'postcss-scss' }
+									},
+									// attributeNames: { activeStyleName: 'activeClassName' },
+									exclude: 'node_modules'
 								}
 							],
 							'@babel/plugin-proposal-object-rest-spread',
