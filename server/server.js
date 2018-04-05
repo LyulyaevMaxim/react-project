@@ -16,6 +16,10 @@ server.route([
 		method: 'GET',
 		path: prefix + '{param*}',
 		options: {
+			cache: {
+				expiresIn: 1209600, //2 недели: 60 * 60 * 24 * 7 * 2
+				privacy: 'private'
+			},
 			handler: (request, h) => {
 				let extension = request.params.param.substr(-2)
 				if (extension === 'js') {
