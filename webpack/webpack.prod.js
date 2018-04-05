@@ -13,7 +13,7 @@ module.exports = merge(common, {
 	entry: {
 		index: `${root}/src/js/index.js`
 	},
-	devtool: 'source-map',
+	//devtool: 'source-map',
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
@@ -40,7 +40,15 @@ module.exports = merge(common, {
 			name: 'manifest',
 			minChunks: Infinity
 		}),
-		new UglifyJSPlugin({ sourceMap: true }),
+		new UglifyJSPlugin({
+			// sourceMap: true,
+			cache: true,
+			parallel: true,
+			uglifyOptions: {
+				mangle: true
+				// compress: false
+			}
+		})
 		// new BundleAnalyzerPlugin()
 	],
 	module: {
