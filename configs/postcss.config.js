@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = ({ file, options, env }) => {
 	const isProd = env === 'production'
 	const cssnano = {
@@ -13,7 +15,21 @@ module.exports = ({ file, options, env }) => {
 	return {
 		parser: 'postcss-scss',
 		plugins: {
-			'postcss-import': {},
+			'postcss-import': {
+				resolve: (id, basedir) => {
+					const alias = [
+						{ name: '~css', toPath: 'src/css' },
+						{ name: '~img', toPath: 'src/img' },
+						{ name: 'node_modules', toPath: 'node_modules' }
+					]
+
+					for (let { name, toPath } of alias)
+						if (id.substr(0, name.length) === name)
+							return path.resolve(__dirname, `../${toPath}/${id.substr(name.length + 1)}`)
+
+					return path.resolve(basedir, id)
+				}
+			},
 			'postcss-nested': { preserveEmpty: true },
 			'postcss-advanced-variables': {},
 			'postcss-custom-media': {},

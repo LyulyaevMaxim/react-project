@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
-import '~css/header/index.scss'
+import './index.scss'
 
 function Header({ path, components }) {
 	const links = [
@@ -9,7 +9,7 @@ function Header({ path, components }) {
 		{ title: 'Таблица', href: `${path}table` },
 		{ title: 'Форма', href: `${path}form` }
 	]
-	const { active: activeClassName } = require('~css/header/index.scss')
+	const { active: activeClassName } = require('./index.scss')
 	return (
 		<header styleName="header">
 			<nav styleName="header-nav">

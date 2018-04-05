@@ -48,7 +48,7 @@ module.exports = merge(common, {
 				mangle: true
 				// compress: false
 			}
-		})
+		}),
 		// new BundleAnalyzerPlugin()
 	],
 	module: {

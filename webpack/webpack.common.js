@@ -37,7 +37,7 @@ module.exports = {
 						sortAttributes: true,
 						sortClassName: true,
 						collapseBooleanAttributes: true
-					}
+				  }
 		}),
 		new ScriptExtHtmlWebpackPlugin({
 			defaultAttribute: 'defer'
@@ -86,6 +86,26 @@ module.exports = {
 							loader: 'stylefmt-loader',
 							options: {
 								//config: `${root}/configs/.stylelintrc`
+							}
+						}
+					]
+				})
+			},
+			{
+				test: /\.css$/,
+				use: ExtractTextPlugin.extract({
+					fallback: {
+						loader: 'style-loader',
+						options: {
+							singleton: true,
+							sourceMap: isDev ? true : false
+						}
+					},
+					use: [
+						{
+							loader: 'css-loader',
+							options: {
+								sourceMap: isDev ? true : false
 							}
 						}
 					]
