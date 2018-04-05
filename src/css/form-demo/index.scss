@@ -1,11 +1,26 @@
 @import "../variables.scss";
 
 .form {
-  display: grid;
-  grid-template-columns: repeat(3, 30%);
   justify-content: space-between;
-  grid-gap: 20px;
   padding: 50px $margin-mobile;
+
+  @supports not (display: grid) {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > * {
+      width: 100%;
+      max-width: 30%;
+      margin-right: 20px;
+      margin-bottom: 20px;
+    }
+  }
+
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    grid-gap: 20px;
+  }
 
   @media (--min-desktop) {
     padding-left: $margin-desktop;

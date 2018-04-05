@@ -11,20 +11,20 @@
   }
 }
 
-.block-for-table > table {
+.table {
   display: block;
+  table-layout: fixed;
   border: none;
   overflow: hidden;
   height: 100%;
   width: 100%;
 }
 
-.block-for-table > table > tbody {
+.table > tbody {
   display: block;
 }
 
-.block-for-table no-data-label {
-  display: block;
+.no-data-label {
   position: relative;
   margin: auto;
   width: 100%;

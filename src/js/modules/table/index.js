@@ -22,9 +22,9 @@ class Table extends Component {
 		if (!data['list'].length)
 			return (
 				<block-for-table styleName="block-for-table" className={styleName}>
-					<no-data-label>
+					<div styleName="no-data-label">
 						<p>Нет данных</p>
-					</no-data-label>
+					</div>
 				</block-for-table>
 			)
 
@@ -42,7 +42,7 @@ class Table extends Component {
 						page
 					}}
 				/>
-				<table>
+				<table styleName="table">
 					<TableBody {...{ data, page, pageSize, columns, TablePopup }} />
 				</table>
 			</section>
