@@ -38,6 +38,7 @@ module.exports = ({ file, options, env }) => {
 			'postcss-selector-matches': {},
 			'postcss-line-height-px-to-unitless': {},
 			'postcss-pxtorem': { rootValue: 16, mediaQuery: false },
+			'postcss-scale': {},
 			'css-mqpacker': { sort: true },
 			'postcss-preset-env': {},
 			'postcss-flexbugs-fixes': {},
