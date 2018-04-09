@@ -22,7 +22,8 @@ module.exports = merge(common, {
 			chaining: false,
 			//для работы с react-css-modules
 			shorthands: true,
-			collections: true
+			collections: true,
+			paths: true
 		}),
 		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
 		new CleanWebpackPlugin([distPath], {
@@ -48,7 +49,7 @@ module.exports = merge(common, {
 				mangle: true
 				// compress: false
 			}
-		}),
+		})
 		// new BundleAnalyzerPlugin()
 	],
 	module: {

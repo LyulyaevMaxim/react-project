@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
-import './index.scss'
+import styles from './index.scss'
 
 function Header({ path, components }) {
 	const links = [
@@ -9,7 +9,6 @@ function Header({ path, components }) {
 		{ title: 'Таблица', href: `${path}table` },
 		{ title: 'Форма', href: `${path}form` }
 	]
-	const { active: activeClassName } = require('./index.scss')
 	return (
 		<header styleName="header">
 			<nav styleName="header-nav">
@@ -17,7 +16,7 @@ function Header({ path, components }) {
 					<NavLink
 						to={href}
 						styleName="header-nav-link"
-						activeClassName={activeClassName}
+						activeClassName={styles['active']}
 						onMouseOver={components[index].load}
 						exact
 						key={title}

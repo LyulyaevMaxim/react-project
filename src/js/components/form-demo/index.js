@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import loadable from 'loadable-components'
 import { hot } from 'react-hot-loader'
-import '~css/form-demo/index.scss'
+import styles from '~css/form-demo/index.scss'
 
 const Input = loadable(() => import('~modules/input'))
 const Textarea = loadable(() => import('~modules/textarea'))
@@ -22,7 +22,6 @@ class FormDemo extends Component {
 	}
 
 	render() {
-		const styles = require('~css/form-demo/index.scss')
 		const { textareaValue, customInput, toSendTextArea } = this.state
 		const customInputHandle = ({ value }) => {
 			this.handleChange({ field: 'customInput', value })

@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { hot } from 'react-hot-loader'
 import Table from '~modules/table'
 import { dateToDMYHM } from '~utils/date'
 import { data } from './data'
-import '~css/table-demo/index.scss'
+import styles from '~css/table-demo/index.scss'
 
 function TableDemo() {
-	const styles = require('~css/table-demo/index.scss')
 	const columns = [
 		{ label: '№', styleName: styles['number-column'], field: '' },
 		{
@@ -23,14 +22,7 @@ function TableDemo() {
 		{
 			label: 'Оплачено',
 			styleName: styles['sum-column'],
-			fieldFormat: ({ totalSum, payedSum }) =>
-				totalSum !== payedSum ? (
-					<Fragment>
-						<span>{totalSum}</span> из <span>{payedSum}</span>
-					</Fragment>
-				) : (
-					<span>{totalSum}</span>
-				)
+			fieldFormat: ({ totalSum }) => <span>{totalSum}</span>
 		},
 		{
 			label: 'Статус',

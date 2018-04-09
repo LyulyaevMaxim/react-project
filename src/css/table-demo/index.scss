@@ -27,7 +27,7 @@
 }
 
 .sum-column {
-  width: 13%;
+  width: 65px;
   margin-left: 4%;
 
   & > span {
@@ -60,6 +60,8 @@
   &::before {
     content: '';
     display: block;
+    min-width: 8px;
+    min-height: 8px;
     width: 8px;
     height: 8px;
     margin-right: 11px;

@@ -7,6 +7,5 @@ export function dateToDMY({ date }) {
 }
 
 export function dateToDMYHM({ date }) {
-	return moment(date).format('L hh:mm ')
+	return moment(date).format('L LT')
 }
-

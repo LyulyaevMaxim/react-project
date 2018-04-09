@@ -21,7 +21,7 @@ class TableLine extends Component {
 			typeof TablePopup !== 'undefined' ? `with-popup ${isOpen ? 'is-open' : ''}` : ''
 
 		return (
-			<tr {...{ onClick }} styleName="tr" className={styleName}>
+			<tr {...{ onClick }} styleName={`tr ${styleName}`}>
 				<td styleName="td" className={first.styleName}>
 					{lineIndex}
 				</td>
@@ -48,8 +48,7 @@ class TableLine extends Component {
 
 	getTd = ({ field, fieldFormat, data }) => {
 		if (typeof fieldFormat === 'function') {
-			if (typeof field !== 'undefined') return fieldFormat(data[field])
-			return fieldFormat(data)
+			return typeof field !== 'undefined' ? fieldFormat(data[field]) : fieldFormat(data)
 		} else {
 			return data[field]
 		}
