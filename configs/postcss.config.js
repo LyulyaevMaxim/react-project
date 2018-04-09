@@ -36,6 +36,8 @@ module.exports = ({ file, options, env }) => {
 			'postcss-color-function': {},
 			'postcss-selector-not': {},
 			'postcss-selector-matches': {},
+			'postcss-line-height-px-to-unitless': {},
+			'postcss-pxtorem': { rootValue: 16, mediaQuery: false },
 			'css-mqpacker': { sort: true },
 			'postcss-preset-env': {},
 			'postcss-flexbugs-fixes': {},
