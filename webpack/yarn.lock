@@ -7550,6 +7550,13 @@ postcss@^6.0.13, postcss@^6.0.20, postcss@^6.0.21:
     source-map "^0.6.1"
     supports-color "^5.3.0"
 
+preload-webpack-plugin@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/preload-webpack-plugin/-/preload-webpack-plugin-2.3.0.tgz#2923d8caff44dead93d1fe5eaab31f3b18ca0de9"
+  dependencies:
+    object-assign "^4.1.1"
+    object.values "^1.0.4"
+
 prepend-http@^1.0.0, prepend-http@^1.0.1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"

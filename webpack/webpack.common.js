@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const root = path.resolve(__dirname, '../')
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -40,7 +41,16 @@ module.exports = {
 				  }
 		}),
 		new ScriptExtHtmlWebpackPlugin({
-			defaultAttribute: 'defer'
+			defaultAttribute: 'defer',
+			preload: /\.js$/
+		}),
+		new PreloadWebpackPlugin({
+			rel: 'preload',
+			include: 'allAssets',
+			fileWhitelist: [/\.woff2/],
+			as(entry) {
+				if (/\.woff2$/.test(entry)) return 'font'
+			}
 		}),
 		new ExtractTextPlugin({
 			filename: 'css/[name].[contenthash].css',
