@@ -1,8 +1,12 @@
 const path = require('path')
+
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
+
+const CssChunksHtmlWebpackPlugin = require('css-chunks-html-webpack-plugin')
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin')
+
 const root = path.resolve(__dirname, '../')
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -18,6 +22,12 @@ module.exports = {
 		}
 	},
 	plugins: [
+		new ExtractCssChunks({
+			filename: 'css/[name].[contenthash].css',
+			ignoreOrder: true //для css-modules
+			// disable: isDev
+		}),
+		new CssChunksHtmlWebpackPlugin({ inject: 'head' }),
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: `${root}/src/html/index.html`,
@@ -51,12 +61,6 @@ module.exports = {
 			as(entry) {
 				if (/\.woff2$/.test(entry)) return 'font'
 			}
-		}),
-		new ExtractTextPlugin({
-			filename: 'css/[name].[contenthash].css',
-			allChunks: true, //все css-modules собираются в 1 файл вместо <styles/>
-			ignoreOrder: true, //для css-modules
-			disable: isDev
 		})
 	],
 	output: {},
@@ -64,7 +68,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.scss$/,
-				use: ExtractTextPlugin.extract({
+				use: ExtractCssChunks.extract({
 					fallback: {
 						loader: 'style-loader',
 						options: {
@@ -103,7 +107,7 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
+				use: ExtractCssChunks.extract({
 					fallback: {
 						loader: 'style-loader',
 						options: {

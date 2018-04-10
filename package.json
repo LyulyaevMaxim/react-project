@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-plugin-dual-import": "^1.2.1",
     "babel-plugin-react-css-modules": "^3.3.3",
     "history": "^4.7.2",
     "loadable-components": "^1.2.0",

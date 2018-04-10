@@ -23,13 +23,13 @@ server.route([
 			handler: (request, h) => {
 				let extension = request.params.param.substr(-2)
 				if (extension === 'js') {
-					let fileName = request.params.param.split('/').pop()
+					let fileName = request.params.param.split('/js/').pop()
 					return h.file(path.join(process.cwd(), `${distPath}/js/${fileName}`))
 				}
 
 				extension = request.params.param.substr(-3)
 				if (extension === 'css') {
-					let fileName = request.params.param.split('/').pop()
+					let fileName = request.params.param.split('/css/').pop()
 					return h.file(path.join(process.cwd(), `${distPath}/css/${fileName}`))
 				}
 

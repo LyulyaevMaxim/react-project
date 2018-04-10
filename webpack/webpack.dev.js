@@ -75,6 +75,7 @@ module.exports = merge(common, {
 									}
 								}
 							],
+							'babel-plugin-dual-import',
 							'@babel/plugin-proposal-object-rest-spread',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',
@@ -100,6 +101,7 @@ module.exports = merge(common, {
 	},
 	output: {
 		filename: '[name].bundle.js',
+		chunkFilename: '[name].[chunkhash].bundle.js',
 		path: `${root}/dist`,
 		publicPath: `/`
 	}
