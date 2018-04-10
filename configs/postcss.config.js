@@ -36,6 +36,7 @@ module.exports = ({ file, options, env }) => {
 			'postcss-color-function': {},
 			'postcss-selector-not': {},
 			'postcss-selector-matches': {},
+			'postcss-svg': { dirs: [path.resolve(__dirname, '../src/img/')] , svgo: {}},
 			'postcss-aspect-ratio': {},
 			'postcss-line-height-px-to-unitless': {},
 			'postcss-pxtorem': { rootValue: 16, mediaQuery: false },

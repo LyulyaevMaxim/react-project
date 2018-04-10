@@ -62,9 +62,12 @@ body > app-container {
   max-width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
-  //@include border-radius(10px);
-  //aspect-ratio: '16:9';
-  //aspect-ratio: calc('4:3' - 20px);
+  /*@include border-radius(10px);
+  aspect-ratio: '16:9';
+  aspect-ratio: calc('4:3' - 20px);
+  background-image: url('../img/arrow-to-right.svg' param(--color gold));
+  background-image: url('arrow-to-right.svg' param(--color red));
+  background-repeat: no-repeat;*/
 
   & > main {
     flex: 1 0 auto;

@@ -52,6 +52,7 @@
     "postcss-scss": "^1.0.5",
     "postcss-selector-matches": "^3.0.1",
     "postcss-selector-not": "^3.0.1",
+    "postcss-svg": "^2.4.0",
     "postcss-zindex": "^2.2.0",
     "preload-webpack-plugin": "^2.3.0",
     "script-ext-html-webpack-plugin": "^1.8.8",
