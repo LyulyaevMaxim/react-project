@@ -112,9 +112,25 @@ module.exports = merge(common, {
 				}
 			},
 			{
-				test: /\.(png|svg|jpg|gif)$/,
+				test: /\.(svg)$/,
 				include: `${root}/src/img`,
 				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							outputPath: 'img',
+							publicPath: '../img/'
+						}
+					}
+				]
+			},
+			{
+				test: /\.(png|jpg|gif)$/,
+				include: `${root}/src/img`,
+				use: [
+					{
+						loader: 'image-trace-loader'
+					},
 					{
 						loader: 'file-loader',
 						options: {
@@ -126,7 +142,8 @@ module.exports = merge(common, {
 						loader: 'image-webpack-loader',
 						options: {
 							svgo: {
-								plugins: [{ removeTitle: true }, { convertPathData: false }]
+								plugins: [{ removeTitle: true }, { convertPathData: false }],
+								enabled: false
 							},
 							mozjpeg: {
 								enabled: false, //пока не заработает с loadable-components

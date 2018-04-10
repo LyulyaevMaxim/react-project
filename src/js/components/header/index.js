@@ -7,7 +7,9 @@ function Header({ path, components }) {
 	const links = [
 		{ title: 'Главная', href: `${path}` },
 		{ title: 'Таблица', href: `${path}table` },
-		{ title: 'Форма', href: `${path}form` }
+		{ title: 'Форма', href: `${path}form` },
+		{ title: 'Lazy Load', href: `${path}lazy` }
+		// { title: 'Переключатели', href: `${path}switches` }
 	]
 	return (
 		<header styleName="header">

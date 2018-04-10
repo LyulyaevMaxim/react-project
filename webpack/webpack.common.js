@@ -24,8 +24,8 @@ module.exports = {
 	plugins: [
 		new ExtractCssChunks({
 			filename: 'css/[name].[contenthash].css',
-			ignoreOrder: true //для css-modules
-			// disable: isDev
+			ignoreOrder: true, //для css-modules
+			disable: isDev
 		}),
 		new CssChunksHtmlWebpackPlugin({ inject: 'head' }),
 		new HtmlWebpackPlugin({

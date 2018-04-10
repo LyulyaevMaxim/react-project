@@ -33,7 +33,7 @@ class Switches extends Component {
 			return (
 				<label
 					htmlFor={`equipment-${index}`}
-					className={activeIndex === index ? 'active' : ''}
+					styleName={activeIndex === index ? 'active' : ''}
 					onClick={handleClick}
 					key={`equipment-${index}`}
 				>
@@ -43,7 +43,7 @@ class Switches extends Component {
 		})
 
 		return (
-			<switches-container class={className}>
+			<switches-container styleName={className}>
 				<switches-content>
 					<aside>{switches}</aside>
 					<section ref={e => (this.equipmentBlocks = e)}>

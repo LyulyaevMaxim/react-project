@@ -36,9 +36,25 @@ module.exports = merge(common, {
 	module: {
 		rules: [
 			{
-				test: /\.(png|svg|jpg|gif)$/,
+				test: /\.(png|jpg|gif)$/,
 				include: `${root}/src/img`,
-				use: ['file-loader']
+				use: [
+					{
+						loader: 'image-trace-loader'
+					},
+					{
+						loader: 'file-loader'
+					}
+				]
+			},
+			{
+				test: /\.(svg)$/,
+				include: `${root}/src/img`,
+				use: [
+					{
+						loader: 'file-loader'
+					}
+				]
 			},
 			{
 				test: /\.js$/,

@@ -2,7 +2,7 @@ import React from 'react'
 import Switches from '~modules/switches'
 import SwitchableBlock from './switchable-block'
 import { hot } from 'react-hot-loader'
-// import '~css/switches/index.scss'
+import '~css/switches/index.scss'
 
 function SwitchesDemo() {
 	return <Switches {...{ data, calcMinHeight: true }} className="demo" />
