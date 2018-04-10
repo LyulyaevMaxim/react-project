@@ -63,6 +63,8 @@ body > app-container {
   min-height: 100vh;
   overflow-x: hidden;
   //@include border-radius(10px);
+  //aspect-ratio: '16:9';
+  //aspect-ratio: calc('4:3' - 20px);
 
   & > main {
     flex: 1 0 auto;
