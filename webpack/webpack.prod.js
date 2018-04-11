@@ -11,10 +11,8 @@ const distPath = `${root}/server/dist`
 
 module.exports = merge(common, {
 	entry: {
-		// index: `${root}/src/js/index.js`
 		index: `${root}/src/js/index.tsx`
 	},
-	//devtool: 'source-map',
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
@@ -54,14 +52,10 @@ module.exports = merge(common, {
 		// new BundleAnalyzerPlugin()
 	],
 
-	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.json']
-	},
-
 	module: {
 		rules: [
 			{
-				test: /\.tsx?$/,
+				test: /\.(ts|tsx)?$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'awesome-typescript-loader',
@@ -73,7 +67,6 @@ module.exports = merge(common, {
 						useBabel: true,
 						babelCore: '@babel/core',
 						babelOptions: {
-							// babelrc: false,
 							presets: [
 								[
 									'@babel/preset-env',
@@ -120,8 +113,7 @@ module.exports = merge(common, {
 								],
 								'closure-elimination',
 								'@babel/plugin-transform-react-constant-elements',
-								'@babel/plugin-transform-react-inline-elements',
-								'transform-react-remove-prop-types'
+								'@babel/plugin-transform-react-inline-elements'
 							]
 						}
 					}

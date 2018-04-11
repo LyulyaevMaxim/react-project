@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,
     "target": "es2015",
+    "module": "esnext", // для поддержки динамического импорта модулей
     "jsx": "react",
     "removeComments": true,
     "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "traceResolution": true,
     "typeRoots": [
       "../node_modules/@types"
     ]

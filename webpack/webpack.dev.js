@@ -2,7 +2,6 @@ const path = require('path')
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
 const webpack = require('webpack')
-const { TsConfigPathsPlugin } = require('awesome-typescript-loader')
 // const StyleLintPlugin = require('stylelint-webpack-plugin')
 const root = path.resolve(__dirname, '../')
 const initialPath = require('../src/js/constants.json').initialPath
@@ -10,7 +9,6 @@ const initialPath = require('../src/js/constants.json').initialPath
 module.exports = merge(common, {
 	entry: {
 		hot: 'react-hot-loader/patch',
-		// index: `${root}/src/js/index.js`
 		index: `${root}/src/js/index.tsx`
 	},
 	devtool: 'eval', //'eval-source-map', 'source-map'
@@ -33,13 +31,9 @@ module.exports = merge(common, {
 		}),
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin()
-		// new TsConfigPathsPlugin(/* { configFileName, compiler } */)
+
 		// new StyleLintPlugin({ configFile: `${root}/configs/.stylelintrc` })
 	],
-
-	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.json']
-	},
 
 	module: {
 		rules: [
@@ -65,7 +59,7 @@ module.exports = merge(common, {
 				]
 			},
 			{
-				test: /\.tsx?$/,
+				test: /\.(ts|tsx)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'awesome-typescript-loader',
@@ -103,7 +97,7 @@ module.exports = merge(common, {
 								[
 									'module-resolver',
 									{
-										root: [path.resolve(__dirname, '../')],
+										root: [path.resolve(__dirname, '../src')],
 										alias: {
 											'~css': '../src/css'
 										}
@@ -122,7 +116,6 @@ module.exports = merge(common, {
 										filetypes: {
 											'.scss': { syntax: 'postcss-scss' }
 										},
-										// attributeNames: { activeStyleName: 'activeClassName' },
 										exclude: 'node_modules'
 									}
 								],

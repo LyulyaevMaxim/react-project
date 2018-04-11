@@ -1,9 +1,8 @@
 ﻿{
   "extends": [
-    "tslint-config-airbnb",
-    "tslint-eslint-rules",
-    "tslint-consistent-codestyle"
-
+//    "tslint-config-airbnb",
+//    "tslint-eslint-rules",
+//    "tslint-consistent-codestyle"
   ],
   "rules": {
     "no-constant-condition": true,

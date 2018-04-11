@@ -3,6 +3,7 @@ import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import reducer from './reducers'
 import thunk from 'redux-thunk'
+
 // import createSagaMiddleware from 'redux-saga'
 // import { createLogger } from 'redux-logger'
 // import perfomanceTools from 'react-perf-devtool'

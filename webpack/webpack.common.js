@@ -20,8 +20,10 @@ module.exports = {
 			['~constants']: path.resolve(__dirname, '../src/js/constants.json'),
 			['~modules']: path.resolve(__dirname, '../src/js/modules'),
 			['~components']: path.resolve(__dirname, '../src/js/components')
-		}
+		},
+		extensions: ['.tsx', '.ts', '.js', '.json']
 	},
+
 	plugins: [
 		new ExtractCssChunks({
 			filename: 'css/[name].[contenthash].css',

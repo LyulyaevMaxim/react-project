@@ -1194,9 +1194,9 @@ autoprefixer@^8.2.0:
     postcss "^6.0.20"
     postcss-value-parser "^3.2.3"
 
-awesome-typescript-loader@3.5:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/awesome-typescript-loader/-/awesome-typescript-loader-3.5.0.tgz#4d4d10cba7a04ed433dfa0334250846fb11a1a5a"
+awesome-typescript-loader@^4.0.0-0:
+  version "4.0.0-0"
+  resolved "https://registry.yarnpkg.com/awesome-typescript-loader/-/awesome-typescript-loader-4.0.0-0.tgz#fde4fa9490ccd15a503dc0934292188c5b9d09d7"
   dependencies:
     chalk "^2.3.1"
     enhanced-resolve "3.3.0"
@@ -1729,10 +1729,6 @@ babel-plugin-transform-object-rest-spread@^6.22.0:
   dependencies:
     babel-plugin-syntax-object-rest-spread "^6.8.0"
     babel-runtime "^6.26.0"
-
-babel-plugin-transform-react-remove-prop-types@^0.4.13:
-  version "0.4.13"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.13.tgz#331cfc05099a808238311d78319c27460d481189"
 
 babel-plugin-transform-regenerator@^6.24.1:
   version "6.26.0"
