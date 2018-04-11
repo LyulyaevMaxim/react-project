@@ -36,5 +36,8 @@
     ]
   },
   "repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "tslint": "^5.9.1"
+  }
 }

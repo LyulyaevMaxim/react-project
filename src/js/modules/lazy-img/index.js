@@ -8,18 +8,17 @@ class LazyImg extends Component {
 	}
 
 	componentDidMount() {
-		const { image } = this
+		// const { image } = this
 		const { src, trace } = require(`~img/${this.props.imgName}`)
 		this.setState({
 			pathImage: src,
-			src: /*image.complete && image.naturalWidth !== 0 ? src :*/ trace
+			src: trace
 		})
 	}
 
 	handleLoad = event => {
 		event.preventDefault()
 		const { image, state: { pathImage } } = this
-		// if (image.complete && image.naturalWidth !== 0)
 		this.setState({ src: pathImage })
 	}
 

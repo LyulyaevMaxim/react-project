@@ -11,7 +11,8 @@ const distPath = `${root}/server/dist`
 
 module.exports = merge(common, {
 	entry: {
-		index: `${root}/src/js/index.js`
+		// index: `${root}/src/js/index.js`
+		index: `${root}/src/js/index.tsx`
 	},
 	//devtool: 'source-map',
 	plugins: [
@@ -52,62 +53,77 @@ module.exports = merge(common, {
 		})
 		// new BundleAnalyzerPlugin()
 	],
+
+	resolve: {
+		extensions: ['.ts', '.tsx', '.js', '.json']
+	},
+
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.tsx?$/,
 				exclude: /node_modules/,
 				use: {
-					loader: 'babel-loader',
+					loader: 'awesome-typescript-loader',
 					options: {
-						cacheDirectory: true,
-						presets: [
-							[
-								'@babel/preset-env',
-								{
-									targets: {
-										browsers: ['last 1 versions']
-									},
-									useBuiltIns: 'usage',
-									modules: false,
-									loose: true,
-									spec: true,
-									forceAllTransforms: true
-								}
-							],
-							'@babel/preset-react',
-							'@babel/preset-stage-0'
-						],
-						plugins: [
-							[
-								'module-resolver',
-								{
-									root: [path.resolve(__dirname, '../')],
-									alias: {
-										'~css': '../src/css'
+						configFileName: `${root}/configs/tsconfig.json`,
+						reportFiles: [`${root}/src/js/**/*.{ts,tsx}`],
+						useCache: true,
+						forceIsolatedModules: true,
+						useBabel: true,
+						babelCore: '@babel/core',
+						babelOptions: {
+							// babelrc: false,
+							presets: [
+								[
+									'@babel/preset-env',
+									{
+										targets: {
+											browsers: ['last 1 versions']
+										},
+										useBuiltIns: 'usage',
+										modules: false,
+										loose: true,
+										spec: true,
+										useBuiltIns: 'usage',
+										forceAllTransforms: true
 									}
-								}
+								],
+								'@babel/preset-react',
+								'@babel/preset-stage-0'
 							],
-							[
-								'react-css-modules',
-								{
-									generateScopedName: '[local]-[hash:base64:4]',
-									filetypes: {
-										'.scss': { syntax: 'postcss-scss' }
-									},
-									// attributeNames: { activeStyleName: 'activeClassName' },
-									exclude: 'node_modules'
-								}
-							],
-							'babel-plugin-dual-import',
-							'@babel/plugin-proposal-object-rest-spread',
-							'@babel/plugin-syntax-dynamic-import',
-							'@babel/plugin-proposal-class-properties',
-							'closure-elimination',
-							'@babel/plugin-transform-react-constant-elements',
-							'@babel/plugin-transform-react-inline-elements',
-							'transform-react-remove-prop-types'
-						]
+							plugins: [
+								[
+									'module-resolver',
+									{
+										root: [path.resolve(__dirname, '../')],
+										alias: {
+											'~css': '../src/css'
+										}
+									}
+								],
+								'babel-plugin-dual-import',
+								'@babel/plugin-proposal-object-rest-spread',
+								'@babel/plugin-syntax-dynamic-import',
+								'@babel/plugin-proposal-class-properties',
+								[
+									'react-css-modules',
+									{
+										webpackHotModuleReloading: true,
+										handleMissingStyleName: 'warn',
+										generateScopedName: '[local]-[hash:base64:4]',
+										filetypes: {
+											'.scss': { syntax: 'postcss-scss' }
+										},
+										exclude: 'node_modules'
+									}
+								],
+								'closure-elimination',
+								'@babel/plugin-transform-react-constant-elements',
+								'@babel/plugin-transform-react-inline-elements',
+								'transform-react-remove-prop-types'
+							]
+						}
 					}
 				}
 			},

@@ -18,7 +18,8 @@ module.exports = {
 			['~actions']: path.resolve(__dirname, '../src/js/actions'),
 			['~utils']: path.resolve(__dirname, '../src/js/utils'),
 			['~constants']: path.resolve(__dirname, '../src/js/constants.json'),
-			['~modules']: path.resolve(__dirname, '../src/js/modules')
+			['~modules']: path.resolve(__dirname, '../src/js/modules'),
+			['~components']: path.resolve(__dirname, '../src/js/components')
 		}
 	},
 	plugins: [
