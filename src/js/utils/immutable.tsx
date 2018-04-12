@@ -1,0 +1,1 @@
+function insertToArray({ array, index, value }) {}
