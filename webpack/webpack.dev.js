@@ -31,7 +31,6 @@ module.exports = merge(common, {
 		}),
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin()
-
 		// new StyleLintPlugin({ configFile: `${root}/configs/.stylelintrc` })
 	],
 
@@ -57,73 +56,6 @@ module.exports = merge(common, {
 						loader: 'file-loader'
 					}
 				]
-			},
-			{
-				test: /\.(ts|tsx)$/,
-				exclude: /node_modules/,
-				use: {
-					loader: 'awesome-typescript-loader',
-					options: {
-						configFileName: `${root}/configs/tsconfig.json`,
-						reportFiles: [`${root}/src/js/**/*.{ts,tsx}`],
-						useCache: true,
-						//usePrecompiledFiles: true, //использовать js файлы
-						//errorsAsWarnings: true, //вместо ошибок TS даёт предупреждения,
-						forceIsolatedModules: true,
-						//useTranspileModule: true, //режим быстрой генерации
-						useBabel: true,
-						babelCore: '@babel/core',
-						babelOptions: {
-							// babelrc: false,
-							presets: [
-								[
-									'@babel/preset-env',
-									{
-										targets: {
-											browsers: ['last 1 versions']
-										},
-										modules: false,
-										loose: true,
-										spec: true,
-										useBuiltIns: 'usage',
-										forceAllTransforms: true
-										// debug: true
-									}
-								],
-								'@babel/preset-react',
-								'@babel/preset-stage-0'
-							],
-							plugins: [
-								[
-									'module-resolver',
-									{
-										root: [path.resolve(__dirname, '../src')],
-										alias: {
-											'~css': '../src/css'
-										}
-									}
-								],
-								'babel-plugin-dual-import',
-								'@babel/plugin-proposal-object-rest-spread',
-								'@babel/plugin-syntax-dynamic-import',
-								'@babel/plugin-proposal-class-properties',
-								[
-									'react-css-modules',
-									{
-										webpackHotModuleReloading: true,
-										handleMissingStyleName: 'warn',
-										generateScopedName: '[local]-[hash:base64:4]',
-										filetypes: {
-											'.scss': { syntax: 'postcss-scss' }
-										},
-										exclude: 'node_modules'
-									}
-								],
-								'react-hot-loader/babel'
-							]
-						}
-					}
-				}
 			},
 			//sourcemap каждогого полученного js файла будет повторно обработан «source-map-loader»
 			{ enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }

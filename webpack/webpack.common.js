@@ -70,6 +70,28 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.(ts|tsx)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'awesome-typescript-loader',
+					options: {
+						configFileName: `${root}/configs/tsconfig.json`,
+						reportFiles: [`${root}/src/js/**/*.{ts,tsx}`],
+						useCache: true,
+						//usePrecompiledFiles: true, //использовать js файлы
+						//errorsAsWarnings: true, //вместо ошибок TS даёт предупреждения,
+						forceIsolatedModules: true,
+						//useTranspileModule: true, //режим быстрой генерации
+						useBabel: true,
+						babelCore: '@babel/core',
+						babelOptions: {
+							babelrc: false,
+							...require('./.babelrc')
+						}
+					}
+				}
+			},
+			{
 				test: /\.scss$/,
 				use: ExtractCssChunks.extract({
 					fallback: {
