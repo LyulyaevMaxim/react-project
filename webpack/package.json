@@ -3,8 +3,8 @@
   "description": "Webpack Configuration",
   "author": "Maxim Lyulyaev",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --env.dev  --config webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --env.dev  --config webpack.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.42",
@@ -68,8 +68,7 @@
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.4",
-    "webpack-dev-server": "^2.11.1",
-    "webpack-merge": "^4.1.2"
+    "webpack-dev-server": "^2.11.1"
   },
   "repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
   "license": "MIT"
