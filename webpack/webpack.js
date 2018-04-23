@@ -24,7 +24,7 @@ const distPath = `${root}/server/dist`
 module.exports = (env, argv) => {
 	const mode = typeof env !== 'undefined' ? env : argv.mode
 	const isDev = mode === 'development'
-	console.log(mode, isDev)
+	console.log(`mode: ${mode}, isDev: ${isDev}`)
 
 	return {
 		mode,
@@ -55,8 +55,7 @@ module.exports = (env, argv) => {
 			extensions: ['.tsx', '.ts', '.js', '.json']
 		},
 
-		//eval по умолчанию, в prod сам отключается
-		// devtool: 'eval', //'eval-source-map', 'source-map'
+		devtool: isDev ? 'eval' : 'none',
 
 		plugins: [
 			new MiniCssExtractPlugin({
@@ -93,7 +92,7 @@ module.exports = (env, argv) => {
 			new ScriptExtHtmlWebpackPlugin({
 				defaultAttribute: 'defer',
 				preload: /\.js$/
-			})
+			}),
 			/*new PreloadWebpackPlugin({
 			rel: 'preload',
 			include: 'allAssets',
@@ -107,7 +106,7 @@ module.exports = (env, argv) => {
 			: new CleanWebpackPlugin([distPath], {
 					allowExternal: true
 			  }) */
-			/*,new BundleAnalyzerPlugin()*/
+			/*,*/
 			/*,new LodashWebpackOptimize({
 					chaining: false,
 					//для работы с react-css-modules
@@ -138,6 +137,7 @@ module.exports = (env, argv) => {
 						// compress: false
 					}
 			  })*/
+			new BundleAnalyzerPlugin()
 		],
 
 		module: {

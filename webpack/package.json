@@ -3,9 +3,9 @@
   "description": "Webpack Configuration",
   "author": "Maxim Lyulyaev",
   "scripts": {
-    "serve": "webpack-serve --mode=development --config webpack.js",
-    "start": "webpack-dev-server --env=development --config webpack.js",
-    "build": "webpack --mode=production --config webpack.js"
+    "server": "webpack-dev-server --env=development --config webpack.js",
+    "startr": "webpack-serve --mode=development --config webpack.js",
+    "build": "cross-env NODE_ENV=production webpack --mode=production --config webpack.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.44",
@@ -26,6 +26,7 @@
     "babel-plugin-react-css-modules": "^3.3.3",
     "cache-loader": "^1.2.2",
     "clean-webpack-plugin": "^0.1.19",
+    "cross-env": "^5.1.4",
     "css-chunks-html-webpack-plugin": "^0.1.0",
     "css-loader": "^0.28.11",
     "css-mqpacker": "^6.0.2",
