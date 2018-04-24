@@ -2,16 +2,7 @@ const path = require('path')
 
 module.exports = ({ file, options, env }) => {
 	const isProd = env === 'production'
-	const cssnano = {
-		preset: [
-			'default',
-			{
-				discardComments: {
-					removeAll: true
-				}
-			}
-		]
-	}
+
 	return {
 		parser: 'postcss-scss',
 		plugins: {
@@ -49,9 +40,7 @@ module.exports = ({ file, options, env }) => {
 				grid: true,
 				flexbox: 'no-2009',
 				remove: true
-			},
-			'postcss-zindex': isProd ? {} : false,
-			cssnano: isProd ? cssnano : false
+			}
 		}
 	}
 }

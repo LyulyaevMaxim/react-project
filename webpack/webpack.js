@@ -6,19 +6,14 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CssChunksHtmlWebpackPlugin = require('css-chunks-html-webpack-plugin')
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin')
 
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const LodashWebpackOptimize = require('lodash-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const LodashWebpackOptimize = require('lodash-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const serve = require('webpack-serve')
-
 const root = path.resolve(__dirname, '../')
-
-const initialPath = require('../src/js/constants.json').initialPath
 const distPath = `${root}/server/dist`
 
 module.exports = (env, argv) => {
@@ -36,8 +31,8 @@ module.exports = (env, argv) => {
 			: { index: `${root}/src/js/index.tsx` },
 
 		output: {
-			filename: `js/[name]${!isDev ? '.[chunkhash]' : ''}.bundle.js`,
-			chunkFilename: 'js/[name].[chunkhash].bundle.js',
+			filename: `js/[name]${isDev ? '' : '.[chunkhash]'}.bundle.js`,
+			chunkFilename: `js/[name]${isDev ? '' : '.[chunkhash]'}.bundle.js`,
 			path: distPath,
 			publicPath: `./`
 		},
@@ -55,20 +50,51 @@ module.exports = (env, argv) => {
 			extensions: ['.tsx', '.ts', '.js', '.json']
 		},
 
-		devtool: isDev ? 'eval' : 'none',
+		optimization: !isDev
+			? {
+					runtimeChunk: false,
+					namedModules: true,
+					noEmitOnErrors: true,
+					concatenateModules: true,
+					minimize: true,
+					splitChunks: {
+						automaticNameDelimiter: '-',
+						chunks: 'all',
+						cacheGroups: {
+							vendor: {
+								name: 'vendor',
+								chunks: 'all',
+								test: /[\\/]node_modules[\\/]/,
+								priority: -10
+							}
+						}
+					},
+					minimizer: [
+						new UglifyJSPlugin({
+							cache: true,
+							parallel: true,
+							uglifyOptions: {
+								mangle: true
+								// compress: false
+							}
+						}),
+						new OptimizeCSSAssetsPlugin({
+							cssProcessor: require('cssnano'),
+							cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} }
+						})
+					]
+			  }
+			: {},
 
 		plugins: [
-			new MiniCssExtractPlugin({
-				filename: 'css/[name].[contenthash].css',
-				ignoreOrder: true //для css-modules
+			new CleanWebpackPlugin([distPath], {
+				allowExternal: true
 			}),
-
-			/*new ExtractCssChunks({
-				filename: 'css/[name].[contenthash].css',
-				ignoreOrder: true, //для css-modules
-				disable: isDev
-			}),*/
-			// new CssChunksHtmlWebpackPlugin({ inject: 'head' }),
+			new MiniCssExtractPlugin({
+				filename: `css/[name]${isDev ? '' : '.[hash]'}.css`,
+				chunkFilename: `css/[name]${isDev ? '' : '.[hash]'}.css`,
+				ignoreOrder: true
+			}),
 			new HtmlWebpackPlugin({
 				filename: 'index.html',
 				template: `${root}/src/html/index.html`,
@@ -100,45 +126,18 @@ module.exports = (env, argv) => {
 			as(entry) {
 				if (/\.woff2$/.test(entry)) return 'font'
 			}
-		})*/
-			/*isDev
-			? (new webpack.NamedModulesPlugin(), new webpack.HotModuleReplacementPlugin())
-			: new CleanWebpackPlugin([distPath], {
-					allowExternal: true
-			  }) */
-			/*,*/
-			/*,new LodashWebpackOptimize({
+			})*/
+			isDev && new webpack.HotModuleReplacementPlugin(),
+			new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
+			!isDev &&
+				new LodashWebpackOptimize({
 					chaining: false,
-					//для работы с react-css-modules
 					shorthands: true,
 					collections: true,
 					paths: true
-			  })*/
-			/*,new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/)*/
-			/*,new webpack.HashedModuleIdsPlugin()*/
-			/*,new webpack.optimize.ModuleConcatenationPlugin()*/
-			/*,new webpack.optimize.CommonsChunkPlugin({
-					name: 'vendor',
-					minChunks: module => {
-						return module.context && module.context.includes('node_modules')
-					}
-			  })*/
-			/*,
-			  new webpack.optimize.CommonsChunkPlugin({
-					name: 'manifest',
-					minChunks: Infinity
-			  })*/
-			/*,new UglifyJSPlugin({
-					// sourceMap: true,
-					cache: true,
-					parallel: true,
-					uglifyOptions: {
-						mangle: true
-						// compress: false
-					}
-			  })*/
-			new BundleAnalyzerPlugin()
-		],
+				})
+			// !isDev && new BundleAnalyzerPlugin()
+		].filter(Boolean),
 
 		module: {
 			rules: [
@@ -161,8 +160,6 @@ module.exports = (env, argv) => {
 						}
 					}
 				},
-				// 		//sourcemap каждогого полученного js файла будет повторно обработан «source-map-loader»
-				// 		{ enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
 				{
 					test: /\.scss$/,
 					use: [
