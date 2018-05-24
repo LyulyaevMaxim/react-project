@@ -38,13 +38,26 @@ module.exports = (env, argv) => {
 			path: distPath,
 			publicPath:  initialPath
     },    
+
+    resolve: {
+			alias: {
+        ['~css']: `${root}/src/css`,
+        ['~img']: `${root}/src/img`,
+        ['~store']: `${root}/src/js/store`,
+        ['~utils']: `${root}/src/js/utils`,
+        ['~constants']: `${root}/src/js/constants.json`,
+				['~modules']: `${root}/src/js/modules`,
+        ['~components']: `${root}/src/js/components`
+			},
+			extensions: ['.tsx', '.ts', '.js', '.json']
+		},
     
     
     plugins: [
 			!isDev && new CleanWebpackPlugin([distPath], {
 				allowExternal: true
 			}),
-			/*!isDev &&*/ new MiniCssExtractPlugin({
+			new MiniCssExtractPlugin({
 				filename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
 				chunkFilename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
 				ignoreOrder: true
@@ -118,7 +131,7 @@ module.exports = (env, argv) => {
 				{
 					test: /\.scss$/,
 					use: [
-						/*isDev ? 'style-loader' :*/ MiniCssExtractPlugin.loader,
+						MiniCssExtractPlugin.loader,
 						{
 							loader: 'css-loader',
 							options: {
@@ -227,21 +240,6 @@ module.exports = (env, argv) => {
         historyApiFallback: true
       }
       : {},
-
-    
-      resolve: {
-			alias: {
-        ['~css']: `${root}/src/css`,
-        ['~img']: `${root}/src/img`,
-        ['~store']: `${root}/src/js/store`,
-				/* DELETE */['~actions']: path.resolve(__dirname, '../src/js/actions'),
-        ['~utils']: `${root}/src/js/utils`,
-        ['~constants']: `${root}/src/js/constants.json`,
-				['~modules']: `${root}/src/js/modules`,
-        ['~components']: `${root}/src/js/components`
-			},
-			extensions: ['.tsx', '.ts', '.js', '.json']
-		},
 
 		optimization: !isDev
 			? {

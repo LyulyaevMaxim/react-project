@@ -1,0 +1,40 @@
+@import "~css/variables.scss";
+
+.main {
+  padding: 20px $margin-mobile;
+  background-color: #f5f6f3;
+
+  @media (--min-desktop) {
+    padding-left: $margin-desktop;
+    padding-right: $margin-desktop;
+  }
+}
+
+.h1 {
+}
+
+.h3 {
+}
+
+@for $i from 1 through 6 {
+  .h$i + p {
+    margin-top: calc(10px + $i*2px);
+  }
+
+  p + .h$i {
+    margin-top: calc(10px + $i*2px);
+  }
+}
+
+@for $i from 1 through 6 {
+  .h$i {
+    font-size: calc(var(--largeFontSize) * (1.1 - 0.$i));
+    line-height: 1.8;
+    font-weight: calc(900 - $i*100);
+  }
+}
+
+.p {
+  font-size: calc(var(--largeFontSize) * 0.5);
+}
+
