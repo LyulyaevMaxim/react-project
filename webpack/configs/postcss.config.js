@@ -1,4 +1,5 @@
 const path = require('path')
+const root = path.resolve(__dirname, '../../')
 
 module.exports = ({ file, options, env }) => {
 	const isProd = env === 'production'
@@ -16,7 +17,7 @@ module.exports = ({ file, options, env }) => {
 
 					for (let { name, toPath } of alias)
 						if (id.substr(0, name.length) === name)
-							return path.resolve(__dirname, `../${toPath}/${id.substr(name.length + 1)}`)
+              return `${root}/${toPath}/${id.substr(name.length + 1)}`
 
 					return path.resolve(basedir, id)
 				}
@@ -27,7 +28,7 @@ module.exports = ({ file, options, env }) => {
 			'postcss-color-function': {},
 			'postcss-selector-not': {},
 			'postcss-selector-matches': {},
-			'postcss-svg': { dirs: [path.resolve(__dirname, '../src/img/')], svgo: {} },
+			'postcss-svg': { dirs: [`${root}/src/img`], svgo: {} },
 			'postcss-aspect-ratio': {},
 			'postcss-line-height-px-to-unitless': {},
 			'postcss-pxtorem': { rootValue: 16, mediaQuery: false },

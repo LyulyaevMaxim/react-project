@@ -1,4 +1,5 @@
 const path = require('path')
+const root = path.resolve(__dirname, '../../')
 const isDev = process.env.NODE_ENV === 'development'
 
 let presets = [
@@ -6,7 +7,7 @@ let presets = [
 		'@babel/preset-env',
 		{
 			targets: {
-				browsers: ['last 1 versions']
+				browsers: ['> 1%', 'last 2 versions']
 			},
 			modules: false,
 			loose: true,
@@ -17,14 +18,14 @@ let presets = [
 		}
 	],
 	'@babel/preset-react',
-	'@babel/preset-stage-0'
+	['@babel/preset-stage-0', { decoratorsLegacy: true }]
 ]
 
 let plugins = [
 	[
 		'module-resolver',
 		{
-			root: [path.resolve(__dirname, '../src')],
+			root: [`${root}/src`],
 			alias: {
 				'~css': '../src/css'
 			}

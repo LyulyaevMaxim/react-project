@@ -3,9 +3,9 @@
   "description": "Webpack Configuration",
   "author": "Maxim Lyulyaev",
   "scripts": {
-    "server": "webpack-dev-server --env=development --config webpack.js",
-    "start": "webpack-serve --mode=development --config webpack.js",
-    "build": "cross-env NODE_ENV=production webpack --mode=production --config webpack.js"
+    "build": "cross-env NODE_ENV=production webpack --mode=production --config webpack.js",
+    "start": "webpack-dev-server --env=development --config webpack.js",
+    "serve": "webpack-serve --mode=development --config webpack.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.44",
@@ -32,7 +32,6 @@
     "cssnano": "^3.10.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
-    "image-trace-loader": "^0.1.0",
     "image-webpack-loader": "^4.2.0",
     "lodash-webpack-plugin": "^0.11.5",
     "mini-css-extract-plugin": "^0.4.0",

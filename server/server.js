@@ -1,8 +1,9 @@
 const Hapi = require('hapi')
 const Inert = require('inert')
 const path = require('path')
-const prefix = '/' //`/${require('../src/js/constants.json').initialPath}`
+const prefix = '/custom-path/' //`/${require('../src/js/constants.json').initialPath}`
 const distPath = './dist'
+const assetsPath = 'assets'
 
 const server = new Hapi.Server({
 	port: process.env.PORT || 5000,
@@ -14,40 +15,26 @@ const server = new Hapi.Server({
 server.route([
 	{
 		method: 'GET',
+		path: prefix + `${assetsPath}/{param*}`,
+		options: {
+			cache: {
+				expiresIn: 1209600, //2 недели: 60 * 60 * 24 * 7 * 2
+				privacy: 'private'
+			},
+			handler: ({params: {param: fileName}}, h) =>
+				h.file(path.join(process.cwd(), `${distPath}/${assetsPath}/${fileName}`))
+		}
+  },
+  {
+		method: 'GET',
 		path: prefix + '{param*}',
 		options: {
 			cache: {
 				expiresIn: 1209600, //2 недели: 60 * 60 * 24 * 7 * 2
 				privacy: 'private'
 			},
-			handler: (request, h) => {
-				let extension = request.params.param.substr(-2)
-				if (extension === 'js') {
-					let fileName = request.params.param.split('/js/').pop()
-					return h.file(path.join(process.cwd(), `${distPath}/js/${fileName}`))
-				}
-
-				extension = request.params.param.substr(-3)
-				if (extension === 'css') {
-					let fileName = request.params.param.split('/css/').pop()
-					return h.file(path.join(process.cwd(), `${distPath}/css/${fileName}`))
-				}
-
-				if (extension === 'svg' || extension === 'jpg' || extension === 'png') {
-					let fileName = request.params.param.split('/').pop()
-					return h.file(path.join(process.cwd(), `${distPath}/img/${fileName}`))
-				}
-
-				if (
-					request.params.param.substr(-5) === 'woff2' ||
-					request.params.param.substr(-4) === 'woff'
-				) {
-					let fileName = request.params.param.split('/').pop()
-					return h.file(path.join(process.cwd(), `${distPath}/fonts/${fileName}`))
-				}
-
-				return h.file(path.join(process.cwd(), `${distPath}/index.html`))
-			}
+			handler: ({params: {param: fileName}}, h) =>
+				h.file(path.join(process.cwd(), `${distPath}/index.html`))
 		}
 	}
 ])

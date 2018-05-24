@@ -19,7 +19,7 @@ class App extends Component {
 	render() {
 		const { loadingToken, token } = this.props.auth
 		const path = require('../constants.json').initialPath
-		if (loadingToken !== false || token === '') return <h1>&quot;Token&quot; не был передан</h1>
+		// if (loadingToken !== false || token === '') return <h1>&quot;Token&quot; не был передан</h1>
 
 		return (
 			<Fragment>

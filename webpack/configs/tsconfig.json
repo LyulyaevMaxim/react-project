@@ -14,11 +14,10 @@
     ]
   },
   "include": [
-    "../src/js/**/*"
+    "../../src/js/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "../node_modules"
+    "../../**/node_modules"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true
