@@ -3,15 +3,14 @@
   "description": "Server Configuration",
   "author": "Maxim Lyulyaev",
   "version": "1.0.0",
-  "repository": "https://maxim-buslaev@github.com/maxim-buslaev/react-project.git",
-  "homepage": "https://maxim-buslaev.github.io/react-project",
+  "repository": "https://LyulyaevMaxim@github.com/LyulyaevMaxim/react-project.git",
   "license": "MIT",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "hapi": "^17.3.0",
+    "hapi": "^17.5.0",
     "inert": "^5.1.0",
-    "pino": "^4.15.3"
+    "pino": "^4.17.0"
   }
 }
