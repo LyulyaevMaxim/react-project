@@ -23,22 +23,22 @@ export async function requestCreator(dispatch, action) {
 	switch (requestType) {
 		case GET_REQUEST: {
 			method = 'get'
-			params = { ...sendObject }
+			params = sendObject
 			break
 		}
 		case POST_REQUEST: {
 			method = 'post'
-			data = { ...sendObject }
+			data = sendObject
 			break
     }
     case PUT_REQUEST: {
       method = 'put'
-      data = { ...sendObject }
+      data = sendObject
       break
   }
   case DELETE_REQUEST: {
       method = 'delete'
-      params = { ...sendObject }
+      params = sendObject
       break
   }
 

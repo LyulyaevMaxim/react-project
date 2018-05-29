@@ -20,7 +20,7 @@ module.exports = (env, argv) => {
   
   const root = path.resolve(__dirname, '../')
 	const distPath = `${root}/server/dist`
-	const initialPath = isDev ? '/' : `/${require('../src/js/constants.json').initialPath}`
+	const initialPath = isDev ? '/' : require('../src/js/constants.js').initialPath
 	const assetsPath = 'assets'
 
 	return {
@@ -45,13 +45,12 @@ module.exports = (env, argv) => {
         ['~img']: `${root}/src/img`,
         ['~store']: `${root}/src/js/store`,
         ['~utils']: `${root}/src/js/utils`,
-        ['~constants']: `${root}/src/js/constants.json`,
+        ['~constants']: `${root}/src/js/constants.js`,
 				['~modules']: `${root}/src/js/modules`,
         ['~components']: `${root}/src/js/components`
 			},
 			extensions: ['.tsx', '.ts', '.js', '.json']
 		},
-    
     
     plugins: [
 			!isDev && new CleanWebpackPlugin([distPath], {

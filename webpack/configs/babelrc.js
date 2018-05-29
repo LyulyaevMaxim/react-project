@@ -18,7 +18,8 @@ let presets = [
 		}
 	],
 	'@babel/preset-react',
-	['@babel/preset-stage-0', { decoratorsLegacy: true }]
+  ['@babel/preset-stage-0', { decoratorsLegacy: true }],
+  // 'babel-preset-proposal-typescript'
 ]
 
 let plugins = [
@@ -33,7 +34,8 @@ let plugins = [
 	],
 	'babel-plugin-dual-import',
 	'@babel/plugin-proposal-object-rest-spread',
-	'@babel/plugin-syntax-dynamic-import',
+  '@babel/plugin-syntax-dynamic-import',
+  // ['@babel/plugin-proposal-decorators', { legacy: true }],
 	'@babel/plugin-proposal-class-properties',
 	[
 		'react-css-modules',
@@ -44,7 +46,7 @@ let plugins = [
 			filetypes: {
 				'.scss': { syntax: 'postcss-scss' }
 			},
-			exclude: 'node_modules'
+			exclude: `${root}/node_modules`
 		}
 	]
 ]

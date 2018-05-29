@@ -1,6 +1,6 @@
 const path = require('path')
 const root = path.resolve(__dirname, '../')
-const {initialPath} = require(`${root}/src/js/constants.json`)
+const {initialPath} = require(`${root}/src/js/constants.js`)
 
 const config = {
 	host: '0.0.0.0',

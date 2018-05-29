@@ -1,12 +1,23 @@
 ﻿{
   "extends": [
+    // "tslint:recommended", "tslint-config-prettier"
 //    "tslint-config-airbnb",
 //    "tslint-eslint-rules",
 //    "tslint-consistent-codestyle"
   ],
   "rules": {
     "no-constant-condition": true,
-	"max-line-length":false
+  "max-line-length":false,
+  // "no-console": false,
+  //   "no-angle-bracket-type-assertion": false,
+  //   "ordered-imports": false,
+  //   "object-literal-sort-keys": false,
+  //   "eofline": true,
+  //   "only-arrow-functions": false,
+  //   "member-ordering": [false, { "order": "fields-first" }],
+  //   "no-shadowed-variable": false,
+  //   "no-unused-expression": false,
+  //   "variable-name": [true, "ban-keywords", false, "allow-leading-underscore"]
 
   }
 }

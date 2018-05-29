@@ -1,7 +1,7 @@
 const Hapi = require('hapi')
 const Inert = require('inert')
 const path = require('path')
-const prefix = '/custom-path/' //`/${require('../src/js/constants.json').initialPath}`
+const prefix = '/custom-path/'
 const distPath = './dist'
 const assetsPath = 'assets'
 
