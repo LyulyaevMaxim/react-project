@@ -1,5 +1,5 @@
-@import "~css/variables.scss";
-@import "~css/mixin.scss";
+@import '~css/variables.scss';
+@import '~css/mixin.scss';
 
 .table {
   padding-top: 40px;
@@ -35,7 +35,7 @@
     align-items: center;
 
     &::after {
-      content: url('~img/icon-ruble-black.svg');
+      content: url('icon-ruble.svg');
       display: block;
       width: 11px;
       padding-top: 1.4px;
@@ -80,4 +80,3 @@
     background-color: $color-pink;
   }
 }
-
