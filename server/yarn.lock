@@ -129,9 +129,9 @@ flatstr@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/flatstr/-/flatstr-1.0.5.tgz#5b451b08cbd48e2eac54a2bbe0bf46165aa14be3"
 
-hapi@^17.5.0:
-  version "17.5.0"
-  resolved "https://registry.yarnpkg.com/hapi/-/hapi-17.5.0.tgz#9fc33f10d6f563d0203853937b60dd13a59b51ce"
+hapi@^17.5.2:
+  version "17.5.2"
+  resolved "https://registry.yarnpkg.com/hapi/-/hapi-17.5.2.tgz#9c5823cdcdd17e5621ebc8928aefb144d033caac"
   dependencies:
     accept "3.x.x"
     ammo "3.x.x"
@@ -253,9 +253,9 @@ pino-std-serializers@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-2.0.0.tgz#63cbacf34bed8c95dd2c67eec824e48b8dd3445f"
 
-pino@^4.17.0:
-  version "4.17.0"
-  resolved "https://registry.yarnpkg.com/pino/-/pino-4.17.0.tgz#9d897a017a94c836652a7e17f11c9c092d90e8fe"
+pino@^4.17.3:
+  version "4.17.3"
+  resolved "https://registry.yarnpkg.com/pino/-/pino-4.17.3.tgz#3536ea36f6258356ba8891d18dbf1afed41fcf09"
   dependencies:
     chalk "^2.4.1"
     fast-json-parse "^1.0.3"
