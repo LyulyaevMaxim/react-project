@@ -14,184 +14,186 @@ const LodashWebpackOptimize = require('lodash-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = (env, argv) => {
-	const mode = typeof env !== 'undefined' ? env : argv.mode
-	const isDev = mode === 'development'
+  const mode = typeof env !== 'undefined' ? env : argv.mode
+  const isDev = mode === 'development'
   console.log(`mode: ${mode}, isDev: ${isDev}`)
-  
-  const root = path.resolve(__dirname, '../')
-	const distPath = `${root}/server/dist`
-	const initialPath = isDev ? '/' : require('../src/js/constants.js').initialPath
-	const assetsPath = 'assets'
 
-	return {
-		mode,
-		entry: isDev
-			? {
-					index: `${root}/src/js/index.tsx`,
-					hot: 'react-hot-loader/patch'
-			  }
+  const root = path.resolve(__dirname, '../')
+  const distPath = `${root}/server/dist`
+  const initialPath = isDev ? '/' : require('../src/js/constants.js').initialPath
+  const assetsPath = 'assets'
+
+  return {
+    mode,
+    entry: isDev
+      ? {
+          index: `${root}/src/js/index.tsx`,
+          hot: 'react-hot-loader/patch',
+        }
       : { index: `${root}/src/js/index.tsx` },
-      
+
     output: {
-			filename: `${assetsPath}/js/[name]${isDev ? '' : '.[chunkhash]'}.js`,
-			chunkFilename: `${assetsPath}/js/[name]${isDev ? '' : '.[chunkhash]'}.js`,
-			path: distPath,
-			publicPath:  initialPath
-    },    
+      filename: `${assetsPath}/js/[name]${isDev ? '' : '.[chunkhash]'}.js`,
+      chunkFilename: `${assetsPath}/js/[name]${isDev ? '' : '.[chunkhash]'}.js`,
+      path: distPath,
+      publicPath: initialPath,
+    },
 
     resolve: {
-			alias: {
+      alias: {
         ['~css']: `${root}/src/css`,
         ['~img']: `${root}/src/img`,
         ['~store']: `${root}/src/js/store`,
         ['~utils']: `${root}/src/js/utils`,
         ['~constants']: `${root}/src/js/constants.js`,
-				['~modules']: `${root}/src/js/modules`,
-        ['~components']: `${root}/src/js/components`
-			},
-			extensions: ['.tsx', '.ts', '.js', '.json']
-		},
-    
+        ['~modules']: `${root}/src/js/modules`,
+        ['~components']: `${root}/src/js/components`,
+      },
+      extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
+    },
+
     plugins: [
-			!isDev && new CleanWebpackPlugin([distPath], {
-				allowExternal: true
-			}),
-			new MiniCssExtractPlugin({
-				filename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
-				chunkFilename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
-				ignoreOrder: true
-			}),
-			new HtmlWebpackPlugin({
-				filename: 'index.html',
-				template: `${root}/src/html/index.html`,
-				favicon: `${root}/src/img/favicon/favicon.ico`,
-				inject: true,
-				cache: true,
-				[!isDev && 'minify']: {
-					minifyJS: true,
-					minifyCSS: true,
-					removeComments: true,
-					removeAttributeQuotes: true,
-					removeEmptyAttributes: true,
-					removeScriptTypeAttributes: true,
-					collapseWhitespace: true,
-					keepClosingSlash: true,
-					sortAttributes: true,
-					sortClassName: true,
-					collapseBooleanAttributes: true
-				}
-			}),
-			new ScriptExtHtmlWebpackPlugin({
-				defaultAttribute: 'defer',
-				preload: /\.js$/
-			}),
-			/*new PreloadWebpackPlugin({
+      !isDev &&
+        new CleanWebpackPlugin([distPath], {
+          allowExternal: true,
+        }),
+      !isDev &&
+        new MiniCssExtractPlugin({
+          filename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
+          chunkFilename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
+          ignoreOrder: true,
+        }),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: `${root}/src/html/index.html`,
+        favicon: `${root}/src/img/favicon/favicon.ico`,
+        inject: true,
+        cache: true,
+        [!isDev && 'minify']: {
+          minifyJS: true,
+          minifyCSS: true,
+          removeComments: true,
+          removeAttributeQuotes: true,
+          removeEmptyAttributes: true,
+          removeScriptTypeAttributes: true,
+          collapseWhitespace: true,
+          keepClosingSlash: true,
+          sortAttributes: true,
+          sortClassName: true,
+          collapseBooleanAttributes: true,
+        },
+      }),
+      new ScriptExtHtmlWebpackPlugin({
+        defaultAttribute: 'defer',
+        preload: /\.js$/,
+      }),
+      /* new PreloadWebpackPlugin({
 			rel: 'preload',
 			include: 'allAssets',
 			fileWhitelist: [/\.woff2/],
 			as(entry) {
 				if (/\.woff2$/.test(entry)) return 'font'
 			}
-			})*/
-			isDev && new webpack.HotModuleReplacementPlugin(),
-			new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
-			!isDev &&
-				new LodashWebpackOptimize({
-					chaining: false,
-					shorthands: true,
-					collections: true,
-					paths: true
-				})
-			// !isDev && new BundleAnalyzerPlugin()
-		].filter(Boolean),
+			}) */
+      isDev && new webpack.HotModuleReplacementPlugin(),
+      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
+      !isDev &&
+        new LodashWebpackOptimize({
+          chaining: false,
+          shorthands: true,
+          collections: true,
+          paths: true,
+        }),
+      // !isDev && new BundleAnalyzerPlugin()
+    ].filter(Boolean),
 
-		module: {
-			rules: [
-				{
-					test: /\.(ts|tsx|js)$/,
-					exclude: /node_modules/,
-					use: {
-						loader: 'awesome-typescript-loader',
-						options: {
-							configFileName: `configs/tsconfig.json`,
-							reportFiles: [`${root}/src/js/**/*.{ts,tsx}`],
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx|ts|tsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'awesome-typescript-loader',
+            options: {
+              configFileName: `configs/tsconfig.json`,
+              reportFiles: [`${root}/src/js/**/*.{js,jsx,ts,tsx}`],
               useCache: true,
               cacheDirectory: 'node_modules/.awcache',
-							usePrecompiledFiles: true, //использовать js файлы
-							//errorsAsWarnings: true, //вместо ошибок TS даёт предупреждения,
-							forceIsolatedModules: true,
-							useTranspileModule: true, //режим быстрой генерации
-							useBabel: true,
-							babelCore: '@babel/core',
-							babelOptions: require('./configs/babelrc')
-						}
-					}
-				},
-				{
-					test: /\.scss$/,
-					use: [
-						MiniCssExtractPlugin.loader,
-						{
-							loader: 'css-loader',
-							options: {
-								importLoaders: 1,
-								modules: true,
-								localIdentName: '[local]-[hash:base64:4]',
-								sourceMap: isDev ? true : false
-							}
-						},
-						{
-							loader: 'postcss-loader',
-							options: {
-								ident: 'postcss',
-								config: {
-									path: `configs/postcss.config.js`
-								},
-								sourceMap: isDev ? 'inline' : false
-							}
+              usePrecompiledFiles: true, //использовать js файлы
+              //errorsAsWarnings: true, //вместо ошибок TS даёт предупреждения,
+              forceIsolatedModules: true,
+              useTranspileModule: true, //режим быстрой генерации
+              useBabel: true,
+              babelCore: '@babel/core',
+              babelOptions: require('./configs/babelrc'),
             },
-            'stylefmt-loader'
-					]
+          },
+        },
+        {
+          test: /\.scss$/,
+          use: [
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                modules: true,
+                localIdentName: '[local]-[hash:base64:4]',
+                sourceMap: isDev,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                config: {
+                  path: `configs/postcss.config.js`,
+                },
+                sourceMap: isDev ? 'inline' : false,
+              },
+            },
+            // 'stylefmt-loader',
+          ],
         },
         {
           test: /\.css$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             'css-loader',
             {
               loader: 'postcss-loader',
               options: {
                 config: {
-                  path: `configs/postcss.config.js`
-                }
-              }
-            }
-          ]
-        },			
-				{
-					test: /\.(woff2|woff)$/,
-					include: `${root}/src/fonts`,
-					use: [
-						{
-							loader: 'file-loader',
-							options: {
-								name: '[name].[ext]',
-								outputPath: `${assetsPath}/fonts/`,
-                publicPath: `${initialPath}${assetsPath}/fonts`
-							}
-						}
-					]
-				},
-				{
-					test: /\.(svg|jpg|png)$/,
+                  path: `configs/postcss.config.js`,
+                },
+              },
+            },
+          ],
+        },
+        {
+          test: /\.(woff2|woff)$/,
+          include: `${root}/src/fonts`,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: `${assetsPath}/fonts/`,
+                publicPath: `${initialPath}${assetsPath}/fonts`,
+              },
+            },
+          ],
+        },
+        {
+          test: /\.(svg|jpg|png)$/,
           include: `${root}/src/img`,
-					use: [
-						{
-							loader: 'file-loader',
-							options: {
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
                 outputPath: `${assetsPath}/img`,
-                publicPath: `${initialPath}${assetsPath}/img`
-              }
+                publicPath: `${initialPath}${assetsPath}/img`,
+              },
             },
             /*!isDev && {
 							loader: 'image-webpack-loader',
@@ -221,59 +223,59 @@ module.exports = (env, argv) => {
 								}
 							}
             }*/
-					].filter(Boolean)
-				}
-			]
+          ].filter(Boolean),
+        },
+      ],
     },
-    
+
     devServer: isDev
       ? {
-        hot: true,
-        clientLogLevel: 'info',
-        https: true,
-        noInfo: true,
-        open: false,
-        contentBase: distPath,
-        overlay: true,
-        host: '0.0.0.0',
-        historyApiFallback: true
-      }
+          hot: true,
+          clientLogLevel: 'info',
+          https: true,
+          noInfo: true,
+          open: false,
+          contentBase: distPath,
+          overlay: true,
+          host: '0.0.0.0',
+          historyApiFallback: true,
+        }
       : {},
 
-		optimization: !isDev
-			? {
-					runtimeChunk: false,
-					namedModules: true,
-					noEmitOnErrors: true,
-					concatenateModules: true,
-					minimize: true,
-					splitChunks: {
-						automaticNameDelimiter: '-',
-						chunks: 'all',
-						cacheGroups: {
-							vendor: {
-								name: 'vendor',
-								chunks: 'all',
-								test: /[\\/]node_modules[\\/]/,
-								priority: -10
-							}
-						}
-					},
-					minimizer: [
-						new UglifyJSPlugin({
-							cache: true,
-							parallel: true,
-							uglifyOptions: {
-								mangle: true
-								// compress: false
-							}
-						}),
-						new OptimizeCSSAssetsPlugin({
-							cssProcessor: require('cssnano'),
-							cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} }
-						})
-					]
-			  }
-			: {},
-	}
+    optimization: !isDev
+      ? {
+          runtimeChunk: false,
+          namedModules: true,
+          noEmitOnErrors: true,
+          concatenateModules: true,
+          minimize: true,
+          splitChunks: {
+            automaticNameDelimiter: '-',
+            chunks: 'all',
+            cacheGroups: {
+              vendor: {
+                name: 'vendor',
+                chunks: 'all',
+                test: /[\\/]node_modules[\\/]/,
+                priority: -10,
+              },
+            },
+          },
+          minimizer: [
+            new UglifyJSPlugin({
+              cache: true,
+              parallel: true,
+              uglifyOptions: {
+                mangle: true,
+                // compress: false
+              },
+            }),
+            new OptimizeCSSAssetsPlugin({
+              cssProcessor: require('cssnano'),
+              cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
+            }),
+          ],
+        }
+      : {},
+  }
 }

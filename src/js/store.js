@@ -14,15 +14,15 @@ const middlewares = [/*sagaMiddleware,*/ thunk, routerMiddleware(history)]
 const isDev = process.env.NODE_ENV === `development`
 
 if (isDev) {
-	// perfomanceTools()
-	// middlewares.push(
-	// 	createLogger({ collapsed: (getState, action, logEntry) => !logEntry.error, diff: true })
-	// )
+  // perfomanceTools()
+  // middlewares.push(
+  // 	createLogger({ collapsed: (getState, action, logEntry) => !logEntry.error, diff: true })
+  // )
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const enhancer = isDev
-	? composeEnhancers(applyMiddleware(...middlewares))
-	: applyMiddleware(...middlewares)
+  ? composeEnhancers(applyMiddleware(...middlewares))
+  : applyMiddleware(...middlewares)
 
 export const store = createStore(reducer, enhancer)
