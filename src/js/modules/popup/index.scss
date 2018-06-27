@@ -1,5 +1,5 @@
 .popup {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -20,7 +20,6 @@
   height: 30px;
   padding: 7px;
   background-color: #ffc875;
-  background-image: url('icon-close.svg' param(--color #3ac162));
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: contain;
@@ -28,6 +27,7 @@
   border-radius: 50%;
   filter: opacity(0.6);
   transition: filter 0.3s ease;
+  background-image: url('icon-close.svg', param(--color #3ac162));
 
   &:hover {
     filter: opacity(1);
