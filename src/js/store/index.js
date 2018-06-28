@@ -20,8 +20,8 @@ if (isDev) {
 }
 
 const reducer = combineReducers({
-  ...['auth', 'user'].reduce(
-    (accumulator = {}, currentModule) => ({
+  ...['auth', 'items', 'documents', 'roles', 'discounts'].reduce(
+    (accumulator, currentModule) => ({
       ...accumulator,
       [currentModule]: require(`./${currentModule}/reducer`).default,
     }),

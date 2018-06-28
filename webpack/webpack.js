@@ -49,7 +49,7 @@ module.exports = (env, argv) => {
         ['~modules']: `${root}/src/js/modules`,
         ['~components']: `${root}/src/js/components`,
       },
-      extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
+      extensions: ['.jsx', '.js', '.json', '.tsx', '.ts'],
     },
 
     plugins: [
