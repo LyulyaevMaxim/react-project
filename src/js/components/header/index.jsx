@@ -9,11 +9,13 @@ function Header({ routes }) {
       <nav className={styles['header-nav']}>
         {routes.map(({ title, path, component }) => (
           <NavLink
-            to={path}
-            className={styles['header-nav-link']}
-            activeClassName={styles['active']}
-            onMouseOver={component.load}
-            exact
+            {...{
+              to: path,
+              className: styles['header-nav-link'],
+              activeClassName: styles['active'],
+              onMouseOver: component.load,
+              exact: true,
+            }}
             key={title}
           >
             {title}
