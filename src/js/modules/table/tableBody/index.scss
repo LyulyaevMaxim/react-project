@@ -66,7 +66,7 @@
   }
 
   &::after {
-    //background-image: url('./../image/arrow-top-green.svg');
+    background-image: url('arrow-to-top.svg'param(--color #3ac162));
   }
 }
 
@@ -76,7 +76,7 @@
   }
 
   &::after {
-    //background-image: url('./../image/arrow-bottom-white.svg');
+    background-image: url('arrow-to-bottom.svg'param(--color white));
   }
 }
 
@@ -98,7 +98,8 @@
   text-align: left;
 }
 
-block-for-table .table-popup {
+.table-popup {
+  grid-area: popup;
   display: flex;
   align-items: center;
   width: calc(100% + 56px);
