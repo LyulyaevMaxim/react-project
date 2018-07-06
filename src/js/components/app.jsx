@@ -15,7 +15,13 @@ class App extends Component {
     const path = require('~constants').initialPath
     return (
       <Switch>
-        <Route path={`/`} exact render={() => <h1>Упс.. 404</h1>} />
+        <Route
+          {...{
+            exact: true,
+            path: '/',
+            render: () => <h1>Упс.. 404</h1>,
+          }}
+        />
         <Route {...{ path, component: MainPage }} />
       </Switch>
     )
@@ -38,6 +44,6 @@ const mapDispatchToProps = { ...authActions }
 export default hot(module)(
   connect(
     mapStateToProps,
-    mapDispatchToProps,
-  )(App),
+    mapDispatchToProps
+  )(App)
 )
