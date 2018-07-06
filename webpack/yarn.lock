@@ -297,6 +297,13 @@
     "@babel/helper-plugin-utils" "7.0.0-beta.51"
     "@babel/plugin-syntax-nullish-coalescing-operator" "7.0.0-beta.51"
 
+"@babel/plugin-proposal-nullish-coalescing-operator@^7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-nullish-coalescing-operator/-/plugin-proposal-nullish-coalescing-operator-7.0.0-beta.52.tgz#4436ea10499855a849e671d650c14939e6678d21"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.52"
+    "@babel/plugin-syntax-nullish-coalescing-operator" "7.0.0-beta.52"
+
 "@babel/plugin-proposal-numeric-separator@7.0.0-beta.51":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-numeric-separator/-/plugin-proposal-numeric-separator-7.0.0-beta.51.tgz#df9c4b7f22d0e075c9e36214fe4871c03cf80145"
@@ -444,6 +451,12 @@
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-nullish-coalescing-operator/-/plugin-syntax-nullish-coalescing-operator-7.0.0-beta.51.tgz#6aa6f241453fe0f219fdb8160a0f20c293c47916"
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.51"
+
+"@babel/plugin-syntax-nullish-coalescing-operator@7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-nullish-coalescing-operator/-/plugin-syntax-nullish-coalescing-operator-7.0.0-beta.52.tgz#06c4d6f3054e04b26685e3a7775050b3bed20e04"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.52"
 
 "@babel/plugin-syntax-numeric-separator@7.0.0-beta.51":
   version "7.0.0-beta.51"
