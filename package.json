@@ -41,7 +41,7 @@
     "postcss-css-reset": "^1.0.2"
   },
   "peerDependencies": {
-    "babel-eslint": "^9.0.0-beta.1",
+    "babel-eslint": "^8.2.5",
     "eslint": "^5.0.1",
     "eslint-config-esnext": "^3.0.0",
     "eslint-config-prettier": "^2.9.0",

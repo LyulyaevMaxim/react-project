@@ -325,6 +325,13 @@
     "@babel/helper-plugin-utils" "7.0.0-beta.51"
     "@babel/plugin-syntax-optional-chaining" "7.0.0-beta.51"
 
+"@babel/plugin-proposal-optional-chaining@^7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-optional-chaining/-/plugin-proposal-optional-chaining-7.0.0-beta.52.tgz#075e501e236bc026e9123f91137c971a79526f57"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.52"
+    "@babel/plugin-syntax-optional-chaining" "7.0.0-beta.52"
+
 "@babel/plugin-proposal-pipeline-operator@7.0.0-beta.51":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-pipeline-operator/-/plugin-proposal-pipeline-operator-7.0.0-beta.51.tgz#131b96caf983f209ceee4135b7029c2bad3054cf"
@@ -461,6 +468,12 @@
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-optional-chaining/-/plugin-syntax-optional-chaining-7.0.0-beta.51.tgz#51022b28dd19bd5e4e33196e1f1124cfcd2d4b6c"
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.51"
+
+"@babel/plugin-syntax-optional-chaining@7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-optional-chaining/-/plugin-syntax-optional-chaining-7.0.0-beta.52.tgz#75a69988519ac6c6b2f699e7dd9fa5c3619e46c6"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.52"
 
 "@babel/plugin-syntax-pipeline-operator@7.0.0-beta.51":
   version "7.0.0-beta.51"
