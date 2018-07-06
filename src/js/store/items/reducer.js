@@ -9,7 +9,7 @@ const initialState = {
 }
 
 export default (state = initialState, { type, payload = {}, other = {} }) => {
-  const { error } = payload
+  // const { error } = payload
 
   switch (type) {
     case ITEMS_GET_QUANTITY + SUCCESS: {

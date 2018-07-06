@@ -2,7 +2,7 @@ const path = require('path')
 const root = path.resolve(__dirname, '../../')
 const isDev = process.env.NODE_ENV === 'development'
 
-let presets = [
+const presets = [
   [
     '@babel/preset-env',
     {

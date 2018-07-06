@@ -41,13 +41,13 @@ module.exports = (env, argv) => {
 
     resolve: {
       alias: {
-        ['~css']: `${root}/src/css`,
-        ['~img']: `${root}/src/img`,
-        ['~store']: `${root}/src/js/store`,
-        ['~utils']: `${root}/src/js/utils`,
-        ['~constants']: `${root}/src/js/constants.js`,
-        ['~modules']: `${root}/src/js/modules`,
-        ['~components']: `${root}/src/js/components`,
+        '~css': `${root}/src/css`,
+        '~img': `${root}/src/img`,
+        '~store': `${root}/src/js/store`,
+        '~utils': `${root}/src/js/utils`,
+        '~constants': `${root}/src/js/constants.js`,
+        '~modules': `${root}/src/js/modules`,
+        '~components': `${root}/src/js/components`,
       },
       extensions: ['.jsx', '.js', '.json'],
     },
