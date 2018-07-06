@@ -25,11 +25,12 @@ module.exports = (env, argv) => {
 
   return {
     mode,
+    devtool: isDev ? 'eval-cheap-module-source-map' : 'none',
     entry: isDev
       ? {
-          index: `${root}/src/js/index.jsx`,
-          hot: 'react-hot-loader/patch',
-        }
+        index: `${root}/src/js/index.jsx`,
+        hot: 'react-hot-loader/patch',
+      }
       : { index: `${root}/src/js/index.jsx` },
 
     output: {
@@ -88,13 +89,13 @@ module.exports = (env, argv) => {
         preload: /\.js$/,
       }),
       /* new PreloadWebpackPlugin({
-			rel: 'preload',
-			include: 'allAssets',
-			fileWhitelist: [/\.woff2/],
-			as(entry) {
-				if (/\.woff2$/.test(entry)) return 'font'
-			}
-			}) */
+      rel: 'preload',
+      include: 'allAssets',
+      fileWhitelist: [/\.woff2/],
+      as(entry) {
+        if (/\.woff2$/.test(entry)) return 'font'
+      }
+     }) */
       isDev && new webpack.HotModuleReplacementPlugin(),
       new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
       !isDev &&
@@ -186,7 +187,7 @@ module.exports = (env, argv) => {
                 publicPath: `${initialPath}${assetsPath}/img`,
               },
             },
-            /*!isDev && {
+            /*! isDev && {
 							loader: 'image-webpack-loader',
 							options: {
 								svgo: {
@@ -213,7 +214,7 @@ module.exports = (env, argv) => {
 									enabled: false
 								}
 							}
-            }*/
+            } */
           ].filter(Boolean),
         },
       ],
@@ -221,52 +222,52 @@ module.exports = (env, argv) => {
 
     devServer: isDev
       ? {
-          hot: true,
-          clientLogLevel: 'info',
-          https: true,
-          noInfo: true,
-          open: false,
-          contentBase: distPath,
-          overlay: true,
-          host: '0.0.0.0',
-          historyApiFallback: true,
-        }
+        hot: true,
+        clientLogLevel: 'info',
+        https: true,
+        noInfo: true,
+        open: false,
+        contentBase: distPath,
+        overlay: true,
+        host: '0.0.0.0',
+        historyApiFallback: true,
+      }
       : {},
 
     optimization: !isDev
       ? {
-          runtimeChunk: false,
-          namedModules: true,
-          noEmitOnErrors: true,
-          concatenateModules: true,
-          minimize: true,
-          splitChunks: {
-            automaticNameDelimiter: '-',
-            chunks: 'all',
-            cacheGroups: {
-              vendor: {
-                name: 'vendor',
-                chunks: 'all',
-                test: /[\\/]node_modules[\\/]/,
-                priority: -10,
-              },
+        runtimeChunk: false,
+        namedModules: true,
+        noEmitOnErrors: true,
+        concatenateModules: true,
+        minimize: true,
+        splitChunks: {
+          automaticNameDelimiter: '-',
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              name: 'vendor',
+              chunks: 'all',
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
             },
           },
-          minimizer: [
-            new UglifyJSPlugin({
-              cache: true,
-              parallel: true,
-              uglifyOptions: {
-                mangle: true,
-                // compress: false
-              },
-            }),
-            new OptimizeCSSAssetsPlugin({
-              cssProcessor: require('cssnano'),
-              cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
-            }),
-          ],
-        }
+        },
+        minimizer: [
+          new UglifyJSPlugin({
+            cache: true,
+            parallel: true,
+            uglifyOptions: {
+              mangle: true,
+              // compress: false
+            },
+          }),
+          new OptimizeCSSAssetsPlugin({
+            cssProcessor: require('cssnano'),
+            cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
+          }),
+        ],
+      }
       : {},
   }
 }
