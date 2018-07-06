@@ -27,10 +27,10 @@ module.exports = (env, argv) => {
     mode,
     entry: isDev
       ? {
-          index: `${root}/src/js/index.tsx`,
+          index: `${root}/src/js/index.jsx`,
           hot: 'react-hot-loader/patch',
         }
-      : { index: `${root}/src/js/index.tsx` },
+      : { index: `${root}/src/js/index.jsx` },
 
     output: {
       filename: `${assetsPath}/js/[name]${isDev ? '' : '.[chunkhash]'}.js`,
@@ -49,7 +49,7 @@ module.exports = (env, argv) => {
         ['~modules']: `${root}/src/js/modules`,
         ['~components']: `${root}/src/js/components`,
       },
-      extensions: ['.jsx', '.js', '.json', '.tsx', '.ts'],
+      extensions: ['.jsx', '.js', '.json'],
     },
 
     plugins: [
@@ -110,22 +110,13 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(js|jsx|ts|tsx)$/,
+          test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: 'awesome-typescript-loader',
+            loader: 'babel-loader',
             options: {
-              configFileName: `configs/tsconfig.json`,
-              reportFiles: [`${root}/src/js/**/*.{js,jsx,ts,tsx}`],
-              useCache: true,
-              cacheDirectory: 'node_modules/.awcache',
-              usePrecompiledFiles: true, //использовать js файлы
-              //errorsAsWarnings: true, //вместо ошибок TS даёт предупреждения,
-              forceIsolatedModules: true,
-              useTranspileModule: true, //режим быстрой генерации
-              useBabel: true,
-              babelCore: '@babel/core',
-              babelOptions: require('./configs/babelrc'),
+              cacheDirectory: true,
+              ...require('./configs/babelrc'),
             },
           },
         },

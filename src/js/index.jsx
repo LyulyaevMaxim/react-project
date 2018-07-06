@@ -9,7 +9,7 @@ import App from './components/app'
 ReactDOM.render(
   <Provider {...{ store }}>
     <ConnectedRouter {...{ history }}>
-      <App />
+      <App onclick={() => {}} />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
