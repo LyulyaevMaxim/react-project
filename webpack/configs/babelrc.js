@@ -34,6 +34,7 @@ let plugins = [
   'babel-plugin-dual-import',
   '@babel/plugin-proposal-object-rest-spread',
   '@babel/plugin-syntax-dynamic-import',
+  ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
   // ['@babel/plugin-proposal-decorators', { legacy: true }],
   '@babel/plugin-proposal-class-properties',
   [

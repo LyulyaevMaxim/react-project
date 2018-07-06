@@ -142,6 +142,10 @@
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.51.tgz#0f6a5f2b6d1c6444413f8fab60940d79b63c2031"
 
+"@babel/helper-plugin-utils@7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.52.tgz#2f058c5f7c3a5fe4bc219036b2e78e11bddeb7ad"
+
 "@babel/helper-regex@7.0.0-beta.51":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.0.0-beta.51.tgz#99722a3c0c704596afb123284b0a888a1a003d82"
@@ -328,6 +332,13 @@
     "@babel/helper-plugin-utils" "7.0.0-beta.51"
     "@babel/plugin-syntax-pipeline-operator" "7.0.0-beta.51"
 
+"@babel/plugin-proposal-pipeline-operator@^7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-pipeline-operator/-/plugin-proposal-pipeline-operator-7.0.0-beta.52.tgz#a154d50ee1a5acb1ce8f84840e3673159059f823"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.52"
+    "@babel/plugin-syntax-pipeline-operator" "7.0.0-beta.52"
+
 "@babel/plugin-proposal-throw-expressions@7.0.0-beta.51":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-throw-expressions/-/plugin-proposal-throw-expressions-7.0.0-beta.51.tgz#38c11db4b1e0948df912965d0e228f70815dcb38"
@@ -456,6 +467,12 @@
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-pipeline-operator/-/plugin-syntax-pipeline-operator-7.0.0-beta.51.tgz#1e674cebc0c57e74c924e6ff0d3dea5cbe996efd"
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.51"
+
+"@babel/plugin-syntax-pipeline-operator@7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-pipeline-operator/-/plugin-syntax-pipeline-operator-7.0.0-beta.52.tgz#ee7891771d0763c75d0ecd1864f23d862445b88a"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.52"
 
 "@babel/plugin-syntax-throw-expressions@7.0.0-beta.51":
   version "7.0.0-beta.51"

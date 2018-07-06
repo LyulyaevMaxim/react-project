@@ -10,8 +10,7 @@
     "deploy": "cd server && now -d --public",
     "version-increment": "perl -i -pe 's/^((\\d+\\.)*)(\\d+)(.*)$/$1.($3+1).$4/e' < version.num version.num",
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
-    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-    "precommit": "prettier --write '**/*.{js,jsx,json,ts,tsx}'",
+    "precommit": "prettier --write '**/*.{js,jsx,json}'",
     "upgrade-packages": "yarn upgrade-interactive && cd webpack && yarn upgrade-interactive && cd ../server && yarn upgrade-interactive"
   },
   "dependencies": {
@@ -44,6 +43,7 @@
   "peerDependencies": {
     "babel-eslint": "^9.0.0-beta.1",
     "eslint": "^5.0.1",
+    "eslint-config-esnext": "^3.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-prettier-standard": "^2.0.0",
     "eslint-config-standard": "^11.0.0",
