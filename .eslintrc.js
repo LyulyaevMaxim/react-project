@@ -35,6 +35,7 @@ module.exports = {
     'no-trailing-spaces': 0,
     'no-multiple-empty-lines': 0,
     'no-useless-escape': 0,
+    'no-tabs': 0,
   },
   settings: {
     // 'import/ignore': [],

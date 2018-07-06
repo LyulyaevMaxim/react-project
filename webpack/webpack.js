@@ -13,8 +13,11 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const LodashWebpackOptimize = require('lodash-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
+const history = require('connect-history-api-fallback')
+const convert = require('koa-connect')
+
 module.exports = (env, argv) => {
-  const mode = typeof env !== 'undefined' ? env : argv.mode
+  const mode = process.env.NODE_ENV // typeof env !== 'undefined' ? env : argv.mode
   const isDev = mode === 'development'
   console.log(`mode: ${mode}, isDev: ${isDev}`)
 
@@ -96,7 +99,7 @@ module.exports = (env, argv) => {
         if (/\.woff2$/.test(entry)) return 'font'
       }
      }) */
-      isDev && new webpack.HotModuleReplacementPlugin(),
+      // isDev && new webpack.HotModuleReplacementPlugin(),
       new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
       !isDev &&
         new LodashWebpackOptimize({
@@ -220,19 +223,17 @@ module.exports = (env, argv) => {
       ],
     },
 
-    devServer: isDev
-      ? {
-        hot: true,
-        clientLogLevel: 'info',
-        https: true,
-        noInfo: true,
-        open: false,
-        contentBase: distPath,
-        overlay: true,
-        host: '0.0.0.0',
-        historyApiFallback: true,
-      }
-      : {},
+    serve: {
+      host: '0.0.0.0',
+      port: '8080',
+      clipboard: false,
+      dev: { publicPath: `/${initialPath}` },
+      hot: true,
+      // http2: true, //Node v9 or greater
+      logLevel: 'info',
+      open: false,
+      add: (app, middleware, options) => app.use(convert(history({}))),
+    },
 
     optimization: !isDev
       ? {
