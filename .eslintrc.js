@@ -36,6 +36,8 @@ module.exports = {
     'no-multiple-empty-lines': 0,
     'no-useless-escape': 0,
     'no-tabs': 0,
+    'no-unused-vars': 1,
+    'spaced-comment': 0,
   },
   settings: {
     // 'import/ignore': [],

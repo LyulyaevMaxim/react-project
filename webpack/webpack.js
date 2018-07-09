@@ -11,6 +11,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const LodashWebpackOptimize = require('lodash-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const history = require('connect-history-api-fallback')
@@ -23,7 +24,7 @@ module.exports = (env, argv) => {
 
   const root = path.resolve(__dirname, '../')
   const distPath = `${root}/server/dist`
-  const initialPath = isDev ? '/' : require('../src/js/constants.js').initialPath
+  const initialPath = isDev ? '/' : require(`${root}/src/js/constants.js`).initialPath
   const assetsPath = 'assets'
 
   return {
@@ -108,7 +109,15 @@ module.exports = (env, argv) => {
           collections: true,
           paths: true,
         }),
-      // !isDev && new BundleAnalyzerPlugin()
+      // new OfflinePlugin(),
+      new WorkboxPlugin.GenerateSW({
+        cacheId: 'service-worker',
+        swDest: `${distPath}/sw.js`,
+        navigateFallback: '/index.html',
+        clientsClaim: true,
+        skipWaiting: true,
+      }),
+      // !isDev && new BundleAnalyzerPlugin(),
     ].filter(Boolean),
 
     module: {
@@ -224,7 +233,7 @@ module.exports = (env, argv) => {
     },
 
     serve: {
-      host: '0.0.0.0',
+      host: '127.0.0.1', //вместо '0.0.0.0' пока не подключу https для корректной работы с SW локально
       port: '8080',
       clipboard: false,
       dev: { publicPath: `/${initialPath}` },
