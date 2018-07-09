@@ -9,7 +9,7 @@ import App from './components/app'
 'serviceWorker' in navigator &&
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('/sw.js')
+      .register(`/${require('~constants').initialPath}/assets/js/sw.js`)
       .then(registration => console.log('SW registered: ', registration))
       .catch(registrationError => console.log('SW registration failed: ', registrationError))
   })
