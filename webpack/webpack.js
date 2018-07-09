@@ -3,7 +3,7 @@ const path = require('path')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-// const PreloadWebpackPlugin = require('preload-webpack-plugin')
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -92,15 +92,14 @@ module.exports = (env, argv) => {
         defaultAttribute: 'defer',
         preload: /\.js$/,
       }),
-      /* new PreloadWebpackPlugin({
-      rel: 'preload',
-      include: 'allAssets',
-      fileWhitelist: [/\.woff2/],
-      as(entry) {
-        if (/\.woff2$/.test(entry)) return 'font'
-      }
-     }) */
-      // isDev && new webpack.HotModuleReplacementPlugin(),
+      new PreloadWebpackPlugin({
+        rel: 'preload',
+        include: 'allAssets',
+        fileWhitelist: [/\museo-sans-regular.woff2/],
+        as(entry) {
+          if (/\.woff2$/.test(entry)) return 'font'
+        },
+      }),
       new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
       !isDev &&
         new LodashWebpackOptimize({
@@ -156,7 +155,6 @@ module.exports = (env, argv) => {
                 sourceMap: isDev ? 'inline' : false,
               },
             },
-            // 'stylefmt-loader',
           ],
         },
         {
