@@ -13,4 +13,5 @@ module.exports = {
   POST_REQUEST: 'POST_REQUEST',
   PUT_REQUEST: 'PUT_REQUEST',
   DELETE_REQUEST: 'DELETE_REQUEST',
+  isDev,
 }

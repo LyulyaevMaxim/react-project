@@ -5,11 +5,12 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import { store, history } from '~store'
 import App from './components/app'
+import { isDev, initialPath } from '~constants'
 
 'serviceWorker' in navigator &&
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register(`/${require('~constants').initialPath}/assets/js/sw.js`)
+      .register(`${isDev ? '' : '/' + initialPath}/assets/js/sw.js`)
       .then(registration => console.log('SW registered: ', registration))
       .catch(registrationError => console.log('SW registration failed: ', registrationError))
   })
