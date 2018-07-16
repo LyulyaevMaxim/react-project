@@ -116,7 +116,7 @@ module.exports = (env, argv) => {
         clientsClaim: true,
         skipWaiting: true,
       }),
-      // !isDev && new BundleAnalyzerPlugin(),
+      !isDev && new BundleAnalyzerPlugin(),
     ].filter(Boolean),
 
     module: {

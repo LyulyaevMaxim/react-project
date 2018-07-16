@@ -3,6 +3,10 @@
   "description": "Fast and effective environment for frontend development",
   "author": "Maxim Lyulyaev",
   "version": "$(cat version.num)",
+  "private": true,
+  "workspaces": [
+    "src/js/**/**"
+  ],
   "scripts": {
     "start": "cd webpack && yarn start",
     "build": "cd webpack && yarn build",
@@ -14,22 +18,16 @@
     "upgrade-packages": "yarn upgrade-interactive && cd webpack && yarn upgrade-interactive && cd ../server && yarn upgrade-interactive"
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "babel-plugin-dual-import": "^1.2.1",
     "babel-plugin-react-css-modules": "^3.4.2",
     "history": "^4.7.2",
     "loadable-components": "^2.2.2",
-    "normalizr": "^3.2.4",
-    "numeral": "^2.0.6",
-    "public-ip": "^2.4.0",
     "react": "^16.4.1",
-    "react-autosize-textarea": "^4.0.0",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^5.0.0-alpha.9",
-    "react-select": "^2.0.0-beta.5",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1"
@@ -37,7 +35,6 @@
   "devDependencies": {
     "@babel/polyfill": "^7.0.0-beta.51",
     "lodash": "^4.17.10",
-    "moment": "^2.22.2",
     "postcss-css-reset": "^1.0.2"
   },
   "optionalDependencies": {

@@ -1,0 +1,10 @@
+{
+  "name": "textarea-module",
+  "description": "Module for work with Textarea",
+  "version": "1.0.0",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",
+  "dependencies": {
+    "react-autosize-textarea": "^4.0.0"
+  }
+}

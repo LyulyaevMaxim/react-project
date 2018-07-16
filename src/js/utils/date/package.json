@@ -1,0 +1,10 @@
+{
+  "name": "date-utils",
+  "description": "Utilities for working with the Date and Time",
+  "version": "1.0.0",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.22.2"
+  }
+}

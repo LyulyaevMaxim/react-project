@@ -1,4 +1,4 @@
-import { requestCreator } from '~utils/action-creators'
+import { requestCreator } from '~utils/request-creator'
 import { API_URL_2, GET_REQUEST, POST_REQUEST, DELETE_REQUEST, PUT_REQUEST } from '~constants'
 import { PROMOTION_GET, PROMOTION_CREATE, PROMOTION_DELETE, PROMOTION_UPDATE } from './constants'
 

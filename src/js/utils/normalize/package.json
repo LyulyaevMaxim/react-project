@@ -1,0 +1,11 @@
+{
+  "name": "normalize-utils",
+  "description": "Utilities for normalization",
+  "version": "1.0.0",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",
+  "dependencies": {
+    "normalizr": "^3.2.4",
+    "uuid-random": "^1.0.6"
+  }
+}

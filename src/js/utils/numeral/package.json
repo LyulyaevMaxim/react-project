@@ -1,0 +1,10 @@
+{
+  "name": "numeral-utils",
+  "description": "Utilities for formatting and manipulating numbers",
+  "version": "1.0.0",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",
+  "dependencies": {
+    "numeral": "^2.0.6"
+  }
+}

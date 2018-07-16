@@ -1,6 +1,6 @@
 import { REQUEST, SUCCESS, FAIL, LOCAL_STORAGE_NAME } from '~constants'
 import { AUTH_SET, AUTH_RESET } from './constants'
-import { axiosInitialization } from '~utils/action-creators'
+import { axiosInitialization } from '~utils/request-creator'
 
 export function setAuthorization({ token = '', extraToken = '' }) {
   return dispatch => {

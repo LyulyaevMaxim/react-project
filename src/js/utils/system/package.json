@@ -1,0 +1,10 @@
+{
+  "name": "system-utils",
+  "description": "Utilities for working with the system",
+  "version": "1.0.0",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",
+  "dependencies": {
+    "public-ip": "^2.4.0"
+  }
+}

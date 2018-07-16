@@ -1,0 +1,10 @@
+{
+  "name": "request-utils",
+  "description": "Module for work with requests",
+  "version": "1.0.0",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}

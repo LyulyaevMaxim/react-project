@@ -1,4 +1,5 @@
 import { normalize, schema } from 'normalizr'
+import uuid from 'uuid-random'
 
 export function normalizeEntity({ data, entities = 'field', key = 'id' }) {
   const entity = new schema.Entity(entities, {}, { idAttribute: key })
@@ -10,9 +11,12 @@ export function normalizeEntity({ data, entities = 'field', key = 'id' }) {
 export const deepRemoveFields = ({ obj = {}, fields = [] }) => {
   const res = {}
   Object.getOwnPropertyNames(obj).forEach(field => {
-    if (!fields.some(removeField => removeField === field))
+    if (!fields.some(removeField => removeField === field)) {
       res[field] =
         typeof obj[field] !== 'object' ? obj[field] : deepRemoveFields({ obj: obj[field], fields })
+    }
   })
   return res
 }
+
+export const getUuid = () => uuid()

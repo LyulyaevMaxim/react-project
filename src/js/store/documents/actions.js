@@ -1,4 +1,4 @@
-import { requestCreator } from '~utils/action-creators'
+import { requestCreator } from '~utils/request-creator'
 import { GET_REQUEST, POST_REQUEST, DELETE_REQUEST } from '~constants'
 import { DOCUMENTS_GET } from './constants'
 

@@ -11,4 +11,4 @@ export function copyToBuffer({ value }) {
   focus.focus()
 }
 
-export const getIP = async () => await publicIp.v4().then(ip => ip)
+export const getIP = () => publicIp.v4().then(ip => ip)

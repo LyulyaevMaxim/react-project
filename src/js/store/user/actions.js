@@ -1,4 +1,4 @@
-import { requestCreator } from '~utils/action-creators'
+import { requestCreator } from '~utils/request-creator'
 import { GET_REQUEST, POST_REQUEST, CACHE } from '~constants'
 import {USER_GET_DATA, USER_UPDATE} from './constants.json'
 
