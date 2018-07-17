@@ -22,6 +22,7 @@
     "babel-plugin-react-css-modules": "^3.4.2",
     "history": "^4.7.2",
     "loadable-components": "^2.2.2",
+    "lodash-es": "^4.17.10",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3",
@@ -33,8 +34,6 @@
     "reselect": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.0.0-beta.51",
-    "lodash": "^4.17.10",
     "postcss-css-reset": "^1.0.2"
   },
   "optionalDependencies": {
