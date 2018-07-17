@@ -116,6 +116,10 @@ module.exports = (env, argv) => {
         clientsClaim: true,
         skipWaiting: true,
       }),
+      new (require('duplicate-package-checker-webpack-plugin'))({
+        verbose: true,
+        emitError: false,
+      }),
       /* !isDev && new BundleAnalyzerPlugin(), */
     ].filter(Boolean),
 
