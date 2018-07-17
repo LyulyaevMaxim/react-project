@@ -5,6 +5,7 @@
   "author": "Maxim Lyulyaev",
   "license": "MIT",
   "dependencies": {
+    "bowser": "^2.0.0-alpha.1",
     "public-ip": "^2.4.0"
   }
 }

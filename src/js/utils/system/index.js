@@ -1,4 +1,18 @@
 import publicIp from 'public-ip'
+import bowser from 'bowser'
+
+export function getUserAgentInformation() {
+  const { userAgent, language } = window.navigator
+  const browser = bowser.getParser(userAgent)
+
+  return {
+    browser: browser.getBrowser(),
+    os: browser.getOS(),
+    platform: browser.getPlatform(),
+    //, isMobile,
+    language,
+  }
+}
 
 export function copyToBuffer({ value }) {
   let tmp = document.createElement('INPUT')
