@@ -1,20 +1,18 @@
-import publicIp from 'public-ip'
-import bowser from 'bowser'
-
-export function getUserAgentInformation() {
+function getUserAgentInformation() {
+  if (typeof window === 'undefined') return
   const { userAgent, language } = window.navigator
-  const browser = bowser.getParser(userAgent)
+  const browser = require('bowser').getParser(userAgent)
 
   return {
     browser: browser.getBrowser(),
     os: browser.getOS(),
     platform: browser.getPlatform(),
-    //, isMobile,
+    //isMobile,
     language,
   }
 }
 
-export function copyToBuffer({ value }) {
+function copyToBuffer({ value }) {
   let tmp = document.createElement('INPUT')
   let focus = document.activeElement
   tmp.value = value
@@ -25,4 +23,14 @@ export function copyToBuffer({ value }) {
   focus.focus()
 }
 
-export const getIP = () => publicIp.v4().then(ip => ip)
+function getIP() {
+  return require('public-ip')
+    .v4()
+    .then(ip => ip)
+}
+
+module.exports = {
+  getUserAgentInformation,
+  copyToBuffer,
+  getIP,
+}

@@ -13,5 +13,6 @@ module.exports = {
   POST_REQUEST: 'POST_REQUEST',
   PUT_REQUEST: 'PUT_REQUEST',
   DELETE_REQUEST: 'DELETE_REQUEST',
+  USER_AGENT: require('./utils/system').getUserAgentInformation(),
   isDev,
 }
