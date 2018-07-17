@@ -61,6 +61,7 @@ if (isDev) {
     'closure-elimination',
     '@babel/plugin-transform-react-constant-elements',
     '@babel/plugin-transform-react-inline-elements',
+    'lodash',
   ]
 }
 
