@@ -15,14 +15,14 @@ class App extends Component {
     const path = require('~constants').initialPath
     return (
       <Switch>
+        <Route {...{ path, component: MainPage }} />
         <Route
           {...{
             exact: true,
-            path: '/',
+            path: '/404',
             render: () => <h1>Упс.. 404</h1>,
           }}
         />
-        <Route {...{ path, component: MainPage }} />
       </Switch>
     )
   }

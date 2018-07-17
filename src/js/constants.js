@@ -1,7 +1,7 @@
 const isDev = process.env.NODE_ENV === `development`
 
 module.exports = {
-  initialPath: '/custom-path/',
+  initialPath: '/', //'/custom-path/',
   LOCAL_STORAGE_NAME: 'REACT_PROJECT',
   API_URL: `https://example.server.ru`,
   API_URL_2: `http://111.11.111.111:808${isDev ? '1' : '0'}`,
