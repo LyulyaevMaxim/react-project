@@ -4,6 +4,11 @@
   "author": "Maxim Lyulyaev",
   "version": "$(cat version.num)",
   "private": true,
+  "browserslist": [
+    "> 1%",
+    "not ie 11",
+    "not op_mini all"
+  ],
   "workspaces": [
     "src/js/**/**"
   ],
