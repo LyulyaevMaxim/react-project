@@ -27,6 +27,13 @@ module.exports = (env, argv) => {
   const initialPath = isDev ? '/' : require(`${root}/src/js/constants.js`).initialPath
   const assetsPath = 'assets'
 
+  const cacheLoader = {
+    loader: 'cache-loader',
+    options: {
+      cacheDirectory: `${path.resolve(__dirname)}/node_modules/.cache-loader`,
+    },
+  }
+
   return {
     mode,
     devtool: isDev ? 'eval-cheap-module-source-map' : 'none',
@@ -58,7 +65,7 @@ module.exports = (env, argv) => {
     },
 
     plugins: [
-      /* !isDev && new (require('hard-source-webpack-plugin'))(), */
+      !isDev && new (require('hard-source-webpack-plugin'))(),
       !isDev &&
         new CleanWebpackPlugin([distPath], {
           allowExternal: true,
@@ -146,18 +153,22 @@ module.exports = (env, argv) => {
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              ...require('./configs/babelrc'),
+          use: [
+            cacheLoader,
+            {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: true,
+                ...require('./configs/babelrc'),
+              },
             },
-          },
+          ],
         },
         {
           test: /\.scss$/,
           use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            cacheLoader,
             {
               loader: 'css-loader',
               options: {
@@ -198,6 +209,7 @@ module.exports = (env, argv) => {
           test: /\.(woff2|woff)$/,
           include: `${root}/src/fonts`,
           use: [
+            cacheLoader,
             {
               loader: 'file-loader',
               options: {
@@ -212,6 +224,7 @@ module.exports = (env, argv) => {
           test: /\.(svg|jpg|png)$/,
           include: `${root}/src/img`,
           use: [
+            cacheLoader,
             {
               loader: 'file-loader',
               options: {
