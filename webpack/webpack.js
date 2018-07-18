@@ -58,6 +58,7 @@ module.exports = (env, argv) => {
     },
 
     plugins: [
+      !isDev && new (require('hard-source-webpack-plugin'))(),
       !isDev &&
         new CleanWebpackPlugin([distPath], {
           allowExternal: true,
@@ -100,7 +101,7 @@ module.exports = (env, argv) => {
           if (/\.woff2$/.test(entry)) return 'font'
         },
       }),
-      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
+      !isDev && new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
       !isDev &&
         new LodashWebpackOptimize({
           chaining: false,
@@ -271,7 +272,7 @@ module.exports = (env, argv) => {
             parallel: true,
             uglifyOptions: {
               mangle: true,
-              // compress: false
+              /* compress: false, */
             },
           }),
           new OptimizeCSSAssetsPlugin({
