@@ -58,7 +58,7 @@ module.exports = (env, argv) => {
     },
 
     plugins: [
-      !isDev && new (require('hard-source-webpack-plugin'))(),
+      /* !isDev && new (require('hard-source-webpack-plugin'))(), */
       !isDev &&
         new CleanWebpackPlugin([distPath], {
           allowExternal: true,
@@ -101,6 +101,23 @@ module.exports = (env, argv) => {
           if (/\.woff2$/.test(entry)) return 'font'
         },
       }),
+      /*new (require('autodll-webpack-plugin'))({
+        inject: true,
+        filename: '[name].dll.js',
+        path: `${assetsPath}/js/`,
+        context: root,
+        entry: {
+          vendor: [
+            'react',
+            'react-dom',
+            'lodash-es',
+            'moment',
+            'autosize',
+            'axios'
+            //...Object.keys(require(`${root}/package.json`).dependencies)
+          ],
+        },
+      }),*/
       !isDev && new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
       !isDev &&
         new LodashWebpackOptimize({
