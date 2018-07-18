@@ -12,6 +12,8 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const LodashWebpackOptimize = require('lodash-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin')
+const HappyPack = require('happypack')
+const happyThreadPool = HappyPack.ThreadPool({ size: 4 })
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const history = require('connect-history-api-fallback')
@@ -70,6 +72,46 @@ module.exports = (env, argv) => {
         new CleanWebpackPlugin([distPath], {
           allowExternal: true,
         }),
+      new HappyPack({
+        id: 'js',
+        threadPool: happyThreadPool,
+        loaders: [
+          cacheLoader,
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              ...require('./configs/babelrc'),
+            },
+          },
+        ],
+      }),
+      new HappyPack({
+        id: 'PostCSS',
+        threadPool: happyThreadPool,
+        loaders: [
+          cacheLoader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: true,
+              localIdentName: '[local]-[hash:base64:4]',
+              sourceMap: isDev,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              config: {
+                path: `configs/postcss.config.js`,
+              },
+              sourceMap: isDev ? 'inline' : false,
+            },
+          },
+        ],
+      }),
       !isDev &&
         new MiniCssExtractPlugin({
           filename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
@@ -153,41 +195,13 @@ module.exports = (env, argv) => {
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: [
-            cacheLoader,
-            {
-              loader: 'babel-loader',
-              options: {
-                cacheDirectory: true,
-                ...require('./configs/babelrc'),
-              },
-            },
-          ],
+          use: 'happypack/loader?id=js',
         },
         {
           test: /\.scss$/,
-          use: [
+          loaders: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-            cacheLoader,
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                modules: true,
-                localIdentName: '[local]-[hash:base64:4]',
-                sourceMap: isDev,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                config: {
-                  path: `configs/postcss.config.js`,
-                },
-                sourceMap: isDev ? 'inline' : false,
-              },
-            },
+            'happypack/loader?id=PostCSS',
           ],
         },
         {
