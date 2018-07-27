@@ -23,7 +23,7 @@ export async function requestCreator(dispatch, action) {
     resultField = 'body',
     headers = {},
     sendObject,
-    other,
+    toReducer,
   } = action
 
   dispatch({ type: type + REQUEST })
@@ -58,6 +58,6 @@ export async function requestCreator(dispatch, action) {
   }
 
   await axios({ method, url, data, params, headers })
-    .then(result => dispatch({ type: type + SUCCESS, payload: result[resultField], other }))
+    .then(result => dispatch({ type: type + SUCCESS, payload: result[resultField], toReducer }))
     .catch(error => dispatch({ type: type + FAIL, error: error.message }))
 }
