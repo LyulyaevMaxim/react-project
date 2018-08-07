@@ -175,14 +175,15 @@ module.exports = (env, argv) => {
           collections: true,
           paths: true,
         }),
-      new WorkboxPlugin.GenerateSW({
-        cacheId: 'service-worker',
-        swDest: `${distPath}/assets/js/sw.js`,
-        precacheManifestFilename: `${distPath}/assets/js/precache-manifest.[manifestHash].js`,
-        navigateFallback: `${distPath}/index.html`,
-        clientsClaim: true,
-        skipWaiting: true,
-      }),
+      !isDev &&
+        new WorkboxPlugin.GenerateSW({
+          cacheId: 'service-worker',
+          swDest: `${distPath}/assets/js/sw.js`,
+          precacheManifestFilename: `${distPath}/assets/js/precache-manifest.[manifestHash].js`,
+          navigateFallback: `${distPath}/index.html`,
+          clientsClaim: true,
+          skipWaiting: true,
+        }),
       new (require('duplicate-package-checker-webpack-plugin'))({
         verbose: true,
         emitError: false,

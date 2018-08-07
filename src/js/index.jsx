@@ -5,9 +5,10 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import { store, history } from '~store'
 import App from './components/app'
-import { isDev, initialPath } from '~constants'
+import { isDev } from '~constants'
 
-'serviceWorker' in navigator &&
+!isDev &&
+  'serviceWorker' in navigator &&
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register(`${window.location.origin}/assets/js/sw.js`)
