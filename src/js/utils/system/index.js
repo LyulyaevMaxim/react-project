@@ -1,7 +1,7 @@
 function getUserAgentInformation() {
   if (typeof window === 'undefined') return
   const { userAgent, language } = window.navigator
-  const browser = require('bowser').default.getParser(userAgent)
+  const browser = require('bowser').getParser(userAgent)
 
   return {
     browser: browser.getBrowser(),
