@@ -24,9 +24,10 @@ export async function requestCreator(dispatch, action) {
     headers = {},
     sendObject,
     toReducer,
+    callbacks,
   } = action
 
-  dispatch({ type: type + REQUEST })
+  dispatch({ type: type + REQUEST, toReducer })
 
   let method, data, params
   switch (requestType) {
@@ -57,7 +58,16 @@ export async function requestCreator(dispatch, action) {
     }
   }
 
-  await axios({ method, url, data, params, headers })
-    .then(result => dispatch({ type: type + SUCCESS, payload: result[resultField], toReducer }))
-    .catch(error => dispatch({ type: type + FAIL, error: error.message }))
+  return await axios({ method, url, data, params, headers })
+    .then(result => {
+      dispatch({ type: type + SUCCESS, payload: result[resultField], toReducer })
+      typeof callbacks.successful === 'function' &&
+        callbacks.successful({ payload: result[resultField] })
+      return true
+    })
+    .catch(errors => {
+      dispatch({ type: type + FAIL, errors, toReducer })
+      typeof callbacks.unfortunate === 'function' && callbacks.unfortunate({ errors })
+      return false
+    })
 }
