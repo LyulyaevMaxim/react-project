@@ -18,3 +18,10 @@ numeral.register('locale', 'ru', {
   },
 })
 numeral.locale('ru')
+
+export function compactlyRoundNumber({ number, numberOfSigns = 3, failback = 'N/A' }) {
+  let numberValue = parseFloat(number)
+  return isNaN(numberValue)
+    ? failback
+    : numberValue.toFixed(+numberOfSigns).replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
+}
