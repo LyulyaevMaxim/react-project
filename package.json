@@ -2,7 +2,6 @@
   "name": "react-project",
   "description": "Fast and effective environment for frontend development",
   "author": "Maxim Lyulyaev",
-  "version": "$(cat version.num)",
   "private": true,
   "browserslist": [
     "> 1%",

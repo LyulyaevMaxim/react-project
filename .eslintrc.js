@@ -30,6 +30,7 @@ module.exports = {
     'import/no-unresolved': 0,
     'import/no-namespace': 0,
     'react/prop-types': 0,
+    'react/display-name': 0,
     'space-before-function-paren': 0,
     'comma-dangle': 0,
     'no-trailing-spaces': 0,

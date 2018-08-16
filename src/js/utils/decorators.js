@@ -35,7 +35,7 @@ export function throttle(fn, interval) {
 }
 
 //функция fn будет выполняться с задержкой wait миллисекунд
-function debounce(fn, wait) {
+export function debounce(fn, wait) {
   let timer
   return function debounced() {
     clearTimeout(timer)
