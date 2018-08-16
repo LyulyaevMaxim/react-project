@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect'
+const emptyObject = {}
 
 const promotionIdGetter = (state, props) => props.promotionId
 export const promotionsDataGetter = (state, props) => state.promotions.data
-export const promotionsListGetter = (state, { sortBy }) => {
+export const promotionsListGetter = (state, { sortBy, quantity }) => {
   if (sortBy) {
     const { list = [], data = {} } = state.promotions
     return [...list].sort((currentId, nextId) => {
@@ -11,8 +12,13 @@ export const promotionsListGetter = (state, { sortBy }) => {
       return 0
     })
   }
+  if (quantity) return state.promotions.list.slice(0, quantity)
   return state.promotions.list
 }
 
 export const promotionFactory = () =>
-  createSelector(promotionIdGetter, promotionsDataGetter, (promotionId, data) => data[promotionId])
+  createSelector(
+    promotionIdGetter,
+    promotionsDataGetter,
+    (promotionId, data) => data[promotionId] || emptyObject
+  )

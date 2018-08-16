@@ -1,20 +1,15 @@
 import { requestCreator } from '~utils/request-creator'
 import { API_URL_2, GET_REQUEST, POST_REQUEST, DELETE_REQUEST, PUT_REQUEST } from '~constants'
 import { PROMOTION_GET, PROMOTION_CREATE, PROMOTION_DELETE, PROMOTION_UPDATE } from './constants'
+import { push } from 'react-router-redux'
 
-export const getPromotions = ({
-  isLastPromotionsGoingFirst = true,
-  promotionId,
-  isEnabled = false,
-  // page = 1,
-  // size = 1 //<= 50
-}) => (dispatch, getState) =>
+export const getPromotions = ({ promotionId = '' } = {}) => (dispatch, getState) =>
   getState().promotions.list.length <= 1 &&
   requestCreator(dispatch, {
     type: PROMOTION_GET,
     requestType: GET_REQUEST,
     requestUrl: `${API_URL_2}/discounts/promotion`,
-    sendObject: { promotionId },
+    [promotionId && 'sendObject']: { promotionId },
   })
 
 export const createPromotion = promotion => (dispatch, getState) =>
@@ -23,7 +18,8 @@ export const createPromotion = promotion => (dispatch, getState) =>
     requestUrl: `${API_URL_2}/discounts/promotion`,
     requestType: POST_REQUEST,
     sendObject: promotion,
-    other: { promotion },
+    toReducer: { promotion },
+    callbacks: { successful: () => dispatch(push('/')) },
   })
 
 export const deletePromotion = ({ promotionId = '' }) => (dispatch, getState) =>
@@ -32,7 +28,7 @@ export const deletePromotion = ({ promotionId = '' }) => (dispatch, getState) =>
     requestUrl: `${API_URL_2}/discounts/promotion`,
     requestType: DELETE_REQUEST,
     sendObject: { promotionId },
-    other: { promotionId },
+    toReducer: { promotionId },
   })
 
 export const updatePromotion = ({ promotion }) => (dispatch, getState) =>
@@ -41,5 +37,6 @@ export const updatePromotion = ({ promotion }) => (dispatch, getState) =>
     requestUrl: `${API_URL_2}/discounts/promotion`,
     requestType: PUT_REQUEST,
     sendObject: promotion,
-    other: { promotion },
+    toReducer: { promotion },
+    callbacks: { successful: () => dispatch(push('/')) },
   })
