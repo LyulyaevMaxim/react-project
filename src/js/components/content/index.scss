@@ -1,4 +1,4 @@
-@import "~css/variables.scss";
+@import '~css/variables.scss';
 
 .main {
   padding: 20px $margin-mobile;
@@ -7,6 +7,27 @@
   @media (--min-desktop) {
     padding-left: $margin-desktop;
     padding-right: $margin-desktop;
+  }
+
+  & > * + .button {
+    margin-top: 15px;
+  }
+}
+
+.button {
+  -webkit-appearance: none;
+  border: 1px solid gray;
+  border-radius: 7px;
+  padding: 4px 8px;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  background-color: transparent;
+  filter: opacity(0.7);
+  transition: filter 0.3s ease;
+
+  &:hover {
+    filter: opacity(1);
   }
 }
 
@@ -18,23 +39,22 @@
 
 @for $i from 1 through 6 {
   .h$i + p {
-    margin-top: calc(10px + $i*2px);
+    margin-top: calc(10px + $i * 2px);
   }
 
   p + .h$i {
-    margin-top: calc(10px + $i*2px);
+    margin-top: calc(10px + $i * 2px);
   }
 }
 
 @for $i from 1 through 6 {
   .h$i {
-    font-size: calc(var(--largeFontSize) * (1.1 - 0.$i));
+    font-size: calc(var(--largeFontSize) * (1.1 - $i / 10));
     line-height: 1.8;
-    font-weight: calc(900 - $i*100);
+    font-weight: calc(900 - $i * 100);
   }
 }
 
 .p {
   font-size: calc(var(--largeFontSize) * 0.5);
 }
-

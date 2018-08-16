@@ -1,8 +1,45 @@
-import React from 'react'
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { hot } from 'react-hot-loader'
 import styles from './index.scss'
 
-function Popup({ popupClass, closeClass, closeId, ...props }) {
+@hot(module)
+export class PopupPortal extends Component {
+  static defaultId = 'modal-root'
+
+  constructor(props) {
+    super(props)
+    this.state = {}
+    if (props.portalId && !document.getElementById(props.portalId)) {
+      this.el = document.createElement('div')
+      this.el.id = props.portalId
+    } else this.el = document.getElementById(PopupPortal.defaultId)
+    this.el.classList.add(styles['popup'], styles['with-background'], ...props.classList)
+  }
+
+  componentDidCatch(error, info) {
+    this.setState({ error })
+  }
+
+  componentDidMount() {
+    document.body.appendChild(this.el)
+  }
+
+  componentDidUpdate(prevProps) {
+    prevProps.isOpen !== this.props.isOpen && this.el.classList.toggle(styles['is-open'])
+  }
+
+  componentWillUnmount() {
+    document.body.removeChild(this.el)
+  }
+
+  render() {
+    if (this.state.error || this.props.isOpen === null) return null
+    return ReactDOM.createPortal(this.props.children, this.el)
+  }
+}
+
+export function Popup({ popupClass, closeClass, closeId, ...props }) {
   const closePopup = ({ target }) => target.querySelector(`[class*='label-close']`).click()
   const handleSubmit = event => {
     event.preventDefault()
@@ -27,5 +64,3 @@ function Popup({ popupClass, closeClass, closeId, ...props }) {
     </form>
   )
 }
-
-export default hot(module)(Popup)
