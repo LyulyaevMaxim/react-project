@@ -1,10 +1,10 @@
 import { requestCreator } from '~utils/request-creator'
-import { GET_REQUEST, POST_REQUEST, DELETE_REQUEST } from '~constants'
+import { GET_REQUEST } from '~constants'
 import { DOCUMENTS_GET } from './constants'
 
 export const getDocuments = ({ store = '', deviceUuid = '', dateStart = '', dateEnd = '' }) => (
   dispatch,
-  getState,
+  getState
 ) =>
   requestCreator(dispatch, {
     type: DOCUMENTS_GET,

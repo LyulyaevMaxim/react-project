@@ -1,5 +1,5 @@
 import { REQUEST, SUCCESS, FAIL, LOCAL_STORAGE_NAME } from '~constants'
-import { AUTH_SET, AUTH_RESET } from './constants'
+import { AUTH_SET } from './constants'
 
 const initialState = {
   loadingToken: null,

@@ -9,7 +9,7 @@ import thunk from 'redux-thunk'
 
 export const history = createHistory()
 // export const sagaMiddleware = createSagaMiddleware()
-const middlewares = [/*sagaMiddleware,*/ thunk, routerMiddleware(history)]
+const middlewares = [thunk, routerMiddleware(history)]
 const isDev = process.env.NODE_ENV === `development`
 
 if (isDev) {
@@ -25,7 +25,7 @@ const reducer = combineReducers({
       ...accumulator,
       [currentModule]: require(`./${currentModule}/reducer`).default,
     }),
-    {},
+    {}
   ),
   routing: routerReducer,
 })

@@ -19,7 +19,8 @@ const presets = [
     },
   ],
   '@babel/preset-react',
-]
+  isTest && 'jest',
+].filter(Boolean)
 
 let plugins = [
   // Stage 0

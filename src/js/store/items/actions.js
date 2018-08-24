@@ -1,5 +1,5 @@
 import { requestCreator } from '~utils/request-creator'
-import { API_URL_2, GET_REQUEST, POST_REQUEST, DELETE_REQUEST } from '~constants'
+import { API_URL_2, GET_REQUEST, DELETE_REQUEST } from '~constants'
 import { ITEMS_GET, ITEM_DELETE } from './constants'
 
 export const getItems = ({ storeId, limit = 0, offset = 0, type = ITEMS_GET }) => dispatch =>

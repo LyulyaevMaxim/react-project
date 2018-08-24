@@ -1,13 +1,11 @@
-import { REQUEST, SUCCESS, FAIL, CACHE } from '~constants'
-import { PROMOTION_GET, PROMOTION_CREATE, PROMOTION_DELETE, PROMOTION_UPDATE } from './constants'
+import { SUCCESS } from '~constants'
+import { PROMOTION_GET, PROMOTION_CREATE, PROMOTION_DELETE } from './constants'
 import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
 
 const initialState = { data: {}, list: [] }
 
 export default (state = initialState, { type, payload = {}, other = {} }) => {
-  const { error } = payload
-
   switch (type) {
     case PROMOTION_GET + SUCCESS: {
       const { data, list } = normalizeEntity({ data: payload.promotions, key: 'promotionId' })

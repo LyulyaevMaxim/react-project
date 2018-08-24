@@ -21,7 +21,8 @@
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
     "precommit": "prettier --write '**/*.{js,jsx,json}'",
     "install-packages": "yarn install --flat && cd webpack && yarn install && cd ../server && yarn install && cd ../__tests__ && yarn install",
-    "upgrade-packages": "yarn upgrade-interactive && cd webpack && yarn upgrade-interactive && cd ../server && yarn upgrade-interactive"
+    "upgrade-packages": "yarn upgrade-interactive && cd webpack && yarn upgrade-interactive && cd ../server && yarn upgrade-interactive && cd ../__tests__ && yarn upgrade-interactive",
+    "lint:js": "eslint --fix src/js"
   },
   "dependencies": {
     "babel-plugin-dual-import": "^1.2.1",
@@ -46,10 +47,12 @@
     "babel-eslint": "^8.2.5",
     "eslint": "^5.0.1",
     "eslint-config-esnext": "^3.0.0",
+    "eslint-config-jest-enzyme": "^6.0.3",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
     "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.21.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-promise": "^3.8.0",

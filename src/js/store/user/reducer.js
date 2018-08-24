@@ -1,4 +1,4 @@
-import { REQUEST, SUCCESS, FAIL, CACHE } from '~constants'
+import { SUCCESS } from '~constants'
 import { USERS_GET, USER_DELETE, USER_CREATE } from './constants'
 import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
@@ -9,8 +9,6 @@ const initialState = {
 }
 
 export default (state = initialState, { type, payload = {}, other = {} }) => {
-  const { error } = payload
-
   switch (type) {
     case USERS_GET + SUCCESS: {
       return { ...state, ...normalizeEntity({ data: payload.users, key: 'userId' }) }

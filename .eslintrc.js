@@ -23,8 +23,10 @@ module.exports = {
     'plugin:react/recommended',
     'standard',
     'standard-react',
+    'plugin:jest/recommended',
+    'jest-enzyme',
   ],
-  plugins: ['import', 'react', 'prettier'],
+  plugins: ['import', 'react', 'prettier', 'jest'],
   rules: {
     // 'prettier/prettier': 'error',
     'import/no-unresolved': 0,
@@ -41,6 +43,8 @@ module.exports = {
     'spaced-comment': 0,
     'one-var': 0,
     'no-return-await': 0,
+    'no-multi-spaces': 0,
+    'standard/object-curly-even-spacing': 0,
   },
   settings: {
     // 'import/ignore': [],

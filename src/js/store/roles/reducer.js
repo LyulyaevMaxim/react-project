@@ -1,4 +1,4 @@
-import { REQUEST, SUCCESS, FAIL, CACHE } from '~constants'
+import { REQUEST, SUCCESS } from '~constants'
 import { ROLES_GET, ROLE_CREATE, ROLE_DELETE, ROLE_UPDATE } from './constants'
 import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
@@ -10,8 +10,6 @@ const initialState = {
 }
 
 export default (state = initialState, { type, payload = {}, other = {} }) => {
-  const { error } = payload
-
   switch (type) {
     case ROLES_GET + REQUEST: {
       return { ...state, loadingRoles: true }

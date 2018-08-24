@@ -1,4 +1,4 @@
-import { REQUEST, SUCCESS, FAIL, CACHE } from '~constants'
+import { REQUEST, SUCCESS } from '~constants'
 import { DOCUMENTS_GET } from './constants'
 
 const initialState = {
@@ -7,8 +7,6 @@ const initialState = {
 }
 
 export default (state = initialState, { type, payload = {}, other = {} }) => {
-  const { error } = payload
-
   switch (type) {
     case DOCUMENTS_GET + REQUEST: {
       return { ...state, loadingDocuments: true }
@@ -23,7 +21,7 @@ export default (state = initialState, { type, payload = {}, other = {} }) => {
         data: { ...state.data, ...data },
         intoShops: {
           ...state.intoShops,
-          [storeId ? storeId : 'ALL']: list.reverse(),
+          [storeId || 'ALL']: list.reverse(),
         },
       }
     }
@@ -40,5 +38,5 @@ const divideIntoShops = ({ data }) =>
       const modifiedUuid = `${document.uuid}-${document.type}`
       return { data: { ...document, uuid: modifiedUuid }, list: [...res.list, modifiedUuid] }
     },
-    { data: {}, list: [] },
+    { data: {}, list: [] }
   )

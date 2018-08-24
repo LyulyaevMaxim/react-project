@@ -1,4 +1,5 @@
 import { normalize, schema } from 'normalizr'
+import get from 'lodash/get'
 import uuid from 'uuid-random'
 
 export function normalizeEntity({ data, entities = 'field', key = 'id' }) {

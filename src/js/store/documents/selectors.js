@@ -19,7 +19,7 @@ export const documentsFromShop = () =>
         if (list['ALL']) {
           const documentsData = {}
           const currentList = list['ALL'].filter(
-            documentId => data[documentId].storeUuid === shopId,
+            documentId => data[documentId].storeUuid === shopId
           )
           currentList.forEach(documentId => (documentsData[documentId] = data[documentId]))
           return { list: currentList, data: documentsData }
@@ -28,9 +28,9 @@ export const documentsFromShop = () =>
       }
       const documentsData = {}
       let currentList = documentsType
-        ? list[shopId].filter(documentId => data[documentId].type == documentsType)
+        ? list[shopId].filter(documentId => data[documentId].type === documentsType)
         : list[shopId]
       currentList.forEach(documentId => (documentsData[documentId] = data[documentId]))
       return { list: currentList, data: documentsData }
-    },
+    }
   )

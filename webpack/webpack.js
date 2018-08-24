@@ -41,9 +41,9 @@ module.exports = (env, argv) => {
     devtool: isDev ? 'eval-cheap-module-source-map' : 'none',
     entry: isDev
       ? {
-        index: `${root}/src/js/index.jsx`,
-        hot: 'react-hot-loader/patch',
-      }
+          index: `${root}/src/js/index.jsx`,
+          hot: 'react-hot-loader/patch',
+        }
       : { index: `${root}/src/js/index.jsx` },
 
     output: {
@@ -188,7 +188,7 @@ module.exports = (env, argv) => {
         verbose: true,
         emitError: false,
       }),
-      !isDev && new BundleAnalyzerPlugin(),
+      /* !isDev && new BundleAnalyzerPlugin(), */
     ].filter(Boolean),
 
     module: {
@@ -294,38 +294,38 @@ module.exports = (env, argv) => {
 
     optimization: !isDev
       ? {
-        runtimeChunk: false,
-        namedModules: true,
-        noEmitOnErrors: true,
-        concatenateModules: true,
-        minimize: true,
-        splitChunks: {
-          automaticNameDelimiter: '-',
-          chunks: 'all',
-          cacheGroups: {
-            vendor: {
-              name: 'vendor',
-              chunks: 'all',
-              test: /[\\/]node_modules[\\/]/,
-              priority: -10,
+          runtimeChunk: false,
+          namedModules: true,
+          noEmitOnErrors: true,
+          concatenateModules: true,
+          minimize: true,
+          splitChunks: {
+            automaticNameDelimiter: '-',
+            chunks: 'all',
+            cacheGroups: {
+              vendor: {
+                name: 'vendor',
+                chunks: 'all',
+                test: /[\\/]node_modules[\\/]/,
+                priority: -10,
+              },
             },
           },
-        },
-        minimizer: [
-          new UglifyJSPlugin({
-            cache: true,
-            parallel: true,
-            uglifyOptions: {
-              mangle: true,
-              /* compress: false, */
-            },
-          }),
-          new OptimizeCSSAssetsPlugin({
-            cssProcessor: require('cssnano'),
-            cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
-          }),
-        ],
-      }
+          minimizer: [
+            new UglifyJSPlugin({
+              cache: true,
+              parallel: true,
+              uglifyOptions: {
+                mangle: true,
+                /* compress: false, */
+              },
+            }),
+            new OptimizeCSSAssetsPlugin({
+              cssProcessor: require('cssnano'),
+              cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
+            }),
+          ],
+        }
       : {},
   }
 }
