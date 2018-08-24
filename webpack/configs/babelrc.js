@@ -1,6 +1,7 @@
 const path = require('path')
 const root = path.resolve(__dirname, '../../')
 const isDev = process.env.NODE_ENV === 'development'
+const isTest = process.env.NODE_ENV === 'test'
 
 const presets = [
   [
@@ -9,7 +10,7 @@ const presets = [
       targets: {
         browsers: require(`${root}/package.json`).browserslist,
       },
-      modules: false,
+      modules: isTest,
       loose: true,
       spec: true,
       useBuiltIns: 'usage',

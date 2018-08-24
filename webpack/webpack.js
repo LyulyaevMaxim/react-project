@@ -188,7 +188,7 @@ module.exports = (env, argv) => {
         verbose: true,
         emitError: false,
       }),
-      /* !isDev && new BundleAnalyzerPlugin(), */
+      !isDev && new BundleAnalyzerPlugin(),
     ].filter(Boolean),
 
     module: {
