@@ -10,7 +10,7 @@ const presets = [
       targets: {
         browsers: require(`${root}/package.json`).browserslist,
       },
-      modules: isTest,
+      modules: isTest && 'commonjs',
       loose: true,
       spec: true,
       useBuiltIns: 'usage',
@@ -19,7 +19,7 @@ const presets = [
     },
   ],
   '@babel/preset-react',
-  isTest && 'jest',
+  //@babel/preset-typescript
 ].filter(Boolean)
 
 let plugins = [

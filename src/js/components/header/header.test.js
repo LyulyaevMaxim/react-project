@@ -1,9 +1,8 @@
-// import React from 'react'
-// const React = require('react')
-// const { shallow } = require('enzyme')
-// const toJson = require('enzyme-to-json')
-// const configureStore = require('redux-mock-store')
-// const Header = require('./index')
+import React from 'react'
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
+import configureStore from 'redux-mock-store'
+import Header from './index'
 
 describe('<Header />', () => {
   it(`render()`, () => {

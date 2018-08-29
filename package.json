@@ -14,7 +14,7 @@
   "scripts": {
     "start": "cd webpack && yarn start",
     "build": "cd webpack && yarn build",
-    "test": "cd __tests__ && yarn test",
+    "test": "cd webpack && yarn test",
     "server": "cd server && yarn start",
     "deploy": "cd server && now -d --public",
     "version-increment": "perl -i -pe 's/^((\\d+\\.)*)(\\d+)(.*)$/$1.($3+1).$4/e' < version.num version.num",
