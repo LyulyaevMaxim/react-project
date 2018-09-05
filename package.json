@@ -21,7 +21,7 @@
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
     "precommit": "prettier --write '**/*.{js,jsx,json}'",
     "install-packages": "yarn install --flat && cd webpack && yarn install && cd ../server && yarn install && cd ../__tests__ && yarn install",
-    "upgrade-packages": "yarn upgrade-interactive && cd ./webpack && yarn upgrade-interactive && cd ../server && yarn upgrade-interactive && cd ../__tests__ && yarn upgrade-interactive",
+    "upgrade-packages": "yarn upgrade-interactive && cd ./webpack && yarn upgrade-interactive && cd ../server && yarn upgrade-interactive",
     "lint:js": "eslint --fix src/js"
   },
   "dependencies": {
