@@ -1,6 +1,5 @@
 import React from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
-import { hot } from 'react-hot-loader'
 import styles from './index.scss'
 
 function Textarea({ getValue, className = '', ...props }) {
@@ -35,4 +34,4 @@ function Textarea({ getValue, className = '', ...props }) {
   )
 }
 
-export default hot(module)(Textarea)
+export default Textarea

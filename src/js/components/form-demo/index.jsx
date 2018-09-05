@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import loadable from 'loadable-components'
-import { hot } from 'react-hot-loader'
 import styles from './index.scss'
 
 const Input = loadable(() => import('~modules/input'))
@@ -88,4 +87,4 @@ class FormDemo extends Component {
   }
 }
 
-export default hot(module)(FormDemo)
+export default FormDemo

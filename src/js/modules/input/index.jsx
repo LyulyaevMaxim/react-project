@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { patternPhone, patternInn, patternNumber, patternLetter, patternDate } from './patterns'
-import { hot } from 'react-hot-loader'
 import styles from './input.scss'
 
 class Input extends Component {
@@ -119,4 +118,4 @@ class Input extends Component {
   }
 }
 
-export default hot(module)(Input)
+export default Input

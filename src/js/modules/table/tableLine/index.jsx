@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { hot } from 'react-hot-loader'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import styles from '../tableBody/index.scss'
@@ -49,8 +48,7 @@ class TableLine extends Component {
 
   handleClick = event => {
     //event.currentTarget.parentNode.tagName === 'TBODY'
-    if (event.target.tagName === 'TR' && document.body.clientWidth - event.clientX < 120)
-      this.setState({ isOpen: !this.state.isOpen })
+    if (event.target.tagName === 'TR' && document.body.clientWidth - event.clientX < 120) { this.setState({ isOpen: !this.state.isOpen }) }
   }
 
   changeState = () => this.setState({ isOpen: !this.state.isOpen })
@@ -76,4 +74,4 @@ function Popup({ TablePopup, ...props }) {
   )
 }
 
-export default hot(module)(TableLine)
+export default TableLine

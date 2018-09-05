@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react'
-import { hot } from 'react-hot-loader'
 import styles from './index.scss'
 
 class Checkbox extends Component {
@@ -35,4 +34,4 @@ class Checkbox extends Component {
   }
 }
 
-export default hot(module)(Checkbox)
+export default Checkbox

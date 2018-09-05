@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { hot } from 'react-hot-loader'
 import './index.scss'
 
 class Switches extends Component {
@@ -52,8 +51,8 @@ class Switches extends Component {
                 <Fragment key={`equipment-${index}`}>
                   {switches[index]}
                   <input
-                    type="radio"
-                    name="equipment"
+                    type='radio'
+                    name='equipment'
                     id={`equipment-${index}`}
                     defaultChecked={!index}
                   />
@@ -68,4 +67,4 @@ class Switches extends Component {
   }
 }
 
-export default hot(module)(Switches)
+export default Switches

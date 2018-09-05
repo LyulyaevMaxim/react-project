@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { hot } from 'react-hot-loader'
 
 class LazyImg extends Component {
   state = {
@@ -46,4 +45,4 @@ class LazyImg extends Component {
   }
 }
 
-export default hot(module)(LazyImg)
+export default LazyImg

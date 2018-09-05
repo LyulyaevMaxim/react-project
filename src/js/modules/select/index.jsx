@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactSelect from 'react-select'
-import { hot } from 'react-hot-loader'
 import styles from './index.scss'
 
 function Select({ onChange, className, ...props }) {
@@ -21,4 +20,4 @@ function Select({ onChange, className, ...props }) {
   )
 }
 
-export default hot(module)(Select)
+export default Select

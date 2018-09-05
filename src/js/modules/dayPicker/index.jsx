@@ -1,5 +1,4 @@
 import React from 'react'
-import { hot } from 'react-hot-loader'
 import DayPicker, { DateUtils } from 'react-day-picker'
 //import styles from './index.scss'
 
@@ -18,4 +17,4 @@ function DayPickerWrapper() {
   )
 }
 
-export default hot(module)(DayPickerWrapper)
+export default DayPickerWrapper

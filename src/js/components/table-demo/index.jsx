@@ -1,5 +1,4 @@
 import React from 'react'
-import { hot } from 'react-hot-loader'
 import Table from '~modules/table'
 import { dateToDMYHM } from '~utils/date'
 import { data } from './data'
@@ -119,4 +118,4 @@ function TableDemo() {
   )
 }
 
-export default hot(module)(TableDemo)
+export default TableDemo

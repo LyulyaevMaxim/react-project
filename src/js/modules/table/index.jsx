@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Pagination from './pagination'
 import TableBody from './tableBody'
-import { hot } from 'react-hot-loader'
 import styles from './index.scss'
 
 class Table extends Component {
@@ -45,7 +44,7 @@ class Table extends Component {
                 totalPages: Math.ceil(list.length / pageSize),
                 pageSize,
                 realQuantity,
-                page: activePage ? activePage : page,
+                page: activePage || page,
                 customPagination,
               }}
             />
@@ -67,4 +66,4 @@ class Table extends Component {
   changePageSize = ({ pageSize }) => this.setState({ pageSize, page: 1 })
 }
 
-export default hot(module)(Table)
+export default Table

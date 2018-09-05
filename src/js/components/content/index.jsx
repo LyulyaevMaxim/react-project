@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { hot } from 'react-hot-loader'
 import styles from './index.scss'
 import { PopupPortal } from '~modules/popup'
 
@@ -57,4 +56,4 @@ function ContactForm(props) {
   )
 }
 
-export default hot(module)(Content)
+export default Content

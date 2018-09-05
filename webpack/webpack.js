@@ -1,23 +1,20 @@
-const webpack = require('webpack')
-const path = require('path')
-
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-const PreloadWebpackPlugin = require('preload-webpack-plugin')
+const webpack = require('webpack'),
+  CleanWebpackPlugin = require('clean-webpack-plugin'),
+  path = require('path'),
+  HappyPack = require('happypack'),
+  happyThreadPool = HappyPack.ThreadPool({ size: 4 }),
+  history = require('connect-history-api-fallback'),
+  convert = require('koa-connect')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin'),
+  ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'),
+  PreloadWebpackPlugin = require('preload-webpack-plugin')
 
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-const LodashWebpackOptimize = require('lodash-webpack-plugin')
-const WorkboxPlugin = require('workbox-webpack-plugin')
-const HappyPack = require('happypack')
-const happyThreadPool = HappyPack.ThreadPool({ size: 4 })
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-
-const history = require('connect-history-api-fallback')
-const convert = require('koa-connect')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+  OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
+  LodashWebpackOptimize = require('lodash-webpack-plugin'),
+  WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = (env, argv) => {
   const mode = process.env.NODE_ENV // typeof env !== 'undefined' ? env : argv.mode
@@ -41,9 +38,9 @@ module.exports = (env, argv) => {
     devtool: isDev ? 'eval-cheap-module-source-map' : 'none',
     entry: isDev
       ? {
-          index: `${root}/src/js/index.jsx`,
-          hot: 'react-hot-loader/patch',
-        }
+        index: `${root}/src/js/index.jsx`,
+        hot: 'react-hot-loader/patch',
+      }
       : { index: `${root}/src/js/index.jsx` },
 
     output: {
@@ -188,7 +185,7 @@ module.exports = (env, argv) => {
         verbose: true,
         emitError: false,
       }),
-      /* !isDev && new BundleAnalyzerPlugin(), */
+      !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
     ].filter(Boolean),
 
     module: {
@@ -294,38 +291,38 @@ module.exports = (env, argv) => {
 
     optimization: !isDev
       ? {
-          runtimeChunk: false,
-          namedModules: true,
-          noEmitOnErrors: true,
-          concatenateModules: true,
-          minimize: true,
-          splitChunks: {
-            automaticNameDelimiter: '-',
-            chunks: 'all',
-            cacheGroups: {
-              vendor: {
-                name: 'vendor',
-                chunks: 'all',
-                test: /[\\/]node_modules[\\/]/,
-                priority: -10,
-              },
+        runtimeChunk: false,
+        namedModules: true,
+        noEmitOnErrors: true,
+        concatenateModules: true,
+        minimize: true,
+        splitChunks: {
+          automaticNameDelimiter: '-',
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              name: 'vendor',
+              chunks: 'all',
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
             },
           },
-          minimizer: [
-            new UglifyJSPlugin({
-              cache: true,
-              parallel: true,
-              uglifyOptions: {
-                mangle: true,
-                /* compress: false, */
-              },
-            }),
-            new OptimizeCSSAssetsPlugin({
-              cssProcessor: require('cssnano'),
-              cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
-            }),
-          ],
-        }
+        },
+        minimizer: [
+          new UglifyJSPlugin({
+            cache: true,
+            parallel: true,
+            uglifyOptions: {
+              mangle: true,
+              /* compress: false, */
+            },
+          }),
+          new OptimizeCSSAssetsPlugin({
+            cssProcessor: require('cssnano'),
+            cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
+          }),
+        ],
+      }
       : {},
   }
 }

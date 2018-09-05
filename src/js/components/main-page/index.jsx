@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import { hot } from 'react-hot-loader'
 import loadable from 'loadable-components'
 import { Route, Switch } from 'react-router-dom'
 
@@ -32,4 +31,4 @@ function MainPage() {
   )
 }
 
-export default hot(module)(MainPage)
+export default MainPage

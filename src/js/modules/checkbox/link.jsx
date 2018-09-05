@@ -1,5 +1,4 @@
 import React from 'react'
-import { hot } from 'react-hot-loader'
 import styles from './index.scss'
 
 function CheckboxLink({ id, labelClass = '', labelText = '' }) {
@@ -15,4 +14,4 @@ function CheckboxLink({ id, labelClass = '', labelText = '' }) {
   )
 }
 
-export default hot(module)(CheckboxLink)
+export default CheckboxLink

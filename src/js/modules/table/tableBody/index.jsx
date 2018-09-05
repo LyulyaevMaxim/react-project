@@ -1,5 +1,4 @@
 import React from 'react'
-import { hot } from 'react-hot-loader'
 import TableLine from '../tableLine'
 import styles from './index.scss'
 
@@ -20,7 +19,7 @@ function TableBody({ data, list, page, pageSize, columns, customKeys, TablePopup
                 : `-${list[i]}`
             }`,
           }}
-        />,
+        />
       )
     }
     return table
@@ -40,4 +39,4 @@ function TableBody({ data, list, page, pageSize, columns, customKeys, TablePopup
   )
 }
 
-export default hot(module)(TableBody)
+export default TableBody

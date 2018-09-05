@@ -1,6 +1,5 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { hot } from 'react-hot-loader'
 import styles from './index.scss'
 
 function Header({ routes }) {
@@ -26,4 +25,4 @@ function Header({ routes }) {
   )
 }
 
-export default hot(module)(Header)
+export default Header
