@@ -1,7 +1,9 @@
 {
   "name": "react-project",
   "description": "Fast and effective environment for frontend development",
+  "repository": "https://LyulyaevMaxim@github.com/LyulyaevMaxim/react-project.git",
   "author": "Maxim Lyulyaev",
+  "license": "MIT",
   "private": true,
   "browserslist": [
     "> 1%",
@@ -22,7 +24,8 @@
     "precommit": "prettier --write '**/*.{js,jsx,json}'",
     "install-packages": "yarn install --flat && cd webpack && yarn install && cd ../server && yarn install && cd ../__tests__ && yarn install",
     "upgrade-packages": "yarn upgrade-interactive && cd ./webpack && yarn upgrade-interactive && cd ../server && yarn upgrade-interactive",
-    "lint:js": "eslint --fix src/js"
+    "lint:js": "eslint --fix src/js",
+    "lint:css": "stylelint src/**/*.{css,scss} --cache --cache-location './node_modules/.stylelintcache'"
   },
   "dependencies": {
     "babel-plugin-dual-import": "^1.2.1",
@@ -58,10 +61,13 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
-    "prettier": "^1.13.7"
+    "prettier": "^1.13.7",
+    "stylelint": "^9.5.0",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-no-unsupported-browser-features": "^3.0.1",
+    "stylelint-scss": "^3.3.0"
   },
-  "repository": "https://LyulyaevMaxim@github.com/LyulyaevMaxim/react-project.git",
-  "license": "MIT",
   "resolutions": {
     "eslint": "5.1.0",
     "@babel/types": "7.0.0-beta.51",

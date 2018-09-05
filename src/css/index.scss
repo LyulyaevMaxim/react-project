@@ -1,6 +1,6 @@
-@import "../fonts/fonts.css";
-@import "./variables.scss";
-@import "./mixin.scss";
+@import '../fonts/fonts.css';
+@import './variables.scss';
+@import './mixin.scss';
 
 *,
 *::before,
@@ -19,6 +19,10 @@ audio {
   height: auto;
 }
 
+a {
+  text-decoration: none;
+}
+
 label,
 button,
 a,
@@ -32,10 +36,6 @@ select {
 
 img:not([alt]) {
   border: 2px dashed red;
-}
-
-a {
-  text-decoration: none;
 }
 
 p {
@@ -153,5 +153,3 @@ h1 {
     border: 1px solid color(#3ac162 a(90%));
   }*/
 }
-
-
