@@ -1,10 +1,10 @@
-export const className = ({ styles }) => {
+export function className({ styles }) {
   return (arrayOfConditions, { useFilter = Boolean, separator = ' ' } = {}) =>
     arrayOfConditions.reduce((accumulator, currentCondition, index) => {
       return !useFilter(currentCondition)
         ? accumulator
         : `${accumulator}${index ? separator : ''}${
-          styles ? styles[currentCondition] : currentCondition
-        }`
+            styles ? styles[currentCondition] : currentCondition
+          }`
     }, '')
 }

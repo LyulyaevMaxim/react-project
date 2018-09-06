@@ -7,15 +7,11 @@ import MainPage from './main-page'
 import '~css/index.scss'
 
 class App extends Component {
-  componentDidMount() {
-    this.authorization()
-  }
-
+  static path = require('~constants').initialPath
   render() {
-    const path = require('~constants').initialPath
     return (
       <Switch>
-        <Route {...{ path, component: MainPage }} />
+        <Route {...{ path: App.path, component: MainPage }} />
         <Route
           {...{
             exact: true,
@@ -25,16 +21,6 @@ class App extends Component {
         />
       </Switch>
     )
-  }
-
-  authorization = () => {
-    const params = this.props.location.search.substring(1).split('&')
-    let token, extraToken
-    params.forEach(el => {
-      if (el.match('token')) token = el.slice('token='.length)
-      else if (el.match('extraToken')) extraToken = el.slice('extraToken='.length)
-    })
-    this.props.setAuthorization({ token, extraToken })
   }
 }
 
