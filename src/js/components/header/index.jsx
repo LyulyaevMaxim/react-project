@@ -5,6 +5,7 @@ import styles from './index.scss'
 function Header({ routes }) {
   return (
     <header className={styles['header']}>
+      <h3 className={styles['header-title']}>React Project</h3>
       <nav className={styles['header-nav']}>
         {routes.map(({ title, path, component }) => (
           <NavLink

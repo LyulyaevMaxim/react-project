@@ -2,29 +2,30 @@
 
 .form {
   justify-content: space-between;
-  padding: 50px $margin-mobile;
+  padding: 50px 0; //$margin-mobile;
+  width: 100%;
 
   @supports not (display: grid) {
     display: flex;
     flex-wrap: wrap;
 
     & > * {
-      width: 100%;
-      max-width: 30%;
-      margin-right: 20px;
       margin-bottom: 20px;
+      margin-right: 20px;
+      max-width: 30%;
+      width: 100%;
     }
   }
 
   @supports (display: grid) {
     display: grid;
-    grid-template-columns: repeat(3, 30%);
     grid-gap: 20px;
+    grid-template-columns: repeat(3, 30%);
   }
 
   @media (--min-desktop) {
-    padding-left: $margin-desktop;
-    padding-right: $margin-desktop;
+    // padding-left: $margin-desktop;
+    // padding-right: $margin-desktop;
   }
 
   & > * > * + * {

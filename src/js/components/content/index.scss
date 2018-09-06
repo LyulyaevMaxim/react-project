@@ -2,14 +2,14 @@
 
 .button {
   -webkit-appearance: none;
+  background-color: transparent;
   border: 1px solid gray;
   border-radius: 7px;
-  padding: 4px 8px;
+  filter: opacity(0.7);
   font-size: 16px;
   line-height: 1;
+  padding: 4px 8px;
   text-align: center;
-  background-color: transparent;
-  filter: opacity(0.7);
   transition: filter 0.3s ease;
 
   &:hover {
@@ -18,12 +18,11 @@
 }
 
 .main {
-  padding: 20px $margin-mobile;
-  background-color: #f5f6f3;
+  padding: 20px 0; //$margin-mobile;
 
   @media (--min-desktop) {
-    padding-left: $margin-desktop;
-    padding-right: $margin-desktop;
+    // padding-left: $margin-desktop;
+    // padding-right: $margin-desktop;
   }
 
   & > * + .button {
@@ -50,8 +49,8 @@
 @for $i from 1 through 6 {
   .h$i {
     font-size: calc(var(--largeFontSize) * (1.1 - $i / 10));
-    line-height: 1.8;
     font-weight: calc(900 - $i * 100);
+    line-height: 1.8;
   }
 }
 

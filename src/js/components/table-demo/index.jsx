@@ -108,13 +108,15 @@ function TableDemo() {
     },
   ]
   return (
-    <Table
-      {...{
-        data,
-        columns,
-        styleName: styles['table'],
-      }}
-    />
+    <main>
+      <Table
+        {...{
+          data,
+          columns,
+          styleName: styles['table'],
+        }}
+      />
+    </main>
   )
 }
 

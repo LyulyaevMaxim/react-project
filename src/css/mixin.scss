@@ -4,14 +4,14 @@
 }*/
 
 @mixin truncated() {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @mixin back-img($src) {
-	background-image: url(../img/$src);
-	background-repeat: no-repeat;
-	background-position: 50%;
-	background-size: cover;
+  background-image: url(../img/$src);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

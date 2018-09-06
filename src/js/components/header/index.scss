@@ -1,59 +1,48 @@
-@import "~css/variables.scss";
+@import '~css/variables.scss';
 
 .header {
-  display: flex;
   align-items: center;
-  padding-left: $margin-mobile;
-  padding-right: $margin-mobile;
+}
+
+.header-title {
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  grid-column: 2 / 13;
+  line-height: 31px;
 
   @media (--min-desktop) {
-    padding-left: $margin-desktop;
-    padding-right: $margin-desktop;
-  }
-
-  &::before {
-    content: 'React Project';
-    display: block;
-    font-size: 24px;
-    line-height: 31px;
-    font-weight: 700;
-    color: #000;
-    margin-right: auto;
-
-    @media (--min-desktop) {
-      /* на отрезке [1024, 1400] равномерно увеличивать размер шрифта с 24px до 36px */
-      font-size: scale($desktop, $big-desktop, 24px, 36px, 100vw);
-    }
+    /* на отрезке [1024, 1400] равномерно увеличивать размер шрифта с 24px до 36px */
+    font-size: scale($desktop, $big-desktop, 24px, 32px, 100vw);
   }
 }
 
 .header-nav {
-  display: flex;
   align-items: center;
   background-color: #fff;
+  display: grid;
+  grid-column: 13;
+  grid-gap: 2.5vw;
+  grid-template-columns: repeat(3, max-content);
 }
 
 .header-nav-link {
+  border-bottom: 3px solid transparent;
+  color: rgba(79, 79, 79, 0.5);
   font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.05em;
   line-height: 18px;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: rgba(79, 79, 79, .5);
-  transition: .3s;
   padding: 28px 0 23px;
-  border-bottom: 3px solid transparent;
+  text-transform: uppercase;
+  transition: color 0.3s;
 
   &.active {
-    color: #4f4f4f;
     border-color: #3ac162;
+    color: #4f4f4f;
   }
 
   &:hover {
     color: #000;
-  }
-
-  & + & {
-    margin-left: 36px;
   }
 }
