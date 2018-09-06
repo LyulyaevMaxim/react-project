@@ -44,6 +44,7 @@ module.exports = {
     'one-var': 0,
     'no-return-await': 0,
     'no-multi-spaces': 0,
+    'no-extra-boolean-cast': 0,
     'standard/object-curly-even-spacing': 0,
   },
   settings: {

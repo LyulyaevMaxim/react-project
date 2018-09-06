@@ -1,43 +1,69 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styles from '../index.scss'
 
-PaginationPage.propTypes = {
-  changeActivePage: PropTypes.func.isRequired,
-  totalPages: PropTypes.number,
-  pageSize: PropTypes.number,
-  page: PropTypes.number,
-}
+class PaginationPage extends Component {
+  static propTypes = {
+    changeActivePage: PropTypes.func.isRequired,
+    totalPages: PropTypes.number,
+    pageSize: PropTypes.number,
+    page: PropTypes.number,
+  }
 
-function PaginationPage({
-  changeActivePage,
-  pageSize,
-  totalPages,
-  page,
-  customPagination,
-  realQuantity,
-}) {
-  const quantityPages = !!realQuantity ? Math.ceil(realQuantity / pageSize) : totalPages
+  render() {
+    const { pageSize, totalPages, page, realQuantity } = this.props
+    const quantityPages = !!realQuantity ? Math.ceil(realQuantity / pageSize) : totalPages
+    return (
+      <pagination-page className={quantityPages <= 1 ? styles['disable'] : ''}>
+        <button
+          {...{
+            page: page - 1,
+            onClick: this.handleClick,
+            className: `${styles['pagination-back']} ${page > 1 ? '' : styles['disable']}`,
+          }}
+        >
+          Назад
+        </button>
+        <pagination-page-buttons>
+          {this.paginationButtons({ page, quantityPages })}
+        </pagination-page-buttons>
+        <button
+          {...{
+            page: page + 1,
+            onClick: this.handleClick,
+            className: `${styles['pagination-next']} ${
+              page >= quantityPages ? styles['disable'] : ''
+            }`,
+          }}
+        >
+          Вперёд
+        </button>
+      </pagination-page>
+    )
+  }
 
-  const handleClick = async event => {
+  handleClick = async event => {
+    const { customPagination, changeActivePage, pageSize } = this.props
     const needPage = Number(event.target.getAttribute('page'))
     customPagination && (await customPagination({ pageSize, needPage }))
     changeActivePage({ page: needPage })
   }
 
-  const paginationButtons = ({ page, quantityPages }) => {
+  paginationButtons = ({ page, quantityPages }) => {
     const buttons = []
     if (quantityPages < 5) {
       for (let i = 1; i <= quantityPages; i++) {
         buttons.push(
           <button
-            onClick={handleClick}
-            className={page === i ? styles['active'] : ''}
-            page={i}
             key={`page-${i}`}
+            {...{
+              page: i,
+              onClick: this.handleClick,
+              className: page === i ? styles['active'] : '',
+            }}
           >
             {i}
-          </button>,
+          </button>
         )
       }
       return buttons
@@ -45,25 +71,27 @@ function PaginationPage({
 
     buttons.push(
       <button
-        onClick={handleClick}
-        className={page === 1 ? styles['active'] : ''}
-        page={1}
         key={`page-${1}`}
+        {...{
+          page: 1,
+          onClick: this.handleClick,
+          className: page === 1 ? styles['active'] : '',
+        }}
       >
         1
-      </button>,
+      </button>
     )
     switch (page) {
       case 2: {
         buttons.push(
           <button className={styles['active']} key={`page-${2}`}>
             {2}
-          </button>,
+          </button>
         )
         buttons.push(
           <button className={styles['disable']} key={`page-other-right`}>
             ...
-          </button>,
+          </button>
         )
         break
       }
@@ -72,14 +100,13 @@ function PaginationPage({
         buttons.push(
           <button className={styles['disable']} key={`page-other-left`}>
             ...
-          </button>,
+          </button>
         )
         buttons.push(
           <button className={styles['active']} key={`page-${quantityPages - 1}`}>
             {quantityPages - 1}
-          </button>,
+          </button>
         )
-
         break
       }
 
@@ -88,25 +115,25 @@ function PaginationPage({
           buttons.push(
             <button className={styles['disable']} key={`page-other-left`}>
               ...
-            </button>,
+            </button>
           )
 
           buttons.push(
             <button className={styles['active']} key={`page-${page}`}>
               {page}
-            </button>,
+            </button>
           )
 
           buttons.push(
             <button className={styles['disable']} key={`page-other-right`}>
               ...
-            </button>,
+            </button>
           )
         } else {
           buttons.push(
             <button className={styles['disable']} key={`page-other`}>
               ...
-            </button>,
+            </button>
           )
         }
       }
@@ -114,39 +141,19 @@ function PaginationPage({
 
     buttons.push(
       <button
-        onClick={handleClick}
-        className={page === quantityPages ? styles['active'] : ''}
-        page={quantityPages}
         key={`page-${quantityPages}`}
+        {...{
+          page: quantityPages,
+          onClick: this.handleClick,
+          className: page === quantityPages ? styles['active'] : '',
+        }}
       >
         {quantityPages}
-      </button>,
+      </button>
     )
 
     return buttons
   }
-
-  return (
-    <pagination-page className={quantityPages <= 1 ? styles['disable'] : ''}>
-      <button
-        className={`${styles['pagination-back']} ${page > 1 ? '' : styles['disable']}`}
-        onClick={handleClick}
-        page={page - 1}
-      >
-        Назад
-      </button>
-      <pagination-page-buttons>
-        {paginationButtons({ page, quantityPages })}
-      </pagination-page-buttons>
-      <button
-        className={`${styles['pagination-next']} ${page < quantityPages ? '' : styles['disable']}`}
-        onClick={handleClick}
-        page={page + 1}
-      >
-        Вперёд
-      </button>
-    </pagination-page>
-  )
 }
 
 export default PaginationPage

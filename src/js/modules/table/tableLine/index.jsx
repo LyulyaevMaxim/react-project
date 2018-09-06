@@ -4,17 +4,14 @@ import get from 'lodash/get'
 import styles from '../tableBody/index.scss'
 
 class TableLine extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isOpen: false,
-    }
-  }
-
   static propTypes = {
     lineIndex: PropTypes.number.isRequired,
     data: PropTypes.object.isRequired,
     columns: PropTypes.array.isRequired,
+  }
+
+  state = {
+    isOpen: false,
   }
 
   render() {
@@ -48,7 +45,9 @@ class TableLine extends Component {
 
   handleClick = event => {
     //event.currentTarget.parentNode.tagName === 'TBODY'
-    if (event.target.tagName === 'TR' && document.body.clientWidth - event.clientX < 120) { this.setState({ isOpen: !this.state.isOpen }) }
+    if (event.target.tagName === 'TR' && document.body.clientWidth - event.clientX < 120) {
+      this.setState({ isOpen: !this.state.isOpen })
+    }
   }
 
   changeState = () => this.setState({ isOpen: !this.state.isOpen })

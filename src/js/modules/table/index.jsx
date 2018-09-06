@@ -5,12 +5,9 @@ import TableBody from './tableBody'
 import styles from './index.scss'
 
 class Table extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      page: 1,
-      pageSize: 50,
-    }
+  state = {
+    page: 1,
+    pageSize: 50,
   }
 
   static propTypes = {
