@@ -48,6 +48,7 @@
     "babel-plugin-dual-import": "^1.2.1",
     "babel-plugin-react-css-modules": "^3.4.2",
     "history": "^4.7.2",
+    "hoist-non-react-statics": "^3.0.1",
     "loadable-components": "^2.2.2",
     "lodash-es": "^4.17.10",
     "react": "^16.4.1",
