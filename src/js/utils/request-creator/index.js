@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {
   REQUEST,
   SUCCESS,
@@ -8,7 +9,6 @@ import {
   DELETE_REQUEST,
   API_URL,
 } from '~constants'
-import axios from 'axios'
 
 export function axiosInitialization({ token }) {
   axios.defaults.baseURL = API_URL
@@ -53,8 +53,7 @@ export async function requestCreator(dispatch, action) {
     }
 
     default: {
-      console.log(`${requestType} - неизвестный тип запроса`)
-      return
+      throw new Error(`${requestType} is unknown request type`)
     }
   }
 

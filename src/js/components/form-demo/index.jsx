@@ -8,9 +8,7 @@ const Textarea = loadable(() => import('~modules/textarea'))
 class FormDemo extends Component {
   state = { textareaValue: '', customInput: '', toSendTextArea: '' }
 
-  handleChange = ({ field, value }) => {
-    this.setState({ [field]: value })
-  }
+  handleChange = ({ field, value }) => this.setState({ [field]: value })
 
   handleKeyPressTextArea = ({ value, event }) => {
     if (event.key === 'Enter' && !event.shiftKey && value !== '') {
@@ -22,13 +20,6 @@ class FormDemo extends Component {
 
   render() {
     const { textareaValue, customInput, toSendTextArea } = this.state
-    const customInputHandle = ({ value }) => {
-      this.handleChange({ field: 'customInput', value })
-    }
-    const textareaHandle = ({ value }) => {
-      this.handleChange({ field: 'textareaValue', value })
-    }
-
     return (
       <main>
         <form className={styles.form}>
@@ -47,7 +38,6 @@ class FormDemo extends Component {
             placeholder="8 900 000 0000"
             pattern="\d{1}[\ ]\d{3}[\ ]\d{3}[\ ]\d{4}"
             settings="isPhone"
-            // data-settings={JSON.stringify({ isPhone: true })}
             required
           />
           <Input placeholder="5200 0000 000" pattern="\d{4}[\ ]\d{4}[\ ]\d{3}" settings="isInn" />
@@ -63,7 +53,7 @@ class FormDemo extends Component {
               pattern="\d{1,}"
               settings="isNumbers"
               placeholder="Отправляем число наружу"
-              getValue={customInputHandle}
+              getValue={({ value }) => this.handleChange({ field: 'customInput', value })}
               onChange={this.handleInputChange}
             />
             <p>Значение: {customInput}</p>
@@ -72,7 +62,7 @@ class FormDemo extends Component {
           <div>
             <Textarea
               {...{
-                getValue: textareaHandle,
+                getValue: ({ value }) => this.handleChange({ field: 'textareaValue', value }),
                 placeholder: 'Растягивающийся textarea',
                 onKeyPress: this.handleKeyPressTextArea,
                 className: styles['custom-textarea'],
