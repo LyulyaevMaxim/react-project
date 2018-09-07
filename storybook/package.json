@@ -1,0 +1,14 @@
+{
+  "name": "react-project",
+  "description": "Storybook Configuration",
+  "repository": "https://LyulyaevMaxim@github.com/LyulyaevMaxim/react-project.git",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "start-storybook -p 9001 -c ./"
+  },
+  "dependencies": {
+    "@storybook/react": "^3.4.10"
+  }
+}

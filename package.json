@@ -11,7 +11,8 @@
     "not op_mini all"
   ],
   "workspaces": [
-    "src/js/**/**"
+    "src/js/**/**",
+    "storybook"
   ],
   "scripts": {
     "start": "cd webpack && yarn start",
@@ -19,6 +20,7 @@
     "test": "cd webpack && yarn test",
     "server": "cd server && yarn start",
     "deploy": "cd server && now -d --public",
+    "storybook": "cd storybook && yarn start",
     "version-increment": "perl -i -pe 's/^((\\d+\\.)*)(\\d+)(.*)$/$1.($3+1).$4/e' < version.num version.num",
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
     "install-packages": "yarn install --flat && cd webpack && yarn install && cd ../server && yarn install",
