@@ -12,8 +12,7 @@ module.exports = {
   roots: [`${root}/src/js`],
   // "projects": [`${root}/pr1`, `${root}/pr2`]
   // moduleFileExtensions: ['js', 'jsx', 'json],
-  moduleDirectories: [`${root}/node_modules`, `${root}/webpack/node_modules`],
-  modulePaths: [`${root}/node_modules`, `${root}/webpack/node_modules`],
+  moduleDirectories: [`${root}/webpack/node_modules`, `${root}/node_modules`],
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__mocks__/fileMock.js',

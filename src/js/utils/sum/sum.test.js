@@ -1,10 +1,7 @@
-const { sum } = require('./index')
-// function sum(a, b) {
-//   return a + b
-// }
+import { sum } from './index'
 
-test('adds 1 + 2 to equal 3', () => {
-  // console.log(require('utils/sum'))
-  // console.log(__DEV__)
-  expect(sum(1, 2)).toBe(3)
+describe('sum', () => {
+  it('adds 1 + 2 to equal 3', () => {
+    expect(sum(1, 2)).toBe(2)
+  })
 })
