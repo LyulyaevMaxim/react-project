@@ -194,6 +194,8 @@
     "domelementtype": "1.3.0",
     "lowercase-keys": "1.0.1",
     "caniuse-lite": "1.0.30000885",
-    "electron-to-chromium": "1.3.63"
+    "electron-to-chromium": "1.3.63",
+    "@babel/helper-module-imports": "7.0.0",
+    "@emotion/stylis": "0.7.0"
   }
 }

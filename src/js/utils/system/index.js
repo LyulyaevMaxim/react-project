@@ -30,6 +30,7 @@ function getIP() {
 }
 
 function getScrollWidth() {
+  if (typeof window === 'undefined') return
   const outer = document.createElement('div')
   const inner = document.createElement('div')
   outer.style.overflow = 'scroll'
