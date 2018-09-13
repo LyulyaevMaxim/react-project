@@ -10,16 +10,6 @@ html {
   scroll-behavior: smooth; //иначе: elem.scrollIntoView({ behavior: 'smooth' })
 }
 
-body {
-  -webkit-font-smoothing: antialiased; //улучшает качество отображения текста на Mac OS
-  line-height: 1;
-  min-height: 100%;
-  -webkit-tap-highlight-color: transparent; //убирает на мобильных синюю подсветку при клике (фокусе)
-  text-decoration-skip: objects; //нижнее подчёркивание не будет накладываться на пересекающие его символы
-  text-rendering: optimizeLegibility; //качественное отображение текста важнее скорости рендеринга
-  -webkit-text-size-adjust: 100%; //не менять размер шрифта после изменения ориентации в iOS
-}
-
 *,
 ::before,
 ::after {
@@ -175,28 +165,50 @@ svg {
   }
 }
 
-body > app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 100%;
-  min-height: 100vh;
+body {
+  color: var(--textColor);
+  -webkit-font-smoothing: antialiased; //улучшает качество отображения текста на Mac OS
+  line-height: 1;
+  min-height: 100%;
+  -webkit-tap-highlight-color: transparent; //убирает на мобильных синюю подсветку при клике (фокусе)
+  text-decoration-skip: objects; //нижнее подчёркивание не будет накладываться на пересекающие его символы
+  text-rendering: optimizeLegibility; //качественное отображение текста важнее скорости рендеринга
+  -webkit-text-size-adjust: 100%; //не менять размер шрифта после изменения ориентации в iOS
 
-  & > header,
-  & > main {
-    display: grid;
-    grid-template-columns: 5vw repeat(12, 1fr) 5vw;
-    justify-items: flex-start;
-
-    & > * {
-      grid-column: 2 / 14;
-    }
+  &.light-theme {
+    --fonColor: #f5f6f3;
+    --textColor: black;
   }
 
-  & > main {
-    align-content: flex-start;
-    background-color: #f5f6f3;
-    flex: 1;
+  &.dark-theme {
+    --fonColor: black;
+    --textColor: white;
+  }
+
+  & > app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+
+    & > header,
+    & > main {
+      display: grid;
+      grid-template-columns: 5vw repeat(12, 1fr) 5vw;
+      justify-items: flex-start;
+
+      & > * {
+        grid-column: 2 / 14;
+      }
+    }
+
+    & > main {
+      align-content: flex-start;
+      background-color: var(--fonColor);
+
+      flex: 1;
+    }
   }
 }
 

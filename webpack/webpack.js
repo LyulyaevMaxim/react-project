@@ -104,7 +104,7 @@ module.exports = (env, argv) => {
               config: {
                 path: `configs/postcss.config.js`,
               },
-              sourceMap: isDev ? 'inline' : false,
+              sourceMap: isDev && 'inline',
             },
           },
         ],

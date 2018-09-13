@@ -8,6 +8,7 @@ import '~css/index.scss'
 
 class App extends Component {
   static path = require('~constants').initialPath
+
   render() {
     return (
       <Switch>

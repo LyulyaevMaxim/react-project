@@ -1,11 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import ThemeSelect from './themeSelect'
 import styles from './index.scss'
 
 function Header({ routes }) {
   return (
     <header className={styles['header']}>
       <h3 className={styles['header-title']}>React Project</h3>
+      <ThemeSelect />
       <nav className={styles['header-nav']}>
         {routes.map(({ title, path, component }) => (
           <NavLink

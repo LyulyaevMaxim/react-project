@@ -8,13 +8,17 @@
   color: #000;
   font-size: 24px;
   font-weight: 700;
-  grid-column: 2 / 13;
+  grid-column: 2 / 5;
   line-height: 31px;
 
   @media (--min-desktop) {
     /* на отрезке [1024, 1400] равномерно увеличивать размер шрифта с 24px до 36px */
     font-size: scale($desktop, $big-desktop, 24px, 32px, 100vw);
   }
+}
+
+.header-select {
+  grid-column: 7 / 8;
 }
 
 .header-nav {
