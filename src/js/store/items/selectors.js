@@ -24,6 +24,8 @@ export const itemsListGetter = (state, { filterBy } = {}) => {
           case '!=': {
             return get(data[el], field) !== value
           }
+          default:
+            throw new Error(`Method don't know as work with your type of operation`, operation)
         }
       })
     })

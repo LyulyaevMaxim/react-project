@@ -12,7 +12,7 @@ import {
 
 export function axiosInitialization({ token }) {
   axios.defaults.baseURL = API_URL
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`
 }
 
 export async function requestCreator(dispatch, action) {

@@ -3,10 +3,12 @@ import loadable from 'loadable-components'
 import { Route, Switch } from 'react-router-dom'
 
 const path = require('~constants').initialPath
+
 const Header = loadable(() => import('../header'))
 const Content = loadable(() => import('../content'))
 const Form = loadable(() => import('../form-demo'))
 const Table = loadable(() => import('../table-demo'))
+const ContactForm = loadable(() => import('~components/contact-form'))
 // const Switches = loadable(() => import('../switches-demo'))
 // const LazyLoadDemo = loadable(() => import('../lazy-demo'))
 
@@ -27,6 +29,7 @@ function MainPage() {
           <Route {...{ path, component, exact: index === 0 }} key={`route-${title}`} />
         ))}
       </Switch>
+      <ContactForm />
     </Fragment>
   )
 }

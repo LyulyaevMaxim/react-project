@@ -2,7 +2,7 @@ const baseKey = 'PROMOTION'
 
 module.exports = {
   [`${baseKey}_GET`]: 'PROMOTION_GET',
-  [baseKey + '_CREATE']: 'PROMOTION_CREATE',
+  [`${baseKey}_CREATE`]: 'PROMOTION_CREATE',
   PROMOTION_DELETE: 'PROMOTION_DELETE',
   PROMOTION_UPDATE: 'PROMOTION_UPDATE',
 }

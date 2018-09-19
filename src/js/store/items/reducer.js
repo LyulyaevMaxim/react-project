@@ -18,7 +18,7 @@ export default (state = initialState, { type, payload = {}, other = {} }) => {
       const { storeId } = other
       return {
         ...state,
-        storeId: storeId,
+        storeId,
         intoShops: {
           ...state.intoShops,
           [storeId]: {

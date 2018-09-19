@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+
 const emptyObject = {}
 
 const promotionIdGetter = (state, props) => props.promotionId

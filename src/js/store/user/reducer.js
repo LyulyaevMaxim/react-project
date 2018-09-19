@@ -25,20 +25,20 @@ export default (state = initialState, { type, payload = {}, other = {} }) => {
     }
 
     case USER_CREATE + SUCCESS: {
-      const _id = payload
+      const id = payload
       return {
         ...state,
         data: {
           ...state.data,
-          [_id]: {
-            ...state.data[_id],
+          [id]: {
+            ...state.data[id],
             meta: {
               ...other.user,
             },
             updated: Date.now(),
           },
         },
-        list: [...state.list, _id],
+        list: [...state.list, id],
       }
     }
 

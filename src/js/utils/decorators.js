@@ -15,7 +15,7 @@ export function once(fn) {
 export function after(count, fn) {
   let runCount = 0
   return function runAfter() {
-    runCount = runCount + 1
+    runCount += 1
     if (runCount >= count) {
       return fn.apply(this, arguments)
     }
@@ -26,7 +26,7 @@ export function after(count, fn) {
 export function throttle(fn, interval) {
   let lastTime
   return function throttled() {
-    let timeSinceLastExecution = Date.now() - lastTime
+    const timeSinceLastExecution = Date.now() - lastTime
     if (!lastTime || timeSinceLastExecution >= interval) {
       fn.apply(this, arguments)
       lastTime = Date.now()
@@ -39,9 +39,9 @@ export function debounce(fn, wait) {
   let timer
   return function debounced() {
     clearTimeout(timer)
-    let args = arguments
-    let that = this
-    timer = setTimeout(function callOriginalFn() {
+    const args = arguments
+    const that = this
+    timer = setTimeout(() => {
       fn.apply(that, args)
     }, wait)
   }

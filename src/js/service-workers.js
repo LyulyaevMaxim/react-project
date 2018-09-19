@@ -1,3 +1,4 @@
+/*eslint-disable*/
 self.addEventListener('install', event => {
   console.log('Установлен')
   /* This is a great time to prepare the service worker to be used by initializing a cache. 

@@ -31,18 +31,16 @@
     "lint:css": "stylelint --fix src/**/*.{css,scss} --cache --cache-location './node_modules/.stylelintcache'"
   },
   "lint-staged": {
-    "linters": {
-      "src/js/**/*.{js,jsx,json}": [
-        "yarn lint:js",
-        "prettier --write",
-        "git add"
-      ],
-      "src/**/*.{css,scss}": [
-        "yarn lint:css",
-        "prettier --write",
-        "git add"
-      ]
-    }
+    "src/js/**/*.{js,jsx,json}": [
+      "yarn lint:js",
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.{css,scss}": [
+      "yarn lint:css",
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "babel-plugin-dual-import": "^1.2.1",
@@ -69,13 +67,16 @@
   "optionalDependencies": {
     "babel-eslint": "^8.2.5",
     "eslint": "^5.0.1",
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-esnext": "^3.0.0",
     "eslint-config-jest-enzyme": "^6.0.3",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
+    "eslint-import-resolver-webpack": "^0.10.1",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jest": "^21.21.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-promise": "^3.8.0",

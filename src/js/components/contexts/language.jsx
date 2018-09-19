@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { get, set } from 'lodash'
+import { get, set } from 'lodash-es'
 
 const translations = {
   light: {
@@ -17,10 +17,10 @@ const translations = {
 const { Consumer, Provider } = createContext({
   activeLanguage: 'en',
   //использовать getter/setter?
-  getTranslate: function({ word }) {
+  getTranslate({ word }) {
     return get(translations, `[${word}][${this.activeLanguage}]`)
   },
-  setTranslate: function({ language, word, translation }) {
+  setTranslate({ language, word, translation }) {
     set(translations, `[${word}][${language}]`, translation)
   },
 })

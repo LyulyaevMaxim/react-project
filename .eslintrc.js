@@ -14,8 +14,10 @@ module.exports = {
     },
   },
   extends: [
+    'airbnb',
     // 'eslint:recommended',
     'prettier',
+    'prettier/react',
     // 'esnext',
     'plugin:import/errors',
     'plugin:import/warnings',
@@ -31,8 +33,15 @@ module.exports = {
     // 'prettier/prettier': 'error',
     'import/no-unresolved': 0,
     'import/no-namespace': 0,
+    'import/prefer-default-export': 0,
+    'import/no-extraneous-dependencies': 0,
+    'import/no-dynamic-require': 0,
     'react/prop-types': 0,
     'react/display-name': 0,
+    'prefer-rest-params': 0,
+    'consistent-return': 0,
+    'no-underscore-dangle': 1,
+    'no-shadow': 1,
     'space-before-function-paren': 0,
     'comma-dangle': 0,
     'no-trailing-spaces': 0,
@@ -45,15 +54,14 @@ module.exports = {
     'no-return-await': 0,
     'no-multi-spaces': 0,
     'no-extra-boolean-cast': 0,
+    'global-require': 0,
     'standard/object-curly-even-spacing': 0,
   },
   settings: {
-    // 'import/ignore': [],
-    // 'import/resolver': {
-    // ['~css']: `${root}/src/css`,
-    // webpack: {
-    //   config: 'webpack/webpack.js',
-    // },
-    // },
+    'import/resolver': {
+      webpack: {
+        config: `${root}/webpack/webpack.js`,
+      },
+    },
   },
 }

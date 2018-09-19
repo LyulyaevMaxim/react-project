@@ -1,5 +1,6 @@
 import moment from 'moment'
 import 'moment/locale/ru'
+
 moment.locale('ru')
 
 export const dateFilters = [
@@ -59,5 +60,7 @@ export function getDateOfFilter({ filter }) {
         .subtract(1, 'year')
         .format('YYYY-MM-DD HH:mm:ss')
     }
+    default:
+      throw new Error(`Method don't know as work with your type of filter`)
   }
 }
