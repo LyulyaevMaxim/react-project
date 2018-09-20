@@ -198,6 +198,12 @@
     "caniuse-lite": "1.0.30000885",
     "electron-to-chromium": "1.3.63",
     "@babel/helper-module-imports": "7.0.0",
-    "@emotion/stylis": "0.7.0"
+    "@emotion/stylis": "0.7.0",
+    "lodash-es": "4.17.11",
+    "lodash": "4.17.11",
+    "punycode": "2.1.1",
+    "process": "0.11.10",
+    "inherits": "2.0.3",
+    "util": "0.10.4"
   }
 }

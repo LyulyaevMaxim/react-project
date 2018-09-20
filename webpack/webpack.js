@@ -35,6 +35,8 @@ module.exports = (env, argv) => {
 
   return {
     mode,
+    // target: 'web', //'node'
+    //externals: [require('webpack-node-externals')()]
     devtool: isDev ? 'eval-cheap-module-source-map' : 'none',
     entry: isDev
       ? {
@@ -102,7 +104,7 @@ module.exports = (env, argv) => {
             options: {
               ident: 'postcss',
               config: {
-                path: `configs/postcss.config.js`,
+                path: `configs/postcss/postcss.config.js`,
               },
               sourceMap: isDev && 'inline',
             },
@@ -211,7 +213,7 @@ module.exports = (env, argv) => {
               loader: 'postcss-loader',
               options: {
                 config: {
-                  path: `configs/postcss.config.js`,
+                  path: `configs/postcss/postcss.config.js`,
                 },
               },
             },

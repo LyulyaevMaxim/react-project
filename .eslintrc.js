@@ -36,6 +36,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': 0,
     'import/no-dynamic-require': 0,
+    'import/newline-after-import': 0,
     'react/prop-types': 0,
     'react/display-name': 0,
     'prefer-rest-params': 0,
