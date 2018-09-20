@@ -1,9 +1,16 @@
-export const removeElement = ({ arr, obj, value, keys }) => {
-  if (typeof arr !== 'undefined') return arr.filter(el => el !== value)
+export const removeElement = ({ arr, deleteByIndexes, deleteByValues, obj, deleteByKeys }) => {
+  if (typeof arr !== 'undefined') {
+    if (deleteByValues) return arr.filter(el => !deleteByValues.some(value => el === value))
+    if (deleteByIndexes) {
+      const newArray = [...arr]
+      deleteByIndexes.forEach(index => delete newArray[index])
+      return newArray.filter(Boolean)
+    }
+  }
   if (typeof obj !== 'undefined') {
-    const newObj = { ...obj }
-    ;[keys].forEach(key => delete newObj[key])
-    return newObj
+    const newObject = { ...obj }
+    ;[deleteByKeys].forEach(key => delete newObject[key])
+    return newObject
   }
   throw new Error(`Method don't know as work with your type of collection`)
 }
