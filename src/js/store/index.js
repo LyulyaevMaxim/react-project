@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-import { routerMiddleware, routerReducer } from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { createBrowserHistory } from 'history'
 import thunk from 'redux-thunk'
 
 // import createSagaMiddleware from 'redux-saga'
 // import { createLogger } from 'redux-logger'
 // import perfomanceTools from 'react-perf-devtool'
 
-export const history = createHistory()
+export const history = createBrowserHistory()
 // export const sagaMiddleware = createSagaMiddleware()
 const middlewares = [thunk, routerMiddleware(history)]
 const isDev = process.env.NODE_ENV === `development`
@@ -19,7 +19,7 @@ if (isDev) {
   // )
 }
 
-const reducer = combineReducers({
+const rootReducer = combineReducers({
   ...['auth', 'items', 'documents', 'roles', 'discounts'].reduce(
     (accumulator, currentModule) => ({
       ...accumulator,
@@ -27,7 +27,6 @@ const reducer = combineReducers({
     }),
     {}
   ),
-  routing: routerReducer,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -35,4 +34,4 @@ const enhancer = isDev
   ? composeEnhancers(applyMiddleware(...middlewares))
   : applyMiddleware(...middlewares)
 
-export const store = createStore(reducer, enhancer)
+export const store = createStore(connectRouter(history)(rootReducer), enhancer)

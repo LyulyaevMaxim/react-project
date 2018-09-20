@@ -1,7 +1,7 @@
 import { requestCreator } from '~utils/request-creator'
 import { API_URL_2, GET_REQUEST, POST_REQUEST, DELETE_REQUEST, PUT_REQUEST } from '~constants'
 import { PROMOTION_GET, PROMOTION_CREATE, PROMOTION_DELETE, PROMOTION_UPDATE } from './constants'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 
 export const getPromotions = ({ promotionId = '' } = {}) => (dispatch, getState) =>
   getState().promotions.list.length <= 1 &&

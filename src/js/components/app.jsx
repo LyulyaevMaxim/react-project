@@ -25,7 +25,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ auth, routing: { location } }) => ({ auth, location })
+const mapStateToProps = ({ auth, router: { location } }) => ({ auth, location })
 const mapDispatchToProps = { ...authActions }
 
 export default hot(module)(
