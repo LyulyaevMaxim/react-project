@@ -204,6 +204,14 @@
     "punycode": "2.1.1",
     "process": "0.11.10",
     "inherits": "2.0.3",
-    "util": "0.10.4"
+    "util": "0.10.4",
+    "babel-eslint": "10.0.1",
+    "ms": "2.1.1",
+    "locate-path": "3.0.0",
+    "p-locate": "3.0.0",
+    "p-limit": "2.0.0",
+    "p-try": "2.0.0",
+    "decamelize": "2.0.0",
+    "through2": "2.0.3"
   }
 }

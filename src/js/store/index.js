@@ -21,9 +21,9 @@ if (isDev) {
 
 const rootReducer = combineReducers({
   ...['auth', 'items', 'documents', 'roles', 'discounts'].reduce(
-    (accumulator, currentModule) => ({
+    (accumulator, module) => ({
       ...accumulator,
-      [currentModule]: require(`./${currentModule}/reducer`).default,
+      [module.substring(module.lastIndexOf('/') + 1)]: require(`./${module}/reducer`).default,
     }),
     {}
   ),
