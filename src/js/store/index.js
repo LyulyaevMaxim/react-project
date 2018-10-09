@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   ...['auth', 'items', 'documents', 'roles', 'discounts', 'products'].reduce(
     (accumulator, currentModule) => ({
       ...accumulator,
-      [module.substring(module.lastIndexOf('/') + 1)]: require(`./${module}/reducer`).default,
+      [currentModule.substring(currentModule.lastIndexOf('/') + 1)]: require(`./${currentModule}/reducer`).default,
     }),
     {}
   ),
