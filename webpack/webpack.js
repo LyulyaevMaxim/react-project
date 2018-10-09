@@ -66,7 +66,7 @@ module.exports = (env, argv) => {
     },
 
     plugins: [
-      !isDev && new (require('hard-source-webpack-plugin'))(),
+      /* !isDev && new (require('hard-source-webpack-plugin'))(), */
       !isDev &&
         new CleanWebpackPlugin([distPath], {
           allowExternal: true,
@@ -111,12 +111,11 @@ module.exports = (env, argv) => {
           },
         ],
       }),
-      !isDev &&
-        new MiniCssExtractPlugin({
-          filename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
-          chunkFilename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
-          ignoreOrder: true,
-        }),
+      new MiniCssExtractPlugin({
+        filename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
+        chunkFilename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
+        ignoreOrder: true,
+      }),
       new HtmlWebpackPlugin({
         filename: 'index.html',
         template: `${root}/src/html/index.html`,
@@ -199,10 +198,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.scss$/,
-          loaders: [
-            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'happypack/loader?id=PostCSS',
-          ],
+          loaders: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'happypack/loader?id=PostCSS'],
         },
         {
           test: /\.css$/,
@@ -221,9 +217,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.(woff2|woff)$/,
-          include: `${root}/src/fonts`,
           use: [
-            cacheLoader,
             {
               loader: 'file-loader',
               options: {
@@ -285,7 +279,7 @@ module.exports = (env, argv) => {
       clipboard: false,
       dev: { publicPath: `/${initialPath}` },
       hot: true,
-      // http2: true, //Node v9 or greater
+      //http2: true, //Node v9 or greater
       logLevel: 'info',
       open: false,
       add: (app, middleware, options) => app.use(convert(history({}))),

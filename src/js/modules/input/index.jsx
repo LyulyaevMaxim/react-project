@@ -1,32 +1,41 @@
 import React, { Component } from 'react'
-import { patternPhone, patternInn, patternNumber, patternLetter, patternDate } from './patterns'
-import styles from './input.scss'
+import loadable from 'loadable-components'
+import { loadHelper } from '~utils/loadHelper'
+import { patternPhone, patternInn, patternNumber, patternLetter } from './patterns'
+
+const preloadModules = [{ name: 'styles', module: loadable(() => import('./input.scss')) }]
 
 class Input extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: props.value,
+      currentValue: props.value || '',
       className: '',
     }
   }
 
   async componentDidMount() {
+    loadHelper({ preloadModules, setState: this.setState.bind(this) })
     if (typeof this.props.value !== 'undefined' && this.props.value.length) {
-      await this.setState({ value: this.props.value })
+      await this.setState({ currentValue: this.props.value })
       this.handleFocusOut()
     }
   }
 
   render() {
+    if (this.state.isAsyncModulesLoading !== false) return null
     const { pattern, getValue, className: propsClass = '', ...props } = this.props
-    const { value: stateValue, className: stateClass } = this.state
+    const {
+      currentValue,
+      className: stateClass,
+      asyncModules: { styles },
+    } = this.state
 
     return (
       <input
         {...{
           ...props,
-          value: stateValue,
+          value: currentValue,
           onChange: this.handleChange,
           onBlur: this.handleFocusOut,
           className: `${styles['maxwell-input']} ${propsClass.length ? propsClass : ''} ${
@@ -40,61 +49,43 @@ class Input extends Component {
   handleChange = event => {
     event.preventDefault()
     const { settings } = this.props
-    const { value: currentValue } = this.state
-    const currentLength = currentValue.length
+    const { currentValue } = this.state
     const { value } = event.currentTarget
-    const length = value.length
-    const lastSymbol = value.substring(value.length - 1)
-    const params = { value, length, currentLength, lastSymbol }
-    // const settings = JSON.parse(event.target.getAttribute("data-settings"));
-
-    switch (settings) {
-      case 'isPhone': {
-        const data = patternPhone(params)
-        if (!Object.is(data, null)) this.setState({ value: data })
-        return
-      }
-
-      case 'isInn': {
-        const data = patternInn(params)
-        if (!Object.is(data, null)) this.setState({ value: data })
-        return
-      }
-
-      case 'isNumbers': {
-        const data = patternNumber(params)
-        if (!Object.is(data, null)) this.setState({ value: data })
-        return
-      }
-
-      case 'isLetter': {
-        const data = patternLetter(params)
-        if (!Object.is(data, null)) this.setState({ value: data })
-        return
-      }
-
-      default: {
-        break
-      }
+    const params = {
+      value,
+      length: value.length,
+      currentLength: currentValue.length,
+      lastSymbol: value.substring(value.length - 1),
     }
-    this.setState({ value })
+
+    const patternMap = {
+      isPhone: () => patternPhone(params),
+      isInn: () => patternInn(params),
+      isNumbers: () => patternNumber(params),
+      isLetter: () => patternLetter(params),
+    }
+
+    if (patternMap[settings]) {
+      const newValue = patternMap[settings]()
+      typeof newValue === 'string' && this.setState({ currentValue: newValue })
+    } else this.setState({ currentValue })
   }
 
   handleFocusOut = event => {
-    const { value } = this.state
+    const { currentValue } = this.state
     const { getValue } = this.props
     const pattern = this.getPattern(this.props.settings, this.props.pattern)
 
-    if (value === '') {
+    if (currentValue === '') {
       this.setState({ className: 'empty' })
       if (typeof getValue === 'function') getValue({ value: '' })
       return
     }
 
     if (pattern) {
-      if (value.match(pattern)) {
+      if (currentValue.match(pattern)) {
         this.setState({ className: 'valid' })
-        if (typeof getValue === 'function') getValue({ value })
+        if (typeof getValue === 'function') getValue({ value: currentValue })
       } else {
         this.setState({ className: 'invalid' })
         if (typeof getValue === 'function') getValue({ value: '' })
@@ -102,7 +93,7 @@ class Input extends Component {
       return
     }
 
-    if (typeof getValue === 'function') getValue({ value })
+    if (typeof getValue === 'function') getValue({ value: currentValue })
     this.setState({ className: 'valid' })
   }
 

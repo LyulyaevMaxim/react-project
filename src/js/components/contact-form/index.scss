@@ -1,3 +1,5 @@
+@import '~css/variables.scss';
+
 .contact-form-open-button {
   position: sticky;
   bottom: 20px;
@@ -5,18 +7,11 @@
   transform: translateX(-5vw);
   width: max-content;
   padding: 10px;
-  border: 1px solid;
   border-radius: 15px;
-  font-weight: 700;
+  font-weight: $FontBold;
   color: green;
   background-color: greenyellow;
-  border-color: greenyellow;
-  filter: opacity(0.5);
-  transition: filter 0.3s ease;
   font-family: initial; /* комбинация sticky, left и transform вызывают подёргивания кнопки при transition */
   margin-top: -38px; /* необходимо сдвинуть блок вверх, т.к. на месте кнопки остаётся пустое место  */
-
-  &:hover {
-    filter: opacity(1);
-  }
+  z-index: 1;
 }

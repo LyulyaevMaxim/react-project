@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import styles from '../index.scss'
 
 class PageSize extends Component {
-  static propTypes = {
+  /*static propTypes = {
     changePageSize: PropTypes.func.isRequired,
     pageSize: PropTypes.number,
-  }
+  }*/
 
   static options = [10, 20, 50, 100]
 
@@ -32,7 +32,7 @@ class PageSize extends Component {
               key={el}
               {...{
                 onClick: this.createOnClick(el),
-                className: pageSize === el ? styles['active'] : '',
+                className: pageSize === el ? styles.active : '',
               }}
             >
               {el}

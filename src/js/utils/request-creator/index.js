@@ -1,33 +1,35 @@
 import axios from 'axios'
-import {
-  REQUEST,
-  SUCCESS,
-  FAIL,
-  GET_REQUEST,
-  POST_REQUEST,
-  PUT_REQUEST,
-  DELETE_REQUEST,
-  API_URL,
-} from '~constants'
+import { get } from 'lodash'
+import { API_URL } from '~constants'
+
+export const REQUEST = '_REQUEST'
+export const SUCCESS = '_SUCCESS'
+export const FAIL = '_FAIL'
+
+export const GET_REQUEST = 'GET_REQUEST'
+export const POST_REQUEST = 'POST_REQUEST'
+export const PUT_REQUEST = 'PUT_REQUEST'
+export const DELETE_REQUEST = 'DELETE_REQUEST'
+export const PATCH_REQUEST = 'PATCH_REQUEST'
 
 export function axiosInitialization({ token }) {
   axios.defaults.baseURL = API_URL
   axios.defaults.headers.common.Authorization = `Bearer ${token}`
 }
 
-export async function requestCreator(dispatch, action) {
+export function requestCreator(dispatch, action) {
   const {
     type,
     requestType,
     requestUrl: url,
-    resultField = 'body',
+    resultField = 'data',
     headers = {},
     sendObject,
-    toReducer,
+    meta,
     callbacks = {},
   } = action
 
-  dispatch({ type: type + REQUEST, toReducer })
+  dispatch({ type: type + REQUEST, meta })
 
   let method, data, params
   switch (requestType) {
@@ -51,21 +53,26 @@ export async function requestCreator(dispatch, action) {
       params = sendObject
       break
     }
+    case PATCH_REQUEST: {
+      method = 'patch'
+      data = sendObject
+      break
+    }
 
     default: {
       throw new Error(`${requestType} is unknown request type`)
     }
   }
 
-  return await axios({ method, url, data, params, headers })
+  return axios({ method, url, data, params, headers })
     .then(result => {
-      dispatch({ type: type + SUCCESS, payload: result[resultField], toReducer })
-      typeof callbacks.successful === 'function' &&
-        callbacks.successful({ payload: result[resultField] })
+      const payload = get(result, resultField, result)
+      dispatch({ type: type + SUCCESS, payload, meta })
+      typeof callbacks.successful === 'function' && callbacks.successful({ payload })
       return result || true
     })
     .catch(errors => {
-      dispatch({ type: type + FAIL, errors, toReducer })
+      dispatch({ type: type + FAIL, errors, meta })
       typeof callbacks.unfortunate === 'function' && callbacks.unfortunate({ errors })
       return errors || false
     })

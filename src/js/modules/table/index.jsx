@@ -1,19 +1,24 @@
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
-import Pagination from './pagination'
-import TableBody from './tableBody'
+import loadable from 'loadable-components'
+import { loadHelper, sequentialLoader } from '~utils/loadHelper'
 import styles from './index.scss'
 
+const sequentialModules = [
+  { name: 'Pagination', module: loadable(() => import('./pagination')) },
+  { name: 'TableBody', module: loadable(() => import('./tableBody')) },
+]
+
 class Table extends Component {
-  state = {
-    page: 1,
-    pageSize: 50,
+  constructor(props) {
+    super(props)
+    this.state = {
+      page: 1,
+      pageSize: 50,
+    }
   }
 
-  static propTypes = {
-    auth: PropTypes.object,
-    data: PropTypes.object.isRequired,
-    columns: PropTypes.array.isRequired,
+  componentDidMount() {
+    sequentialLoader({ modules: sequentialModules, setState: this.setState.bind(this) })
   }
 
   render() {
@@ -29,27 +34,31 @@ class Table extends Component {
 
     const { page, pageSize } = this.state
     const { changeActivePage, changePageSize } = this
+    const { Pagination, TableBody } = this.state.asyncModules || {}
 
     return (
       <section className={`${styles['block-for-table']} ${styleName}`}>
-        {list.length ? (
+        {list.length && (
           <Fragment>
-            <Pagination
-              {...{
-                changeActivePage,
-                changePageSize,
-                totalPages: Math.ceil(list.length / pageSize),
-                pageSize,
-                realQuantity,
-                page: activePage || page,
-                customPagination,
-              }}
-            />
-            <table className={styles['table']}>
-              <TableBody {...{ data, list, page, pageSize, columns, customKeys, TablePopup }} />
+            {Pagination && (
+              <Pagination
+                {...{
+                  changeActivePage,
+                  changePageSize,
+                  totalPages: Math.ceil(list.length / pageSize),
+                  pageSize,
+                  realQuantity,
+                  page: activePage || page,
+                  customPagination,
+                }}
+              />
+            )}
+            <table className={styles.table}>
+              {TableBody && <TableBody {...{ data, list, page, pageSize, columns, customKeys, TablePopup }} />}
             </table>
           </Fragment>
-        ) : (
+        )}
+        {!list.length && (
           <div className={styles['no-data-label']}>
             <p>Нет данных</p>
           </div>

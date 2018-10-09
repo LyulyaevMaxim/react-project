@@ -1,6 +1,6 @@
-import { requestCreator } from '~utils/request-creator'
-import { API_URL_2, GET_REQUEST, DELETE_REQUEST } from '~constants'
-import { ITEMS_GET, ITEM_DELETE } from './constants'
+import { requestCreator, GET_REQUEST, DELETE_REQUEST } from '~utils/request-creator'
+import { API_URL_2 } from '~constants'
+const { ITEMS_GET, ITEM_DELETE } = require('./constants').default
 
 export const getItems = ({ storeId, limit = 0, offset = 0, type = ITEMS_GET }) => dispatch =>
   requestCreator(dispatch, {

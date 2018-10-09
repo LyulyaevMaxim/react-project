@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import Select from '~modules/select'
+import loadable from 'loadable-components'
+import { loadHelper } from '~utils/loadHelper'
 import globalStyles from '~css/index.scss'
-import styles from './index.scss'
+
+const preloadModules = [{ name: 'Select', module: loadable(() => import('~modules/select')) }],
+  postModules = [{ name: 'styles', module: loadable(() => import('./index.scss')) }]
 
 class ThemeSelect extends Component {
   static themes = { dark: globalStyles['dark-theme'], light: globalStyles['light-theme'] }
+
   static themesOptions = Object.keys(ThemeSelect.themes).map(theme => ({
     label: theme,
     value: ThemeSelect.themes[theme],
@@ -12,11 +16,16 @@ class ThemeSelect extends Component {
 
   constructor(props) {
     super(props)
+    this.asyncModules = {}
     this.state = {
       activeTheme: ThemeSelect.themes.light,
       toggleTheme: this.toggleTheme,
     }
     document.body.classList.add(this.state.activeTheme)
+  }
+
+  componentDidMount() {
+    loadHelper({ preloadModules, postModules, setState: this.setState.bind(this) })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -26,7 +35,12 @@ class ThemeSelect extends Component {
   toggleTheme = ({ theme }) => this.setState(state => ({ activeTheme: theme }))
 
   render() {
-    const { activeTheme, toggleTheme } = this.state
+    if (this.state.isAsyncModulesLoading !== false) return null
+    const {
+      activeTheme,
+      toggleTheme,
+      asyncModules: { Select, styles },
+    } = this.state
     return (
       <Select
         {...{

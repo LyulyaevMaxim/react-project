@@ -3,6 +3,7 @@
   "description": "Storybook Configuration",
   "repository": "https://LyulyaevMaxim@github.com/LyulyaevMaxim/react-project.git",
   "author": "Maxim Lyulyaev",
+  "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "scripts": {

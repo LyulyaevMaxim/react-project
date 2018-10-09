@@ -1,6 +1,6 @@
-import { REQUEST, SUCCESS, FAIL, LOCAL_STORAGE_NAME } from '~constants'
-import { AUTH_SET, AUTH_RESET } from './constants'
-import { axiosInitialization } from '~utils/request-creator'
+import { LOCAL_STORAGE_NAME } from '~constants'
+import { axiosInitialization, REQUEST, SUCCESS, FAIL } from '~utils/request-creator'
+const { AUTH_SET, AUTH_RESET } = require('./constants').default
 
 export function setAuthorization({ token = '', extraToken = '' }) {
   return dispatch => {
@@ -25,7 +25,7 @@ export function resetAuthorization() {
   return dispatch => {
     localStorage.setItem(
       LOCAL_STORAGE_NAME,
-      JSON.stringify({ token: '', extraToken: '', isRegistered: false }),
+      JSON.stringify({ token: '', extraToken: '', isRegistered: false })
     )
     dispatch({ type: AUTH_RESET })
   }

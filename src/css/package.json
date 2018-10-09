@@ -1,0 +1,10 @@
+{
+  "name": "styles-dependencies",
+  "description": "Styles dependencies",
+  "version": "1.0.0",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",  
+  "devDependencies": {
+    "postcss-css-reset": "^1.0.2"
+  }
+}

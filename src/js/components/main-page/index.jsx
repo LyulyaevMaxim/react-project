@@ -1,37 +1,37 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, Component } from 'react'
 import loadable from 'loadable-components'
 import { Route, Switch } from 'react-router-dom'
+import Header from '~components/header'
 
-const path = require('~constants').initialPath
-
-const Header = loadable(() => import('../header'))
-const Content = loadable(() => import('../content'))
-const Form = loadable(() => import('../form-demo'))
-const Table = loadable(() => import('../table-demo'))
 const ContactForm = loadable(() => import('~components/contact-form'))
-// const Switches = loadable(() => import('../switches-demo'))
-// const LazyLoadDemo = loadable(() => import('../lazy-demo'))
 
-function MainPage() {
-  const routes = [
-    { title: 'Главная', path: `${path}`, component: Content },
-    { title: 'Таблица', path: `${path}table`, component: Table },
-    { title: 'Форма', path: `${path}form`, component: Form },
-    // { title: 'Lazy Load', path: `${path}lazy`, component: LazyLoadDemo },
-    // { title: 'Переключатели', path: `${path}switches`, component: Switches },
+class MainPage extends Component {
+  static path = require('~constants').initialPath
+
+  static routes = [
+    { title: 'Главная', path: MainPage.path, component: loadable(() => import('~components/content')) },
+    {
+      title: 'Таблица',
+      path: `${MainPage.path}table`,
+      component: loadable(() => import('~components/operationTable')),
+    },
+    { title: 'Форма', path: `${MainPage.path}form`, component: loadable(() => import('~components/form-demo')) },
+    { title: 'Продукты', path: `${MainPage.path}products`, component: loadable(() => import('~components/products')) },
   ]
 
-  return (
-    <Fragment>
-      <Header {...{ routes }} />
-      <Switch>
-        {routes.map(({ path, component, title }, index) => (
-          <Route {...{ path, component, exact: index === 0 }} key={`route-${title}`} />
-        ))}
-      </Switch>
-      <ContactForm />
-    </Fragment>
-  )
+  render() {
+    return (
+      <Fragment>
+        <Header {...{ routes: MainPage.routes }} />
+        <Switch>
+          {MainPage.routes.map(({ path, component, title }, index) => (
+            <Route {...{ path, component, exact: index === 0, key: `route-${title}` }} />
+          ))}
+        </Switch>
+        <ContactForm />
+      </Fragment>
+    )
+  }
 }
 
 export default MainPage

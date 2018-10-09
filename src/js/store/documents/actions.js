@@ -1,6 +1,5 @@
-import { requestCreator } from '~utils/request-creator'
-import { GET_REQUEST } from '~constants'
-import { DOCUMENTS_GET } from './constants'
+import { requestCreator, GET_REQUEST } from '~utils/request-creator'
+const { DOCUMENTS_GET } = require('./constants').default
 
 export const getDocuments = ({ store = '', deviceUuid = '', dateStart = '', dateEnd = '' }) => (
   dispatch,

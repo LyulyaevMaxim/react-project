@@ -1,0 +1,13 @@
+{
+  "name": "selectors-utils",
+  "description": "Module for work with selectors",
+  "version": "1.0.0",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",
+  "dependencies": {
+    "reselect": "^4.0.0"
+  },
+  "devDependencies": {
+    "reselect-tools": "^0.0.6"
+  }
+}

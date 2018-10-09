@@ -1,0 +1,102 @@
+@import '~css/variables.scss';
+
+.line {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: minmax(150px, 3fr) minmax(150px, 3fr) minmax(150px, 3fr) minmax(50px, 1fr) minmax(50px, 1fr);
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid;
+  min-height: 40px;
+  padding: 0 20px 0 10px;
+
+  & > div {
+    /*& > ${ReactSelectStyled} {
+          min-width: 90%;
+          margin: 7px 0;
+
+          .Select--multi {
+              .Select-value {
+                  display: grid;
+                  grid-template-columns: 20px 1fr;
+              }
+
+              .Select-value-label {
+                  max-width: 100%;
+                  white-space: normal;
+                  text-align: left;
+
+                  .with-tooltip:hover .tooltip {
+                      display: none;
+                  }
+              }
+
+              .Select-control {
+                  display: grid;
+                  grid-template-columns: 1fr repeat(2, max-content);
+                  grid-gap: 5px;
+                  align-items: flex-start;
+                  height: max-content;
+                  pointer-events: none;
+
+                  & > * {
+                      pointer-events: all;
+                  }
+
+                  .Select-multi-value-wrapper {
+                      display: flex;
+                      flex-direction: column;
+                      padding: 6px 3px;
+                  }
+
+                  .Select-input {
+                      order: -1;
+                      border: 1px solid ${COLORS.borderGrey};
+                      margin: 0 0 5px 3px;
+                  }
+
+                  .Select-placeholder {
+                      padding: 0 10px;
+                      align-items: initial;
+                      line-height: 3;
+                  }
+              }
+
+              .Select-arrow-zone {
+                  display: none;
+              }
+          }
+      }*/
+
+    & > * {
+      max-width: 100%;
+    }
+  }
+
+  &:first-child {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  &:not(:first-child) {
+    background-color: '#f1f9fc';
+    border-color: $color-gray;
+
+    .is-unsaved {
+      background-color: '#dbeff6';
+    }
+  }
+}
+
+.action-button {
+  &.edit-button {
+  }
+
+  &.cancel-button {
+  }
+
+  &.disabled {
+  }
+}

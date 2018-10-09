@@ -1,42 +1,38 @@
-import { REQUEST, SUCCESS } from '~constants'
-import { DOCUMENTS_GET } from './constants'
+import produce from 'immer'
+import { REQUEST, SUCCESS } from '~utils/request-creator'
 
+const { DOCUMENTS_GET } = require('./constants').default
 const initialState = {
   loadingDocuments: null,
   intoShops: {},
 }
 
-export default (state = initialState, { type, payload = {}, other = {} }) => {
+export default produce((state = initialState, { type, payload = {}, other = {} }) => {
   switch (type) {
     case DOCUMENTS_GET + REQUEST: {
-      return { ...state, loadingDocuments: true }
+      state.loadingDocuments = true
+      break
     }
 
     case DOCUMENTS_GET + SUCCESS: {
       const { storeId } = other
       const { data, list } = divideIntoShops({ data: payload })
-      return {
-        ...state,
-        loadingDocuments: false,
-        data: { ...state.data, ...data },
-        intoShops: {
-          ...state.intoShops,
-          [storeId || 'ALL']: list.reverse(),
-        },
-      }
+      state.loadingDocuments = false
+      state.data = { ...state.data, ...data }
+      state.intoShops[storeId || 'ALL'] = list.reverse()
+      break
     }
 
-    default: {
+    default:
       return state
-    }
   }
-}
+})
 
 const divideIntoShops = ({ data }) =>
   data.reduce(
-    (res, document) => {
+    (acc, document) => {
       const modifiedUuid = `${document.uuid}-${document.type}`
-      return { data: { ...document, uuid: modifiedUuid }, list: [...res.list, modifiedUuid] }
+      return { data: { ...document, uuid: modifiedUuid }, list: [...acc.list, modifiedUuid] }
     },
     { data: {}, list: [] }
   )

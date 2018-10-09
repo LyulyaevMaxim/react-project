@@ -1,35 +1,40 @@
-import { SUCCESS } from '~constants'
-import { PROMOTION_GET, PROMOTION_CREATE, PROMOTION_DELETE } from './constants'
+import produce from 'immer'
+import { SUCCESS } from '~utils/request-creator'
 import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
 
+const { PROMOTION_GET, PROMOTION_CREATE, PROMOTION_DELETE } = require('./constants').default
 const initialState = { data: {}, list: [] }
 
-export default (state = initialState, { type, payload = {}, other = {} }) => {
+export default produce((state = initialState, { type, payload = {}, toReducer = {} }) => {
   switch (type) {
     case PROMOTION_GET + SUCCESS: {
       const { data, list } = normalizeEntity({ data: payload.promotions, key: 'promotionId' })
-      return { ...state, data: { ...state.data, ...data }, list }
+      list.forEach(promotionId => {
+        if (promotionId in state.data) {
+          state.data[promotionId] = { ...state.data[promotionId], ...data[promotionId] }
+        } else {
+          state.list.push(promotionId)
+          state.data[promotionId] = data[promotionId]
+        }
+      })
+      break
     }
 
     case PROMOTION_CREATE + SUCCESS: {
       const promotionId = payload
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          [promotionId]: other.promotion,
-        },
-        list: [...state.list, promotionId],
-      }
+      state.list.push(promotionId)
+      state.data[promotionId] = toReducer.promotion
+      break
     }
 
     case PROMOTION_DELETE + SUCCESS: {
-      return { ...state, list: removeElement({ arr: state.list, value: other.promotionId }) }
+      state.list = removeElement({ arr: state.list, value: toReducer.promotionId })
+      break
     }
 
     default: {
       return state
     }
   }
-}
+})

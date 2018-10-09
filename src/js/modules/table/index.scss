@@ -9,6 +9,20 @@
   & > pagination-block + table {
     margin-top: 15px;
   }
+
+  pagination-pagesize + pagination-page {
+    margin-left: auto;
+  }
+
+  pagination-pagesize pagination-pagesize-buttons {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  pagination-page pagination-page-buttons {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
 }
 
 .table {
@@ -42,21 +56,5 @@
     font-size: 36px;
     font-weight: 500;
     color: rgba(79, 79, 79, 0.5);
-  }
-}
-
-.block-for-table {
-  pagination-pagesize + pagination-page {
-    margin-left: auto;
-  }
-
-  pagination-pagesize pagination-pagesize-buttons {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  pagination-page pagination-page-buttons {
-    margin-left: 8px;
-    margin-right: 8px;
   }
 }

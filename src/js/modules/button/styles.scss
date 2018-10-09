@@ -1,0 +1,39 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border-radius: 7px;
+  border: none;
+  filter: opacity(0.5);
+  transition-property: filter background-color color;
+  transition-duration: 0.3s;
+  text-decoration: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    filter: opacity(1);
+  }
+
+  &.disabled {
+    filter: opacity(0.2);
+    cursor: none;
+  }
+
+  &.is-main {
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    color: #4b4746;
+    padding: 0 14px;
+
+    &:hover {
+    }
+  }
+}

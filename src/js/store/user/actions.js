@@ -1,9 +1,7 @@
-import { requestCreator } from '~utils/request-creator'
-import { GET_REQUEST, POST_REQUEST, CACHE } from '~constants'
-import { USER_GET_DATA, USER_UPDATE } from './constants.json'
+import { requestCreator, GET_REQUEST, POST_REQUEST } from '~utils/request-creator'
+const { USER_GET_DATA, USER_UPDATE } = require('./constants').default
 
-export function UserGetData({ cache, uuid }) {
-  if (cache) return { type: USER_GET_DATA + CACHE, payload: { uuid } }
+export function UserGetData({ uuid }) {
   return (dispatch, getState) =>
     requestCreator(dispatch, {
       type: USER_GET_DATA,
@@ -15,7 +13,7 @@ export function UserGetData({ cache, uuid }) {
     })
 }
 
-export function UserUpdate({ login, password }, { cache }) {
+export function UserUpdate({ login, password }) {
   return (dispatch, getState) =>
     requestCreator(dispatch, {
       type: USER_UPDATE,

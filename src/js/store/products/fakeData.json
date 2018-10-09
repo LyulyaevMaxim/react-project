@@ -1,0 +1,46 @@
+{
+  "paymentTypes": {
+    "options": [
+      {
+        "value": 0,
+        "label": "Other"
+      },
+      {
+        "value": 1,
+        "label": "Cash"
+      },
+      {
+        "value": 2,
+        "label": "Credit"
+      },
+      {
+        "value": 3,
+        "label": "Check"
+      },
+      {
+        "value": 4,
+        "label": "Gift"
+      }
+    ]
+  },
+  "productGroups": {
+    "options": [
+      {
+        "value": 0,
+        "label": "None"
+      },
+      {
+        "value": 1,
+        "label": "Food"
+      },
+      {
+        "value": 2,
+        "label": "Clothes"
+      },
+      {
+        "value": 3,
+        "label": "Instruments"
+      }
+    ]
+  }
+}

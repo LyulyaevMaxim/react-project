@@ -1,34 +1,39 @@
-import React from 'react'
-import PageSize from './pageSize'
-import PaginationPage from './paginationPage'
+import React, { Component } from 'react'
+import loadable from 'loadable-components'
+import { loadHelper } from '~utils/loadHelper'
 import PropTypes from 'prop-types'
-import styles from './index.scss'
 
-Pagination.propTypes = {
-  changeActivePage: PropTypes.func.isRequired,
-  changePageSize: PropTypes.func.isRequired,
-  totalPages: PropTypes.number,
-  pageSize: PropTypes.number,
-  page: PropTypes.number,
-}
+const preloadModules = [
+    { name: 'PageSize', module: loadable(() => import('./pageSize')) },
+    { name: 'PaginationPage', module: loadable(() => import('./paginationPage')) },
+  ],
+  postModules = [{ name: 'styles', module: loadable(() => import('./index.scss')) }]
 
-function Pagination({
-  changeActivePage,
-  changePageSize,
-  pageSize,
-  totalPages,
-  page,
-  customPagination,
-  realQuantity,
-}) {
-  return (
-    <pagination-block>
-      <PageSize {...{ changePageSize, pageSize }} />
-      <PaginationPage
-        {...{ changeActivePage, pageSize, totalPages, page, customPagination, realQuantity }}
-      />
-    </pagination-block>
-  )
+class Pagination extends Component {
+  state = {}
+  /*static propTypes = {
+    changeActivePage: PropTypes.func.isRequired,
+    changePageSize: PropTypes.func.isRequired,
+    totalPages: PropTypes.number,
+    pageSize: PropTypes.number,
+    page: PropTypes.number,
+  }*/
+
+  componentDidMount() {
+    loadHelper({ preloadModules, postModules, setState: this.setState.bind(this) })
+  }
+
+  render() {
+    if (this.state.isAsyncModulesLoading !== false) return null
+    const { PageSize, PaginationPage } = this.state.asyncModules
+    const { changeActivePage, changePageSize, pageSize, totalPages, page, customPagination, realQuantity } = this.props
+    return (
+      <pagination-block>
+        <PageSize {...{ changePageSize, pageSize }} />
+        <PaginationPage {...{ changeActivePage, pageSize, totalPages, page, customPagination, realQuantity }} />
+      </pagination-block>
+    )
+  }
 }
 
 export default Pagination

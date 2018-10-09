@@ -1,5 +1,6 @@
-import { REQUEST, SUCCESS, FAIL, LOCAL_STORAGE_NAME } from '~constants'
-import { AUTH_SET } from './constants'
+import { LOCAL_STORAGE_NAME } from '~constants'
+import { REQUEST, SUCCESS, FAIL } from '~utils/request-creator'
+const { AUTH_SET } = require('./constants').default
 
 const initialState = {
   loadingToken: null,
@@ -27,8 +28,7 @@ export default (state = initialState, { type, payload = {} }) => {
       return { ...state, loadingToken: null, token: '', extraToken: '', error }
     }
 
-    default: {
+    default:
       return state
-    }
   }
 }

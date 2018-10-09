@@ -1,59 +1,49 @@
-import { REQUEST, SUCCESS } from '~constants'
-import { ROLES_GET, ROLE_CREATE, ROLE_DELETE, ROLE_UPDATE } from './constants'
+import produce from 'immer'
+import { REQUEST, SUCCESS } from '~utils/request-creator'
 import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
 
+const { ROLES_GET, ROLE_CREATE, ROLE_DELETE, ROLE_UPDATE } = require('./constants').default
 const initialState = {
   loadingRoles: null,
   data: {},
   list: [],
 }
 
-export default (state = initialState, { type, payload = {}, other = {} }) => {
+export default produce((state = initialState, { type, payload = {}, toReducer = {} }) => {
   switch (type) {
     case ROLES_GET + REQUEST: {
-      return { ...state, loadingRoles: true }
+      state.loadingRoles = true
+      break
     }
 
     case ROLES_GET + SUCCESS: {
       const { data, list } = normalizeEntity({ data: payload, key: 'roleId' })
-      return {
-        ...state,
-        loadingRoles: false,
-        data: { ...state.data, ...data },
-        list,
-      }
+      state.loadingRoles = false
+      state.data = { ...state.data, ...data }
+      state.list = list
+      break
     }
 
     case ROLE_CREATE + SUCCESS: {
       const roleId = payload
-      return {
-        ...state,
-        list: [...state.list, roleId],
-        data: { ...state.data, [roleId]: other.role },
-      }
+      state.list.push(roleId)
+      state.data[roleId] = toReducer.role
+      break
     }
 
     case ROLE_DELETE + SUCCESS: {
-      return { ...state, list: removeElement({ arr: state.list, value: other.roleId }) }
+      state.list = removeElement({ arr: state.list, value: toReducer.roleId })
+      break
     }
 
     case ROLE_UPDATE + SUCCESS: {
-      const { role } = other
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          [role.roleId]: {
-            ...state.data[role.roleId],
-            ...role,
-          },
-        },
-      }
+      const { role } = toReducer
+      state.data[role.roleId] = { ...state.data[role.roleId], ...role }
+      break
     }
 
-    default: {
+    default:
       return state
-    }
   }
-}
+})

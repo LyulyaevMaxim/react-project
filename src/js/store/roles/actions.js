@@ -1,6 +1,12 @@
-import { requestCreator } from '~utils/request-creator'
-import { API_URL_2, GET_REQUEST, POST_REQUEST, DELETE_REQUEST, PUT_REQUEST } from '~constants'
-import { ROLES_GET, ROLE_CREATE, ROLE_DELETE, ROLE_UPDATE } from './constants'
+import {
+  requestCreator,
+  GET_REQUEST,
+  POST_REQUEST,
+  DELETE_REQUEST,
+  PUT_REQUEST,
+} from '~utils/request-creator'
+import { API_URL_2 } from '~constants'
+const { ROLES_GET, ROLE_CREATE, ROLE_DELETE, ROLE_UPDATE } = require('./constants').default
 
 export const getRoles = (/*{roleId, roleName}*/) => (dispatch, getState) =>
   /* (!getState().documents.intoShops[store]) &&*/ requestCreator(dispatch, {

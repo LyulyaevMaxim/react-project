@@ -5,7 +5,7 @@ import styles from './index.scss'
 
 function Header({ routes }) {
   return (
-    <header className={styles['header']}>
+    <header className={styles.header}>
       <h3 className={styles['header-title']}>React Project</h3>
       <ThemeSelect />
       <nav className={styles['header-nav']}>
@@ -14,7 +14,7 @@ function Header({ routes }) {
             {...{
               to: path,
               className: styles['header-nav-link'],
-              activeClassName: styles['active'],
+              activeClassName: styles.active,
               onMouseOver: component.load,
               exact: true,
             }}

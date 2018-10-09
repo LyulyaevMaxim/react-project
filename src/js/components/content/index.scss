@@ -1,15 +1,11 @@
 @import '~css/variables.scss';
 
 .button {
-  -webkit-appearance: none;
-  background-color: transparent;
   border: 1px solid gray;
-  border-radius: 7px;
   filter: opacity(0.7);
   font-size: 16px;
   line-height: 1;
   padding: 4px 8px;
-  text-align: center;
   transition: filter 0.3s ease;
 
   &:hover {

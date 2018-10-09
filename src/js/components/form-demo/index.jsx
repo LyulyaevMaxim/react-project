@@ -1,25 +1,35 @@
 import React, { Component } from 'react'
 import loadable from 'loadable-components'
-import styles from './index.scss'
+import { loadHelper } from '~utils/loadHelper'
 
-const Input = loadable(() => import('~modules/input'))
-const Textarea = loadable(() => import('~modules/textarea'))
+const preloadModules = [{ name: 'styles', module: loadable(() => import('./index.scss')) }],
+  postModules = [
+    { name: 'Input', module: loadable(() => import('~modules/input')) },
+    { name: 'Textarea', module: loadable(() => import('~modules/textarea')) },
+  ]
 
 class FormDemo extends Component {
   state = { textareaValue: '', customInput: '', toSendTextArea: '' }
+
+  componentDidMount() {
+    loadHelper({ preloadModules, postModules, setState: this.setState.bind(this) })
+  }
 
   handleChange = ({ field, value }) => this.setState({ [field]: value })
 
   handleKeyPressTextArea = ({ value, event }) => {
     if (event.key === 'Enter' && !event.shiftKey && value !== '') {
       event.preventDefault()
-      event.target.value = ''
+      // event.target.value = ''
       this.setState({ toSendTextArea: value })
     }
   }
 
   render() {
+    if (this.state.isAsyncModulesLoading !== false) return <main />
     const { textareaValue, customInput, toSendTextArea } = this.state
+    const { Input, Textarea, styles } = this.state.asyncModules
+
     return (
       <main>
         <form className={styles.form}>
@@ -29,17 +39,8 @@ class FormDemo extends Component {
             settings="isLetter"
             required
           />
-          <Input
-            type="email"
-            placeholder="ivanovii@mail.ru"
-            pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$"
-          />
-          <Input
-            placeholder="8 900 000 0000"
-            pattern="\d{1}[\ ]\d{3}[\ ]\d{3}[\ ]\d{4}"
-            settings="isPhone"
-            required
-          />
+          <Input type="email" placeholder="ivanovii@mail.ru" pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$" />
+          <Input placeholder="8 900 000 0000" pattern="\d{1}[\ ]\d{3}[\ ]\d{3}[\ ]\d{4}" settings="isPhone" required />
           <Input placeholder="5200 0000 000" pattern="\d{4}[\ ]\d{4}[\ ]\d{3}" settings="isInn" />
           <Input
             placeholder="ivanovivan.ru"

@@ -46,6 +46,7 @@ let plugins = [
   '@babel/plugin-syntax-import-meta',
   ['@babel/plugin-proposal-class-properties', { loose: true }],
   '@babel/plugin-proposal-json-strings',
+
   // Other
   [
     'module-resolver',

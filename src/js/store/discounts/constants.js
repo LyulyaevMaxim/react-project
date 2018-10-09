@@ -1,8 +1,9 @@
+import { generateConstants } from '~utils/react'
 const baseKey = 'PROMOTION'
 
-module.exports = {
-  [`${baseKey}_GET`]: 'PROMOTION_GET',
-  [`${baseKey}_CREATE`]: 'PROMOTION_CREATE',
-  PROMOTION_DELETE: 'PROMOTION_DELETE',
-  PROMOTION_UPDATE: 'PROMOTION_UPDATE',
-}
+export default generateConstants([
+  `${baseKey}_GET`,
+  `${baseKey}_CREATE`,
+  'PROMOTION_DELETE',
+  'PROMOTION_UPDATE',
+])
