@@ -11,7 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
   ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'),
   PreloadWebpackPlugin = require('preload-webpack-plugin')
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+const TerserPlugin = require('terser-webpack-plugin'),
   OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
   LodashWebpackOptimize = require('lodash-webpack-plugin'),
   WorkboxPlugin = require('workbox-webpack-plugin')
@@ -38,12 +38,7 @@ module.exports = (env, argv) => {
     // target: 'web', //'node'
     //externals: [require('webpack-node-externals')()]
     devtool: isDev ? 'eval-cheap-module-source-map' : 'none',
-    entry: isDev
-      ? {
-        index: `${root}/src/js/index.jsx`,
-        hot: 'react-hot-loader/patch',
-      }
-      : { index: `${root}/src/js/index.jsx` },
+    entry: [`${root}/src/js/index.jsx`],
 
     output: {
       filename: `${assetsPath}/js/[name]${isDev ? '' : '.[chunkhash]'}.js`,
@@ -186,7 +181,7 @@ module.exports = (env, argv) => {
         verbose: true,
         emitError: false,
       }),
-      !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
+      /* !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(), */
     ].filter(Boolean),
 
     module: {
@@ -305,14 +300,7 @@ module.exports = (env, argv) => {
           },
         },
         minimizer: [
-          new UglifyJSPlugin({
-            cache: true,
-            parallel: true,
-            uglifyOptions: {
-              mangle: true,
-              /* compress: false, */
-            },
-          }),
+          new TerserPlugin({ cache: true, parallel: true, terserOptions: { mangle: true } }),
           new OptimizeCSSAssetsPlugin({
             cssProcessor: require('cssnano'),
             cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
