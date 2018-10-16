@@ -2,9 +2,7 @@ const webpack = require('webpack'),
   CleanWebpackPlugin = require('clean-webpack-plugin'),
   path = require('path'),
   HappyPack = require('happypack'),
-  happyThreadPool = HappyPack.ThreadPool({ size: 4 }),
-  history = require('connect-history-api-fallback'),
-  convert = require('koa-connect')
+  happyThreadPool = HappyPack.ThreadPool({ size: 4 })
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin'),
@@ -47,6 +45,18 @@ module.exports = (env, argv) => {
       publicPath: initialPath,
     },
 
+    devServer: {
+      hot: true,
+      https: true,
+      open: false,
+      overlay: true,
+      historyApiFallback: true,
+      host: '127.0.0.1',
+      port: '8080',
+      compress: true,
+      clientLogLevel: 'info',
+    },
+
     resolve: {
       alias: {
         '~css': `${root}/src/css`,
@@ -66,6 +76,7 @@ module.exports = (env, argv) => {
         new CleanWebpackPlugin([distPath], {
           allowExternal: true,
         }),
+      isDev && new webpack.HotModuleReplacementPlugin(),
       new HappyPack({
         id: 'js',
         threadPool: happyThreadPool,
@@ -266,18 +277,6 @@ module.exports = (env, argv) => {
           ].filter(Boolean),
         },
       ],
-    },
-
-    serve: {
-      host: '127.0.0.1', //вместо '0.0.0.0' пока не подключу https для корректной работы с SW локально
-      port: '8080',
-      clipboard: false,
-      dev: { publicPath: `/${initialPath}` },
-      hot: true,
-      //http2: true, //Node v9 or greater
-      logLevel: 'info',
-      open: false,
-      add: (app, middleware, options) => app.use(convert(history({}))),
     },
 
     optimization: !isDev
