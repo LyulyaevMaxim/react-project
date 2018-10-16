@@ -192,7 +192,7 @@ module.exports = (env, argv) => {
         verbose: true,
         emitError: false,
       }),
-      /* !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(), */
+      !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(), 
     ].filter(Boolean),
 
     module: {
