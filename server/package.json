@@ -9,7 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "hapi": "^17.5.2",
+    "hapi": "^17.6.0",
     "inert": "^5.1.0",
     "pino": "^5.8.0"
   }
