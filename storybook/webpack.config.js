@@ -1,8 +1,8 @@
 const path = require('path')
-const projectRoot = path.resolve(__dirname, '../../')
+const projectRoot = path.resolve(__dirname, '../')
 const root = path.resolve(__dirname, './')
 const isDev = process.env.NODE_ENV === 'development'
-const webpackConfig = require('../webpack')()
+const webpackConfig = require(`${projectRoot}/webpack.config.js`)()
 
 module.exports = (baseConfig, env, defaultConfig) => {
   defaultConfig.module.rules[0] = {
@@ -13,7 +13,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
-          ...require('../configs/babelrc'),
+          ...require(`${projectRoot}/babelrc`),
         },
       },
     ],
@@ -37,7 +37,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
         options: {
           ident: 'postcss',
           config: {
-            path: `${projectRoot}/webpack/configs/postcss.config.js`,
+            path: `${projectRoot}/postcss.config.js`,
           },
           sourceMap: isDev && 'inline',
         },
@@ -45,7 +45,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
     ],
   })
 
-  defaultConfig.resolve.modules.push(`${projectRoot}/node_modules`)
+  defaultConfig.resolve.modules.push(`${projectRoot}/src/node_modules`)
   defaultConfig.resolve.alias = {
     ...defaultConfig.resolve.alias,
     ...webpackConfig.resolve.alias,

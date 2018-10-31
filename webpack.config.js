@@ -15,11 +15,11 @@ const TerserPlugin = require('terser-webpack-plugin'),
   WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = (env, argv) => {
-  const mode = process.env.NODE_ENV // typeof env !== 'undefined' ? env : argv.mode
+  const mode = process.env.NODE_ENV
   const isDev = mode === 'development'
   console.log(`mode: ${mode}, isDev: ${isDev}`)
 
-  const root = path.resolve(__dirname, '../')
+  const root = path.resolve(__dirname, './')
   const distPath = `${root}/server/dist`
   const initialPath = isDev ? '/' : require(`${root}/src/js/constants.js`).initialPath
   const assetsPath = 'assets'
@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
   const cacheLoader = {
     loader: 'cache-loader',
     options: {
-      cacheDirectory: `${path.resolve(__dirname)}/node_modules/.cache-loader`,
+      cacheDirectory: `${root}/node_modules/.cache-loader`,
     },
   }
 
@@ -86,7 +86,7 @@ module.exports = (env, argv) => {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
-              ...require('./configs/babelrc'),
+              ...require(`${root}/babelrc`),
             },
           },
         ],
@@ -110,7 +110,7 @@ module.exports = (env, argv) => {
             options: {
               ident: 'postcss',
               config: {
-                path: `configs/postcss/postcss.config.js`,
+                path: `${root}/postcss.config.js`,
               },
               sourceMap: isDev && 'inline',
             },
@@ -192,7 +192,7 @@ module.exports = (env, argv) => {
         verbose: true,
         emitError: false,
       }),
-      !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(), 
+      !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
     ].filter(Boolean),
 
     module: {
@@ -215,7 +215,7 @@ module.exports = (env, argv) => {
               loader: 'postcss-loader',
               options: {
                 config: {
-                  path: `configs/postcss/postcss.config.js`,
+                  path: `${root}/postcss.config.js`,
                 },
               },
             },
