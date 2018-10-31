@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import loadable from 'loadable-components'
 import { loadHelper, sequentialLoader } from '~utils/loadHelper'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 const sequentialModules = [
   { name: 'Pagination', module: loadable(() => import('./pagination')) },

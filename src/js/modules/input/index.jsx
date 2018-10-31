@@ -3,7 +3,7 @@ import loadable from 'loadable-components'
 import { loadHelper } from '~utils/loadHelper'
 import { patternPhone, patternInn, patternNumber, patternLetter } from './patterns'
 
-const preloadModules = [{ name: 'styles', module: loadable(() => import('./input.scss')) }]
+const preloadModules = [{ name: 'styles', module: loadable(() => import('./input.pcss')) }]
 
 class Input extends Component {
   constructor(props) {

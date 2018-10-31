@@ -6,7 +6,7 @@ const preloadModules = [
     { name: 'Button', module: loadable(() => import('~modules/button')) },
     { name: 'PopupPortal', module: loadable(() => import('~modules/popup')), isDefault: false },
   ],
-  postModules = [{ name: 'styles', module: loadable(() => import('./index.scss')) }]
+  postModules = [{ name: 'styles', module: loadable(() => import('./index.pcss')) }]
 
 class Content extends Component {
   constructor(props) {

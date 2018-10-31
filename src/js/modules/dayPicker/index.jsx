@@ -1,6 +1,6 @@
 import React from 'react'
 import DayPicker, { DateUtils } from 'react-day-picker'
-//import styles from './index.scss'
+//import styles from './index.pcss'
 
 function DayPickerWrapper() {
   return (
