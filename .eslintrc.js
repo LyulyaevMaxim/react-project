@@ -70,7 +70,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       webpack: {
-        config: `${root}/webpack/webpack.js`,
+        config: `${root}/webpack.config.js`,
       },
     },
   },
