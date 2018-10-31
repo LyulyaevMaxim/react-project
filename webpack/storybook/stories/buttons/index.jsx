@@ -7,10 +7,12 @@ storiesOf('Buttons', module).add('with text', () => (
   <button
     {...{
       onClick: action('clicked'),
-      fontSize: text('fontSize', '14px'),
-      minWidth: text('minWidth', 'auto'),
-      height: text('height', '30px'),
-      borderRadius: text('borderRadius', undefined),
+      styles: {
+        fontSize: text('fontSize', '14px'),
+        minWidth: text('minWidth', 'auto'),
+        height: text('height', '30px'),
+        borderRadius: text('borderRadius', undefined),
+      },
       disabled: boolean('disabled', false),
       active: boolean('active', false),
     }}

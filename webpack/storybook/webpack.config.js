@@ -19,6 +19,32 @@ module.exports = (baseConfig, env, defaultConfig) => {
     ],
   }
 
+  defaultConfig.module.rules.push({
+    test: /\.pcss$/,
+    loaders: [
+      'style-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1,
+          modules: true,
+          localIdentName: '[local]-[hash:base64:4]',
+          sourceMap: isDev,
+        },
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss',
+          config: {
+            path: `${projectRoot}/webpack/configs/postcss.config.js`,
+          },
+          sourceMap: isDev && 'inline',
+        },
+      },
+    ],
+  })
+
   defaultConfig.resolve.modules.push(`${projectRoot}/node_modules`)
   defaultConfig.resolve.alias = {
     ...defaultConfig.resolve.alias,

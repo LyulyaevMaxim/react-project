@@ -11,8 +11,7 @@
     "not op_mini all"
   ],
   "workspaces": [
-    "src/**/**",
-    "storybook"
+    "src/**/**"
   ],
   "scripts": {
     "start": "cd webpack && yarn start",
