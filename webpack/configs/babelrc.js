@@ -49,7 +49,7 @@ let plugins = [
       webpackHotModuleReloading: isDev,
       handleMissingStyleName: 'warn',
       generateScopedName: '[local]-[hash:base64:4]',
-      filetypes: { '.scss': { syntax: 'postcss-scss' } },
+      filetypes: { '.pcss': { syntax: 'postcss-scss' } },
       exclude: `${root}/node_modules`,
     },
   ],

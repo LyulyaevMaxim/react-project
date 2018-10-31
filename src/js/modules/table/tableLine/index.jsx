@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { get } from 'lodash'
-import styles from '../tableBody/index.scss'
+import styles from '../tableBody/index.pcss'
 
 class TableLine extends Component {
   /*static propTypes = {

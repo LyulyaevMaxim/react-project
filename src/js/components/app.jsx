@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import loadable from 'loadable-components'
 import { loadHelper } from '~utils/loadHelper'
 
-const preloadModules = [{ name: 'styles', module: loadable(() => import('~css/index.scss')) }]
+const preloadModules = [{ name: 'styles', module: loadable(() => import('~css/index.pcss')) }]
 
 class App extends Component {
   static path = require('~constants').initialPath

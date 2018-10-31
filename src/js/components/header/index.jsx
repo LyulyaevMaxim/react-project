@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import ThemeSelect from './themeSelect'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 function Header({ routes }) {
   return (

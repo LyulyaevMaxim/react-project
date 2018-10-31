@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import './index.scss'
+import './index.pcss'
 
 class Switches extends Component {
   static propTypes = {
@@ -50,12 +50,7 @@ class Switches extends Component {
               return (
                 <Fragment key={`equipment-${index}`}>
                   {switches[index]}
-                  <input
-                    type='radio'
-                    name='equipment'
-                    id={`equipment-${index}`}
-                    defaultChecked={!index}
-                  />
+                  <input type="radio" name="equipment" id={`equipment-${index}`} defaultChecked={!index} />
                   <switchable-block class={className}>{content}</switchable-block>
                 </Fragment>
               )

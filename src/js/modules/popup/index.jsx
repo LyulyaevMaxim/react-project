@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 export class PopupPortal extends Component {
   static defaultId = 'modal-root'

@@ -1,6 +1,6 @@
 import React from 'react'
 import TableLine from '../tableLine'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 function TableBody({ data, list, page, pageSize, columns, customKeys, TablePopup }) {
   const getBody = () => {

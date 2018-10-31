@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Table from '~modules/table'
 import { dateToDMYHM } from '~utils/date'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 const className = require('~utils/react').className({ styles })
 

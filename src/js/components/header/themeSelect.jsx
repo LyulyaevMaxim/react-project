@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import loadable from 'loadable-components'
 import { loadHelper } from '~utils/loadHelper'
-import globalStyles from '~css/index.scss'
+import globalStyles from '~css/index.pcss'
 
 const preloadModules = [{ name: 'Select', module: loadable(() => import('~modules/select')) }],
-  postModules = [{ name: 'styles', module: loadable(() => import('./index.scss')) }]
+  postModules = [{ name: 'styles', module: loadable(() => import('./index.pcss')) }]
 
 class ThemeSelect extends Component {
   static themes = { dark: globalStyles['dark-theme'], light: globalStyles['light-theme'] }

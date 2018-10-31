@@ -1,6 +1,6 @@
 import React from 'react'
 import loadable from 'loadable-components'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 const LazyImg = loadable(() => import('~modules/lazy-img'))
 
@@ -18,7 +18,7 @@ function LazyLoadDemo() {
     'cashbox-categories-placeholder-10.jpg',
   ]
   return (
-    <section styleName='lazy-demo'>
+    <section styleName="lazy-demo">
       {images.map((imgName, index) => (
         <LazyImg {...{ imgName, className: styles['lazy-img'], key: imgName }} />
       ))}

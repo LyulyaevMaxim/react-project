@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 function CheckboxLink({ id, labelClass = '', labelText = '' }) {
   return (
