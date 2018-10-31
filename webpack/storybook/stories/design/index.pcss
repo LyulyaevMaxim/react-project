@@ -1,0 +1,60 @@
+.icons-section {
+  --elemSize: 60px;
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, var(--elemSize));
+  justify-content: center;
+
+  & > article {
+    width: var(--elemSize);
+
+    & > img {
+      display: flex;
+      max-width: 100%;
+      width: 40px;
+      height: 40px;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    & > h6 {
+      font-size: 14px;
+      text-align: center;
+      margin: 7px 0 0 0;
+    }
+  }
+}
+
+.colors-section {
+  --elemSize: 130;
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, calc(var(--elemSize) * 1px));
+  justify-content: center;
+
+  .color-item {
+    & > div {
+      margin: 0 auto;
+    }
+
+    & > h6 {
+      font-size: 14px;
+      text-align: center;
+      margin: 7px 0 0 0;
+    }
+  }
+
+  & + * {
+    margin-top: 20px;
+  }
+}
+
+.color-item {
+  & > div {
+    width: calc(var(--elemSize, 130) / 3 * 1px);
+    height: calc(var(--elemSize, 130) / 3 * 1px);
+    border-radius: 50%;
+    background-color: var(--color);
+    border: 1px solid gainsboro;
+  }
+}

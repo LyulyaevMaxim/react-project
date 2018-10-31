@@ -7,7 +7,9 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.js",
     "test": "cross-env NODE_ENV=test jest --config ./tests/jest.config.js",
     "test:watch": "cross-env NODE_ENV=test jest --config ./tests/jest.config.js --watch",
-    "test:updatesnap": "cross-env NODE_ENV=test jest --config ./tests/jest.config.js --updateSnapshot ../src/js"
+    "test:updatesnap": "cross-env NODE_ENV=test jest --config ./tests/jest.config.js --updateSnapshot ../src/js",
+    "storybook:start": "cross-env NODE_ENV=development start-storybook -p 9001 -c ./storybook",
+    "storybook:build": "cross-env NODE_ENV=production build-storybook -c ./storybook -o ./storybook/dist"
   },
   "dependencies": {
     "autodll-webpack-plugin": "^0.4.2",
@@ -54,6 +56,12 @@
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^4.0.0",
+    "@storybook/addon-knobs": "^4.0.0",
+    "@storybook/addon-options": "^4.0.0",
+    "@storybook/addon-viewport": "^4.0.0",
+    "@storybook/addons": "^4.0.0",
+    "@storybook/react": "^4.0.0",
     "autoprefixer": "^9.3.1",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.4.2",
@@ -80,7 +88,8 @@
     "postcss-scss": "^2.0.0",
     "postcss-selector-matches": "^4.0.0",
     "postcss-selector-not": "^4.0.0",
-    "postcss-svg": "^2.4.0"
+    "postcss-svg": "^2.4.0",
+    "storybook-readme": "^4.0.2"
   },
   "optionalDependencies": {
     "enzyme": "^3.7.0",
