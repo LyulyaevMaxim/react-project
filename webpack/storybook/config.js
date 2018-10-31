@@ -17,6 +17,6 @@ require('@storybook/addon-options').setOptions({
 
 addDecorator(require('@storybook/addon-knobs/react').withKnobs)
 
-const stories = ['buttons', 'requests' /*, ', 'design', 'inputs', 'elements', 'styledElements'*/]
+const stories = ['buttons', 'requests', 'design' /*'inputs', 'elements', 'styledElements'*/]
 
 configure(stories.sort().forEach(story => require(`./stories/${story}`)), module)
