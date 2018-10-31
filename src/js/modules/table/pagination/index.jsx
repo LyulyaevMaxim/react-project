@@ -7,7 +7,7 @@ const preloadModules = [
     { name: 'PageSize', module: loadable(() => import('./pageSize')) },
     { name: 'PaginationPage', module: loadable(() => import('./paginationPage')) },
   ],
-  postModules = [{ name: 'styles', module: loadable(() => import('./index.scss')) }]
+  postModules = [{ name: 'styles', module: loadable(() => import('./index.pcss')) }]
 
 class Pagination extends Component {
   state = {}

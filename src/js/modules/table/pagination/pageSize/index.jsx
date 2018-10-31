@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import cached from 'react-cached-callback'
 import PropTypes from 'prop-types'
-import styles from '../index.scss'
+import styles from '../index.pcss'
 
 class PageSize extends Component {
   /*static propTypes = {

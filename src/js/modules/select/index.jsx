@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactSelect from 'react-select'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 function Select({ onChange, className, ...props }) {
   const handleOnChange = value => onChange(value)

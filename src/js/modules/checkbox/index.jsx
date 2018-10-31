@@ -1,13 +1,11 @@
 import React, { Fragment, Component } from 'react'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 class Checkbox extends Component {
   constructor(props) {
     super(props)
     const { handleChange, id } = props
-    this.handleChange = handleChange
-      ? ({ target }) => handleChange({ value: target.checked ? id : null })
-      : () => ({})
+    this.handleChange = handleChange ? ({ target }) => handleChange({ value: target.checked ? id : null }) : () => ({})
   }
 
   render() {

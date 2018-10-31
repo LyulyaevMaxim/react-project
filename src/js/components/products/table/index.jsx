@@ -1,6 +1,6 @@
 import React, { Component, Fragment, createRef } from 'react'
 import { connect } from 'react-redux'
-import styles from './styles.scss'
+import styles from './styles.pcss'
 import ProductTableLine from './line'
 import Button from '~modules/button'
 import {

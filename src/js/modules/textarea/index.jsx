@@ -1,6 +1,6 @@
 import React from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
-import styles from './index.scss'
+import styles from './index.pcss'
 
 function Textarea({ getValue, className = '', ...props }) {
   const handleFocusOut = event => {

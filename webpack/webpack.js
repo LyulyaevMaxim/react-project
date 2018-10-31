@@ -203,7 +203,7 @@ module.exports = (env, argv) => {
           use: 'happypack/loader?id=js',
         },
         {
-          test: /\.scss$/,
+          test: /\.pcss$/,
           loaders: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'happypack/loader?id=PostCSS'],
         },
         {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import loadable from 'loadable-components'
 import { loadHelper } from '~utils/loadHelper'
 
-const preloadModules = [{ name: 'styles', module: loadable(() => import('./index.scss')) }],
+const preloadModules = [{ name: 'styles', module: loadable(() => import('./index.pcss')) }],
   postModules = [
     { name: 'Input', module: loadable(() => import('~modules/input')) },
     { name: 'Textarea', module: loadable(() => import('~modules/textarea')) },
