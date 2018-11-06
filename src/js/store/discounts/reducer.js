@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { SUCCESS } from '~utils/request-creator'
+import { requestStatuses } from '~utils/request-creator'
 import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
 
@@ -8,7 +8,7 @@ const initialState = { data: {}, list: [] }
 
 export default produce((state = initialState, { type, payload = {}, toReducer = {} }) => {
   switch (type) {
-    case PROMOTION_GET + SUCCESS: {
+    case PROMOTION_GET + requestStatuses.SUCCESS: {
       const { data, list } = normalizeEntity({ data: payload.promotions, key: 'promotionId' })
       list.forEach(promotionId => {
         if (promotionId in state.data) {
@@ -21,14 +21,14 @@ export default produce((state = initialState, { type, payload = {}, toReducer = 
       break
     }
 
-    case PROMOTION_CREATE + SUCCESS: {
+    case PROMOTION_CREATE + requestStatuses.SUCCESS: {
       const promotionId = payload
       state.list.push(promotionId)
       state.data[promotionId] = toReducer.promotion
       break
     }
 
-    case PROMOTION_DELETE + SUCCESS: {
+    case PROMOTION_DELETE + requestStatuses.SUCCESS: {
       state.list = removeElement({ arr: state.list, value: toReducer.promotionId })
       break
     }

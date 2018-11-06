@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { REQUEST, SUCCESS, FAIL } from '~utils/request-creator'
+import { requestStatuses } from '~utils/request-creator'
 import { paymentTypes, productGroups } from './fakeData'
 
 const {
@@ -31,12 +31,12 @@ const initialProduct = {
 
 export default produce((state = initialState, { type, payload = {}, meta = {} }) => {
   switch (type) {
-    case PRODUCTS_FETCH + REQUEST: {
+    case PRODUCTS_FETCH + requestStatuses.REQUEST: {
       state.isLoadProducts = true
       break
     }
 
-    case PRODUCTS_FETCH + SUCCESS: {
+    case PRODUCTS_FETCH + requestStatuses.SUCCESS: {
       const normalizedProducts = productsNormalize({ products: payload })
       state.data = normalizedProducts.data
       state.list = normalizedProducts.list
@@ -56,13 +56,13 @@ export default produce((state = initialState, { type, payload = {}, meta = {} })
       break
     }
 
-    case PRODUCTS_UPDATE + SUCCESS: {
+    case PRODUCTS_UPDATE + requestStatuses.SUCCESS: {
       state.isSaveRun = false
       state.data = { ...state.data, ...productsNormalize({ products: payload }).data }
       break
     }
 
-    case PRODUCTS_CREATE + SUCCESS: {
+    case PRODUCTS_CREATE + requestStatuses.SUCCESS: {
       const { savedProducts } = meta
       const normalizedProducts = productsNormalize({ products: payload })
       state.list = [...state.list, ...normalizedProducts.list]
@@ -73,13 +73,13 @@ export default produce((state = initialState, { type, payload = {}, meta = {} })
       break
     }
 
-    case PRODUCTS_UPDATE + FAIL:
-    case PRODUCTS_CREATE + FAIL: {
+    case PRODUCTS_UPDATE + requestStatuses.FAIL:
+    case PRODUCTS_CREATE + requestStatuses.FAIL: {
       state.isSaveRun = false
       break
     }
 
-    case PRODUCT_GROUPS_FETCH + SUCCESS: {
+    case PRODUCT_GROUPS_FETCH + requestStatuses.SUCCESS: {
       state.productGrops = payload.reduce(
         (acc, { groupId, name }) => {
           acc.options.push({ value: groupId, label: name })

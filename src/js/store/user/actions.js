@@ -1,4 +1,4 @@
-import { requestCreator, GET_REQUEST, POST_REQUEST } from '~utils/request-creator'
+import { requestCreator, requestTypes } from '~utils/request-creator'
 const { USER_GET_DATA, USER_UPDATE } = require('./constants').default
 
 export function UserGetData({ uuid }) {
@@ -6,7 +6,7 @@ export function UserGetData({ uuid }) {
     requestCreator(dispatch, {
       type: USER_GET_DATA,
       requestUrl: '/userapi/user/get',
-      requestType: GET_REQUEST,
+      requestType: requestTypes.GET_REQUEST,
       headers: { 'X-Authorization': getState().auth.extraToken },
       resultField: 'data',
       sendObject: { mode: 'dev' },
@@ -18,7 +18,7 @@ export function UserUpdate({ login, password }) {
     requestCreator(dispatch, {
       type: USER_UPDATE,
       requestUrl: '/userapi/user/update',
-      requestType: POST_REQUEST,
+      requestType: requestTypes.POST_REQUEST,
       sendObject: { login, password },
     })
 }

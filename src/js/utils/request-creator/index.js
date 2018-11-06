@@ -1,16 +1,29 @@
 import axios from 'axios'
-import { get } from 'lodash'
+import { get, has } from 'lodash'
 import { API_URL } from '~constants'
+import { patterns } from '~utils/regExp'
 
-export const REQUEST = '_REQUEST'
-export const SUCCESS = '_SUCCESS'
-export const FAIL = '_FAIL'
+export const requestTypes = {
+  GET_REQUEST: 'GET_REQUEST',
+  POST_REQUEST: 'POST_REQUEST',
+  PUT_REQUEST: 'PUT_REQUEST',
+  DELETE_REQUEST: 'DELETE_REQUEST',
+  PATCH_REQUEST: 'PATCH_REQUEST',
+}
 
-export const GET_REQUEST = 'GET_REQUEST'
-export const POST_REQUEST = 'POST_REQUEST'
-export const PUT_REQUEST = 'PUT_REQUEST'
-export const DELETE_REQUEST = 'DELETE_REQUEST'
-export const PATCH_REQUEST = 'PATCH_REQUEST'
+export const requestStatuses = {
+  REQUEST: '_REQUEST',
+  SUCCESS: '_SUCCESS',
+  FAIL: '_FAIL',
+}
+
+export const getError = (field = {}) =>
+  [
+    ['type', v => `${v} is incorrect action type`],
+    ['requestType', v => `${v} is unknown request type`],
+    ['requestUrl', v => `${v} is incorrect url`],
+    ['callbacks.successful', v => `${v} is not function`],
+  ].forEach((fieldName, getText) => has(field, fieldName) && getText(field[fieldName]))
 
 export function axiosInitialization({ token }) {
   axios.defaults.baseURL = API_URL
@@ -18,61 +31,56 @@ export function axiosInitialization({ token }) {
 }
 
 export function requestCreator(dispatch, action) {
-  const {
-    type,
-    requestType,
-    requestUrl: url,
-    resultField = 'data',
-    headers = {},
-    sendObject,
-    meta,
-    callbacks = {},
-  } = action
+  const { type, requestType, requestUrl, resultField = 'data', headers = {}, sendObject, meta, callbacks = {} } = action
 
-  dispatch({ type: type + REQUEST, meta })
+  if (!type) throw new Error(getError({ type }))
+  if (!Object.values(requestTypes).some(type => type === requestType)) throw new Error(getError({ requestType }))
+  if (!patterns.url.test(requestUrl)) throw new Error(getError({ requestUrl }))
+  if (callbacks.successful && typeof callbacks.successful !== 'function')
+    throw new Error(getError({ 'callbacks.successful': callbacks.successful }))
+
+  dispatch({ type: type + requestStatuses.REQUEST, meta })
 
   let method, data, params
   switch (requestType) {
-    case GET_REQUEST: {
+    case requestTypes.GET_REQUEST: {
       method = 'get'
       params = sendObject
       break
     }
-    case POST_REQUEST: {
+    case requestTypes.POST_REQUEST: {
       method = 'post'
       data = sendObject
       break
     }
-    case PUT_REQUEST: {
+    case requestTypes.PUT_REQUEST: {
       method = 'put'
       data = sendObject
       break
     }
-    case DELETE_REQUEST: {
+    case requestTypes.DELETE_REQUEST: {
       method = 'delete'
       params = sendObject
       break
     }
-    case PATCH_REQUEST: {
+    case requestTypes.PATCH_REQUEST: {
       method = 'patch'
       data = sendObject
       break
     }
-
-    default: {
-      throw new Error(`${requestType} is unknown request type`)
-    }
+    default:
+      break
   }
 
-  return axios({ method, url, data, params, headers })
+  return axios({ method, url: requestUrl, data, params, headers })
     .then(result => {
       const payload = get(result, resultField, result)
-      dispatch({ type: type + SUCCESS, payload, meta })
+      dispatch({ type: type + requestStatuses.SUCCESS, payload, meta })
       typeof callbacks.successful === 'function' && callbacks.successful({ payload })
       return result || true
     })
     .catch(errors => {
-      dispatch({ type: type + FAIL, errors, meta })
+      dispatch({ type: type + requestStatuses.FAIL, errors, meta })
       typeof callbacks.unfortunate === 'function' && callbacks.unfortunate({ errors })
       return errors || false
     })
