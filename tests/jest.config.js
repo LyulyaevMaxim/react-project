@@ -1,21 +1,19 @@
 const path = require('path'),
   root = path.resolve(__dirname, '../'),
-  isProd = process.env.NODE_ENV === 'production',
-  webpackConfig = require(`${root}/webpack.config.js`)()
+  isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   bail: true,
   verbose: true,
   notify: false,
-  testEnvironment: 'jsdom', // "node"
+  testEnvironment: 'node',
   // testURL: => location.href
-  runner: 'jest-runner', // "jest-runner-eslint" "jest-runner-prettier"
+  runner: 'jest-runner',
   roots: [`${root}/src/js`],
   // "projects": [`${root}/pr1`, `${root}/pr2`]
   // moduleFileExtensions: ['js', 'jsx', 'json],
   moduleDirectories: [`${root}/node_modules`, `${root}/src/node_modules`],
   moduleNameMapper: {
-    ...webpackConfig.resolve.alias,
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__mocks__/fileMock.js',
     '\\.(css|scss)$': 'identity-obj-proxy',
