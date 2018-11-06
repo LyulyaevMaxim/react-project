@@ -1,6 +1,7 @@
-const path = require('path')
-const root = path.resolve(__dirname, '../')
-const isProd = process.env.NODE_ENV === 'production'
+const path = require('path'),
+  root = path.resolve(__dirname, '../'),
+  isProd = process.env.NODE_ENV === 'production',
+  webpackConfig = require(`${root}/webpack.config.js`)()
 
 module.exports = {
   bail: true,
@@ -14,6 +15,7 @@ module.exports = {
   // moduleFileExtensions: ['js', 'jsx', 'json],
   moduleDirectories: [`${root}/node_modules`, `${root}/src/node_modules`],
   moduleNameMapper: {
+    ...webpackConfig.resolve.alias,
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__mocks__/fileMock.js',
     '\\.(css|scss)$': 'identity-obj-proxy',
