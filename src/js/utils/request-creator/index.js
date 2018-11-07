@@ -2,6 +2,7 @@ import axios from 'axios'
 import { get, has } from 'lodash'
 import { API_URL } from '~constants'
 import { patterns } from '~utils/regExp'
+import { errorsMapCreator } from '~utils/testHelper'
 
 export const requestTypes = {
   GET_REQUEST: 'GET_REQUEST',
@@ -17,15 +18,6 @@ export const requestStatuses = {
   FAIL: '_FAIL',
 }
 
-export const getError = (field = {}) =>
-  [
-    ['type', v => `${v} is incorrect action type`],
-    ['requestType', v => `${v} is unknown request type`],
-    ['requestUrl', v => `${v} is incorrect url`],
-    ['callbacks.successful', v => `${v} is not function`],
-    ['callbacks.unfortunate', v => `${v} is not function`],
-  ].forEach((fieldName, getText) => has(field, fieldName) && getText(field[fieldName]))
-
 export function axiosInitialization({ token }) {
   axios.defaults.baseURL = API_URL
   axios.defaults.headers.common.Authorization = `Bearer ${token}`
@@ -33,9 +25,10 @@ export function axiosInitialization({ token }) {
 
 export function requestCreator(dispatch, action) {
   const { type, requestType, requestUrl, resultField = 'data', headers = {}, sendObject, meta, callbacks = {} } = action
+  const { getError } = requestCreator
 
   if (!type) throw new Error(getError({ type }))
-  if (!Object.values(requestTypes).some(type => type === requestType)) throw new Error(getError({ requestType }))
+  if (!Object.values(requestTypes).some(t => t === requestType)) throw new Error(getError({ requestType }))
   if (!patterns.url.test(requestUrl)) throw new Error(getError({ requestUrl }))
   if (callbacks.successful && typeof callbacks.successful !== 'function')
     throw new Error(getError({ 'callbacks.successful': callbacks.successful }))
@@ -88,3 +81,11 @@ export function requestCreator(dispatch, action) {
       return errors || false
     })
 }
+
+requestCreator.getError = errorsMapCreator([
+  ['type', v => `${v} is incorrect action type`],
+  ['requestType', v => `${v} is unknown request type`],
+  ['requestUrl', v => `${v} is incorrect url`],
+  ['callbacks.successful', v => `${v} is not function`],
+  ['callbacks.unfortunate', v => `${v} is not function`],
+])

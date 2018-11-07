@@ -1,5 +1,4 @@
 import { selectorsCreator, selectorFactoriesCreator } from '~utils/selector-creator'
-import { registerSelectors } from 'reselect-tools'
 
 const dataFactory = (id, data) => data[id] || {}
 
@@ -37,6 +36,5 @@ const selectors = {
   productGroupsGetter,
   paymentTypesGetter,
 }
-registerSelectors(selectors)
 
 export default selectors

@@ -6,8 +6,5 @@
   "license": "MIT",
   "dependencies": {
     "reselect": "^4.0.0"
-  },
-  "devDependencies": {
-    "reselect-tools": "^0.0.6"
   }
 }

@@ -1,7 +1,8 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { set, cloneDeep } from 'lodash'
-import { requestCreator, requestTypes, requestStatuses, getError } from './index'
+import { set, cloneDeep, curry } from 'lodash'
+import { testsCreator } from '~utils/testHelper'
+import { requestCreator, requestTypes, requestStatuses } from './index'
 
 const mockStore = configureStore([thunk])
 
@@ -12,22 +13,18 @@ const correctData = {
 }
 
 describe('requestCreator', () => {
-  const dispatch = jest.fn()
-  ;[
-    { field: 'type', testValues: [undefined, null, ''] },
-    { field: 'requestType', testValues: [undefined, null, '', 'CUSTOM_TYPE'] },
-    { field: 'requestUrl', testValues: [undefined, null, '', 'url', 'htt://g.ru'] },
-    { field: 'callbacks.successful', testValues: [null, true, 1, 'text', [1]] },
-    { field: 'callbacks.unfortunate', testValues: [null, true, 1, 'text', [1]] },
-  ].forEach(({ field, testValues }) =>
-    it(`${field} is incorrect`, () => {
-      testValues.forEach(value => {
-        expect(() => {
-          requestCreator(dispatch, set(cloneDeep([correctData]), field, value))
-        }).toThrow(getError({ [field]: value }))
-      })
-    })
-  )
+  testsCreator({
+    func: curry(requestCreator)(jest.fn()),
+    getError: requestCreator.getError,
+    validations: [
+      { field: 'type', testValues: [undefined, null, ''] },
+      { field: 'requestType', testValues: [undefined, null, '', 'CUSTOM_TYPE'] },
+      { field: 'requestUrl', testValues: [undefined, null, '', 'url', 'htt://g.ru'] },
+      { field: 'callbacks.successful', testValues: [true, 1, 'text', [1]] },
+      { field: 'callbacks.unfortunate', testValues: [true, 1, 'text', [1]] },
+    ],
+    data: correctData,
+  })
 
   it('request is successfull', async () => {
     const store = mockStore({})
