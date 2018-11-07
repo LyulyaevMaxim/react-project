@@ -23,6 +23,7 @@ export const getError = (field = {}) =>
     ['requestType', v => `${v} is unknown request type`],
     ['requestUrl', v => `${v} is incorrect url`],
     ['callbacks.successful', v => `${v} is not function`],
+    ['callbacks.unfortunate', v => `${v} is not function`],
   ].forEach((fieldName, getText) => has(field, fieldName) && getText(field[fieldName]))
 
 export function axiosInitialization({ token }) {
@@ -38,6 +39,8 @@ export function requestCreator(dispatch, action) {
   if (!patterns.url.test(requestUrl)) throw new Error(getError({ requestUrl }))
   if (callbacks.successful && typeof callbacks.successful !== 'function')
     throw new Error(getError({ 'callbacks.successful': callbacks.successful }))
+  if (callbacks.unfortunate && typeof callbacks.unfortunate !== 'function')
+    throw new Error(getError({ 'callbacks.unfortunate': callbacks.unfortunate }))
 
   dispatch({ type: type + requestStatuses.REQUEST, meta })
 
