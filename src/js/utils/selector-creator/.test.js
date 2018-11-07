@@ -4,7 +4,7 @@ import { set, cloneDeep } from 'lodash'
 
 describe('selectorsCreator', () => {
   testsCreator({
-    func: selectorsCreator,
+    func: settings => selectorsCreator([settings]),
     getError: selectorsCreator.getError,
     validations: [
       { field: 'type', testValues: [undefined, null, ''] },
@@ -26,7 +26,7 @@ describe('selectorFactoriesCreator', () => {
     }
 
   testsCreator({
-    func: selectorFactoriesCreator,
+    func: settings => selectorFactoriesCreator([settings]),
     getError: selectorFactoriesCreator.getError,
     data: factorySettings,
     validations: [

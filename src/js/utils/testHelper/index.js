@@ -13,6 +13,7 @@ export function testsCreator({ func, getError, validations, data }) {
   validations.forEach(({ field, testValues }) => {
     it(`${field} is incorrect`, () => {
       testValues.forEach(value => {
+        // TODO: need get 'getError' from 'func'
         expect(() => func(set(cloneDeep(data), field, value))).toThrow(getError({ [field]: value }))
       })
     })

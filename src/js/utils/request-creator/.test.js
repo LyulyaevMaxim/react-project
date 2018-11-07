@@ -1,6 +1,6 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { set, cloneDeep, curry } from 'lodash'
+import { set, cloneDeep } from 'lodash'
 import { testsCreator } from '~utils/testHelper'
 import { requestCreator, requestTypes, requestStatuses } from './index'
 
@@ -14,7 +14,7 @@ const correctData = {
 
 describe('requestCreator', () => {
   testsCreator({
-    func: curry(requestCreator)(jest.fn()),
+    func: action => requestCreator(jest.fn(), action),
     getError: requestCreator.getError,
     validations: [
       { field: 'type', testValues: [undefined, null, ''] },
