@@ -9,8 +9,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "hapi": "^17.6.0",
-    "inert": "^5.1.0",
-    "pino": "^5.8.0"
+    "hapi": "^17.7.0",
+    "inert": "^5.1.2",
+    "pino": "^5.8.1"
   }
 }

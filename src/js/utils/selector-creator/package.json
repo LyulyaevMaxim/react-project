@@ -8,6 +8,6 @@
     "reselect": "^4.0.0"
   },
   "devDependencies": {
-    "reselect-tools": "^0.0.6"
+    "reselect-tools": "^0.0.7"
   }
 }

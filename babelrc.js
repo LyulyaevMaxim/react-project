@@ -63,7 +63,7 @@ let plugins = [
 ]
 
 if (isDev) {
-  plugins = [...plugins, 'react-hot-loader/babel']
+  plugins = [...plugins, `${root}/src/node_modules/react-hot-loader/babel`]
 } else {
   plugins = [
     ...plugins,
