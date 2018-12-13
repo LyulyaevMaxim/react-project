@@ -1,60 +1,25 @@
-.block-for-table {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  min-height: calc(100vh - 72px);
-  padding-top: 29px;
-  padding-bottom: 55px;
+@import '~css/variables.pcss';
 
-  & > pagination-block + table {
-    margin-top: 15px;
-  }
-
-  pagination-pagesize + pagination-page {
-    margin-left: auto;
-  }
-
-  pagination-pagesize pagination-pagesize-buttons {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  pagination-page pagination-page-buttons {
-    margin-left: 8px;
-    margin-right: 8px;
-  }
-}
-
-.table {
-  display: block;
-  table-layout: fixed;
-  border: none;
-  height: 100%;
+.table-container {
   width: 100%;
-}
+  /* overflow-x: auto; it's break "position: sticky" in titleLine */
+  padding-top: 50px;
 
-.table > tbody {
-  display: block;
-}
+  & > header {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, max-content));
+    grid-gap: 10px;
+    justify-content: flex-end;
 
-.no-data-label {
-  position: relative;
-  margin: auto;
-  width: 100%;
-  opacity: 1;
-  transition: opacity 0.3s;
-
-  &.disabled {
-    opacity: 0;
+    & > button {
+    }
   }
 
-  & > p {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 36px;
-    font-weight: 500;
-    color: rgba(79, 79, 79, 0.5);
+  & > header + main {
+    margin-top: 20px;
+  }
+
+  & > main {
+    min-width: max-content;
   }
 }

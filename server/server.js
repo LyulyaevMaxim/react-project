@@ -6,6 +6,7 @@ const distPath = './dist'
 const assetsPath = 'assets'
 
 const server = new Hapi.Server({
+  host: 'localhost',
   port: process.env.PORT || 5000,
   routes: {
     cors: true,
@@ -15,7 +16,7 @@ const server = new Hapi.Server({
 server.route([
   {
     method: 'GET',
-    path: prefix + `${assetsPath}/{param*}`,
+    path: `${prefix}${assetsPath}/{param*}`,
     options: {
       cache: {
         expiresIn: 1209600, //2 недели: 60 * 60 * 24 * 7 * 2
@@ -27,14 +28,13 @@ server.route([
   },
   {
     method: 'GET',
-    path: prefix + '{param*}',
+    path: `${prefix}{param*}`,
     options: {
       cache: {
         expiresIn: 1209600, //2 недели: 60 * 60 * 24 * 7 * 2
         privacy: 'private',
       },
-      handler: ({ params: { param: fileName } }, h) =>
-        h.file(path.join(process.cwd(), `${distPath}/index.html`)),
+      handler: ({ params: { param: fileName } }, h) => h.file(path.join(process.cwd(), `${distPath}/index.html`)),
     },
   },
 ])

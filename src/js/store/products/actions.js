@@ -5,11 +5,13 @@ const {
   PRODUCTS_UPDATE,
   PRODUCTS_CREATE,
   PRODUCT_ADD,
+  PRODUCT_DELETE,
   PRODUCTS_SAVE,
   PRODUCT_GROUPS_FETCH,
+  PAYMENT_TYPES_FETCH,
 } = require('./constants').default
 
-export const fetchProducts = () => dispatch =>
+export const fetchProducts = dispatch =>
   requestCreator(dispatch, {
     type: PRODUCTS_FETCH,
     requestType: GET_REQUEST,
@@ -39,11 +41,21 @@ export const createProducts = ({ productsData = [] }) => dispatch => {
 
 export const addProduct = () => dispath => dispath({ type: PRODUCT_ADD })
 
+export const deleteProduct = ({ id, isUnsaved }) => dispath =>
+  dispath({ type: PRODUCT_DELETE, payload: { id, isUnsaved } })
+
 export const saveProducts = () => dispath => dispath({ type: PRODUCTS_SAVE })
 
-export const fetchProductGroups = () => dispatch =>
+export const fetchProductGroups = dispatch =>
   requestCreator(dispatch, {
     type: PRODUCT_GROUPS_FETCH,
     requestType: GET_REQUEST,
     requestUrl: `${API_URL}/productGroupList/`,
+  })
+
+export const fetchPaymentTypes = dispatch =>
+  requestCreator(dispatch, {
+    type: PAYMENT_TYPES_FETCH,
+    requestType: GET_REQUEST,
+    requestUrl: `${API_URL}/paymentTypes/`,
   })

@@ -66,6 +66,10 @@ module.exports = {
     'global-require': 0,
     'standard/object-curly-even-spacing': 0,
     'standard/computed-property-even-spacing': 1,
+    'jsx-a11y/label-has-for': 1,
+    'jsx-a11y/label-has-associated-control': 1,
+    'jsx-a11y/no-noninteractive-element-interactions': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
   },
   settings: {
     'import/resolver': {

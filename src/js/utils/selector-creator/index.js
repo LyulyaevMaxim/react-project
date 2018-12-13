@@ -5,6 +5,7 @@ const defaultsMap = {
   string: '',
   object: {},
   array: [],
+  other: null,
 }
 
 export const selectorsCreator = (settings = []) =>
@@ -21,5 +22,12 @@ export const selectorFactoriesCreator = (settings = []) =>
     if (!selectors.length) throw new Error(`You must give field 'selectors' in ${index} element of settings (as array)`)
     if (typeof func !== 'function')
       throw new Error(`You must give field 'func' in ${index} element of settings (as func)`)
-    return { ...acc, [name]: () => createSelector(selectors, func) }
+    return {
+      ...acc,
+      [name]: () =>
+        createSelector(
+          selectors,
+          func
+        ),
+    }
   }, {})

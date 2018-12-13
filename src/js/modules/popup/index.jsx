@@ -7,16 +7,12 @@ export class PopupPortal extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { hasError: false }
     if (props.portalId && !document.getElementById(props.portalId)) {
       this.el = document.createElement('div')
       this.el.id = props.portalId
     } else this.el = document.getElementById(PopupPortal.defaultId)
-    this.el.classList.add(styles['popup'], styles['with-background'], ...props.classList)
-  }
-
-  componentDidCatch(error, info) {
-    this.setState({ error })
+    this.el.classList.add(styles.popup, styles['with-background'], ...props.classList)
   }
 
   componentDidMount() {
@@ -31,8 +27,12 @@ export class PopupPortal extends Component {
     document.body.removeChild(this.el)
   }
 
+  static getDerivedStateFromError() {
+    return { hasError: true }
+  }
+
   render() {
-    if (this.state.error || this.props.isOpen === null) return null
+    if (this.state.hasError || this.props.isOpen === null) return null
     return ReactDOM.createPortal(this.props.children, this.el)
   }
 }
@@ -48,7 +48,7 @@ export function Popup({ popupClass, closeClass, closeId, ...props }) {
   return (
     <form
       {...{
-        className: `${styles['popup']} ${popupClass}`,
+        className: `${styles.popup} ${popupClass}`,
         onSubmit: handleSubmit,
       }}
     >
@@ -58,7 +58,7 @@ export function Popup({ popupClass, closeClass, closeId, ...props }) {
           htmlFor: closeId,
         }}
       />
-      {this.props.children}
+      {props.children}
     </form>
   )
 }
