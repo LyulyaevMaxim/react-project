@@ -19,17 +19,18 @@ if (isDev) {
   // )
 }
 
-const rootReducer = combineReducers({
-  ...['auth', 'items', 'documents', 'roles', 'discounts', 'products'].reduce(
-    (accumulator, currentModule) => ({
-      ...accumulator,
-      [currentModule.substring(currentModule.lastIndexOf('/') + 1)]: require(`./${currentModule}/reducer`).default,
-    }),
-    {}
-  ),
-})
+const rootReducer = history =>
+  combineReducers({
+    ...['auth', 'items', 'documents', 'roles', 'discounts', 'products'].reduce(
+      (accumulator, currentModule) => ({
+        ...accumulator,
+        [currentModule.substring(currentModule.lastIndexOf('/') + 1)]: require(`./${currentModule}/reducer`).default,
+      }),
+      { router: connectRouter(history) }
+    ),
+  })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const enhancer = isDev ? composeEnhancers(applyMiddleware(...middlewares)) : applyMiddleware(...middlewares)
 
-export const store = createStore(connectRouter(history)(rootReducer), enhancer)
+export const store = createStore(rootReducer(history), enhancer)

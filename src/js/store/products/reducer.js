@@ -1,14 +1,16 @@
 import produce from 'immer'
 import { requestStatuses } from '~utils/request-creator'
-import { paymentTypes, productGroups } from './fakeData'
+import { paymentTypes, productGroups, productsData  } from './fakeData'
 
 const {
   PRODUCTS_FETCH,
   PRODUCT_ADD,
+  PRODUCT_DELETE,
   PRODUCTS_SAVE,
   PRODUCTS_CREATE,
   PRODUCTS_UPDATE,
   PRODUCT_GROUPS_FETCH,
+  PAYMENT_TYPES_FETCH,
 } = require('./constants').default
 
 const initialState = {
@@ -18,15 +20,16 @@ const initialState = {
   data: {},
   unsavedList: [],
   unsavedData: {},
-  productGroups,
-  paymentTypes,
+  productGroups: { options: [], optionsMap: {}, isLoad: null },
+  paymentTypes: { options: [], optionsMap: {}, isLoad: null },
 }
 
 const initialProduct = {
-  active: false,
-  name: '',
-  description: '',
-  product_groups: [],
+  active: { value: false },
+  name: { value: '' },
+  description: { value: '' },
+  productGroups: { value: [] },
+  paymentTypes: { value: [] },
 }
 
 export default produce((state = initialState, { type, payload = {}, meta = {} }) => {
@@ -44,10 +47,26 @@ export default produce((state = initialState, { type, payload = {}, meta = {} })
       break
     }
 
+    case PRODUCTS_FETCH + requestStatuses.FAIL: {
+      const normalizedProducts = productsNormalize({ products: productsData })
+      state.data = normalizedProducts.data
+      state.list = normalizedProducts.list
+      state.isLoadProducts = false
+      break
+    }
+
     case PRODUCT_ADD: {
       const productId = state.unsavedList.length + 1
       state.unsavedList.push(productId)
-      state.unsavedData[productId] = { ...initialProduct, productId }
+      state.unsavedData[productId] = { ...initialProduct, id: productId }
+      break
+    }
+
+    case PRODUCT_DELETE: {
+      const { id, isUnsaved } = payload,
+        [listName, dataName] = isUnsaved ? ['unsavedList', 'unsavedData'] : ['list', 'data']
+      state[listName] = state[listName].filter(productId => productId !== id)
+      delete state[dataName][id]
       break
     }
 
@@ -83,10 +102,21 @@ export default produce((state = initialState, { type, payload = {}, meta = {} })
       state.productGrops = payload.reduce(
         (acc, { groupId, name }) => {
           acc.options.push({ value: groupId, label: name })
+          acc.optionsMap[groupId] = name
           return acc
         },
-        { options: [] }
+        { options: [], optionsMap: {}, isLoad: false }
       )
+      break
+    }
+
+    case PRODUCT_GROUPS_FETCH + requestStatuses.FAIL: {
+      state.productGroups = { ...productGroups, isLoad: false }
+      break
+    }
+
+    case PAYMENT_TYPES_FETCH + requestStatuses.FAIL: {
+      state.paymentTypes = { ...paymentTypes, isLoad: false }
       break
     }
 

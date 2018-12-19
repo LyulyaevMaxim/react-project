@@ -7,7 +7,7 @@ html {
   font-family: $MuseoSans;
   font-weight: $FontLight;
   height: 100%;
-  scroll-behavior: smooth; //иначе: elem.scrollIntoView({ behavior: 'smooth' })
+  scroll-behavior: smooth; /*else: elem.scrollIntoView({ behavior: 'smooth' })*/
 }
 
 *,
@@ -69,7 +69,8 @@ audio,
 canvas,
 progress,
 video,
-img {
+img,
+picture {
   display: block;
 }
 
@@ -152,6 +153,7 @@ svg {
 
 body {
   color: var(--textColor);
+  background-color: var(--fonColor);
   -webkit-font-smoothing: antialiased; //улучшает качество отображения текста на Mac OS
   line-height: 1;
   min-height: 100%;

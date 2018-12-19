@@ -13,10 +13,9 @@ class MainPage extends Component {
     {
       title: 'Таблица',
       path: `${MainPage.path}table`,
-      component: loadable(() => import('~components/operationTable')),
+      component: loadable(() => import('~components/products')),
     },
     { title: 'Форма', path: `${MainPage.path}form`, component: loadable(() => import('~components/form-demo')) },
-    { title: 'Продукты', path: `${MainPage.path}products`, component: loadable(() => import('~components/products')) },
   ]
 
   render() {

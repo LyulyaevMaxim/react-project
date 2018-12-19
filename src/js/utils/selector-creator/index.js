@@ -16,6 +16,7 @@ selectorsCreator.defaultsMap = {
   string: '',
   object: {},
   array: [],
+  other: null
 }
 
 selectorsCreator.getError = errorsMapCreator([

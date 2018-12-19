@@ -109,10 +109,10 @@ flatstr@^1.0.5:
   resolved "https://registry.yarnpkg.com/flatstr/-/flatstr-1.0.8.tgz#0e849229751f2b9f6a0919f8e81e1229e84ba901"
   integrity sha512-YXblbv/vc1zuVVUtnKl1hPqqk7TalZCppnKE7Pr8FI/Rp48vzckS/4SJ4Y9O9RNiI82Vcw/FydmtqdQOg1Dpqw==
 
-hapi@^17.6.0:
-  version "17.6.0"
-  resolved "https://registry.yarnpkg.com/hapi/-/hapi-17.6.0.tgz#158a2276253a8de727be678c4daeb1f73929e588"
-  integrity sha512-GSHjE1hJExluAukrT/QuYSk96irmbYBDd3wOgywiHsPoR2QeKgDnIttD+dB6NbADEmSdb9MS5gTUIVq0uHTdkA==
+hapi@^17.7.0:
+  version "17.7.0"
+  resolved "https://registry.yarnpkg.com/hapi/-/hapi-17.7.0.tgz#7d335e161fcfef5cc7f2a0aa090ccf9169f9382a"
+  integrity sha512-I34AQyIVO4kTpjkC6pyAq4yaeUcIuCxt6QOEh5QjD6K1yGLTMSGE4muNxp0qR9FTW7ARJ/Innwf/48MiMlOxcw==
   dependencies:
     accept "3.x.x"
     ammo "3.x.x"
@@ -122,11 +122,12 @@ hapi@^17.6.0:
     catbox "10.x.x"
     catbox-memory "3.x.x"
     heavy "6.x.x"
-    hoek "5.x.x"
-    joi "13.x.x"
+    hoek "6.x.x"
+    joi "14.x.x"
     mimos "4.x.x"
     podium "3.x.x"
     shot "4.x.x"
+    somever "2.x.x"
     statehood "6.x.x"
     subtext "6.x.x"
     teamwork "3.x.x"
@@ -146,16 +147,21 @@ hoek@5.x.x:
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-5.0.4.tgz#0f7fa270a1cafeb364a4b2ddfaa33f864e4157da"
   integrity sha512-Alr4ZQgoMlnere5FZJsIyfIjORBqZll5POhDsF4q64dPuJR6rNxXdDxtHSQq8OXRurhmx+PWYEE8bXRROY8h0w==
 
-inert@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/inert/-/inert-5.1.0.tgz#e9f130dc3047ccd9ffaa64b157b4c1114611035d"
-  integrity sha512-5rJZbezGEkBN4QrP/HEEwsQ0N+7YzqDZrvBZrE7B0CrNY6I4XKI434aL3UNLCmbI4HzPGQs7Ae/4h1tiTMJ6Wg==
+hoek@6.x.x:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/hoek/-/hoek-6.0.2.tgz#a79eac32bdc4fdd6ca056951e3066d84c229d228"
+  integrity sha512-0RGPLkyxpsMJVj/iOCaJaIWFEch988eUicJJpRiQ+Or1CMvBXcoZPlSx9FhreDWw4hxMYy8xgTEdlsYQDTnxWA==
+
+inert@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/inert/-/inert-5.1.2.tgz#0c26f15bc22aae7af9c1f1a164bf867c58c5f4a6"
+  integrity sha512-5jSCKrQ7ENfdECnzLatCejXSkJwVzKFXZW30fI6TNHFbDuigT8IilRfydI2H5j9ZTnH7vXKO4WUg2qph9bItow==
   dependencies:
     ammo "3.x.x"
     boom "7.x.x"
     bounce "1.x.x"
-    hoek "5.x.x"
-    joi "13.x.x"
+    hoek "6.x.x"
+    joi "14.x.x"
     lru-cache "4.1.x"
 
 iron@5.x.x:
@@ -180,6 +186,15 @@ joi@13.x.x:
   integrity sha512-xuY5VkHfeOYK3Hdi91ulocfuFopwgbSORmIwzcwHKESQhC7w1kD5jaVSPnqDxS2I8t3RZ9omCKAxNwXN5zG1/Q==
   dependencies:
     hoek "5.x.x"
+    isemail "3.x.x"
+    topo "3.x.x"
+
+joi@14.x.x:
+  version "14.0.4"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-14.0.4.tgz#f066f79330f6bd6f3dda243be6d2c211f83a5f9b"
+  integrity sha512-KUXRcinDUMMbtlOk7YLGHQvG73dLyf8bmgE+6sBTkdJbZpeGVGAlPXEHLiQBV7KinD/VLD5OA0EUgoTTfbRAJQ==
+  dependencies:
+    hoek "6.x.x"
     isemail "3.x.x"
     topo "3.x.x"
 
@@ -235,10 +250,10 @@ pino-std-serializers@^2.3.0:
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-2.3.0.tgz#34eeaab97c055c28e22c0542ae55978e7e427786"
   integrity sha512-klfGoOsP6sJH7ON796G4xoUSx2fkpFgKHO4YVVO2zmz31jR+etzc/QzGJILaOIiCD6HTCFgkPx+XN8nk+ruqPw==
 
-pino@^5.8.0:
-  version "5.8.0"
-  resolved "https://registry.yarnpkg.com/pino/-/pino-5.8.0.tgz#b566f78617c53c2bae91d30ad62d52cd1074df4a"
-  integrity sha512-L+nysfU1DMoMku+/4DTsBNFl/ajFzPWMGFQ7Gs3Cuo60Iya4ixPzHSxBUT6po2lQRexW9iEj8oCAIGpEXBeIZQ==
+pino@^5.8.1:
+  version "5.8.1"
+  resolved "https://registry.yarnpkg.com/pino/-/pino-5.8.1.tgz#1385335f8c356b6d80cd357bcc767d42aac7f263"
+  integrity sha512-7bVFzUw3ffIfOM3t7MuQ9KsH+wX5bdGdQhGfccKgleoY7qG4FO3CmVSjywlFmmYGyMOISi1LDGC6JMEH7XkZJg==
   dependencies:
     fast-json-parse "^1.0.3"
     fast-redact "^1.2.0"
@@ -287,6 +302,14 @@ shot@4.x.x:
   dependencies:
     hoek "5.x.x"
     joi "13.x.x"
+
+somever@2.x.x:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/somever/-/somever-2.0.0.tgz#7bdbed3bee8ece2c7c8a2e7d9a1c022bd98d6c89"
+  integrity sha512-9JaIPP+HxwYGqCDqqK3tRaTqdtQHoK6Qy3IrXhIt2q5x8fs8RcfU7BMWlFTCOgFazK8p88zIv1tHQXvAwtXMyw==
+  dependencies:
+    bounce "1.x.x"
+    hoek "6.x.x"
 
 sonic-boom@^0.6.1:
   version "0.6.1"
