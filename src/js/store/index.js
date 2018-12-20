@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import thunk from 'redux-thunk'
-import { getStateWith } from 'reselect-tools'
 
 // import createSagaMiddleware from 'redux-saga'
 // import { createLogger } from 'redux-logger'
@@ -35,5 +34,3 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const enhancer = isDev ? composeEnhancers(applyMiddleware(...middlewares)) : applyMiddleware(...middlewares)
 
 export const store = createStore(rootReducer(history), enhancer)
-
-getStateWith(() => store.getState())

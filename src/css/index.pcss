@@ -86,6 +86,12 @@ a {
   text-decoration: none;
 }
 
+a, button {
+  &:focus {
+      outline: none;
+  }
+}
+
 strong {
   font-weight: inherit;
 }
@@ -193,7 +199,6 @@ body {
     & > main {
       align-content: flex-start;
       background-color: var(--fonColor);
-
       flex: 1;
     }
   }

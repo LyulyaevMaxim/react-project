@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { SUCCESS } from '~utils/request-creator'
+import { requestStatuses } from '~utils/request-creator'
 import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
 
@@ -11,11 +11,11 @@ const initialState = {
 
 export default produce((state = initialState, { type, payload = {}, toReducer = {} }) => {
   switch (type) {
-    case USERS_GET + SUCCESS: {
+    case USERS_GET + requestStatuses.SUCCESS: {
       return { ...state, ...normalizeEntity({ data: payload.users, key: 'userId' }) }
     }
 
-    case USER_DELETE + SUCCESS: {
+    case USER_DELETE + requestStatuses.SUCCESS: {
       const { userId } = toReducer
       const { [userId]: temp, ...data } = state.data
       return {
@@ -25,7 +25,7 @@ export default produce((state = initialState, { type, payload = {}, toReducer = 
       }
     }
 
-    case USER_CREATE + SUCCESS: {
+    case USER_CREATE + requestStatuses.SUCCESS: {
       const id = payload
       state.data[id].meta = toReducer.user
       state.data[id].updated = Date.now()

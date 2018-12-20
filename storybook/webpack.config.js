@@ -1,8 +1,8 @@
-const path = require('path')
-const projectRoot = path.resolve(__dirname, '../')
-const root = path.resolve(__dirname, './')
-const isDev = process.env.NODE_ENV === 'development'
-const webpackConfig = require(`${projectRoot}/webpack.config.js`)()
+const path = require('path'),
+  projectRoot = path.resolve(__dirname, '../'),
+  root = path.resolve(__dirname, './'),
+  webpackConfig = require(`${projectRoot}/webpack.config.js`)(),
+  isDev = process.env.NODE_ENV === 'development'
 
 module.exports = (baseConfig, env, defaultConfig) => {
   defaultConfig.module.rules[0] = {

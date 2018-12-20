@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { REQUEST, SUCCESS } from '~utils/request-creator'
+import { requestStatuses } from '~utils/request-creator'
 import { normalizeEntity } from '~utils/normalize'
 
 const { ITEMS_GET_QUANTITY, ITEMS_GET } = require('./constants').default
@@ -11,20 +11,20 @@ const initialState = {
 
 export default produce((state = initialState, { type, payload = {}, other = {} }) => {
   switch (type) {
-    case ITEMS_GET_QUANTITY + SUCCESS: {
+    case ITEMS_GET_QUANTITY + requestStatuses.SUCCESS: {
       state.lastUpdate = payload.date
       state.quantityItems = payload.res.count
       break
     }
 
-    case ITEMS_GET + REQUEST: {
+    case ITEMS_GET + requestStatuses.REQUEST: {
       const { storeId } = other
       state.storeId = storeId
       state.intoShops[storeId].loadingItems = true
       break
     }
 
-    case ITEMS_GET + SUCCESS: {
+    case ITEMS_GET + requestStatuses.SUCCESS: {
       const { storeId } = other
       const { count, items, offset } = payload.res
       const { data, list: normalizeList } = normalizeEntity({ data: items, key: 'articul' })

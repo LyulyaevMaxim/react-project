@@ -1,7 +1,8 @@
-const path = require('path')
-const root = path.resolve(__dirname, './')
-const isDev = process.env.NODE_ENV === 'development'
-const isTest = process.env.NODE_ENV === 'test'
+const path = require('path'),
+  root = path.resolve(__dirname, './'),
+  webpackConfig = require(`${root}/webpack.config.js`)(),
+  isDev = process.env.NODE_ENV === 'development',
+  isTest = process.env.NODE_ENV === 'test'
 
 const presets = [
   [
@@ -54,10 +55,9 @@ let plugins = [
     },
   ],
   [
-    'module-resolver', //for react-css-modules
+    'module-resolver', //for react-css-modules and jest
     {
-      root: [`${root}/src`],
-      alias: { '~css': `${root}/src/css` },
+      alias: webpackConfig.resolve.alias,
     },
   ],
 ]

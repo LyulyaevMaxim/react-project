@@ -1,14 +1,14 @@
-const path = require('path')
-const root = path.resolve(__dirname, '../')
-const isProd = process.env.NODE_ENV === 'production'
+const path = require('path'),
+  root = path.resolve(__dirname, '../'),
+  isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   bail: true,
   verbose: true,
   notify: false,
-  testEnvironment: 'jsdom', // "node"
+  testEnvironment: 'node',
   // testURL: => location.href
-  runner: 'jest-runner', // "jest-runner-eslint" "jest-runner-prettier"
+  runner: 'jest-runner',
   roots: [`${root}/src/js`],
   // "projects": [`${root}/pr1`, `${root}/pr2`]
   // moduleFileExtensions: ['js', 'jsx', 'json],

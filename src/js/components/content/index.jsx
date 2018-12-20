@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import loadable from 'loadable-components'
-import { loadHelper } from '~utils/loadHelper'
+import loadable from 'react-loadable'
+import styles from './index.pcss'
 
-const preloadModules = [
-    { name: 'Button', module: loadable(() => import('~modules/button')) },
-    { name: 'PopupPortal', module: loadable(() => import('~modules/popup')), isDefault: false },
-  ],
-  postModules = [{ name: 'styles', module: loadable(() => import('./index.pcss')) }]
+const Button = loadable({
+    loader: () => import('~modules/button' /* webpackChunkName: "modules->button" */),
+    loading: () => null,
+  }),
+  PopupPortal = loadable({
+    loader: () => import('~modules/popup' /* webpackChunkName: "modules->popup" */).then(modules => modules.PopupPortal),
+    loading: () => null,
+  })
 
 class Content extends Component {
   constructor(props) {
@@ -15,23 +18,12 @@ class Content extends Component {
     this.state = { isOpenContactForm: null }
   }
 
-  componentDidMount() {
-    loadHelper({ preloadModules, postModules, setState: this.setState.bind(this) })
-  }
-
   onOpenContactForm = event => {
     event.preventDefault()
     this.setState(state => ({ isOpenContactForm: !state.isOpenContactForm }))
   }
 
   render() {
-    if (this.state.isAsyncModulesLoading !== false)
-      return (
-        <main>
-          <div className="loader" />
-        </main>
-      )
-    const { Button, PopupPortal, styles } = this.state.asyncModules
     return (
       <main className={styles.main}>
         <h1 className={styles.h1}>React Project</h1>

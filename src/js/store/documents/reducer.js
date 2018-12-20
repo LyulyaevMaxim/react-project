@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { REQUEST, SUCCESS } from '~utils/request-creator'
+import { requestStatuses } from '~utils/request-creator'
 
 const { DOCUMENTS_GET } = require('./constants').default
 const initialState = {
@@ -9,12 +9,12 @@ const initialState = {
 
 export default produce((state = initialState, { type, payload = {}, other = {} }) => {
   switch (type) {
-    case DOCUMENTS_GET + REQUEST: {
+    case DOCUMENTS_GET + requestStatuses.REQUEST: {
       state.loadingDocuments = true
       break
     }
 
-    case DOCUMENTS_GET + SUCCESS: {
+    case DOCUMENTS_GET + requestStatuses.SUCCESS: {
       const { storeId } = other
       const { data, list } = divideIntoShops({ data: payload })
       state.loadingDocuments = false

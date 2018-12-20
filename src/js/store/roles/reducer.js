@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { REQUEST, SUCCESS } from '~utils/request-creator'
+import { requestStatuses } from '~utils/request-creator'
 import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
 
@@ -12,12 +12,12 @@ const initialState = {
 
 export default produce((state = initialState, { type, payload = {}, toReducer = {} }) => {
   switch (type) {
-    case ROLES_GET + REQUEST: {
+    case ROLES_GET + requestStatuses.REQUEST: {
       state.loadingRoles = true
       break
     }
 
-    case ROLES_GET + SUCCESS: {
+    case ROLES_GET + requestStatuses.SUCCESS: {
       const { data, list } = normalizeEntity({ data: payload, key: 'roleId' })
       state.loadingRoles = false
       state.data = { ...state.data, ...data }
@@ -25,19 +25,19 @@ export default produce((state = initialState, { type, payload = {}, toReducer = 
       break
     }
 
-    case ROLE_CREATE + SUCCESS: {
+    case ROLE_CREATE + requestStatuses.SUCCESS: {
       const roleId = payload
       state.list.push(roleId)
       state.data[roleId] = toReducer.role
       break
     }
 
-    case ROLE_DELETE + SUCCESS: {
+    case ROLE_DELETE + requestStatuses.SUCCESS: {
       state.list = removeElement({ arr: state.list, value: toReducer.roleId })
       break
     }
 
-    case ROLE_UPDATE + SUCCESS: {
+    case ROLE_UPDATE + requestStatuses.SUCCESS: {
       const { role } = toReducer
       state.data[role.roleId] = { ...state.data[role.roleId], ...role }
       break

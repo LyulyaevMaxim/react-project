@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-import loadable from 'loadable-components'
-import { loadHelper } from '~utils/loadHelper'
+import React from 'react'
 import { patternPhone, patternInn, patternNumber, patternLetter } from './patterns'
+import styles from './input.pcss'
 
-const preloadModules = [{ name: 'styles', module: loadable(() => import('./input.pcss')) }]
+const getClass = require('~utils/react').className()
 
-class Input extends Component {
+class Input extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -15,7 +14,6 @@ class Input extends Component {
   }
 
   async componentDidMount() {
-    loadHelper({ preloadModules, setState: this.setState.bind(this) })
     if (typeof this.props.value !== 'undefined' && this.props.value.length) {
       await this.setState({ currentValue: this.props.value })
       this.handleFocusOut()
@@ -23,14 +21,8 @@ class Input extends Component {
   }
 
   render() {
-    if (this.state.isAsyncModulesLoading !== false) return null
     const { pattern, getValue, className: propsClass = '', ...props } = this.props
-    const {
-      currentValue,
-      className: stateClass,
-      asyncModules: { styles },
-    } = this.state
-
+    const { currentValue, className: stateClass = '' } = this.state
     return (
       <input
         {...{
@@ -38,9 +30,7 @@ class Input extends Component {
           value: currentValue,
           onChange: this.handleChange,
           onBlur: this.handleFocusOut,
-          className: `${styles['maxwell-input']} ${propsClass.length ? propsClass : ''} ${
-            stateClass.length ? stateClass : ''
-          }`,
+          className: getClass([styles['maxwell-input'], propsClass, stateClass && styles[stateClass]])
         }}
       />
     )
