@@ -9,7 +9,6 @@
     "./**/**"
   ],
   "dependencies": {
-    "@loadable/component": "^5.2.2",
     "babel-plugin-react-css-modules": "^5.0.0",
     "connected-react-router": "^6.0.0",
     "history": "^4.7.2",

@@ -7,7 +7,7 @@ import '~css/index.pcss'
 import Header from '~components/header'
 
 const ContactForm = loadable({
-  loader: () => import('~components/contact-form'),
+  loader: () => import('~components/contact-form' /* webpackChunkName: "components->contactForm */),
   loading: () => null,
 })
 
@@ -16,7 +16,7 @@ const routes = [
     title: 'Главная',
     path: initialPath,
     component: loadable({
-      loader: () => import('~components/content'),
+      loader: () => import('~components/content' /* webpackChunkName: "components->content" */),
       loading: () => null,
     }),
   },
@@ -24,7 +24,7 @@ const routes = [
     title: 'Форма',
     path: `${initialPath}form`,
     component: loadable({
-      loader: () => import('~components/form-demo' /* webpackChunkName: "~components/form-demo" */),
+      loader: () => import('~components/form-demo' /* webpackChunkName: "components->form-demo" */),
       loading: () => null,
     }),
   },
@@ -32,7 +32,7 @@ const routes = [
     title: 'Таблица',
     path: `${initialPath}table`,
     component: loadable({
-      loader: () => import('~components/products' /* webpackChunkName: "~components/products" */),
+      loader: () => import('~components/products' /* webpackChunkName: "components->products" */),
       loading: () => null,
     })
   }

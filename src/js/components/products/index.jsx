@@ -5,7 +5,7 @@ import loadable from 'react-loadable'
 import styles from './index.pcss'
 
 const Table = loadable({
-  loader: () => import('~modules/table'),
+  loader: () => import('~modules/table' /* webpackChunkName: "modules->table" */),
   loading: () => null,
 })
 

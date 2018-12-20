@@ -5,11 +5,11 @@ import loadable from 'react-loadable'
 import styles from './index.pcss'
 
 const TableLine = loadable({
-    loader: () => import('./line'),
+    loader: () => import('./line' /* webpackChunkName: "modules->table->line" */),
     loading: () => null,
   }),
   Button = loadable({
-    loader: () => import('~modules/button'),
+    loader: () => import('~modules/button' /* webpackChunkName: "modules->button" */),
     loading: () => null,
   })
 

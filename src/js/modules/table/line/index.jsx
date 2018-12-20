@@ -1,13 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { get, set } from 'lodash'
+import { get, set } from 'lodash-es'
 import produce from 'immer'
-import Select from '~modules/select'
-import Button from '~modules/button'
-import LazyImage from '~modules/lazyImage'
+import loadable from 'react-loadable'
 import { LineConsumer } from '../index'
 import styles from './index.pcss'
+
+const Select = loadable({
+    loader: () => import('~modules/select' /* webpackChunkName: "modules->select" */),
+    loading: () => null,
+  }),
+  Button = loadable({
+    loader: () => import('~modules/button' /* webpackChunkName: "modules->button" */),
+    loading: () => null,
+  }),
+  LazyImage = loadable({
+    loader: () => import('~modules/lazyImage' /* webpackChunkName: "modules->lazyImage" */),
+    loading: () => null,
+  })
 
 const className = require('~utils/react').className({ styles })
 

@@ -1,14 +1,13 @@
-// home.component.js
 import React, { Component } from 'react'
 import loadable from 'react-loadable'
 import styles from './index.pcss'
 
 const Button = loadable({
-    loader: () => import('~modules/button'),
+    loader: () => import('~modules/button' /* webpackChunkName: "modules->button" */),
     loading: () => null,
   }),
   PopupPortal = loadable({
-    loader: () => import('~modules/popup').then(modules => modules.PopupPortal),
+    loader: () => import('~modules/popup' /* webpackChunkName: "modules->popup" */).then(modules => modules.PopupPortal),
     loading: () => null,
   })
 

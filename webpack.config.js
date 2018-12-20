@@ -101,15 +101,14 @@ module.exports = (env, argv) => ({
             modules: true,
             localIdentName: '[local]-[hash:base64:4]',
             sourceMap: isDev,
+            // camelCase: true,
+            // exportOnlyLocals: true,
           },
         },
         {
           loader: 'postcss-loader',
           options: {
-            ident: 'postcss',
-            config: {
-              path: `${root}/postcss.config.js`,
-            },
+            config: { path: `${root}/postcss.config.js` },
             sourceMap: isDev && 'inline',
           },
         },
@@ -117,8 +116,7 @@ module.exports = (env, argv) => ({
     }),
     new MiniCssExtractPlugin({
       filename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
-      chunkFilename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
-      ignoreOrder: true,
+      chunkFilename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -243,35 +241,7 @@ module.exports = (env, argv) => ({
               outputPath: `${assetsPath}/img`,
               publicPath: `${initialPath}${assetsPath}/img`,
             },
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              disable: isDev,
-              svgo: {
-                plugins: [{ removeTitle: true }, { convertPathData: false }],
-                enabled: false,
-              },
-              mozjpeg: {
-                enabled: false, //don't work with Firefox
-                progressive: true,
-                quality: 65,
-              },
-              pngquant: {
-                quality: '65-90',
-                speed: 4,
-              },
-              optipng: {
-                enabled: false,
-              },
-              gifsicle: {
-                enabled: false,
-              },
-              webp: {
-                enabled: false,
-              },
-            },
-          },
+          }
         ].filter(Boolean),
       },
     ],

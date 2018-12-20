@@ -3,11 +3,11 @@ import loadable from 'react-loadable'
 import styles from './index.pcss'
 
 const Input = loadable({
-    loader: () => import('~modules/input'),
+    loader: () => import('~modules/input' /* webpackChunkName: "modules->input" */),
     loading: () => null,
   }),
   Textarea = loadable({
-    loader: () => import('~modules/textarea'),
+    loader: () => import('~modules/textarea' /* webpackChunkName: "modules->textarea" */),
     loading: () => null,
   })
 

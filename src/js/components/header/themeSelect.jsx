@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import loadable from '@loadable/component'
+import loadable from 'react-loadable'
 import globalStyles from '~css/index.pcss'
 import styles from './index.pcss'
 
-const Select = loadable(() => import('~modules/select'))
+const Select = loadable({
+  loader: () => import('~modules/select' /* webpackChunkName: "modules->select" */),
+  loading: () => null,
+})
 
 class ThemeSelect extends Component {
   static themes = { dark: globalStyles['dark-theme'], light: globalStyles['light-theme'] }
