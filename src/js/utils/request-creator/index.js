@@ -36,7 +36,6 @@ export function requestCreator(dispatch, action) {
     throw new Error(getError({ 'callbacks.unfortunate': callbacks.unfortunate }))
 
   dispatch({ type: type + requestStatuses.REQUEST, meta })
-
   let method, data, params
   switch (requestType) {
     case requestTypes.GET_REQUEST: {
@@ -67,7 +66,6 @@ export function requestCreator(dispatch, action) {
     default:
       break
   }
-
   return axios({ method, url: requestUrl, data, params, headers })
     .then(result => {
       const payload = get(result, resultField, result)

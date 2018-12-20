@@ -1,6 +1,6 @@
 const path = require('path'),
   root = path.resolve(__dirname, './'),
-  webpackConfig = require(`${root}/webpack.config.js`),
+  webpackConfig = require(`${root}/webpack.config.js`)(),
   isDev = process.env.NODE_ENV === 'development',
   isTest = process.env.NODE_ENV === 'test'
 

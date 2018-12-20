@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch, props) =>
   mapStateToProps,
   mapDispatchToProps,
   null,
-  { withRef: true }
+  { forwardRef: true }
 )
 class TableLine extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class TableLine extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (!this.state.isEdit && this.props.isSaved !== nextProps.isSaved) return null
+    if (this.state && !this.state.isEdit && this.props.isSaved !== nextProps.isSaved) return null
     return true
   }
 

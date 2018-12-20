@@ -1,5 +1,6 @@
 import { requestCreator, requestTypes, requestStatuses } from '~utils/request-creator'
 import { API_URL } from '~constants'
+
 const {
   PRODUCTS_FETCH,
   PRODUCTS_UPDATE,
@@ -56,6 +57,6 @@ export const fetchProductGroups = dispatch =>
 export const fetchPaymentTypes = dispatch =>
   requestCreator(dispatch, {
     type: PAYMENT_TYPES_FETCH,
-    requestType: GET_REQUEST,
+    requestType: requestTypes.GET_REQUEST,
     requestUrl: `${API_URL}/paymentTypes/`,
   })

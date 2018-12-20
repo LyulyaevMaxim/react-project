@@ -1,5 +1,5 @@
 import React from 'react'
-import loadable from 'loadable-components'
+import loadable from '@loadable/component'
 import styles from './index.pcss'
 
 const LazyImg = loadable(() => import('~modules/lazy-img'))

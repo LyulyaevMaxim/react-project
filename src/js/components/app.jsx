@@ -1,42 +1,58 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Fragment } from 'react'
 import { hot } from 'react-hot-loader'
 import { Route, Switch } from 'react-router-dom'
-import loadable from 'loadable-components'
-import { loadHelper } from '~utils/loadHelper'
+import loadable from 'react-loadable'
+import { initialPath } from '~constants'
+import '~css/index.pcss'
+import Header from '~components/header'
 
-const preloadModules = [{ name: 'styles', module: loadable(() => import('~css/index.pcss')) }]
+const ContactForm = loadable({
+  loader: () => import('~components/contact-form'),
+  loading: () => null,
+})
 
-class App extends Component {
-  static path = require('~constants').initialPath
-
-  componentDidMount() {
-    loadHelper({ preloadModules, setState: this.setState.bind(this) })
+const routes = [
+  {
+    title: 'Главная',
+    path: initialPath,
+    component: loadable({
+      loader: () => import('~components/content'),
+      loading: () => null,
+    }),
+  },
+  {
+    title: 'Форма',
+    path: `${initialPath}form`,
+    component: loadable({
+      loader: () => import('~components/form-demo' /* webpackChunkName: "~components/form-demo" */),
+      loading: () => null,
+    }),
+  },
+  {
+    title: 'Таблица',
+    path: `${initialPath}table`,
+    component: loadable({
+      loader: () => import('~components/products' /* webpackChunkName: "~components/products" */),
+      loading: () => null,
+    })
   }
+]
 
-  render() {
-    if (!this.state || this.state.isAsyncModulesLoading !== false) return null
-    return (
-      <Switch>
-        <Route {...{ path: App.path, component: loadable(() => import('./main-page')) }} />
-        <Route
-          {...{
-            exact: true,
-            path: '/404',
-            render: () => <h1>Упс.. 404</h1>,
-          }}
-        />
-      </Switch>
-    )
-  }
-}
+const App = () => <Fragment>
+  <Header {...{ routes }} />
+  <Switch>
+    <Route
+      {...{
+        exact: true,
+        path: '/404',
+        render: () => <h1>Упс.. 404</h1>,
+      }}
+    />
+    {routes.map(({ path, component, title }, index) => (
+      <Route {...{ path, component, exact: index === 0, key: `route-${title}` }} />
+    ))}
+  </Switch>
+  <ContactForm />
+</Fragment>
 
-const mapStateToProps = ({ auth, router: { location } }) => ({ auth, location })
-const mapDispatchToProps = require('~store/auth/actions')
-
-export default hot(module)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-)
+export default hot(module)(App)

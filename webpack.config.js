@@ -30,7 +30,7 @@ const cacheLoader = {
   },
 }
 
-module.exports = {
+module.exports = (env, argv) => ({
   mode,
   target: 'web',
   devtool: isDev ? 'eval-cheap-module-source-map' : 'none',
@@ -71,9 +71,9 @@ module.exports = {
   plugins: [
     /* !isDev && new (require('hard-source-webpack-plugin'))(), */
     !isDev &&
-      new CleanWebpackPlugin([distPath], {
-        allowExternal: true,
-      }),
+    new CleanWebpackPlugin([distPath], {
+      allowExternal: true,
+    }),
     isDev && new webpack.HotModuleReplacementPlugin(),
     new HappyPack({
       id: 'js',
@@ -171,25 +171,25 @@ module.exports = {
       }),*/
     !isDev && new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
     !isDev &&
-      new LodashWebpackOptimize({
-        chaining: false,
-        shorthands: true,
-        collections: true,
-        paths: true,
-      }),
+    new LodashWebpackOptimize({
+      chaining: false,
+      shorthands: true,
+      collections: true,
+      paths: true,
+    }),
     !isDev &&
-      new WorkboxPlugin.GenerateSW({
-        cacheId: 'service-worker',
-        swDest: `${distPath}/assets/js/sw.js`,
-        precacheManifestFilename: `${distPath}/assets/js/precache-manifest.[manifestHash].js`,
-        navigateFallback: `${distPath}/index.html`,
-        clientsClaim: true,
-        skipWaiting: true,
-      }),
-    new (require('duplicate-package-checker-webpack-plugin'))({
+    new WorkboxPlugin.GenerateSW({
+      cacheId: 'service-worker',
+      swDest: `${distPath}/assets/js/sw.js`,
+      precacheManifestFilename: `${distPath}/assets/js/precache-manifest.[manifestHash].js`,
+      navigateFallback: `${distPath}/index.html`,
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
+    /*new (require('duplicate-package-checker-webpack-plugin'))({
       verbose: true,
       emitError: false,
-    }),
+    }),*/
     !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
   ].filter(Boolean),
 
@@ -236,42 +236,42 @@ module.exports = {
         test: /\.(svg|jpg|png)$/,
         include: `${root}/src/img`,
         use: [
-          cacheLoader,
           {
             loader: 'file-loader',
             options: {
+              name: '[name].[ext]',
               outputPath: `${assetsPath}/img`,
               publicPath: `${initialPath}${assetsPath}/img`,
             },
           },
-          /*! isDev && {
-							loader: 'image-webpack-loader',
-							options: {
-								svgo: {
-									plugins: [{ removeTitle: true }, { convertPathData: false }],
-									enabled: false
-								},
-								mozjpeg: {
-									enabled: false, //пока не заработает с loadable-components
-									progressive: true,
-									quality: 65
-								},
-								pngquant: {
-									quality: '65-90',
-									speed: 4,
-									enabled: false //пока не заработает с loadable-components
-								},
-								optipng: {
-									enabled: false
-								},
-								gifsicle: {
-									enabled: false
-								},
-								webp: {
-									enabled: false
-								}
-							}
-            } */
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              disable: isDev,
+              svgo: {
+                plugins: [{ removeTitle: true }, { convertPathData: false }],
+                enabled: false,
+              },
+              mozjpeg: {
+                enabled: false, //don't work with Firefox
+                progressive: true,
+                quality: 65,
+              },
+              pngquant: {
+                quality: '65-90',
+                speed: 4,
+              },
+              optipng: {
+                enabled: false,
+              },
+              gifsicle: {
+                enabled: false,
+              },
+              webp: {
+                enabled: false,
+              },
+            },
+          },
         ].filter(Boolean),
       },
     ],
@@ -305,4 +305,4 @@ module.exports = {
       ],
     }
     : {},
-}
+})

@@ -2,36 +2,41 @@ import React from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import styles from './index.pcss'
 
-function Textarea({ getValue, className = '', ...props }) {
-  const handleFocusOut = event => {
+class Textarea extends React.Component {
+  static defaultProps = { className: '' }
+
+  handleFocusOut = event => {
     event.preventDefault()
-    getValue({ value: event.target.value })
+    this.props.getValue({ value: event.target.value })
   }
 
-  const handleKeyPress = event => {
+  handleKeyPress = event => {
     const { value } = event.target
     if (event.key === 'Enter' && !event.shiftKey && value !== '') {
       event.preventDefault()
-      getValue({ value })
+      this.props.getValue({ value })
     }
   }
 
-  return (
-    <div {...{ className: `${styles['maxwell-textarea-container']} ${className}` }}>
-      <TextareaAutosize
-        {...{
-          className: styles['maxwell-textarea'],
-          placeholder: '',
-          defaultValue: '',
-          rows: 3,
-          maxRows: 10,
-          onBlur: handleFocusOut,
-          onKeyPress: handleKeyPress,
-          ...props,
-        }}
-      />
-    </div>
-  )
+  render() {
+    const { getValue, className, ...otherProps } = this.props
+    return (
+      <div {...{ className: `${styles['maxwell-textarea-container']} ${className}` }}>
+        <TextareaAutosize
+          {...{
+            className: styles['maxwell-textarea'],
+            placeholder: '',
+            defaultValue: '',
+            rows: 3,
+            maxRows: 10,
+            onBlur: this.handleFocusOut,
+            onKeyPress: this.handleKeyPress,
+            ...otherProps,
+          }}
+        />
+      </div>
+    )
+  }
 }
 
 export default Textarea
