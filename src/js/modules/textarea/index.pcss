@@ -1,9 +1,11 @@
+@import "~css/variables.pcss";
+
 .maxwell-textarea-container {
   width: 100%;
-  border: 1px solid #dad5d3;
+  border: 1px solid hsl(17, 9%, 84%);
   border-radius: 5px;
   position: relative;
-  background-color: white;
+  background-color: $color-white;
 
   &::after {
     content: '';
@@ -13,14 +15,14 @@
     height: 100%;
     position: absolute;
     top: 0;
-    right: 0px;
+    right: 0;
     z-index: 1;
     border-radius: 5px;
   }
 }
 
 .maxwell-textarea {
-  border: none;
+  border: initial;
   border-radius: 5px;
   width: 100%;
   padding: 15px 16px 15px 16px;

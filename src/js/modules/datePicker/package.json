@@ -1,0 +1,10 @@
+{
+  "name": "date-picker-module",
+  "description": "Module for work with date and time",
+  "version": "1.0.0",
+  "author": "Maxim Lyulyaev",
+  "license": "MIT",
+  "dependencies": {
+    "react-day-picker": "^7.2.4"
+  }
+}

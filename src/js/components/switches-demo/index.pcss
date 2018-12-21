@@ -22,10 +22,10 @@ switches-container {
 
   .&-title {
     line-height: 51px;
-    font-size: 36px;
+    font-size: $font-size-6;
     font-weight: $FontMedium;
     text-align: center;
-    color: #22253d;
+    color: hsl(233, 28%, 19%);
 
     & + switches-content {
       @media (--max-desktop) {
@@ -86,7 +86,7 @@ switches-content > aside > label,
 switches-content > main > label {
   display: block;
   line-height: 19px;
-  font-size: 14px;
+  font-size: $font-size-1;
   font-weight: $FontMedium;
   letter-spacing: 1.2px;
   text-transform: uppercase;
@@ -115,11 +115,11 @@ switches-content > main > label {
 
   &.active {
     color: $color-white;
-    background-color: #ff7800;
+    background-color: hsl(28, 100%, 50%);
 
     @media (--min-desktop) {
       &::after {
-        border-left-color: #ff7800;
+        border-left-color: hsl(28, 100%, 50%);
       }
     }
   }

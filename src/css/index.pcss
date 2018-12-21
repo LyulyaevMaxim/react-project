@@ -7,7 +7,7 @@ html {
   font-family: $MuseoSans;
   font-weight: $FontLight;
   height: 100%;
-  scroll-behavior: smooth; /*else: elem.scrollIntoView({ behavior: 'smooth' })*/
+  scroll-behavior: smooth; /* else: elem.scrollIntoView({ behavior: 'smooth' }) */
 }
 
 *,
@@ -18,10 +18,10 @@ html {
 
 ::-webkit-scrollbar {
   display: none;
-  width: 0px;
+  width: 0;
 
   &-thumb {
-    background-color: #c1c1c1;
+    background-color: hsl(0, 0%, 76%);
     border-radius: 4px;
   }
 }
@@ -44,7 +44,7 @@ html {
 }
 
 :-webkit-autofill {
-  box-shadow: 0 0 100px #fff inset;
+  box-shadow: 0 0 100px hsl(0, 0%, 100%) inset;
   -webkit-text-fill-color: currentColor;
 }
 
@@ -105,7 +105,7 @@ mark {
 }
 
 fieldset {
-  border: none;
+  border: initial;
   margin: 0;
   padding: 0;
 }
@@ -137,7 +137,7 @@ svg {
   width: 100%;
 }
 
-[class*='icon-']:after {
+[class*='icon-']::after {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -160,16 +160,16 @@ svg {
 body {
   color: var(--textColor);
   background-color: var(--fonColor);
-  -webkit-font-smoothing: antialiased; //улучшает качество отображения текста на Mac OS
+  -webkit-font-smoothing: antialiased; /*улучшает качество отображения текста на Mac OS*/
   line-height: 1;
   min-height: 100%;
-  -webkit-tap-highlight-color: transparent; //убирает на мобильных синюю подсветку при клике (фокусе)
-  text-decoration-skip: objects; //нижнее подчёркивание не будет накладываться на пересекающие его символы
-  text-rendering: optimizeLegibility; //качественное отображение текста важнее скорости рендеринга
-  -webkit-text-size-adjust: 100%; //не менять размер шрифта после изменения ориентации в iOS
+  -webkit-tap-highlight-color: transparent; /*убирает на мобильных синюю подсветку при клике (фокусе)*/
+  text-decoration-skip: objects; /*нижнее подчёркивание не будет накладываться на пересекающие его символы*/
+  text-rendering: optimizeLegibility; /*качественное отображение текста важнее скорости рендеринга*/
+  -webkit-text-size-adjust: 100%; /*не менять размер шрифта после изменения ориентации в ios*/
 
   &.light-theme {
-    --fonColor: #f5f6f3;
+    --fonColor: hsl(80, 14%, 96%);
     --textColor: black;
   }
 
@@ -204,14 +204,14 @@ body {
   }
 }
 
-/*@include border-radius(10px);
+/* @include border-radius(10px);
   aspect-ratio: '16:9';
   aspect-ratio: calc('4:3' - 20px);
   background-image: url('../img/arrow-to-right.svg' param(--color gold));
   background-image: url('arrow-to-right.svg' param(--color red));
-  background-repeat: no-repeat;*/
+  background-repeat: no-repeat; */
 
-/*block-for-items {
+/* block-for-items {
   display: flex;
   margin: 20px 5px;
 
@@ -244,9 +244,9 @@ body {
   block-for-items.grow item-block:nth-child(#{$i}) {
     height: calc(100px + $i*10px);
   }
-}*/
+} */
 
-/*$theme: dark;
+/* $theme: dark;
 
 .hello {
   @if $theme == dark {
@@ -274,19 +274,19 @@ body {
     display: flex;
     z-index: 5500;
   }
-}*/
+} */
 
 h1 {
   font-size: calc(var(--largeFontSize) * 1.5);
   line-height: 1.8;
-  //color: var(--mainColor);
+  /*color: var(--mainColor);*/
 
-  /*@media (--max-tablet) {
+  /* @media (--max-tablet) {
     background: color-mod(var(--mainColor) alpha(50%));
-  }*/
+  } */
 
-  /*@media (--desktop) {
+  /* @media (--desktop) {
     background: color(#3ac162 l(80%));
     border: 1px solid color(#3ac162 a(90%));
-  }*/
+  } */
 }

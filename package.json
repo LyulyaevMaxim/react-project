@@ -24,7 +24,7 @@
     "precommit": "lint-staged",
     "postcommit": "git update-index --again",
     "lint:js": "eslint --fix src/js",
-    "lint:css": "stylelint --fix src/**/*.{css,scss} --cache --cache-location './node_modules/.stylelintcache'"
+    "lint:css": "stylelint --fix src/**/*.{css,pcss} --cache --cache-location './node_modules/.stylelintcache'"
   },
   "lint-staged": {
     "src/js/**/*.{js,jsx,json}": [
@@ -150,10 +150,16 @@
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.2",
     "stylelint": "^9.8.0",
-    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-color-format": "^0.2.0",
+    "stylelint-config-airbnb": "^0.0.0",
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-config-standard": "^18.2.0",
     "stylelint-declaration-block-no-ignored-properties": "^1.1.0",
+    "stylelint-declaration-use-variable": "^1.7.0",
+    "stylelint-group-selectors": "^1.0.7",
     "stylelint-high-performance-animation": "^1.1.1",
+    "stylelint-no-indistinguishable-colors": "^1.2.1",
     "stylelint-no-unsupported-browser-features": "^3.0.2",
     "stylelint-order": "^2.0.0",
     "stylelint-scss": "^3.4.0"

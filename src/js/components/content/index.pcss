@@ -3,7 +3,7 @@
 .button {
   border: 1px solid gray;
   filter: opacity(0.7);
-  font-size: 16px;
+  font-size: $font-size-1;
   line-height: 1;
   padding: 4px 8px;
   transition: filter 0.3s ease;
@@ -14,11 +14,11 @@
 }
 
 .main {
-  padding: 20px 0; //$margin-mobile;
+  padding: 20px 0; /*$margin-mobile;*/
 
   @media (--min-desktop) {
-    // padding-left: $margin-desktop;
-    // padding-right: $margin-desktop;
+    /*padding-left: $margin-desktop;
+    padding-right: $margin-desktop;*/
   }
 
   & > * + .button {

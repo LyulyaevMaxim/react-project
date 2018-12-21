@@ -1,10 +1,12 @@
+@import "~css/variables.pcss";
+
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
   border-radius: 7px;
-  border: none;
+  border: initial;
   filter: opacity(0.5);
   transition-property: filter background-color color;
   transition-duration: 0.3s;
@@ -27,10 +29,10 @@
 
   &.is-main {
     font-weight: 700;
-    font-size: 13px;
+    font-size: $font-size-1;
     line-height: 1.4;
     letter-spacing: 0.04em;
-    color: #4b4746;
+    color: hsl(12, 3%, 28%);
     padding: 0 14px;
 
     &:hover {

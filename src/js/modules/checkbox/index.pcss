@@ -2,8 +2,8 @@
   display: none;
 
   &:checked + .checkbox-label {
-    border-color: #219653;
-    background-image: url('icon-checked.svg', param(--color #219653));
+    border-color: hsl(146, 64%, 36%);
+    background-image: url('icon-checked.svg', param(--color hsl(146, 64%, 36%)));
   }
 }
 
@@ -15,8 +15,8 @@
   min-height: 36px;
   width: 36px;
   height: 36px;
-  border: 2px solid #dde0e9;
-  transition: 0.3s ease;
+  border: 2px solid hsl(225, 21%, 89%);
+  transition: border-color 0.3s, background-image 0.3s;
 }
 
 .checkbox-label-link {
