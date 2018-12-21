@@ -86,9 +86,10 @@ a {
   text-decoration: none;
 }
 
-a, button {
+a,
+button {
   &:focus {
-      outline: none;
+    outline: none;
   }
 }
 
@@ -158,8 +159,8 @@ svg {
 }
 
 body {
-  color: var(--textColor);
   background-color: var(--fonColor);
+  color: var(--textColor);
   -webkit-font-smoothing: antialiased; /*улучшает качество отображения текста на Mac OS*/
   line-height: 1;
   min-height: 100%;
@@ -181,8 +182,7 @@ body {
   & > app-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    max-width: 100%;
+    height: 100%;  max-width: 100%;
     min-height: 100vh;
 
     & > header,

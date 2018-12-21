@@ -1,17 +1,17 @@
 @import '~css/variables.pcss';
 
 .contact-form-open-button {
-  position: sticky;
+  background-color: $color-green-light;
+  border-radius: 15px;
   bottom: 20px;
+  color: $color-green;
+  font-family: initial; /* комбинация sticky, left и transform вызывают подёргивания кнопки при transition */
+  font-weight: $FontBold;
   left: 100%;
+  margin-top: -38px; /* необходимо сдвинуть блок вверх, т.к. на месте кнопки остаётся пустое место  */
+  padding: 10px;
+  position: sticky;
   transform: translateX(-5vw);
   width: max-content;
-  padding: 10px;
-  border-radius: 15px;
-  font-weight: $FontBold;
-  color: $color-green;
-  background-color: $color-green-light;
-  font-family: initial; /* комбинация sticky, left и transform вызывают подёргивания кнопки при transition */
-  margin-top: -38px; /* необходимо сдвинуть блок вверх, т.к. на месте кнопки остаётся пустое место  */
   z-index: 1;
 }

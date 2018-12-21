@@ -1,32 +1,32 @@
-@import "~css/variables.pcss";
+@import '~css/variables.pcss';
 
 .maxwell-textarea-container {
-  width: 100%;
+  background-color: $color-white;
   border: 1px solid hsl(17, 9%, 84%);
   border-radius: 5px;
   position: relative;
-  background-color: $color-white;
+  width: 100%;
 
   &::after {
+    background-color: inherit;
+    border-radius: 5px;
     content: '';
     display: block;
-    background-color: inherit;
-    width: 16px;
     height: 100%;
     position: absolute;
-    top: 0;
     right: 0;
+    top: 0;
+    width: 16px;
     z-index: 1;
-    border-radius: 5px;
   }
 }
 
 .maxwell-textarea {
   border: initial;
   border-radius: 5px;
-  width: 100%;
-  padding: 15px 16px 15px 16px;
   overflow-y: scroll !important;
+  padding: 15px 16px 15px 16px;
+  width: 100%;
 
   &::-webkit-scrollbar {
     display: none;

@@ -2,21 +2,21 @@
   display: none;
 
   &:checked + .checkbox-label {
-    border-color: hsl(146, 64%, 36%);
     background-image: url('icon-checked.svg', param(--color hsl(146, 64%, 36%)));
+    border-color: hsl(146, 64%, 36%);
   }
 }
 
 .checkbox-label {
-  display: inline-flex;
-  background-repeat: no-repeat;
   background-position: 50%;
-  min-width: 36px;
-  min-height: 36px;
-  width: 36px;
-  height: 36px;
+  background-repeat: no-repeat;
   border: 2px solid hsl(225, 21%, 89%);
+  display: inline-flex;
+  height: 36px;
+  min-height: 36px;
+  min-width: 36px;
   transition: border-color 0.3s, background-image 0.3s;
+  width: 36px;
 }
 
 .checkbox-label-link {
