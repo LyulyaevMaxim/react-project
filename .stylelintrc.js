@@ -36,33 +36,11 @@ module.exports = {
       { ignoreValues: ['inherit', 'transparent', 'currentColor'] },
     ]],
     'plugin/stylelint-group-selectors': true,
-    "aditayvm/at-rule-no-children": [{ severity: "warning" }],
-    // 'order/order': [/*'custom-properties', 'dollar-variables', 'declarations', 'at-rules', 'rules'*/, { 'disableFix': !isLintFix }],
-    /*"order/order": [
-      "declarations",
-      {
-        "type": "at-rule",
-        "name": "media"
-      },
-      {
-        "type": "rule",
-        "selector": "^&::(before|after)"
-      },
-      {
-        "type": "rule",
-        "selector": "^&:\\w"
-      },
-      {
-        "type": "rule",
-        "selector": "^&_"
-      },
-      {
-        "type": "rule",
-        "selector": "^."
-      }
-    ],*/
+    'aditayvm/at-rule-no-children': [{ severity: 'warning' }],
+    'order/order': ['custom-properties', 'dollar-variables', 'declarations', 'at-rules', 'rules'],
     'order/properties-alphabetical-order': true,
     'selector-type-no-unknown': [true, { ignore: ['custom-elements'] }],
+    'selector-class-pattern': '^[a-z][a-zA-Z0-9]+$', //lowerCamelCase
     'block-no-empty': null,
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
