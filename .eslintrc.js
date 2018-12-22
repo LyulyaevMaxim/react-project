@@ -1,5 +1,5 @@
-const path = require('path')
-const root = path.resolve(__dirname, './')
+const path = require('path'),
+  root = path.resolve(__dirname, './')
 
 module.exports = {
   parser: 'babel-eslint',

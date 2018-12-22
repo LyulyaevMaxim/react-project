@@ -30,7 +30,7 @@ class Input extends React.Component {
           value: currentValue,
           onChange: this.handleChange,
           onBlur: this.handleFocusOut,
-          className: getClass([styles['maxwell-input'], propsClass, stateClass && styles[stateClass]])
+          className: getClass([styles['maxwell-input'], propsClass, stateClass && styles[stateClass]]),
         }}
       />
     )

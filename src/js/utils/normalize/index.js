@@ -26,8 +26,7 @@ export const deepRemoveFields = ({ obj = {}, fields = [] }) => {
   const res = {}
   Object.getOwnPropertyNames(obj).forEach(field => {
     if (!fields.some(removeField => removeField === field)) {
-      res[field] =
-        typeof obj[field] !== 'object' ? obj[field] : deepRemoveFields({ obj: obj[field], fields })
+      res[field] = typeof obj[field] !== 'object' ? obj[field] : deepRemoveFields({ obj: obj[field], fields })
     }
   })
   return res

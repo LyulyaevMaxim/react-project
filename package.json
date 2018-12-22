@@ -10,7 +10,7 @@
     "not op_mini all"
   ],
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "start": "yarn prettier-watch & cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "server": "cd server && yarn start",
     "deploy": "cd server && now -d --public",
@@ -24,7 +24,8 @@
     "precommit": "lint-staged",
     "postcommit": "git update-index --again",
     "lint:js": "eslint --fix src/js",
-    "lint:css": "stylelint --fix src/**/*.{css,pcss} --cache --cache-location './node_modules/.stylelintcache'"
+    "lint:css": "stylelint --fix src/**/*.{css,pcss} --cache --cache-location './node_modules/.stylelintcache'",
+    "prettier-watch": "onchange '**/*.*' -- prettier --write {{changed}}"
   },
   "lint-staged": {
     "src/js/**/*.{js,jsx,json}": [
@@ -53,7 +54,6 @@
     "html-webpack-plugin": "^3.2.0",
     "lodash-webpack-plugin": "^0.11.5",
     "mini-css-extract-plugin": "^0.5.0",
-    "now": "^12.1.14",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "path": "^0.12.7",
     "preload-webpack-plugin": "^3.0.0-beta.1",
@@ -148,7 +148,8 @@
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
-    "prettier": "^1.15.2",
+    "onchange": "^5.2.0",
+    "prettier": "^1.15.3",
     "stylelint": "^9.8.0",
     "stylelint-color-format": "^0.2.0",
     "stylelint-config-airbnb": "^0.0.0",
@@ -157,6 +158,7 @@
     "stylelint-config-standard": "^18.2.0",
     "stylelint-declaration-block-no-ignored-properties": "^1.1.0",
     "stylelint-declaration-use-variable": "^1.7.0",
+    "stylelint-find-rules": "^2.0.0",
     "stylelint-group-selectors": "^1.0.7",
     "stylelint-high-performance-animation": "^1.1.1",
     "stylelint-no-indistinguishable-colors": "^1.2.1",

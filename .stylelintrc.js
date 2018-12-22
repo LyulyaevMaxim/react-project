@@ -1,3 +1,4 @@
+/* you can run "yarn stylelint-find-rules" to find stylelint rules that are not unused, deprecated or invalid */
 const path = require('path'),
   root = path.resolve(__dirname, './'),
   isLintFix = false //TODO: add activation in package.json

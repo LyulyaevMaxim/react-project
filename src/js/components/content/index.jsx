@@ -7,7 +7,8 @@ const Button = loadable({
     loading: () => null,
   }),
   PopupPortal = loadable({
-    loader: () => import('~modules/popup' /* webpackChunkName: "modules->popup" */).then(modules => modules.PopupPortal),
+    loader: () =>
+      import('~modules/popup' /* webpackChunkName: "modules->popup" */).then(modules => modules.PopupPortal),
     loading: () => null,
   })
 
