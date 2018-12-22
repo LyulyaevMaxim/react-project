@@ -6,8 +6,8 @@
 }
 
 .header-title {
-  color: #000;
-  font-size: 24px;
+  color: hsl(0, 0%, 0%);
+  font-size: $font-size-3;
   font-weight: 700;
   grid-column: 2 / 5;
   line-height: 31px;
@@ -24,7 +24,7 @@
 
 .header-nav {
   align-items: center;
-  background-color: #fff;
+  background-color: hsl(0, 0%, 100%);
   display: grid;
   grid-column: 13;
   grid-gap: 2.5vw;
@@ -34,7 +34,7 @@
 .header-nav-link {
   border-bottom: 3px solid transparent;
   color: rgba(79, 79, 79, 0.5);
-  font-size: 13px;
+  font-size: $font-size-1;
   font-weight: 700;
   letter-spacing: 0.05em;
   line-height: 18px;
@@ -43,11 +43,11 @@
   transition: color 0.3s;
 
   &.active {
-    border-color: #3ac162;
-    color: #4f4f4f;
+    border-color: hsl(138, 54%, 49%);
+    color: hsl(0, 0%, 31%);
   }
 
   &:hover {
-    color: #000;
+    color: hsl(0, 0%, 0%);
   }
 }

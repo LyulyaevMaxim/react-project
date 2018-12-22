@@ -37,13 +37,13 @@ class Table extends React.Component {
     const { isSaveRun, linesList, unsavedLinesList } = this.props
     if (prevProps.isSaveRun !== this.props.isSaveRun && isSaveRun) {
       this.props.tableUpdate &&
-      this.props.tableUpdate({
-        updated: linesList.reduce((acc, id) => {
-          const { isChanged, data } = this.linesMap[id].current.getWrappedInstance().state
-          return isChanged ? [...acc, data] : acc
-        }, []),
-        created: unsavedLinesList.map(id => this.unsavedLinesMap[id].current.getWrappedInstance().state.data),
-      })
+        this.props.tableUpdate({
+          updated: linesList.reduce((acc, id) => {
+            const { isChanged, data } = this.linesMap[id].current.getWrappedInstance().state
+            return isChanged ? [...acc, data] : acc
+          }, []),
+          created: unsavedLinesList.map(id => this.unsavedLinesMap[id].current.getWrappedInstance().state.data),
+        })
     }
   }
 
@@ -53,7 +53,7 @@ class Table extends React.Component {
 
   getLines({ isUnsaved = false, isTitleLine = false } = {}) {
     if (isTitleLine) return <TableLine {...{ isTitleLine }} />
-    if (!isUnsaved && this.props.isLoad !== false) return <div className='loader' />
+    if (!isUnsaved && this.props.isLoad !== false) return <div className="loader" />
 
     const [list, refsMap] = !isUnsaved
       ? [this.props.linesList, this.linesMap]
@@ -85,7 +85,7 @@ class Table extends React.Component {
           {handleTableSave && (
             <Button onClick={handleTableSave}>
               <span>Save</span>
-              {!!this.props.isSaveRun && <div className="loader"/>}
+              {!!this.props.isSaveRun && <div className="loader" />}
             </Button>
           )}
         </header>
@@ -131,4 +131,7 @@ const mapStateToProps = (store, props) => {
 const mapDispatchToProps = (dispatch, { tableDidMount, ...props }) =>
   bindActionCreators({ tableDidMount, ...props.tableHandlers }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Table)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Table)

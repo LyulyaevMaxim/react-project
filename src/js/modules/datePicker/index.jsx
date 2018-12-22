@@ -2,7 +2,7 @@ import React from 'react'
 import DayPicker, { DateUtils } from 'react-day-picker'
 //import styles from './index.pcss'
 
-function DayPickerWrapper() {
+function DatePicker() {
   return (
     <DayPicker
       //className="Range"
@@ -17,4 +17,4 @@ function DayPickerWrapper() {
   )
 }
 
-export default DayPickerWrapper
+export default DatePicker

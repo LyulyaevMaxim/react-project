@@ -1,18 +1,18 @@
-@import "~css/variables.pcss";
+@import '~css/variables.pcss';
 
 switches-container {
   display: block;
 
   @media (--max-desktop) {
-    padding-top: 77px;
     padding-left: 19px;
     padding-right: 22px;
+    padding-top: 77px;
   }
 
   @media (--min-desktop) {
-    padding-top: 89px;
     padding-left: 3vw;
     padding-right: 3vw;
+    padding-top: 89px;
   }
 
   @media (--big-desktop) {
@@ -21,11 +21,11 @@ switches-container {
   }
 
   .&-title {
-    line-height: 51px;
-    font-size: 36px;
+    color: hsl(233, 28%, 19%);
+    font-size: $font-size-6;
     font-weight: $FontMedium;
+    line-height: 51px;
     text-align: center;
-    color: #22253d;
 
     & + switches-content {
       @media (--max-desktop) {
@@ -84,14 +84,14 @@ switches-content > main {
 
 switches-content > aside > label,
 switches-content > main > label {
+  cursor: pointer;
   display: block;
-  line-height: 19px;
-  font-size: 14px;
+  font-size: $font-size-1;
   font-weight: $FontMedium;
   letter-spacing: 1.2px;
-  text-transform: uppercase;
+  line-height: 19px;
   padding: 30px 30px 29px 31px;
-  cursor: pointer;
+  text-transform: uppercase;
 
   @media (--min-desktop) {
     position: relative;
@@ -99,27 +99,27 @@ switches-content > main > label {
 
   &::after {
     @media (--min-desktop) {
+      border-bottom: 39px solid transparent;
+      border-left: 30px solid transparent;
+      border-top: 39px solid transparent;
       content: '';
       display: block;
-      position: absolute;
+      height: 0;
       left: 100%;
+      position: absolute;
       top: 0;
       width: 0;
-      height: 0;
-      border-top: 39px solid transparent;
-      border-left: 30px solid transparent;
-      border-bottom: 39px solid transparent;
       z-index: 1;
     }
   }
 
   &.active {
+    background-color: hsl(28, 100%, 50%);
     color: $color-white;
-    background-color: #ff7800;
 
     @media (--min-desktop) {
       &::after {
-        border-left-color: #ff7800;
+        border-left-color: hsl(28, 100%, 50%);
       }
     }
   }

@@ -1,14 +1,14 @@
 @import '~css/variables.pcss';
 
 .table-container {
-  width: 100%;
   /* overflow-x: auto; it's break "position: sticky" in titleLine */
   padding-top: 50px;
+  width: 100%;
 
   & > header {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, max-content));
     grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(0, max-content));
     justify-content: flex-end;
 
     & > button {

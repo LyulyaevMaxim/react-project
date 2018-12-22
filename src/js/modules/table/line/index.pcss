@@ -1,14 +1,14 @@
 @import '~css/variables.pcss';
 
 .line {
+  align-items: center;
+  border-bottom: 1px solid;
   display: grid;
   grid-gap: 10px;
   justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  border-bottom: 1px solid;
   min-height: 40px;
   padding: 0 20px 0 10px;
+  text-align: center;
 
   & > div > * {
     max-width: 100%;
@@ -16,18 +16,18 @@
 
   &:first-child {
     background-color: var(--fonColor);
+    left: 0;
     position: sticky;
     top: 0;
-    left: 0;
     z-index: 1;
   }
 
   &:not(:first-child) {
-    background-color: '#f1f9fc';
+    background-color: $color-blue-light;
     border-color: $color-gray;
 
     .is-unsaved {
-      background-color: '#dbeff6';
+      background-color: $color-gray;
     }
   }
 }

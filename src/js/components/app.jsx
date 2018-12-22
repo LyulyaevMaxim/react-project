@@ -34,25 +34,27 @@ const routes = [
     component: loadable({
       loader: () => import('~components/products' /* webpackChunkName: "components->products" */),
       loading: () => null,
-    })
-  }
+    }),
+  },
 ]
 
-const App = () => <Fragment>
-  <Header {...{ routes }} />
-  <Switch>
-    <Route
-      {...{
-        exact: true,
-        path: '/404',
-        render: () => <h1>Упс.. 404</h1>,
-      }}
-    />
-    {routes.map(({ path, component, title }, index) => (
-      <Route {...{ path, component, exact: index === 0, key: `route-${title}` }} />
-    ))}
-  </Switch>
-  <ContactForm />
-</Fragment>
+const App = () => (
+  <Fragment>
+    <Header {...{ routes }} />
+    <Switch>
+      <Route
+        {...{
+          exact: true,
+          path: '/404',
+          render: () => <h1>Упс.. 404</h1>,
+        }}
+      />
+      {routes.map(({ path, component, title }, index) => (
+        <Route {...{ path, component, exact: index === 0, key: `route-${title}` }} />
+      ))}
+    </Switch>
+    <ContactForm />
+  </Fragment>
+)
 
 export default hot(module)(App)

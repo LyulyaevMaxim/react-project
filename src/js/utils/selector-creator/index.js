@@ -16,7 +16,7 @@ selectorsCreator.defaultsMap = {
   string: '',
   object: {},
   array: [],
-  other: null
+  other: null,
 }
 
 selectorsCreator.getError = errorsMapCreator([
@@ -32,7 +32,14 @@ export function selectorFactoriesCreator(settings) {
     if (typeof name !== 'string' || !name) throw new Error(getError({ name }))
     if (!Array.isArray(selectors) || !selectors.length) throw new Error(getError({ selectors }))
     if (typeof func !== 'function') throw new Error(getError({ func }))
-    return { ...acc, [name]: () => createSelector(selectors, func) }
+    return {
+      ...acc,
+      [name]: () =>
+        createSelector(
+          selectors,
+          func
+        ),
+    }
   }, {})
 }
 

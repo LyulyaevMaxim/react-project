@@ -1,6 +1,6 @@
 import produce from 'immer'
 import { requestStatuses } from '~utils/request-creator'
-import { paymentTypes, productGroups, productsData  } from './fakeData'
+import { paymentTypes, productGroups, productsData } from './fakeData'
 
 const {
   PRODUCTS_FETCH,

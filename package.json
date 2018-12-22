@@ -10,7 +10,7 @@
     "not op_mini all"
   ],
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "start": "yarn prettier-watch & cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "server": "cd server && yarn start",
     "deploy": "cd server && now -d --public",
@@ -21,20 +21,25 @@
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
     "install-packages": "yarn install && cd ./src && yarn install && cd ../server && yarn install",
     "upgrade-packages": "yarn upgrade-interactive --latest && cd ./src && yarn upgrade-interactive --latest && cd ../server && yarn upgrade-interactive --latest",
-    "precommit": "lint-staged",
-    "postcommit": "git update-index --again",
     "lint:js": "eslint --fix src/js",
-    "lint:css": "stylelint --fix src/**/*.{css,scss} --cache --cache-location './node_modules/.stylelintcache'"
+    "lint:css": "stylelint --fix src/**/*.{css,pcss} --cache --cache-location './node_modules/.stylelintcache'",
+    "prettier-watch": "onchange '**/*.*' -- prettier --write {{changed}}"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-commit": "git update-index --again"
+    }
   },
   "lint-staged": {
     "src/js/**/*.{js,jsx,json}": [
-      "yarn lint:js",
       "prettier --write",
+      "yarn lint:js",
       "git add"
     ],
-    "src/**/*.{css,scss}": [
-      "yarn lint:css",
+    "src/**/*.{css,pcss}": [
       "prettier --write",
+      "yarn lint:css",
       "git add"
     ]
   },
@@ -53,7 +58,6 @@
     "html-webpack-plugin": "^3.2.0",
     "lodash-webpack-plugin": "^0.11.5",
     "mini-css-extract-plugin": "^0.5.0",
-    "now": "^12.1.14",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "path": "^0.12.7",
     "preload-webpack-plugin": "^3.0.0-beta.1",
@@ -148,12 +152,21 @@
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
-    "prettier": "^1.15.2",
+    "onchange": "^5.2.0",
+    "prettier": "^1.15.3",
     "stylelint": "^9.8.0",
-    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-at-rule-no-children": "^0.3.1",
+    "stylelint-color-format": "^0.2.0",
+    "stylelint-config-airbnb": "^0.0.0",
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-config-standard": "^18.2.0",
     "stylelint-declaration-block-no-ignored-properties": "^1.1.0",
+    "stylelint-declaration-use-variable": "^1.7.0",
+    "stylelint-find-rules": "^2.0.0",
+    "stylelint-group-selectors": "^1.0.7",
     "stylelint-high-performance-animation": "^1.1.1",
+    "stylelint-no-indistinguishable-colors": "^1.2.1",
     "stylelint-no-unsupported-browser-features": "^3.0.2",
     "stylelint-order": "^2.0.0",
     "stylelint-scss": "^3.4.0"
