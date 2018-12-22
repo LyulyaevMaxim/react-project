@@ -21,14 +21,14 @@
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
     "install-packages": "yarn install && cd ./src && yarn install && cd ../server && yarn install",
     "upgrade-packages": "yarn upgrade-interactive --latest && cd ./src && yarn upgrade-interactive --latest && cd ../server && yarn upgrade-interactive --latest",
-    "postcommit": "git update-index --again",
     "lint:js": "eslint --fix src/js",
     "lint:css": "stylelint --fix src/**/*.{css,pcss} --cache --cache-location './node_modules/.stylelintcache'",
     "prettier-watch": "onchange '**/*.*' -- prettier --write {{changed}}"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "post-commit": "git update-index --again"
     }
   },
   "lint-staged": {
@@ -37,7 +37,7 @@
       "yarn lint:js",
       "git add"
     ],
-    "src/**/*.{css,scss}": [
+    "src/**/*.{css,pcss}": [
       "prettier --write",
       "yarn lint:css",
       "git add"
