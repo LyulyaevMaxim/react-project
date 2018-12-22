@@ -11419,11 +11419,6 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier-webpack-plugin@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/prettier-webpack-plugin/-/prettier-webpack-plugin-1.2.0.tgz#4a5635f054741160936c7f509f0a9b1f928e5550"
-  integrity sha512-icoIPxDpOo/q7SUCHSW152dCr83z7QS/6s2V3phweKu1bfJcXSObVAq/Z8OeSX7ykuXrcV2UpZbfljRI2rIOMg==
-
 prettier@^1.15.3:
   version "1.15.3"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.3.tgz#1feaac5bdd181237b54dbe65d874e02a1472786a"
@@ -13456,6 +13451,11 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
+stylelint-at-rule-no-children@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/stylelint-at-rule-no-children/-/stylelint-at-rule-no-children-0.3.1.tgz#700152f9ddf4c544592e80ffdcb67ff342749e8d"
+  integrity sha512-SNXI6r3XSQja4PqKunu1LNzfqTc/qaONnkOW4ey7ONYY3Z4HIgrBF1ctxCITth1az0fRdrUZNixT/NQIROTX1Q==
+
 stylelint-color-format@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/stylelint-color-format/-/stylelint-color-format-0.2.0.tgz#b0bb2ce504d66da98564bead3f6c170d8d7b1284"
@@ -13560,13 +13560,6 @@ stylelint-order@^2.0.0:
     lodash "^4.17.10"
     postcss "^7.0.2"
     postcss-sorting "^4.0.1"
-
-stylelint-prettier@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/stylelint-prettier/-/stylelint-prettier-1.0.5.tgz#762807a1b4565c88f186c57bd6e0d9e89b8fbb50"
-  integrity sha512-nrrw+z4muE/3KC3OOUXOiq2qfQnVbTr2Vt6vLyW3ULkTPM2rHwmHSYIL+xcxAIRTMPGHGoCkNNQkqTEyE8OIhg==
-  dependencies:
-    prettier-linter-helpers "^1.0.0"
 
 stylelint-scss@^3.4.0:
   version "3.4.1"

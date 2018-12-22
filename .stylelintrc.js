@@ -1,7 +1,6 @@
 /* you can run "yarn stylelint-find-rules" to find stylelint rules that are not unused, deprecated or invalid */
 const path = require('path'),
-  root = path.resolve(__dirname, './'),
-  isLintFix = false //TODO: add activation in package.json
+  root = path.resolve(__dirname, './')
 
 module.exports = {
   extends: ['stylelint-config-recommended-scss', 'stylelint-config-airbnb', 'stylelint-config-standard', 'stylelint-config-prettier'],
@@ -14,7 +13,7 @@ module.exports = {
     'stylelint-color-format',
     'stylelint-declaration-use-variable',
     'stylelint-group-selectors', // only easy cases :(
-    'stylelint-prettier' //TODO: it has conflict with stylelint-order, need run last or use webpack
+    'stylelint-at-rule-no-children',
   ],
   rules: {
     'plugin/declaration-block-no-ignored-properties': true,
@@ -37,10 +36,32 @@ module.exports = {
       { ignoreValues: ['inherit', 'transparent', 'currentColor'] },
     ]],
     'plugin/stylelint-group-selectors': true,
+    "aditayvm/at-rule-no-children": [{ severity: "warning" }],
     // 'order/order': [/*'custom-properties', 'dollar-variables', 'declarations', 'at-rules', 'rules'*/, { 'disableFix': !isLintFix }],
+    /*"order/order": [
+      "declarations",
+      {
+        "type": "at-rule",
+        "name": "media"
+      },
+      {
+        "type": "rule",
+        "selector": "^&::(before|after)"
+      },
+      {
+        "type": "rule",
+        "selector": "^&:\\w"
+      },
+      {
+        "type": "rule",
+        "selector": "^&_"
+      },
+      {
+        "type": "rule",
+        "selector": "^."
+      }
+    ],*/
     'order/properties-alphabetical-order': true,
-    "prettier/prettier": isLintFix,
-
     'selector-type-no-unknown': [true, { ignore: ['custom-elements'] }],
     'block-no-empty': null,
     'at-rule-no-unknown': null,
