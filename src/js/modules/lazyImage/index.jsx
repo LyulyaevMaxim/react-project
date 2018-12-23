@@ -1,4 +1,3 @@
-import 'intersection-observer'
 import React, { Component, Fragment, createRef } from 'react'
 import styles from './index.pcss'
 
