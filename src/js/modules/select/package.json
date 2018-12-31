@@ -5,6 +5,6 @@
   "author": "Maxim Lyulyaev",
   "license": "MIT",
   "dependencies": {
-    "react-select": "^2.1.1"
+    "react-select": "^2.2.0"
   }
 }

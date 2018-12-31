@@ -7,7 +7,7 @@ import '~css/index.pcss'
 import Header from '~components/header'
 
 const ContactForm = loadable({
-  loader: () => import('~components/contact-form' /* webpackChunkName: "components->contactForm */),
+  loader: () => import('~components/contact-form' /* webpackChunkName: "components->contact-form" */),
   loading: () => null,
 })
 

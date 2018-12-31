@@ -4,8 +4,8 @@ const webpack = require('webpack'),
   HappyPack = require('happypack'),
   happyThreadPool = HappyPack.ThreadPool({ size: 4 })
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin'),
+  MiniCssExtractPlugin = require('mini-css-extract-plugin'),
   ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'),
   PreloadWebpackPlugin = require('preload-webpack-plugin')
 
@@ -45,13 +45,13 @@ module.exports = (env, argv) => ({
 
   devServer: {
     hot: true,
-    https: true,
+    // https: true,
     open: false,
     overlay: true,
     historyApiFallback: true,
-    host: '127.0.0.1',
-    port: '8080',
-    compress: true,
+    // host: '127.0.0.1',
+    // port: '8080',
+    // compress: true,
     clientLogLevel: 'info',
   },
 
@@ -64,6 +64,7 @@ module.exports = (env, argv) => ({
       '~constants': `${root}/src/js/constants.js`,
       '~modules': `${root}/src/js/modules`,
       '~components': `${root}/src/js/components`,
+      'modernizr$': `${root}/.modernizrrc.js`
     },
     extensions: ['.jsx', '.js', '.json'],
   },
@@ -166,21 +167,21 @@ module.exports = (env, argv) => ({
       }),*/
     !isDev && new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
     !isDev &&
-      new LodashWebpackOptimize({
-        chaining: false,
-        shorthands: true,
-        collections: true,
-        paths: true,
-      }),
+    new LodashWebpackOptimize({
+      chaining: false,
+      shorthands: true,
+      collections: true,
+      paths: true,
+    }),
     !isDev &&
-      new WorkboxPlugin.GenerateSW({
-        cacheId: 'service-worker',
-        swDest: `${distPath}/assets/js/sw.js`,
-        precacheManifestFilename: `${distPath}/assets/js/precache-manifest.[manifestHash].js`,
-        navigateFallback: `${distPath}/index.html`,
-        clientsClaim: true,
-        skipWaiting: true,
-      }),
+    new WorkboxPlugin.GenerateSW({
+      cacheId: 'service-worker',
+      swDest: `${distPath}/assets/js/sw.js`,
+      precacheManifestFilename: `${distPath}/assets/js/precache-manifest.[manifestHash].js`,
+      navigateFallback: `${distPath}/index.html`,
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
     /*new (require('duplicate-package-checker-webpack-plugin'))({
       verbose: true,
       emitError: false,
@@ -190,6 +191,10 @@ module.exports = (env, argv) => ({
 
   module: {
     rules: [
+      {
+        test: /\.modernizrrc.js$/,
+        use: [ 'modernizr-loader' ]
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -246,30 +251,30 @@ module.exports = (env, argv) => ({
 
   optimization: !isDev
     ? {
-        runtimeChunk: false,
-        namedModules: true,
-        noEmitOnErrors: true,
-        concatenateModules: true,
-        minimize: true,
-        splitChunks: {
-          automaticNameDelimiter: '-',
-          chunks: 'all',
-          cacheGroups: {
-            vendor: {
-              name: 'vendor',
-              chunks: 'all',
-              test: /[\\/]node_modules[\\/]/,
-              priority: -10,
-            },
+      runtimeChunk: false,
+      namedModules: true,
+      noEmitOnErrors: true,
+      concatenateModules: true,
+      minimize: true,
+      splitChunks: {
+        automaticNameDelimiter: '-',
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            name: 'vendor',
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
           },
         },
-        minimizer: [
-          new TerserPlugin({ cache: true, parallel: true, terserOptions: { mangle: true } }),
-          new OptimizeCSSAssetsPlugin({
-            cssProcessor: require('cssnano'),
-            cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
-          }),
-        ],
-      }
+      },
+      minimizer: [
+        new TerserPlugin({ cache: true, parallel: true, terserOptions: { mangle: true } }),
+        new OptimizeCSSAssetsPlugin({
+          cssProcessor: require('cssnano'),
+          cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
+        }),
+      ],
+    }
     : {},
 })
