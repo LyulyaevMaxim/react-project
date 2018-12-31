@@ -1,3 +1,4 @@
+import '~modules/polyfills'
 import '~css/vendors.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
