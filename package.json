@@ -21,7 +21,7 @@
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
     "install-packages": "yarn install && cd ./src && yarn install && cd ../server && yarn install",
     "upgrade-packages": "yarn upgrade-interactive --latest && cd ./src && yarn upgrade-interactive --latest && cd ../server && yarn upgrade-interactive --latest",
-    "lint:js": "eslint --fix src/js --ext .js,.jsx && tslint --project ./ --fix && tsc --noEmit",
+    "lint:js": "eslint --fix src/js --ext .js,.jsx && tslint --project tsconfig.json --config tslint.json './src/js/**/*.{ts,tsx}' && tsc --noEmit",
     "lint:css": "stylelint --fix src/**/*.{css,pcss} --cache --cache-location './node_modules/.stylelintcache'",
     "prettier-watch": "onchange '**/*.*' -- prettier --write {{changed}}"
   },
@@ -174,6 +174,12 @@
     "stylelint-no-unsupported-browser-features": "^3.0.2",
     "stylelint-order": "^2.0.0",
     "stylelint-scss": "^3.4.4",
-    "tslint": "^5.12.0"
+    "tslint": "^5.12.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-immutable": "^5.0.1",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^3.6.0",
+    "tslint-sonarts": "^1.8.0"
   }
 }

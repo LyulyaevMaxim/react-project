@@ -1,12 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-// import { App } from './components/App'
-
-function App(props: number) {
-  return <h1>Hello, TS</h1>;
+function App() {
+  return <button>Hello, TS</button>
 }
 
-App("");
-
-ReactDOM.render(<App/>, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'))

@@ -1,9 +1,21 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint:recommended"
+        "tslint:recommended",
+        "tslint-react",
+        "tslint-config-airbnb",
+        "tslint-sonarts",
+        "tslint-immutable",
+        "tslint-config-prettier"
     ],
-    "jsRules": {},
-    "rules": {},
-    "rulesDirectory": []
+    "jsRules": {
+
+    },
+    "rules": {
+        "prettier": true,
+        "no-constant-condition": true,
+        "import-name": false,
+        "function-name": false
+    },
+    "rulesDirectory": ["tslint-plugin-prettier"]
 }
