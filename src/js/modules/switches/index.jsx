@@ -46,15 +46,13 @@ class Switches extends Component {
         <switches-content>
           <aside>{switches}</aside>
           <section ref={e => (this.equipmentBlocks = e)}>
-            {data.map(({ content, className }, index) => {
-              return (
-                <Fragment key={`equipment-${index}`}>
-                  {switches[index]}
-                  <input type="radio" name="equipment" id={`equipment-${index}`} defaultChecked={!index} />
-                  <switchable-block class={className}>{content}</switchable-block>
-                </Fragment>
-              )
-            })}
+            {data.map(({ content, className }, index) => (
+              <Fragment key={`equipment-${index}`}>
+                {switches[index]}
+                <input type='radio' name='equipment' id={`equipment-${index}`} defaultChecked={!index} />
+                <switchable-block class={className}>{content}</switchable-block>
+              </Fragment>
+            ))}
           </section>
         </switches-content>
       </switches-container>

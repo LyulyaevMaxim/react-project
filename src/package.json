@@ -26,6 +26,8 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "react-hot-loader": "^4.3.12"
+    "react-hot-loader": "^4.3.12",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11"
   }
 }

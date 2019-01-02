@@ -53,7 +53,7 @@ class Table extends React.Component {
 
   getLines({ isUnsaved = false, isTitleLine = false } = {}) {
     if (isTitleLine) return <TableLine {...{ isTitleLine }} />
-    if (!isUnsaved && this.props.isLoad !== false) return <div className="loader" />
+    if (!isUnsaved && this.props.isLoad !== false) return <div className='loader' />
 
     const [list, refsMap] = !isUnsaved
       ? [this.props.linesList, this.linesMap]
@@ -85,7 +85,7 @@ class Table extends React.Component {
           {handleTableSave && (
             <Button onClick={handleTableSave}>
               <span>Save</span>
-              {!!this.props.isSaveRun && <div className="loader" />}
+              {!!this.props.isSaveRun && <div className='loader' />}
             </Button>
           )}
         </header>

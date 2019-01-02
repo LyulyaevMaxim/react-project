@@ -2,7 +2,8 @@ const webpack = require('webpack'),
   CleanWebpackPlugin = require('clean-webpack-plugin'),
   path = require('path'),
   HappyPack = require('happypack'),
-  happyThreadPool = HappyPack.ThreadPool({ size: 4 })
+  happyThreadPool = HappyPack.ThreadPool({ size: 4 }),
+  ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin'),
   MiniCssExtractPlugin = require('mini-css-extract-plugin'),
@@ -34,7 +35,7 @@ module.exports = (env, argv) => ({
   mode,
   target: 'web',
   devtool: isDev ? 'eval-cheap-module-source-map' : 'none',
-  entry: [`${root}/src/js/index.jsx`],
+  entry: [`${root}/src/js/index.tsx`],
 
   output: {
     filename: `${assetsPath}/js/[name]${isDev ? '' : '.[chunkhash]'}.js`,
@@ -64,9 +65,9 @@ module.exports = (env, argv) => ({
       '~constants': `${root}/src/js/constants.js`,
       '~modules': `${root}/src/js/modules`,
       '~components': `${root}/src/js/components`,
-      'modernizr$': `${root}/.modernizrrc.js`
+      modernizr$: `${root}/.modernizrrc.js`,
     },
-    extensions: ['.jsx', '.js', '.json'],
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },
 
   plugins: [
@@ -148,23 +149,13 @@ module.exports = (env, argv) => ({
         if (/\.woff2$/.test(entry)) return 'font'
       },
     }),
-    /*new (require('autodll-webpack-plugin'))({
-        inject: true,
-        filename: '[name].dll.js',
-        path: `${assetsPath}/js/`,
-        context: root,
-        entry: {
-          vendor: [
-            'react',
-            'react-dom',
-            'lodash-es',
-            'moment',
-            'autosize',
-            'axios'
-            //...Object.keys(require(`${root}/package.json`).dependencies)
-          ],
-        },
-      }),*/
+    new ForkTsCheckerWebpackPlugin({
+      tsconfig: `${root}/tsconfig.json`,
+      tslint: `${root}/tslint.json`,
+      watch: [`${root}/src/js`],
+      async: false,
+      checkSyntacticErrors: false
+    }),
     !isDev && new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
     !isDev &&
     new LodashWebpackOptimize({
@@ -193,10 +184,10 @@ module.exports = (env, argv) => ({
     rules: [
       {
         test: /\.modernizrrc.js$/,
-        use: [ 'modernizr-loader' ]
+        use: ['modernizr-loader'],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: 'happypack/loader?id=js',
       },
