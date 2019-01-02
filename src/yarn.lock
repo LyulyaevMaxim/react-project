@@ -98,6 +98,11 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@types/modernizr@^3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@types/modernizr/-/modernizr-3.5.2.tgz#4fe495d99910b27bf41be65cc21e07e2ef727f33"
+  integrity sha512-htRn9XGhRgd/kuXwaFsoVKojz2NDYwqr0e1HC39yxWU/ZKp8bF7wl0GFPq3w03ez8BLHcDTnolT6bSk/D3RLhg==
+
 "@types/prop-types@*":
   version "15.5.8"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.8.tgz#8ae4e0ea205fe95c3901a5a1df7f66495e3a56ce"
@@ -109,6 +114,14 @@
   integrity sha512-x6zUx9/42B5Kl2Vl9HlopV8JF64wLpX3c+Pst9kc1HgzrsH+mkehe/zmHMQTplIrR48H2gpU7ZqurQolYu8XBA==
   dependencies:
     "@types/react" "*"
+
+"@types/react-redux@^6.0.11":
+  version "6.0.11"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.11.tgz#d872254bbcba42465195a5475f40b22502b0407d"
+  integrity sha512-I3POoeGGwNqZjbK7TfnPJS2C51TFvT0atQPz4M+xpVTrLMjsX37AAfcTF3XUOTnmxHsryEjwJN9r/ScGwSXdtg==
+  dependencies:
+    "@types/react" "*"
+    redux "^4.0.0"
 
 "@types/react@*", "@types/react@^16.7.18":
   version "16.7.18"
@@ -500,7 +513,7 @@ hoist-non-react-statics@^2.5.0:
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
-hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.2.1:
+hoist-non-react-statics@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.2.1.tgz#c09c0555c84b38a7ede6912b61efddafd6e75e1e"
   integrity sha512-TFsu3TV3YLY+zFTZDrN8L2DTFanObwmBLpWvJs1qfUuEQ5bTAdFcwfx2T/bsCXfM9QHSLvjfP+nihEl0yvozxw==
@@ -517,7 +530,7 @@ icss-replace-symbols@1.1.0, icss-replace-symbols@^1.0.2, icss-replace-symbols@^1
   resolved "https://registry.yarnpkg.com/icss-replace-symbols/-/icss-replace-symbols-1.1.0.tgz#06ea6f83679a7749e386cfe1fe812ae5db223ded"
   integrity sha1-Bupvg2ead0njhs/h/oEq5dsiPe0=
 
-immer@^1.8.0:
+immer@^1.9.3:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.9.3.tgz#e88f8cbea730d2cde0f5e7e763000a8608bccdae"
   integrity sha512-bUyz3fOHGn82V7h4oVgJGmFglZt53JWwSyVNAT4sO0d7IovHLwLuHbh14uYKY0tewFoDcEdiQW7HuL0NsRVziw==
@@ -977,7 +990,7 @@ react-day-picker@^7.2.4:
   dependencies:
     prop-types "^15.6.2"
 
-react-dom@^16.6.3:
+react-dom@^16.7.0:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.7.0.tgz#a17b2a7ca89ee7390bc1ed5eb81783c7461748b8"
   integrity sha512-D0Ufv1ExCAmF38P2Uh1lwpminZFRXEINJe53zRAbm4KPwSyd6DY/uDoS0Blj9jvPpn1+wivKpZYc8aAAN/nAkg==
@@ -987,7 +1000,7 @@ react-dom@^16.6.3:
     prop-types "^15.6.2"
     scheduler "^0.12.0"
 
-react-hot-loader@^4.3.12:
+react-hot-loader@^4.6.3:
   version "4.6.3"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.6.3.tgz#d9c8923c45b35fd51538ba4297081a00be6bccb1"
   integrity sha512-FUvRO8dwbeLnc3mgLn8ARuSh8NnLBYJyiRjFn+grY/5GupSyPqv0U7ixgwXro77hwDplhm8z9wU7FlJ8kZqiAQ==
@@ -1086,7 +1099,7 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.6.3:
+react@^16.7.0:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.7.0.tgz#b674ec396b0a5715873b350446f7ea0802ab6381"
   integrity sha512-StCz3QY8lxTb5cl2HJxjwLFOXPIFQp+p+hxQfc8WE0QiLfCtIlKj8/+5tjjKm8uSTlAW+fCPaavGFS06V9Ar3A==
@@ -1101,7 +1114,7 @@ redux-thunk@^2.3.0:
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
   integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
 
-redux@^4.0.1:
+redux@^4.0.0, redux@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
   integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
