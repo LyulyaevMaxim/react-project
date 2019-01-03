@@ -1,6 +1,16 @@
 import { requestCreator, requestTypes, requestStatuses } from '~utils/request-creator'
 import { API_URL } from '~constants'
 
+/*
+interface IGetProductsAction {
+  type: ActionTypes.PRODUCTS_FETCH_REQUEST | ActionTypes.PRODUCTS_FETCH_SUCCESS
+  //payload: { id: number} | { data: IProduct }
+}
+
+function getProducts(id: number): IGetProductsAction {
+  return { type: ActionTypes.PRODUCTS_FETCH_REQUEST }
+}*/
+
 const {
   PRODUCTS_FETCH,
   PRODUCTS_UPDATE,

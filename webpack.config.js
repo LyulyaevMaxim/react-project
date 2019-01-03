@@ -66,6 +66,7 @@ module.exports = (env, argv) => ({
       '~modules': `${root}/src/js/modules`,
       '~components': `${root}/src/js/components`,
       modernizr$: `${root}/.modernizrrc.js`,
+      '~types': `${root}/src/js/types`,
     },
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },

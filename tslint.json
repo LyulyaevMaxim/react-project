@@ -10,7 +10,7 @@
   ],
   "jsRules": {},
   "rules": {
-    "prettier": true,
+    "prettier": false,
     "no-constant-condition": true,
     "import-name": false,
     "function-name": false,
@@ -18,7 +18,11 @@
     "ordered-imports": false,
     "no-commented-code": false,
     "one-variable-per-declaration": false,
-    "variable-name": false
+    "variable-name": false,
+    "object-literal-sort-keys": false,
+    "no-unused-variable": false,
+    "comment-format": false,
+    "useless-assignment-to-local": false
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
 }

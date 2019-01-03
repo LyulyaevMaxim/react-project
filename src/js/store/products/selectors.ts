@@ -1,4 +1,8 @@
-import { selectorsCreator, selectorFactoriesCreator } from '~utils/selector-creator'
+import { createSelector } from 'reselect'
+import { IState } from './reducer'
+
+const getList = (state: IState) => state.list
+/*import { selectorsCreator, selectorFactoriesCreator } from '~utils/selector-creator'
 
 const dataFactory = (id, data) => data[id] || {}
 
@@ -29,3 +33,4 @@ export const { productFactory, unsavedProductFactory } = selectorFactoriesCreato
   { name: 'productFactory', selectors: [productIdGetter, productsDataGetter], func: dataFactory },
   { name: 'unsavedProductFactory', selectors: [productIdGetter, unsavedProductsDataGetter], func: dataFactory },
 ])
+*/

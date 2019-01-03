@@ -1,19 +1,32 @@
 import produce from 'immer'
-import { requestStatuses } from '~utils/request-creator'
-import { paymentTypes, productGroups, productsData } from './fakeData'
+import * as Types from '~types/index'
+/*import { requestStatuses } from '~utils/request-creator'*/
+/*import { paymentTypes, productGroups, productsData } from './fakeData'*/
 
-const {
-  PRODUCTS_FETCH,
-  PRODUCT_ADD,
-  PRODUCT_DELETE,
-  PRODUCTS_SAVE,
-  PRODUCTS_CREATE,
-  PRODUCTS_UPDATE,
-  PRODUCT_GROUPS_FETCH,
-  PAYMENT_TYPES_FETCH,
-} = require('./constants').default
+export interface IState {
+  readonly isLoadProducts: Types.TLoadingFlag
+  isSaveRun: Types.TLoadingFlag
+  list: number[]
+  data: object
+  unsavedList: number[]
+  unsavedData: object
+  productGroups: { options: string[]; optionsMap: object; isLoad: Types.TLoadingFlag }
+  paymentTypes: { options: string[]; optionsMap: object; isLoad: Types.TLoadingFlag }
+}
 
-const initialState = {
+enum ActionTypes {
+  /* PRODUCTS_FETCH, PRODUCT_ADD, PRODUCT_DELETE, PRODUCTS_SAVE, PRODUCTS_CREATE, PRODUCTS_UPDATE, PRODUCT_GROUPS_FETCH, PAYMENT_TYPES_FETCH, */
+  PRODUCTS_FETCH_REQUEST = 'PRODUCTS_FETCH_REQUEST',
+  PRODUCTS_FETCH_SUCCESS = 'PRODUCTS_FETCH_SUCCESS',
+}
+
+interface IAction {
+  readonly type: ActionTypes.PRODUCTS_FETCH_REQUEST | ActionTypes.PRODUCTS_FETCH_SUCCESS
+  readonly payload?: object
+  readonly meta?: object
+}
+
+const initialState: IState = {
   isLoadProducts: null,
   isSaveRun: null,
   list: [],
@@ -24,30 +37,34 @@ const initialState = {
   paymentTypes: { options: [], optionsMap: {}, isLoad: null },
 }
 
-const initialProduct = {
+export default function(state: IState = initialState, action: IAction): IState {
+  switch (action.type) {
+    case ActionTypes.PRODUCTS_FETCH_REQUEST /* PRODUCTS_FETCH + requestStatuses.REQUEST */: {
+      /*state.isLoadProducts = true check for immer */
+      return { ...state, isLoadProducts: true }
+    }
+
+    case ActionTypes.PRODUCTS_FETCH_SUCCESS /* PRODUCTS_FETCH + requestStatuses.SUCCESS */: {
+      /* const normalizedProducts = productsNormalize({ products: payload })
+         state.data = normalizedProducts.data
+         state.list = normalizedProducts.list */
+      return { ...state, isLoadProducts: false }
+    }
+
+    default:
+      return state
+  }
+}
+
+/*const initialProduct = {
   active: { value: false },
   name: { value: '' },
   description: { value: '' },
   productGroups: { value: [] },
   paymentTypes: { value: [] },
-}
+}*/
 
-export default produce((state = initialState, { type, payload = {}, meta = {} }) => {
-  switch (type) {
-    case PRODUCTS_FETCH + requestStatuses.REQUEST: {
-      state.isLoadProducts = true
-      break
-    }
-
-    case PRODUCTS_FETCH + requestStatuses.SUCCESS: {
-      const normalizedProducts = productsNormalize({ products: payload })
-      state.data = normalizedProducts.data
-      state.list = normalizedProducts.list
-      state.isLoadProducts = false
-      break
-    }
-
-    case PRODUCTS_FETCH + requestStatuses.FAIL: {
+/*   case PRODUCTS_FETCH + requestStatuses.FAIL: {
       const normalizedProducts = productsNormalize({ products: productsData })
       state.data = normalizedProducts.data
       state.list = normalizedProducts.list
@@ -118,12 +135,12 @@ export default produce((state = initialState, { type, payload = {}, meta = {} })
     case PAYMENT_TYPES_FETCH + requestStatuses.FAIL: {
       state.paymentTypes = { ...paymentTypes, isLoad: false }
       break
-    }
+    }*!/
 
     default:
       return state
   }
-})
+}*/
 
 function productsNormalize({ products }) {
   return products.reduce(

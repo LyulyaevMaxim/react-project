@@ -1,16 +1,15 @@
 import polyfills from '~modules/polyfills'
 import '~css/vendors.css'
-import React from 'react'
-import ReactDOM from 'react-dom'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-// import { ConnectedRouter } from 'connected-react-router'
+import { ConnectedRouter } from 'connected-react-router'
+import App from '~components/app'
+import { store, history } from '~store/index'
+/*import { isDev } from '~constants'*/
 
 Promise.all(polyfills)
   .then(() => {
-    const { store /*, history*/ } = require('~store'),
-      App = require('~components/app').default
-    // { isDev } = require('~constants')
-
     /*!isDev && 'serviceWorker' in navigator &&
     window.addEventListener('load', () => {
       navigator.serviceWorker
@@ -21,11 +20,11 @@ Promise.all(polyfills)
 
     ReactDOM.render(
       <Provider {...{ store }}>
-        {/*<ConnectedRouter {...{ history }}>*/}
-        <App />
-        {/*</ConnectedRouter>*/}
+        <ConnectedRouter {...{ history }}>
+          <App />
+        </ConnectedRouter>
       </Provider>,
-      document.getElementById('root')
+      document.getElementById('root') as HTMLElement
     )
   })
   .catch(error => console.error('Failed fetching polyfills', error))
