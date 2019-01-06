@@ -16,7 +16,7 @@ class Content extends Component {
   constructor(props) {
     super(props)
     this.contactFormID = 'contact-form'
-    this.state = { isOpenContactForm: null }
+    this.state /* : Readonly<IState> */ = { isOpenContactForm: null }
   }
 
   onOpenContactForm = event => {

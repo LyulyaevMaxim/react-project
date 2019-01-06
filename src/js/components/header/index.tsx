@@ -1,18 +1,23 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import ThemeSelect from './themeSelect'
+import { IRoute } from '~types/index'
 import styles from './index.pcss'
 
-const Header = ({ routes }) => (
+interface IProps {
+  routes: IRoute[]
+}
+
+const Header = ({ routes }: IProps) => (
   <header className={styles.header}>
-    <h3 className={styles['header-title']}>React Project</h3>
+    <h3 className={styles.headerTitle}>React Project</h3>
     <ThemeSelect />
-    <nav className={styles['header-nav']}>
+    <nav className={styles.headerNav}>
       {routes.map(({ title, path, component }) => (
         <NavLink
           {...{
             to: path,
-            className: styles['header-nav-link'],
+            className: styles.headerNavLink,
             activeClassName: styles.active,
             onMouseEnter: () => component.preload(),
             exact: true,

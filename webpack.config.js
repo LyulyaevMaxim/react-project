@@ -93,13 +93,14 @@ module.exports = (env, argv) => ({
       id: 'PostCSS',
       threadPool: happyThreadPool,
       loaders: [
-        cacheLoader,
+        // cacheLoader,
         {
-          loader: 'css-loader',
+          loader: require.resolve('typings-for-css-modules-loader'),
           options: {
-            importLoaders: 1,
             modules: true,
+            importLoaders: 1,
             localIdentName: '[local]-[hash:base64:4]',
+            namedExport: true,
             sourceMap: isDev,
             // camelCase: true,
             // exportOnlyLocals: true,
@@ -178,6 +179,7 @@ module.exports = (env, argv) => ({
       verbose: true,
       emitError: false,
     }),*/
+    new webpack.WatchIgnorePlugin([/pcss\.d\.ts$/]),
     !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
   ].filter(Boolean),
 

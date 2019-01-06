@@ -22,7 +22,9 @@
     "object-literal-sort-keys": false,
     "no-unused-variable": false,
     "comment-format": false,
-    "useless-assignment-to-local": false
+    "useless-assignment-to-local": false,
+    "jsx-boolean-value": false,
+    "no-var-requires": false
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
 }
