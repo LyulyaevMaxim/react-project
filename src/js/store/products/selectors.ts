@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 import { IState } from './reducer'
 
-const getList = (state: IState) => state.list
-/*import { selectorsCreator, selectorFactoriesCreator } from '~utils/selector-creator'
+/*const getList = (state: IState) => state.list*/
+import { selectorsCreator, selectorFactoriesCreator, SelectorTypes } from '~utils/selector-creator'
 
 const dataFactory = (id, data) => data[id] || {}
 
@@ -16,14 +16,14 @@ export const {
   paymentTypesGetter,
   isSaveRun,
 } = selectorsCreator([
-  { name: 'productIdGetter', path: 'props.id', type: 'string' },
-  { name: 'productsListGetter', path: 'store.products.list', type: 'array' },
-  { name: 'productsDataGetter', path: 'store.products.data', type: 'object' },
-  { name: 'unsavedProductsDataGetter', path: 'store.products.unsavedData', type: 'object' },
-  { name: 'unsavedProductsListGetter', path: 'store.products.unsavedList', type: 'array' },
-  { name: 'productGroupsGetter', path: 'store.products.productGroups', type: 'object' },
-  { name: 'paymentTypesGetter', path: 'store.products.paymentTypes', type: 'object' },
-  { name: 'isSaveRun', path: 'store.products.isSaveRun', type: 'other' },
+  { name: 'productIdGetter', path: 'props.id', type: SelectorTypes.string },
+  { name: 'productsListGetter', path: 'store.products.list', type: SelectorTypes.array },
+  { name: 'productsDataGetter', path: 'store.products.data', type: SelectorTypes.object },
+  { name: 'unsavedProductsDataGetter', path: 'store.products.unsavedData', type: SelectorTypes.object },
+  { name: 'unsavedProductsListGetter', path: 'store.products.unsavedList', type: SelectorTypes.array },
+  { name: 'productGroupsGetter', path: 'store.products.productGroups', type: SelectorTypes.object },
+  { name: 'paymentTypesGetter', path: 'store.products.paymentTypes', type: SelectorTypes.object },
+  { name: 'isSaveRun', path: 'store.products.isSaveRun', type: SelectorTypes.flag },
 ])
 
 export const isLoadProducts = ({ products }) =>
@@ -33,4 +33,3 @@ export const { productFactory, unsavedProductFactory } = selectorFactoriesCreato
   { name: 'productFactory', selectors: [productIdGetter, productsDataGetter], func: dataFactory },
   { name: 'unsavedProductFactory', selectors: [productIdGetter, unsavedProductsDataGetter], func: dataFactory },
 ])
-*/

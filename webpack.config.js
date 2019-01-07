@@ -93,7 +93,7 @@ module.exports = (env, argv) => ({
       id: 'PostCSS',
       threadPool: happyThreadPool,
       loaders: [
-        // cacheLoader,
+        cacheLoader,
         {
           loader: require.resolve('typings-for-css-modules-loader'),
           options: {
@@ -156,25 +156,25 @@ module.exports = (env, argv) => ({
       tslint: `${root}/tslint.json`,
       watch: [`${root}/src/js`],
       async: false,
-      checkSyntacticErrors: false
+      checkSyntacticErrors: false,
     }),
     !isDev && new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
     !isDev &&
-    new LodashWebpackOptimize({
-      chaining: false,
-      shorthands: true,
-      collections: true,
-      paths: true,
-    }),
+      new LodashWebpackOptimize({
+        chaining: false,
+        shorthands: true,
+        collections: true,
+        paths: true,
+      }),
     !isDev &&
-    new WorkboxPlugin.GenerateSW({
-      cacheId: 'service-worker',
-      swDest: `${distPath}/assets/js/sw.js`,
-      precacheManifestFilename: `${distPath}/assets/js/precache-manifest.[manifestHash].js`,
-      navigateFallback: `${distPath}/index.html`,
-      clientsClaim: true,
-      skipWaiting: true,
-    }),
+      new WorkboxPlugin.GenerateSW({
+        cacheId: 'service-worker',
+        swDest: `${distPath}/assets/js/sw.js`,
+        precacheManifestFilename: `${distPath}/assets/js/precache-manifest.[manifestHash].js`,
+        navigateFallback: `${distPath}/index.html`,
+        clientsClaim: true,
+        skipWaiting: true,
+      }),
     /*new (require('duplicate-package-checker-webpack-plugin'))({
       verbose: true,
       emitError: false,
@@ -245,30 +245,30 @@ module.exports = (env, argv) => ({
 
   optimization: !isDev
     ? {
-      runtimeChunk: false,
-      namedModules: true,
-      noEmitOnErrors: true,
-      concatenateModules: true,
-      minimize: true,
-      splitChunks: {
-        automaticNameDelimiter: '-',
-        chunks: 'all',
-        cacheGroups: {
-          vendor: {
-            name: 'vendor',
-            chunks: 'all',
-            test: /[\\/]node_modules[\\/]/,
-            priority: -10,
+        runtimeChunk: false,
+        namedModules: true,
+        noEmitOnErrors: true,
+        concatenateModules: true,
+        minimize: true,
+        splitChunks: {
+          automaticNameDelimiter: '-',
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              name: 'vendor',
+              chunks: 'all',
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+            },
           },
         },
-      },
-      minimizer: [
-        new TerserPlugin({ cache: true, parallel: true, terserOptions: { mangle: true } }),
-        new OptimizeCSSAssetsPlugin({
-          cssProcessor: require('cssnano'),
-          cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
-        }),
-      ],
-    }
+        minimizer: [
+          new TerserPlugin({ cache: true, parallel: true, terserOptions: { mangle: true } }),
+          new OptimizeCSSAssetsPlugin({
+            cssProcessor: require('cssnano'),
+            cssProcessorOptions: { discardComments: { removeAll: true }, zindex: {} },
+          }),
+        ],
+      }
     : {},
 })

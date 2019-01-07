@@ -1,4 +1,21 @@
-export const paymentTypes = {
+interface IPaymentTypes {
+  options: Array<{value: number, label: string}>,
+  optionsMap: {[key: string]: string}
+}
+
+interface IProductGroups extends IPaymentTypes {}
+
+interface IProduct {
+  productId: string,
+  name: { value: string, readonly?: boolean},
+  description: {value: string, readonly?: boolean},
+  productGroups: { value: Array<number>, readonly?: boolean},
+  paymentTypes: { value: Array<number>, readonly?: boolean },
+  picture: {value: string, readonly?: boolean},
+  active: {value: boolean, readonly?: boolean}
+}
+
+export const paymentTypes : IPaymentTypes= {
   options: [
     {
       value: 0,
@@ -30,7 +47,7 @@ export const paymentTypes = {
   },
 }
 
-export const productGroups = {
+export const productGroups: IProductGroups = {
   options: [
     {
       value: 0,
@@ -57,7 +74,7 @@ export const productGroups = {
   },
 }
 
-export const productsData = [
+export const productsData: Array<IProduct> = [
   {
     productId: 'id0',
     name: { value: 'Product 0' },

@@ -1,29 +1,57 @@
 import produce from 'immer'
 import * as Types from '~types/index'
 /*import { requestStatuses } from '~utils/request-creator'*/
-/*import { paymentTypes, productGroups, productsData } from './fakeData'*/
+import { paymentTypes, productGroups, productsData } from './fakeData'
+
+const initialProduct = {
+  active: { value: false },
+  name: { value: '' },
+  description: { value: '' },
+  productGroups: { value: [] },
+  paymentTypes: { value: [] },
+}
 
 export interface IState {
   readonly isLoadProducts: Types.TLoadingFlag
-  isSaveRun: Types.TLoadingFlag
-  list: number[]
-  data: object
-  unsavedList: number[]
-  unsavedData: object
-  productGroups: { options: string[]; optionsMap: object; isLoad: Types.TLoadingFlag }
-  paymentTypes: { options: string[]; optionsMap: object; isLoad: Types.TLoadingFlag }
+  readonly isSaveRun: Types.TLoadingFlag
+  readonly list: number[]
+  readonly data: object
+  readonly unsavedList: number[]
+  readonly unsavedData: object
+  readonly productGroups: { options: string[]; optionsMap: object; isLoad: Types.TLoadingFlag }
+  readonly paymentTypes: { options: string[]; optionsMap: object; isLoad: Types.TLoadingFlag }
 }
 
 enum ActionTypes {
-  /* PRODUCTS_FETCH, PRODUCT_ADD, PRODUCT_DELETE, PRODUCTS_SAVE, PRODUCTS_CREATE, PRODUCTS_UPDATE, PRODUCT_GROUPS_FETCH, PAYMENT_TYPES_FETCH, */
   PRODUCTS_FETCH_REQUEST = 'PRODUCTS_FETCH_REQUEST',
   PRODUCTS_FETCH_SUCCESS = 'PRODUCTS_FETCH_SUCCESS',
+  PRODUCTS_FETCH_FAIL = 'PRODUCTS_FETCH_FAIL',
+
+  PRODUCTS_CREATE_REQUEST = 'PRODUCTS_CREATE_REQUEST',
+  PRODUCTS_CREATE_SUCCESS = 'PRODUCTS_CREATE_SUCCESS',
+  PRODUCTS_CREATE_FAIL = 'PRODUCTS_CREATE_FAIL',
+
+  PRODUCTS_UPDATE_REQUEST = 'PRODUCTS_UPDATE_REQUEST',
+  PRODUCTS_UPDATE_SUCCESS = 'PRODUCTS_UPDATE_SUCCESS',
+  PRODUCTS_UPDATE_FAIL = 'PRODUCTS_UPDATE_FAIL',
+
+  PRODUCT_GROUPS_FETCH_REQUEST = 'PRODUCT_GROUPS_FETCH_REQUEST',
+  PRODUCT_GROUPS_FETCH_SUCCESS = 'PRODUCT_GROUPS_FETCH_SUCCESS',
+  PRODUCT_GROUPS_FETCH_FAIL = 'PRODUCT_GROUPS_FETCH_FAIL',
+
+  PAYMENT_TYPES_FETCH_REQUEST = 'PAYMENT_TYPES_FETCH_REQUEST',
+  PAYMENT_TYPES_FETCH_SUCCESS = 'PAYMENT_TYPES_FETCH_SUCCESS',
+  PAYMENT_TYPES_FETCH_FAIL = 'PAYMENT_TYPES_FETCH_FAIL',
+
+  PRODUCT_ADD = 'PRODUCT_ADD',
+  PRODUCT_DELETE = 'PRODUCT_DELETE',
+  PRODUCTS_SAVE = 'PRODUCTS_SAVE',
 }
 
 interface IAction {
-  readonly type: ActionTypes.PRODUCTS_FETCH_REQUEST | ActionTypes.PRODUCTS_FETCH_SUCCESS
-  readonly payload?: object
-  readonly meta?: object
+  readonly type: ActionTypes
+  readonly payload?: any //object
+  readonly meta?: any //object
 }
 
 const initialState: IState = {
@@ -37,110 +65,98 @@ const initialState: IState = {
   paymentTypes: { options: [], optionsMap: {}, isLoad: null },
 }
 
-export default function(state: IState = initialState, action: IAction): IState {
-  switch (action.type) {
-    case ActionTypes.PRODUCTS_FETCH_REQUEST /* PRODUCTS_FETCH + requestStatuses.REQUEST */: {
-      /*state.isLoadProducts = true check for immer */
-      return { ...state, isLoadProducts: true }
+export default (state: IState = initialState, action: IAction) =>
+  produce<IState>(state, draft => {
+    switch (action.type) {
+      case ActionTypes.PRODUCTS_FETCH_REQUEST: {
+        draft.isLoadProducts = true
+        break
+      }
+
+      case ActionTypes.PRODUCTS_FETCH_SUCCESS: {
+        const normalizedProducts = productsNormalize({ products: action.payload })
+        draft.data = normalizedProducts.data
+        draft.list = normalizedProducts.list
+        draft.isLoadProducts = false
+        break
+      }
+
+      case ActionTypes.PRODUCTS_FETCH_FAIL: {
+        const normalizedProducts = productsNormalize({ products: productsData })
+        draft.data = normalizedProducts.data
+        draft.list = normalizedProducts.list
+        draft.isLoadProducts = false
+        break
+      }
+
+      case ActionTypes.PRODUCT_GROUPS_FETCH_SUCCESS: {
+        draft.productGroups = (action.payload as any[]).reduce(
+          (acc, { groupId, name }) => {
+            acc.options.push({ value: groupId, label: name })
+            acc.optionsMap[groupId] = name
+            return acc
+          },
+          { options: [], optionsMap: {}, isLoad: false }
+        )
+        break
+      }
+
+      case ActionTypes.PRODUCT_GROUPS_FETCH_FAIL: {
+        draft.productGroups = { ...productGroups, isLoad: false }
+        break
+      }
+
+      case ActionTypes.PAYMENT_TYPES_FETCH_FAIL: {
+        draft.paymentTypes = { ...paymentTypes, isLoad: false }
+        break
+      }
+
+      case ActionTypes.PRODUCT_ADD: {
+        const productId = state.unsavedList.length + 1
+        draft.unsavedList.push(productId)
+        draft.unsavedData[productId] = { ...initialProduct, id: productId }
+        break
+      }
+
+      case ActionTypes.PRODUCT_DELETE: {
+        const { id, isUnsaved } = action.payload,
+          [listName, dataName] = isUnsaved ? ['unsavedList', 'unsavedData'] : ['list', 'data']
+        draft[listName] = state[listName].filter(productId => productId !== id)
+        delete draft[dataName][id]
+        break
+      }
+
+      case ActionTypes.PRODUCTS_SAVE: {
+        draft.isSaveRun = true
+        break
+      }
+
+      case ActionTypes.PRODUCTS_UPDATE_SUCCESS: {
+        draft.isSaveRun = false
+        draft.data = { ...state.data, ...productsNormalize({ products: action.payload }).data }
+        break
+      }
+
+      case ActionTypes.PRODUCTS_CREATE_SUCCESS: {
+        const { savedProducts } = action.meta
+        const normalizedProducts = productsNormalize({ products: action.payload })
+        draft.list = [...state.list, ...normalizedProducts.list]
+        draft.data = { ...state.data, ...normalizedProducts.data }
+        draft.unsavedList = state.unsavedList.filter(productId => !savedProducts.some(id => id === productId))
+        savedProducts.forEach(productId => delete draft.unsavedData[productId])
+        draft.isSaveRun = false
+        break
+      }
+
+      case ActionTypes.PRODUCTS_CREATE_FAIL:
+      case ActionTypes.PRODUCTS_UPDATE_FAIL: {
+        draft.isSaveRun = false
+        break
+      }
     }
 
-    case ActionTypes.PRODUCTS_FETCH_SUCCESS /* PRODUCTS_FETCH + requestStatuses.SUCCESS */: {
-      /* const normalizedProducts = productsNormalize({ products: payload })
-         state.data = normalizedProducts.data
-         state.list = normalizedProducts.list */
-      return { ...state, isLoadProducts: false }
-    }
-
-    default:
-      return state
-  }
-}
-
-/*const initialProduct = {
-  active: { value: false },
-  name: { value: '' },
-  description: { value: '' },
-  productGroups: { value: [] },
-  paymentTypes: { value: [] },
-}*/
-
-/*   case PRODUCTS_FETCH + requestStatuses.FAIL: {
-      const normalizedProducts = productsNormalize({ products: productsData })
-      state.data = normalizedProducts.data
-      state.list = normalizedProducts.list
-      state.isLoadProducts = false
-      break
-    }
-
-    case PRODUCT_ADD: {
-      const productId = state.unsavedList.length + 1
-      state.unsavedList.push(productId)
-      state.unsavedData[productId] = { ...initialProduct, id: productId }
-      break
-    }
-
-    case PRODUCT_DELETE: {
-      const { id, isUnsaved } = payload,
-        [listName, dataName] = isUnsaved ? ['unsavedList', 'unsavedData'] : ['list', 'data']
-      state[listName] = state[listName].filter(productId => productId !== id)
-      delete state[dataName][id]
-      break
-    }
-
-    case PRODUCTS_SAVE: {
-      state.isSaveRun = true
-      break
-    }
-
-    case PRODUCTS_UPDATE + requestStatuses.SUCCESS: {
-      state.isSaveRun = false
-      state.data = { ...state.data, ...productsNormalize({ products: payload }).data }
-      break
-    }
-
-    case PRODUCTS_CREATE + requestStatuses.SUCCESS: {
-      const { savedProducts } = meta
-      const normalizedProducts = productsNormalize({ products: payload })
-      state.list = [...state.list, ...normalizedProducts.list]
-      state.data = { ...state.data, ...normalizedProducts.data }
-      state.unsavedList = state.unsavedList.filter(productId => !savedProducts.some(id => id === productId))
-      savedProducts.forEach(productId => delete state.unsavedData[productId])
-      state.isSaveRun = false
-      break
-    }
-
-    case PRODUCTS_UPDATE + requestStatuses.FAIL:
-    case PRODUCTS_CREATE + requestStatuses.FAIL: {
-      state.isSaveRun = false
-      break
-    }
-
-    case PRODUCT_GROUPS_FETCH + requestStatuses.SUCCESS: {
-      state.productGrops = payload.reduce(
-        (acc, { groupId, name }) => {
-          acc.options.push({ value: groupId, label: name })
-          acc.optionsMap[groupId] = name
-          return acc
-        },
-        { options: [], optionsMap: {}, isLoad: false }
-      )
-      break
-    }
-
-    case PRODUCT_GROUPS_FETCH + requestStatuses.FAIL: {
-      state.productGroups = { ...productGroups, isLoad: false }
-      break
-    }
-
-    case PAYMENT_TYPES_FETCH + requestStatuses.FAIL: {
-      state.paymentTypes = { ...paymentTypes, isLoad: false }
-      break
-    }*!/
-
-    default:
-      return state
-  }
-}*/
+    return draft
+  })
 
 function productsNormalize({ products }) {
   return products.reduce(

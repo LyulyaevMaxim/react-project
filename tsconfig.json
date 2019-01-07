@@ -16,6 +16,7 @@
     "allowJs": false,
     "checkJs": false,
     "alwaysStrict": true,
+    "noEmit": true,
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "diagnostics": true,
     "extendedDiagnostics": true,
@@ -27,6 +28,7 @@
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
     "importHelpers": true,
+    "isolatedModules": true,
     "baseUrl": "./",
     "paths": {
       "~components/*": ["src/js/components/*"],

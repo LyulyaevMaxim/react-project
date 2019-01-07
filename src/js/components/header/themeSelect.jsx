@@ -9,7 +9,7 @@ const Select = Loadable({
 })
 
 class ThemeSelect extends Component {
-  static themes = { dark: globalStyles['dark-theme'], light: globalStyles['light-theme'] }
+  static themes = { dark: globalStyles.darkTheme, light: globalStyles.lightTheme }
 
   static themesOptions = Object.keys(ThemeSelect.themes).map(theme => ({
     label: theme,

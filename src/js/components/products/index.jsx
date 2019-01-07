@@ -1,17 +1,17 @@
 import React from 'react'
 import * as selectors from '~store/products/selectors'
 import * as actions from '~store/products/actions'
-import loadable from 'react-loadable'
+import Loadable from 'react-loadable'
 import styles from './index.pcss'
 
-const Table = loadable({
+const Table = Loadable({
   loader: () => import('~modules/table' /* webpackChunkName: "modules->table" */),
   loading: () => null,
 })
 
 function ProductsPage() {
   return (
-    <main className={styles['products-container']}>
+    <main className={styles.productsContainer}>
       <Table
         {...{
           tableSelectors: {

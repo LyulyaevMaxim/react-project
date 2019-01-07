@@ -24,7 +24,11 @@
     "comment-format": false,
     "useless-assignment-to-local": false,
     "jsx-boolean-value": false,
-    "no-var-requires": false
+    "no-var-requires": false,
+    "max-union-size": false,
+    "prefer-array-literal": false,
+    "array-type": false,
+    "no-empty-interface": false
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
 }
