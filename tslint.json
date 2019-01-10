@@ -8,7 +8,6 @@
     "tslint-immutable",
     "tslint-config-prettier"
   ],
-  "jsRules": {},
   "rules": {
     "prettier": false,
     "no-constant-condition": true,
@@ -28,7 +27,9 @@
     "max-union-size": false,
     "prefer-array-literal": false,
     "array-type": false,
-    "no-empty-interface": false
+    "no-empty-interface": false,
+    "object-shorthand-properties-first": false,
+    "curly": false
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
 }

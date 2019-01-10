@@ -2,7 +2,8 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router'
 import { createBrowserHistory, History } from 'history'
 import thunk from 'redux-thunk'
-import * as fromProducts from './products/reducer'
+import productsReducer from './products/reducer'
+import productsTypes from './products/reducer.d'
 
 export const history: History = createBrowserHistory()
 
@@ -13,11 +14,11 @@ const isDev = process.env.NODE_ENV === `development`,
 
 interface IStore {
   router: RouterState
-  products: fromProducts.IState
+  products: productsTypes.IState
 }
 
 export const store = createStore(
-  combineReducers<IStore>({ router: connectRouter(history), products: fromProducts.default }),
+  combineReducers<IStore>({ router: connectRouter(history), products: productsReducer }),
   enhancer
 )
 

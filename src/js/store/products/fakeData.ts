@@ -1,19 +1,4 @@
-interface IPaymentTypes {
-  options: Array<{value: number, label: string}>,
-  optionsMap: {[key: string]: string}
-}
-
-interface IProductGroups extends IPaymentTypes {}
-
-interface IProduct {
-  productId: string,
-  name: { value: string, readonly?: boolean},
-  description: {value: string, readonly?: boolean},
-  productGroups: { value: Array<number>, readonly?: boolean},
-  paymentTypes: { value: Array<number>, readonly?: boolean },
-  picture: {value: string, readonly?: boolean},
-  active: {value: boolean, readonly?: boolean}
-}
+import {IPaymentTypes, IProductGroups, IProduct} from './reducer.d'
 
 export const paymentTypes : IPaymentTypes= {
   options: [

@@ -1,7 +1,3 @@
-import { createSelector } from 'reselect'
-import { IState } from './reducer'
-
-/*const getList = (state: IState) => state.list*/
 import { selectorsCreator, selectorFactoriesCreator, SelectorTypes } from '~utils/selector-creator'
 
 const dataFactory = (id, data) => data[id] || {}

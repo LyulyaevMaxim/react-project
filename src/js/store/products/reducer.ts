@@ -1,28 +1,19 @@
 import produce from 'immer'
-import * as Types from '~types/index'
-/*import { requestStatuses } from '~utils/request-creator'*/
+import IActions from './actions.d'
+import {IProduct, IState} from './reducer.d'
 import { paymentTypes, productGroups, productsData } from './fakeData'
 
-const initialProduct = {
+const initialProduct: IProduct= {
+  productId: '',
   active: { value: false },
   name: { value: '' },
   description: { value: '' },
   productGroups: { value: [] },
   paymentTypes: { value: [] },
+  picture: {value: ''},
 }
 
-export interface IState {
-  readonly isLoadProducts: Types.TLoadingFlag
-  readonly isSaveRun: Types.TLoadingFlag
-  readonly list: number[]
-  readonly data: object
-  readonly unsavedList: number[]
-  readonly unsavedData: object
-  readonly productGroups: { options: string[]; optionsMap: object; isLoad: Types.TLoadingFlag }
-  readonly paymentTypes: { options: string[]; optionsMap: object; isLoad: Types.TLoadingFlag }
-}
-
-enum ActionTypes {
+export enum ActionTypes {
   PRODUCTS_FETCH_REQUEST = 'PRODUCTS_FETCH_REQUEST',
   PRODUCTS_FETCH_SUCCESS = 'PRODUCTS_FETCH_SUCCESS',
   PRODUCTS_FETCH_FAIL = 'PRODUCTS_FETCH_FAIL',
@@ -48,12 +39,6 @@ enum ActionTypes {
   PRODUCTS_SAVE = 'PRODUCTS_SAVE',
 }
 
-interface IAction {
-  readonly type: ActionTypes
-  readonly payload?: any //object
-  readonly meta?: any //object
-}
-
 const initialState: IState = {
   isLoadProducts: null,
   isSaveRun: null,
@@ -65,7 +50,7 @@ const initialState: IState = {
   paymentTypes: { options: [], optionsMap: {}, isLoad: null },
 }
 
-export default (state: IState = initialState, action: IAction) =>
+export default (state: IState = initialState, action: IActions) =>
   produce<IState>(state, draft => {
     switch (action.type) {
       case ActionTypes.PRODUCTS_FETCH_REQUEST: {
@@ -90,13 +75,13 @@ export default (state: IState = initialState, action: IAction) =>
       }
 
       case ActionTypes.PRODUCT_GROUPS_FETCH_SUCCESS: {
-        draft.productGroups = (action.payload as any[]).reduce(
+        draft.productGroups = action.payload.reduce(
           (acc, { groupId, name }) => {
             acc.options.push({ value: groupId, label: name })
             acc.optionsMap[groupId] = name
             return acc
           },
-          { options: [], optionsMap: {}, isLoad: false }
+          { options: [], optionsMap: {}, isLoad: false } as IState['productGroups']
         )
         break
       }
@@ -112,9 +97,9 @@ export default (state: IState = initialState, action: IAction) =>
       }
 
       case ActionTypes.PRODUCT_ADD: {
-        const productId = state.unsavedList.length + 1
+        const productId = String(state.unsavedList.length + 1)
         draft.unsavedList.push(productId)
-        draft.unsavedData[productId] = { ...initialProduct, id: productId }
+        draft.unsavedData[productId] = { ...initialProduct, productId  }
         break
       }
 
@@ -138,12 +123,14 @@ export default (state: IState = initialState, action: IAction) =>
       }
 
       case ActionTypes.PRODUCTS_CREATE_SUCCESS: {
-        const { savedProducts } = action.meta
         const normalizedProducts = productsNormalize({ products: action.payload })
         draft.list = [...state.list, ...normalizedProducts.list]
         draft.data = { ...state.data, ...normalizedProducts.data }
-        draft.unsavedList = state.unsavedList.filter(productId => !savedProducts.some(id => id === productId))
-        savedProducts.forEach(productId => delete draft.unsavedData[productId])
+        if (action.meta && action.meta.savedProducts) {
+          const { savedProducts } = action.meta
+          draft.unsavedList = state.unsavedList.filter(productId => !savedProducts.some(id => id === productId))
+          savedProducts.forEach(productId => delete draft.unsavedData[productId])
+        }
         draft.isSaveRun = false
         break
       }
@@ -158,13 +145,13 @@ export default (state: IState = initialState, action: IAction) =>
     return draft
   })
 
-function productsNormalize({ products }) {
+function productsNormalize({ products } : { products: Array<IProduct> }) {
   return products.reduce(
     (accumulator, product) => {
       accumulator.list.push(product.productId)
       accumulator.data[product.productId] = product
       return accumulator
     },
-    { list: [], data: {} }
+    { list: [], data: {} } as {list: Array<IProduct['productId']>, data: {[key: string]: IProduct }}
   )
 }
