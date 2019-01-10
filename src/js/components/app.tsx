@@ -1,21 +1,22 @@
-import React, { Fragment } from 'react'
-import { hot } from 'react-hot-loader'
+import React from 'react'
+import { hot } from 'react-hot-loader/root'
 import { Route, Switch } from 'react-router-dom'
-import loadable from 'react-loadable'
+import Loadable from 'react-loadable'
 import { initialPath } from '~constants'
 import '~css/index.pcss'
+import { IRoute } from '~types/index'
 import Header from '~components/header'
 
-const ContactForm = loadable({
+const ContactForm: React.ComponentType<{}> = Loadable({
   loader: () => import('~components/contact-form' /* webpackChunkName: "components->contact-form" */),
   loading: () => null,
 })
 
-const routes = [
+const routes: IRoute[] = [
   {
     title: 'Главная',
     path: initialPath,
-    component: loadable({
+    component: Loadable({
       loader: () => import('~components/content' /* webpackChunkName: "components->content" */),
       loading: () => null,
     }),
@@ -23,7 +24,7 @@ const routes = [
   {
     title: 'Форма',
     path: `${initialPath}form`,
-    component: loadable({
+    component: Loadable({
       loader: () => import('~components/form-demo' /* webpackChunkName: "components->form-demo" */),
       loading: () => null,
     }),
@@ -31,30 +32,26 @@ const routes = [
   {
     title: 'Таблица',
     path: `${initialPath}table`,
-    component: loadable({
+    component: Loadable({
       loader: () => import('~components/products' /* webpackChunkName: "components->products" */),
       loading: () => null,
     }),
   },
 ]
 
+const Page404 = () => <h1>Упс.. 404</h1>
+
 const App = () => (
-  <Fragment>
+  <React.Fragment>
     <Header {...{ routes }} />
     <Switch>
-      <Route
-        {...{
-          exact: true,
-          path: '/404',
-          render: () => <h1>Упс.. 404</h1>,
-        }}
-      />
+      <Route exact path="/404" component={Page404} />
       {routes.map(({ path, component, title }, index) => (
         <Route {...{ path, component, exact: index === 0, key: `route-${title}` }} />
       ))}
     </Switch>
     <ContactForm />
-  </Fragment>
+  </React.Fragment>
 )
 
-export default hot(module)(App)
+export default hot(App)

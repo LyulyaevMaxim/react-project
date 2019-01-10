@@ -1,4 +1,6 @@
-export const paymentTypes = {
+import {IPaymentTypes, IProductGroups, IProduct} from './reducer.d'
+
+export const paymentTypes : IPaymentTypes= {
   options: [
     {
       value: 0,
@@ -30,7 +32,7 @@ export const paymentTypes = {
   },
 }
 
-export const productGroups = {
+export const productGroups: IProductGroups = {
   options: [
     {
       value: 0,
@@ -57,7 +59,7 @@ export const productGroups = {
   },
 }
 
-export const productsData = [
+export const productsData: Array<IProduct> = [
   {
     productId: 'id0',
     name: { value: 'Product 0' },

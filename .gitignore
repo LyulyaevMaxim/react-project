@@ -2,10 +2,9 @@
 
 # dependencies
 /**/node_modules
-
-# production
 /**/dist
 /tests/coverage
+/**/*.pcss.d.ts
 
 # misc
 .DS_Store
@@ -14,6 +13,7 @@
 .env.test.local
 .env.production.local
 .vscode
+.idea
 /**/.cache
 
 /**/npm-debug.log

@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import loadable from 'react-loadable'
+import Loadable from 'react-loadable'
 import globalStyles from '~css/index.pcss'
 import styles from './index.pcss'
 
-const Select = loadable({
+const Select = Loadable({
   loader: () => import('~modules/select' /* webpackChunkName: "modules->select" */),
   loading: () => null,
 })
 
 class ThemeSelect extends Component {
-  static themes = { dark: globalStyles['dark-theme'], light: globalStyles['light-theme'] }
+  static themes = { dark: globalStyles.darkTheme, light: globalStyles.lightTheme }
 
   static themesOptions = Object.keys(ThemeSelect.themes).map(theme => ({
     label: theme,
@@ -29,7 +29,7 @@ class ThemeSelect extends Component {
     document.body.classList.replace(prevState.activeTheme, this.state.activeTheme)
   }
 
-  toggleTheme = ({ theme }) => this.setState(state => ({ activeTheme: theme }))
+  toggleTheme = ({ theme }) => this.setState({ activeTheme: theme })
 
   render() {
     const { activeTheme, toggleTheme } = this.state
@@ -37,7 +37,7 @@ class ThemeSelect extends Component {
       <Select
         {...{
           onChange: ({ value }) => toggleTheme({ theme: value }),
-          className: styles['header-select'],
+          className: styles.headerSelect,
           options: ThemeSelect.themesOptions.filter(({ value }) => value !== activeTheme),
           value: ThemeSelect.themesOptions.find(({ value }) => value === activeTheme),
         }}

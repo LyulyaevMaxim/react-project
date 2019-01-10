@@ -1,21 +1,22 @@
 import axios from 'axios'
-import { get, has } from 'lodash'
+import { Dispatch } from 'redux'
+import { get } from 'lodash-es'
 import { API_URL } from '~constants'
 import { patterns } from '~utils/regExp'
 import { errorsMapCreator } from '~utils/testHelper'
 
-export const requestTypes = {
-  GET_REQUEST: 'GET_REQUEST',
-  POST_REQUEST: 'POST_REQUEST',
-  PUT_REQUEST: 'PUT_REQUEST',
-  DELETE_REQUEST: 'DELETE_REQUEST',
-  PATCH_REQUEST: 'PATCH_REQUEST',
+export enum requestTypes {
+  GET_REQUEST = 'GET_REQUEST',
+  POST_REQUEST = 'POST_REQUEST',
+  PUT_REQUEST = 'PUT_REQUEST',
+  DELETE_REQUEST = 'DELETE_REQUEST',
+  PATCH_REQUEST = 'PATCH_REQUEST',
 }
 
-export const requestStatuses = {
-  REQUEST: '_REQUEST',
-  SUCCESS: '_SUCCESS',
-  FAIL: '_FAIL',
+export enum requestStatuses {
+  REQUEST = '_REQUEST',
+  SUCCESS = '_SUCCESS',
+  FAIL = '_FAIL',
 }
 
 export function axiosInitialization({ token }) {
@@ -23,7 +24,19 @@ export function axiosInitialization({ token }) {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`
 }
 
-export function requestCreator(dispatch, action) {
+interface IAction {
+  type: string
+  requestType: requestTypes
+  requestUrl: string
+  headers?: object
+  resultField?: string
+  callbacks?: { successful?: ({ payload }) => any; unfortunate?: ({ errors }) => any }
+  //TODO: the fields work with array, but it's incorrectly
+  sendObject?: { [key: string]: any }
+  meta?: object
+}
+
+export function requestCreator(dispatch: Dispatch, action: IAction) {
   const { type, requestType, requestUrl, resultField = 'data', headers = {}, sendObject, meta, callbacks = {} } = action
   const { getError } = requestCreator
 
@@ -36,7 +49,7 @@ export function requestCreator(dispatch, action) {
     throw new Error(getError({ 'callbacks.unfortunate': callbacks.unfortunate }))
 
   dispatch({ type: type + requestStatuses.REQUEST, meta })
-  let method, data, params
+  let method: 'get' | 'post' | 'put' | 'delete' | 'patch', data, params
   switch (requestType) {
     case requestTypes.GET_REQUEST: {
       method = 'get'
@@ -64,18 +77,18 @@ export function requestCreator(dispatch, action) {
       break
     }
     default:
-      break
+      throw new Error(`${requestType} is unknown request type`)
   }
   return axios({ method, url: requestUrl, data, params, headers })
     .then(result => {
       const payload = get(result, resultField, result)
       dispatch({ type: type + requestStatuses.SUCCESS, payload, meta })
-      typeof callbacks.successful === 'function' && callbacks.successful({ payload })
-      return result || true
+      if (typeof callbacks.successful === 'function') callbacks.successful({ payload })
+      return result
     })
     .catch(errors => {
       dispatch({ type: type + requestStatuses.FAIL, errors, meta })
-      typeof callbacks.unfortunate === 'function' && callbacks.unfortunate({ errors })
+      if (typeof callbacks.unfortunate === 'function') callbacks.unfortunate({ errors })
       return errors || false
     })
 }

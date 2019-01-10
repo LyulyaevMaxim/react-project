@@ -10,5 +10,8 @@
     "dialog-polyfill": "^0.4.10",
     "stickyfilljs": "^2.1.0",
     "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/modernizr": "^3.5.2"
   }
 }

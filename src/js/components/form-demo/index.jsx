@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import loadable from 'react-loadable'
+import Loadable from 'react-loadable'
 import styles from './index.pcss'
 
-const Input = loadable({
+const Input = Loadable({
     loader: () => import('~modules/input' /* webpackChunkName: "modules->input" */),
     loading: () => null,
   }),
-  Textarea = loadable({
+  Textarea = Loadable({
     loader: () => import('~modules/textarea' /* webpackChunkName: "modules->textarea" */),
     loading: () => null,
   })
@@ -53,7 +53,7 @@ class FormDemo extends Component {
               {...{
                 getValue: ({ value }) => this.handleChange({ field: 'textareaValue', value }),
                 placeholder: 'Растягивающийся textarea',
-                className: styles['custom-textarea'],
+                className: styles.customTextarea,
               }}
             />
             <p>Значение, введённое в textarea:</p>
