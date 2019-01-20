@@ -5,5 +5,6 @@ export type TLoadingFlag = null | boolean
 export interface IRoute {
   title: string
   path: string
+  isExact?: boolean
   component: Loadable.LoadableComponent & React.ComponentType<{}>
 }

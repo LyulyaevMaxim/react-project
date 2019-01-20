@@ -1,12 +1,13 @@
 import React from 'react'
-import DayPicker, { DateUtils } from 'react-day-picker'
-//import styles from './index.pcss'
+import DayPicker from 'react-day-picker'
+//import styles from './styles.pcss'
 
-function DatePicker() {
+function DatePicker(props) {
   return (
     <DayPicker
+      {...{ ...props }}
       //className="Range"
-      numberOfMonths={2}
+      // numberOfMonths={2}
       //fromMonth={}
       //selectedDays={selectedDays}
       //disabledDays={disabledDays}

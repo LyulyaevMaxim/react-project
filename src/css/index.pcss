@@ -1,6 +1,5 @@
 @import '../fonts/fonts.css';
 @import './variables.pcss';
-@import './mixin.pcss';
 
 html {
   box-sizing: border-box;
@@ -21,7 +20,7 @@ html {
   width: 0;
 
   &-thumb {
-    background-color: hsl(0, 0%, 76%);
+    background-color: $colorGray;
     border-radius: 4px;
   }
 }
@@ -148,19 +147,9 @@ svg {
   width: 100%;
 }
 
-:root {
-  --mainColor: gold;
-  --largeFontSize: 24px;
-
-  @media (--desktop) {
-    --mainColor: green;
-    --largeFontSize: 36px;
-  }
-}
-
 body {
-  background-color: var(--fonColor);
-  color: var(--textColor);
+  background-color: var(--fonColor, $colorWhite);
+  color: var(--textColor, $colorBlack);
   -webkit-font-smoothing: antialiased; /*улучшает качество отображения текста на Mac OS*/
   line-height: 1;
   min-height: 100%;
@@ -205,89 +194,16 @@ body {
   }
 }
 
-/* @include border-radius(10px);
-  aspect-ratio: '16:9';
-  aspect-ratio: calc('4:3' - 20px);
-  background-image: url('../img/arrow-to-right.svg' param(--color gold));
-  background-image: url('arrow-to-right.svg' param(--color red));
-  background-repeat: no-repeat; */
-
-/* block-for-items {
-  display: flex;
-  margin: 20px 5px;
-
-  item-block {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #d073b7;
-    height: 100px;
-
-    &:not(:first-child, :last-child) {
-      margin-left: -1px;
-      background-color: yellow;
-    }
-
-    &:matches(:first-child, :last-child) {
-      background-color: yellowgreen;
-    }
-  }
+/*
+aspect-ratio: '16:9';
+aspect-ratio: calc('4:3' - 20px);
+background-image: url('arrow-to-right.svg' param(--color red));
+background-color: color-mod(var(--mainColor) alpha(50%))
+border-color: color(#3ac162 a(90%))
+@include border-radius(10px);
+&:not(:first-child, :last-child) { background-color: yellow; }
+&:matches(:first-child, :last-child) { background-color: yellowgreen; }
+@for $i from 1 through 5 { //by 2 для увеличения счётчика на 2
+  block-for-items.grow item-block:nth-child(#{$i}) { width: calc($i*10%); }
 }
-
-@for $i from 1 through 5 {
-  block-for-items.grow item-block:nth-child(#{$i}) {
-    width: calc($i*10%);
-  }
-}
-
-//by 2 для приращения счётчика на 2
-@for $i from 1 through 5 by 2 {
-  block-for-items.grow item-block:nth-child(#{$i}) {
-    height: calc(100px + $i*10px);
-  }
-} */
-
-/* $theme: dark;
-
-.hello {
-  @if $theme == dark {
-    color: black;
-  } @else {
-    color: gainsboro;
-  }
-
-  p {
-    margin: 0;
-    font-size: 18px;
-  }
-
-  &::before {
-    content: '';
-    display: block;
-    width: 100px;
-    height: 100px;
-    @include back-img(icon.png);
-    z-index: 5000;
-  }
-
-  &::after {
-    content: 'Other text';
-    display: flex;
-    z-index: 5500;
-  }
-} */
-
-h1 {
-  font-size: calc(var(--largeFontSize) * 1.5);
-  line-height: 1.8;
-  /*color: var(--mainColor);*/
-
-  /* @media (--max-tablet) {
-    background: color-mod(var(--mainColor) alpha(50%));
-  } */
-
-  /* @media (--desktop) {
-    background: color(#3ac162 l(80%));
-    border: 1px solid color(#3ac162 a(90%));
-  } */
-}
+*/

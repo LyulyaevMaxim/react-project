@@ -20,7 +20,7 @@ module.exports = {
   },
   resetModules: false,
   transform: {
-    '^.+\\.(js|jsx)$': `${root}/tests/jestPreprocess.js`,
+    '^.+\\.(ts|js)x?$': `${root}/tests/jestPreprocess.js`,
   },
   // transformIgnorePatterns: [`${root}/node_modules`],
   collectCoverage: isProd,

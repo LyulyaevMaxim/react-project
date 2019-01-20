@@ -4,6 +4,8 @@ import { createBrowserHistory, History } from 'history'
 import thunk from 'redux-thunk'
 import productsReducer from './products/reducer'
 import productsTypes from './products/reducer.d'
+import eventsReducer from './events/reducer'
+import eventsTypes from './events/reducer.d'
 
 export const history: History = createBrowserHistory()
 
@@ -12,13 +14,14 @@ const isDev = process.env.NODE_ENV === `development`,
   composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose,
   enhancer = isDev ? composeEnhancers(applyMiddleware(...middlewares)) : applyMiddleware(...middlewares)
 
-interface IStore {
+export interface IStore {
   router: RouterState
   products: productsTypes.IState
+  events: eventsTypes.IState
 }
 
 export const store = createStore(
-  combineReducers<IStore>({ router: connectRouter(history), products: productsReducer }),
+  combineReducers<IStore>({ router: connectRouter(history), products: productsReducer, events: eventsReducer }),
   enhancer
 )
 

@@ -1,0 +1,135 @@
+@import '~css/variables.pcss';
+
+.table {
+  display: block;
+  width: 100%;
+
+  thead,
+  tbody {
+    display: block;
+    @supports (display: contents) {
+      display: contents;
+    }
+  }
+
+  thead .line {
+    padding-bottom: 20px;
+    padding-top: 15px;
+  }
+
+  tr:not(.functionalLine) {
+    border-left: 1px solid $colorBlack;
+    border-right: 1px solid $colorBlack;
+    font-size: 12px;
+
+    & + tr {
+      border-top: 1px solid $colorBlack;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $colorBlack;
+    }
+  }
+}
+
+.warningLine {
+  color: $colorPink;
+  display: flex;
+  justify-content: center;
+}
+
+.warningLine,
+.line {
+  padding-bottom: 15px;
+  padding-left: 22px;
+  padding-right: 20px;
+  padding-top: 10px;
+}
+
+.functionalLine,
+.line {
+  align-items: center;
+  display: grid;
+  justify-items: flex-start;
+}
+
+.functionalLine {
+  background-color: $colorGray;
+  grid-template-columns: 1fr 40%;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 6px;
+}
+
+.line {
+  grid-gap: 43px;
+  grid-template-columns: 16px 1fr 1fr 1fr;
+}
+
+.columnChecked {
+  & > input[type='checkbox'] {
+    display: none;
+
+    &:checked + label {
+      background-image: url('icon-checked.svg', param(--color $colorGreen));
+      background-position: center;
+      background-repeat: no-repeat;
+      border-color: $colorGreen;
+    }
+  }
+  & > label {
+    border: 1px solid;
+    border-radius: 3px;
+    display: flex;
+    height: 17px;
+    width: 17px;
+  }
+}
+
+.columnName {
+}
+
+.columnDate {
+}
+
+.columnPlace {
+}
+
+.addEventButton,
+.deleteEventsButton,
+.searchEventsButton {
+  background-color: transparent;
+  border: initial;
+}
+
+.addEventButton,
+.deleteEventsButton {
+  transition: filter 0.3s;
+  &:not(:disabled) {
+    cursor: pointer;
+    filter: opacity(1);
+  }
+  &:disabled {
+    filter: opacity(0.4);
+  }
+}
+
+.addEventButton {
+  margin-left: 9px;
+  &::before {
+    content: '+';
+    font-size: $font-size-3;
+  }
+}
+.addEventButton + .deleteEventsButton {
+  margin-left: 16px;
+}
+
+.deleteEventsButton::before {
+  content: '—';
+}
+
+.searchEventsButton {
+  line-height: 2;
+}

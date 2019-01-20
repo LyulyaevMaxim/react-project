@@ -2,9 +2,10 @@ import React from 'react'
 import ReactSelect from 'react-select'
 import styles from './index.pcss'
 
+Select.defaultOptions = []
+
 function Select({ onChange, className, ...props }) {
   const handleOnChange = value => onChange(value)
-  const defaultOptions = []
   return (
     <ReactSelect
       {...{
@@ -12,7 +13,7 @@ function Select({ onChange, className, ...props }) {
         className: `${styles['maxwell-select']} ${className}`,
         value: 'Не выбрано',
         placeholder: 'Выбрать',
-        options: defaultOptions,
+        options: Select.defaultOptions,
         onChange: handleOnChange,
         ...props,
       }}

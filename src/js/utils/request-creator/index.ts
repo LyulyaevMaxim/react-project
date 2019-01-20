@@ -84,12 +84,12 @@ export function requestCreator(dispatch: Dispatch, action: IAction) {
       const payload = get(result, resultField, result)
       dispatch({ type: type + requestStatuses.SUCCESS, payload, meta })
       if (typeof callbacks.successful === 'function') callbacks.successful({ payload })
-      return result
+      return {result}
     })
     .catch(errors => {
       dispatch({ type: type + requestStatuses.FAIL, errors, meta })
       if (typeof callbacks.unfortunate === 'function') callbacks.unfortunate({ errors })
-      return errors || false
+      return {errors }
     })
 }
 

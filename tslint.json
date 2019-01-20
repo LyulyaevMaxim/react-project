@@ -29,7 +29,11 @@
     "array-type": false,
     "no-empty-interface": false,
     "object-shorthand-properties-first": false,
-    "curly": false
+    "curly": false,
+    "member-access": false,
+    "member-ordering": false,
+    "no-extra-semicolon": false,
+    "no-use-of-empty-return-value": false
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
 }

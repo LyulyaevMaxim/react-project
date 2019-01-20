@@ -1,0 +1,78 @@
+@import '~css/variables.pcss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: $colorWhite;
+  max-height: 90vh;
+  max-width: 496px;
+  width: 100%;
+  overflow-y: auto;
+
+  & > header {
+    padding: 25px 22px;
+    & > h2 {
+      font-size: calc($font-size-2 - 1px);
+      font-weight: 700;
+    }
+  }
+
+  & > main {
+    padding: 10px 20px;
+  }
+
+  & > footer {
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: flex-end;
+    padding: 20px 10px 6px 10px;
+  }
+}
+
+.buttonCancel,
+.buttonConfirm {
+  background-color: transparent;
+  border: initial;
+  border-radius: 3px;
+  color: $colorBlueLight;
+  filter: opacity(0.6);
+  font-size: calc($font-size-1 - 3px);
+  font-weight: 700;
+  padding: 8px;
+  text-transform: uppercase;
+  transition: filter 0.3s, color 0.3s;
+
+  &:disabled {
+    filter: opacity(0.3);
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+    &:hover {
+      filter: opacity(1);
+    }
+  }
+}
+
+.popupAddEvent {
+  & > .form > main {
+    display: grid;
+    grid-gap: 22px;
+    grid-template-columns: minmax(max-content, 230px);
+
+    & > input[name='fieldEventName'],
+    & > [class='DayPickerInput'] > input {
+      border: initial;
+      border-bottom: 1px solid $colorGray;
+      width: 100%;
+    }
+  }
+}
+
+.popupDeleteEvents {
+}
+
+.error {
+  color: $colorPink;
+}

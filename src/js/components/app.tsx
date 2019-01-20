@@ -16,14 +16,25 @@ const routes: IRoute[] = [
   {
     title: 'Главная',
     path: initialPath,
+    isExact: true,
     component: Loadable({
       loader: () => import('~components/content' /* webpackChunkName: "components->content" */),
       loading: () => null,
     }),
   },
   {
+    title: 'Мероприятия',
+    path: `${initialPath}events`,
+    isExact: true,
+    component: Loadable({
+      loader: () => import('~components/events' /* webpackChunkName: "components-events" */),
+      loading: () => null,
+    }),
+  },
+  {
     title: 'Форма',
     path: `${initialPath}form`,
+    isExact: true,
     component: Loadable({
       loader: () => import('~components/form-demo' /* webpackChunkName: "components->form-demo" */),
       loading: () => null,
@@ -32,6 +43,7 @@ const routes: IRoute[] = [
   {
     title: 'Таблица',
     path: `${initialPath}table`,
+    isExact: true,
     component: Loadable({
       loader: () => import('~components/products' /* webpackChunkName: "components->products" */),
       loading: () => null,
@@ -39,16 +51,16 @@ const routes: IRoute[] = [
   },
 ]
 
-const Page404 = () => <h1>Упс.. 404</h1>
+const PageNotFound = () => <h1>404</h1>
 
 const App = () => (
   <React.Fragment>
     <Header {...{ routes }} />
     <Switch>
-      <Route exact path="/404" component={Page404} />
-      {routes.map(({ path, component, title }, index) => (
-        <Route {...{ path, component, exact: index === 0, key: `route-${title}` }} />
+      {routes.map(({ path, component, isExact, title }) => (
+        <Route {...{ path, component, exact: isExact, key: `route-${title}` }} />
       ))}
+      <Route component={PageNotFound} />
     </Switch>
     <ContactForm />
   </React.Fragment>
