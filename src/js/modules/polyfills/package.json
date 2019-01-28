@@ -4,10 +4,10 @@
   "author": "Maxim Lyulyaev",
   "license": "MIT",
   "dependencies": {
-    "intersection-observer": "^0.5.1",
-    "details-element-polyfill": "^2.2.0",
-    "react-a11y-dialog": "^4.1.0",
+    "details-element-polyfill": "^2.3.0",
     "dialog-polyfill": "^0.4.10",
+    "intersection-observer": "^0.5.1",
+    "react-a11y-dialog": "^4.1.0",
     "stickyfilljs": "^2.1.0",
     "whatwg-fetch": "^3.0.0"
   },
