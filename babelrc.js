@@ -9,14 +9,14 @@ const presets = [
     '@babel/preset-env',
     !isTest
       ? {
-        targets: { browsers: require(`${root}/package.json`).browserslist },
-        modules: false,
-        loose: true,
-        spec: true,
-        useBuiltIns: 'usage',
-        forceAllTransforms: true,
-        debug: false,
-      }
+          targets: { browsers: require(`${root}/package.json`).browserslist },
+          modules: false,
+          loose: true,
+          spec: true,
+          useBuiltIns: 'usage',
+          forceAllTransforms: true,
+          debug: false,
+        }
       : {},
   ],
   ['@babel/preset-typescript', { isTSX: false, jsxPragma: 'React', allExtensions: false }],
@@ -39,9 +39,10 @@ let plugins = [
 
   ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }], //ESLint has a problem
 
-  /* '@babel/plugin-proposal-export-default-from',
-     '@babel/plugin-proposal-export-namespace-from',
-     a ||= b  => a || (a = b), and also: a &&= b, a ??= b
+  /* not supported by TypeScript
+    '@babel/plugin-proposal-export-default-from', '@babel/plugin-proposal-export-namespace-from',*/
+
+  /* a ||= b  => a || (a = b), and also: a &&= b, a ??= b
     '@babel/plugin-proposal-logical-assignment-operators', */
 
   //------------------------------------------STAGE 2------------------------------------------

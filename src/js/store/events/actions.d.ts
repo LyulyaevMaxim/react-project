@@ -1,5 +1,4 @@
-import { ActionTypes } from './reducer'
-import { IEvent, IEventNew, IPlace } from './reducer.d'
+import { IEvent, IEventNew, IPlace, ActionTypes } from './reducer.d'
 
 export default IActions
 type IActions = IFetchEvents | ISaveEvent | IEventSelected | IEventsSearch | IDeleteEvents | IFetchPlaces

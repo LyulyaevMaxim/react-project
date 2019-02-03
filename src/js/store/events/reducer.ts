@@ -1,38 +1,19 @@
 import produce from 'immer'
-import IActions from './actions.d'
-import { IEvent, IPlace, IState } from './reducer.d'
 import { mockPlacesData, mockEventsData } from './fakeData'
+import IEventsActions from './actions.d'
+import * as IEvents from './reducer.d'
+export { IEvents }
+
+type IEvent = IEvents.IEvent
+type IState = IEvents.IState
+type IPlace = IEvents.IPlace
+const { ActionTypes } = IEvents
 
 const initialEvent: IEvent = {
   eventId: '',
   name: { value: '' },
   date: { value: '' },
   place: { value: '' },
-}
-
-export enum ActionTypes {
-  EVENTS_FETCH = 'EVENTS_FETCH',
-  EVENTS_FETCH_REQUEST = 'EVENTS_FETCH_REQUEST',
-  EVENTS_FETCH_SUCCESS = 'EVENTS_FETCH_SUCCESS',
-  EVENTS_FETCH_FAIL = 'EVENTS_FETCH_FAIL',
-
-  EVENT_SAVE = 'EVENT_SAVE',
-  EVENT_SAVE_REQUEST = 'EVENT_SAVE_REQUEST',
-  EVENT_SAVE_SUCCESS = 'EVENT_SAVE_SUCCESS',
-  EVENT_SAVE_FAIL = 'EVENT_SAVE_FAIL',
-
-  EVENTS_DELETE = 'EVENTS_DELETE',
-  EVENTS_DELETE_REQUEST = 'EVENTS_DELETE_REQUEST',
-  EVENTS_DELETE_SUCCESS = 'EVENTS_DELETE_SUCCESS',
-  EVENTS_DELETE_FAIL = 'EVENTS_DELETE_FAIL',
-
-  EVENT_SELECTED = 'EVENT_SELECTED',
-  EVENTS_SEARCH = 'EVENTS_SEARCH',
-
-  PLACES_FETCH = 'PLACES_FETCH',
-  PLACES_FETCH_REQUEST = 'PLACES_FETCH_REQUEST',
-  PLACES_FETCH_SUCCESS = 'PLACES_FETCH_SUCCESS',
-  PLACES_FETCH_FAIL = 'PLACES_FETCH_FAIL',
 }
 
 const initialState: IState = {
@@ -48,7 +29,7 @@ const initialState: IState = {
   },
 }
 
-export default (state: IState = initialState, action: IActions) =>
+export const eventsReducer = (state: IState = initialState, action: IEventsActions) =>
   produce<IState>(state, draft => {
     switch (action.type) {
       case ActionTypes.PLACES_FETCH_REQUEST: {
