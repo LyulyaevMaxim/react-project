@@ -17,6 +17,7 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__mocks__/fileMock.js',
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '^lodash-es$': 'lodash'
   },
   resetModules: false,
   transform: {
@@ -45,7 +46,7 @@ module.exports = {
   // clearMocks: false,
   // resetMocks: false,
   // restoreMocks: false,
-  setupTestFrameworkScriptFile: `./setupEnzyme.js`,
+  setupFilesAfterEnv: [`./setupEnzyme.js`],
   // testPathIgnorePatterns: [],
   // resolver: `${root}/__tests__/resolver.js`,
 }
