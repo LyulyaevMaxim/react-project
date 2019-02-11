@@ -78,6 +78,7 @@ if (isDev) {
 } else {
   plugins = [
     ...plugins,
+    ['react-remove-properties', { properties: ['data-test'] }],
     'closure-elimination',
     '@babel/plugin-transform-react-constant-elements',
     '@babel/plugin-transform-react-inline-elements',

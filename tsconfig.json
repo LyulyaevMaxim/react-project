@@ -29,6 +29,7 @@
     "strictNullChecks": true,
     "importHelpers": true,
     "isolatedModules": false,
+    "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
       "~components/*": ["src/js/components/*"],
@@ -43,5 +44,5 @@
     }
   },
   "include": ["src/js/**/*"],
-  "exclude": ["/**/node_modules"]
+  "exclude": ["**/node_modules/**/*"]
 }

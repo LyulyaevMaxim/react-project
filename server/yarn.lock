@@ -91,10 +91,10 @@ flatstr@^1.0.9:
   resolved "https://registry.yarnpkg.com/flatstr/-/flatstr-1.0.9.tgz#0950d56fec02de1030c1311847ecd58c25690eb9"
   integrity sha512-qFlJnOBWDfIaunF54/lBqNKmXOI0HqNhu+mHkLmbaBXlS71PUd9OjFOdyevHt/aHoHB1+eW7eKHgRKOG5aHSpw==
 
-hapi@^18.0.0:
-  version "18.0.0"
-  resolved "https://registry.yarnpkg.com/hapi/-/hapi-18.0.0.tgz#97dcc248432baa3d32eb9d9542dec028d8271e1a"
-  integrity sha512-Yv68jeoHww6W88gQsvBfZil139Ho/CTMH75+GADuREIET/4bo60yhp+MoVc3lHjMR5hIEYl7HC6wxGzbmGBLQg==
+hapi@^18.1.0:
+  version "18.1.0"
+  resolved "https://registry.yarnpkg.com/hapi/-/hapi-18.1.0.tgz#98a2a5a8f37a41eb196bdad9727f66b1fbca5fec"
+  integrity sha512-nSU1VLyTAgp7P5gy47QzJIP2JAb+wOFvJIV3gnL0lFj/mD+HuTXhyUsDYXjF/dhADMVXVEz31z6SUHBJhtsvGA==
   dependencies:
     accept "3.x.x"
     ammo "3.x.x"

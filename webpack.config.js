@@ -180,7 +180,7 @@ module.exports = (env, argv) => ({
       emitError: false,
     }),*/
     new webpack.WatchIgnorePlugin([/pcss\.d\.ts$/]),
-    !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
+    // !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
   ].filter(Boolean),
 
   module: {

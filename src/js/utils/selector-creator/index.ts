@@ -4,9 +4,9 @@ import { errorsMapCreator } from '~utils/testHelper'
 import * as Types from '~types/index'
 
 interface ISelectorsCreator {
-  (settings: ISelectorSettings[]): any
+  (settings: Array<ISelectorSettings>): { [key: string]: (store, props?) => any }
   defaultsMap: ISelectorsCreatorDefaultMap
-  getError: ({ settings, type }: { settings?: ISelectorSettings[]; type?: ISelectorSettings['type'] }) => string
+  getError: ({ settings, type }: { settings?: Array<ISelectorSettings>; type?: ISelectorSettings['type'] }) => string
 }
 
 export enum SelectorTypes {
