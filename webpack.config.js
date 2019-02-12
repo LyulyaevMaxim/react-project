@@ -67,6 +67,7 @@ module.exports = (env, argv) => ({
       '~components': `${root}/src/js/components`,
       modernizr$: `${root}/.modernizrrc.js`,
       '~types': `${root}/src/js/types`,
+      '~backend': `${root}/backend`
     },
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },

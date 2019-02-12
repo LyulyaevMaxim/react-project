@@ -77,12 +77,21 @@ export const eventsReducer = (state: IState = initialState, action: IEventsActio
 
       case ActionTypes.EVENT_SAVE_FAIL: {
         const { name, date, place } = action.meta
+        // TODO: now I create the event locally, later need will handle object with errors and display them.
+        // It means that IEventNew must be an object which has "value" and "errors?" properties
         let eventId
         do {
           eventId = `id${Math.random()}`
         } while (state.data[eventId])
         draft.list.push(eventId)
         draft.data[eventId] = { eventId, name: { value: name }, date: { value: date }, place: { value: place } }
+        draft.isSaving = false
+        break
+      }
+
+      case ActionTypes.EVENT_SAVE_SUCCESS: {
+        draft.list.push(action.payload.eventId)
+        draft.data[action.payload.eventId] = action.payload
         draft.isSaving = false
         break
       }

@@ -40,7 +40,8 @@
       "~css/*": ["src/css/*"],
       "~img/*": ["src/img/*"],
       "modernizr$": [".modernizrrc.js"],
-      "~types/*": ["src/js/types/*"]
+      "~types/*": ["src/js/types/*"],
+      "~backend/*": ["backend/*"]
     }
   },
   "include": ["src/js/**/*"],

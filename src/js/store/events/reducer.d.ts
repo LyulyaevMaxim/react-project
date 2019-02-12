@@ -1,11 +1,7 @@
 import * as Types from '~types/index'
+import { IServerEvent, IServerPlace } from '~backend/events'
 
-export interface IEvent {
-  eventId: string
-  name: { value: string }
-  date: { value: string }
-  place: { value: string }
-}
+export interface IEvent extends IServerEvent {}
 
 export interface IEventNew {
   name: IEvent['name']['value']
@@ -13,10 +9,7 @@ export interface IEventNew {
   place: IEvent['place']['value']
 }
 
-export interface IPlace {
-  placeId: string
-  name: { value: string }
-}
+export interface IPlace extends IServerPlace {}
 
 interface IPlaceOption {
   value: IPlace['placeId']
