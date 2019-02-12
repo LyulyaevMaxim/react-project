@@ -8,11 +8,9 @@ import DatePicker from 'react-day-picker/DayPickerInput'
 import DatePickerLocalizaton, { formatDate, parseDate } from 'react-day-picker/moment'
 import * as eventsSelectors from '~store/events/selectors'
 import * as eventsActions from '~store/events/actions'
+import { withLanguage } from '~modules/contexts/language'
+import { flowRight } from 'lodash-es'
 import styles from '../styles.pcss'
-import 'moment/locale/ru'
-
-PopupAddEvent.portalId = `popupAddEvent-${Math.random()}`
-PopupAddEvent.classList = [styles.popupAddEvent]
 
 function PopupAddEvent(props: I.IPopupProps) {
   return (
@@ -21,6 +19,8 @@ function PopupAddEvent(props: I.IPopupProps) {
     </PopupPortal>
   )
 }
+PopupAddEvent.portalId = `popupAddEvent-${Math.random()}`
+PopupAddEvent.classList = [styles.popupAddEvent]
 
 enum fieldNames {
   eventName = 'fieldEventName',
@@ -30,7 +30,8 @@ enum fieldNames {
 
 const dateFormat = 'DD.MM.YYYY'
 
-class Form extends React.Component<I.IProps, I.IState> {
+class Form extends React.Component<I.IProps & { language: any }, I.IState> {
+  static displayName = 'FormAddEvent'
   defaultState = { fieldEventName: '', fieldEventDate: '', fieldEventPlace: '', errors: {} }
   state = this.defaultState
 
@@ -93,7 +94,7 @@ class Form extends React.Component<I.IProps, I.IState> {
               name: fieldNames.eventDate,
               onDayChange: this.onChangeDate,
               value: fieldEventDate,
-              dayPickerProps: { locale: 'ru', localeUtils: DatePickerLocalizaton },
+              dayPickerProps: { locale: this.props.language.activeLanguage, localeUtils: DatePickerLocalizaton },
               format: dateFormat,
               formatDate,
               parseDate,
@@ -130,12 +131,15 @@ class Form extends React.Component<I.IProps, I.IState> {
   }
 }
 
-const FormAddEvent = connect(
-  (store: I.IStore): I.IReduxProps => ({
-    eventsPlaces: eventsSelectors.placesGetter(store),
-    isSaving: eventsSelectors.isSaving(store),
-  }),
-  { saveEvent: eventsActions.saveEvent } as I.IDispatchProps
-)(Form)
+const FormAddEvent = flowRight([
+  withLanguage(),
+  connect(
+    (store: I.IStore): I.IReduxProps => ({
+      eventsPlaces: eventsSelectors.placesGetter(store),
+      isSaving: eventsSelectors.isSaving(store),
+    }),
+    { saveEvent: eventsActions.saveEvent } as I.IDispatchProps
+  ),
+])(Form)
 
 export default PopupAddEvent

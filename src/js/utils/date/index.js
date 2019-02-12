@@ -1,7 +1,7 @@
+import { defaultLanguage } from '~constants'
 import moment from 'moment'
-import 'moment/locale/ru'
-
-moment.locale('ru')
+moment.locale(defaultLanguage)
+export { moment }
 
 export const dateFilters = [
   { value: 'now', label: 'Сейчас' },

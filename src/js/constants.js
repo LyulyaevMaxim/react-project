@@ -8,6 +8,7 @@ module.exports = {
   API_URL_2: `http://111.11.111.111:808${isDev ? '1' : '0'}`,
   USER_AGENT: !isTest && require('./utils/system').getUserAgentInformation(),
   SCROLL_WIDTH: require('./utils/system').getScrollWidth(),
+  defaultLanguage: 'en',
   isDev,
   isTest,
 }

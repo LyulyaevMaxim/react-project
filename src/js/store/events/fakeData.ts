@@ -1,28 +1,17 @@
 import { IPlace, IEvent } from './reducer.d'
+import { faker } from '~utils/testHelper/fakeData'
+import { moment } from '~utils/date'
 
-export const mockPlacesData: Array<IPlace> = [
-  { placeId: 'id0', name: { value: 'Нижний Новгород' } },
-  { placeId: 'id1', name: { value: 'Саров' } },
-  { placeId: 'id2', name: { value: 'Арзамас' } },
-]
+const getFakeDate = () => moment(faker.date.past()).format('DD.MM.YYYY')
 
-export const mockEventsData: Array<IEvent> = [
-  {
-    eventId: 'id0',
-    name: { value: 'Мероприятие 1' },
-    date: { value: '20.08.2017' },
-    place: { value: 'id0' },
-  },
-  {
-    eventId: 'id1',
-    name: { value: 'Мероприятие 2' },
-    date: { value: '13.09.2017' },
-    place: { value: 'id1' },
-  },
-  {
-    eventId: 'id2',
-    name: { value: 'Мероприятие 3' },
-    date: { value: '03.10.2017' },
-    place: { value: 'id2' },
-  },
-]
+export const mockPlacesData: Array<IPlace> = Array.from({ length: 3 }, _ => ({
+  placeId: faker.address.zipCode(),
+  name: { value: faker.address.city() },
+}))
+
+export const mockEventsData: Array<IEvent> = Array.from({ length: 30 }, _ => ({
+  eventId: faker.random.uuid(),
+  name: { value: faker.random.words() },
+  date: { value: getFakeDate() },
+  place: { value: mockPlacesData[Math.floor(Math.random() * mockPlacesData.length)].placeId },
+}))
