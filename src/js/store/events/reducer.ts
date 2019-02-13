@@ -16,7 +16,7 @@ const initialEvent: IEvent = {
   place: { value: '' },
 }
 
-const initialState: IState = {
+export const initialState: IState = {
   isLoading: null,
   isSaving: null,
   isDeleting: null,

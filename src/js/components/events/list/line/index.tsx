@@ -1,7 +1,7 @@
 import * as I from './index.d'
 import React from 'react'
 import { connect } from 'react-redux'
-import * as eventsSelectors from '~store/events/selectors'
+import eventsSelectors from '~store/events/selectors'
 import styles from '../styles.pcss'
 
 function EventLine(props: I.IReduxProps & I.IOwnProps) {

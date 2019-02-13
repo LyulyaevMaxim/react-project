@@ -9,6 +9,7 @@ module.exports = {
   testEnvironment: 'node',
   // testURL: => location.href
   runner: 'jest-runner',
+  preset: 'ts-jest/presets/js-with-babel',
   roots: [`${root}/src/js`],
   // "projects": [`${root}/pr1`, `${root}/pr2`]
   // moduleFileExtensions: ['js', 'jsx', 'json],

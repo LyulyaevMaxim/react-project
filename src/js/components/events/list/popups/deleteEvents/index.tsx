@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { PopupPortal } from '~modules/popup'
 import * as eventsActions from '~store/events/actions'
-import * as eventsSelectors from '~store/events/selectors'
+import eventsSelectors from '~store/events/selectors'
 import styles from '../styles.pcss'
 
 class FormDeleteEvents extends React.Component<I.IProps> {

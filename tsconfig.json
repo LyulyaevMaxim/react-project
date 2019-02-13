@@ -31,6 +31,10 @@
     "isolatedModules": false,
     "skipLibCheck": true,
     "baseUrl": "./",
+    "types": ["jest", "node"],
+    "typeRoots": [
+      "src/node_modules/@types"
+    ],
     "paths": {
       "~components/*": ["src/js/components/*"],
       "~store/*": ["src/js/store/*"],
