@@ -23,7 +23,7 @@ describe('EVENTS SELECTORS', () => {
     })
   })
 
-  test.todo('eventSelectedFactory')
+  // test.todo('eventSelectedFactory')
 })
 
 /*

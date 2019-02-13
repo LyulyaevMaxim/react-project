@@ -28,7 +28,7 @@ module.exports = {
   collectCoverage: isProd,
   coverageDirectory: `./coverage/`,
   coverageReporters: ['json', 'lcov', 'text'],
-  collectCoverageFrom: [`${root}/src/js/*.{js,jsx}`, `!${root}/**/node_modules`],
+  collectCoverageFrom: [`${root}/src/js/*.(ts|js)x?`, `!${root}/**/node_modules`],
   coverageThreshold: {
     global: {
       branches: 80,
@@ -47,7 +47,7 @@ module.exports = {
   // clearMocks: false,
   // resetMocks: false,
   // restoreMocks: false,
-  setupFilesAfterEnv: [`./setupEnzyme.js`],
+  // setupFilesAfterEnv: [`./setupEnzyme.js`],
   // testPathIgnorePatterns: [],
   // resolver: `${root}/__tests__/resolver.js`,
 }

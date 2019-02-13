@@ -1,9 +1,9 @@
 import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
-import { get } from 'lodash'
-import { requestCreator, requestTypes } from '~utils/request-creator'
-
-const getItems = ({ itemId = '' } = {}) => dispatch =>
+import { get } from 'lodash-es'
+// import { requestCreator, requestTypes } from '~utils/request-creator'
+// console.log(require('~utils/request-creator'))
+/*const getItems = ({ itemId = '' } = {}) => dispatch =>
   requestCreator(dispatch, {
     type: 'ITEMS_GET',
     requestType: requestTypes.GET_REQUEST,
@@ -20,7 +20,7 @@ const createItem = ({ itemData }) => dispatch =>
     toReducer: { itemData },
     callbacks: {
       successful: () => ({
-        /* after a successful creation - redirect to item's list */
+        /!* after a successful creation - redirect to item's list *!/
       }),
     },
   })
@@ -34,21 +34,21 @@ const deleteItem = ({ itemId = '' }) => (dispatch, getState) => {
     sendObject: { itemId },
     toReducer: { itemId },
   })
-}
+}*/
 
 @connect(
   state => state,
-  { getItems, createItem, deleteItem }
+  // { getItems, createItem, deleteItem }
 )
 class RequestCreatorDemo extends Component {
   render() {
     const { getItems, createItem, deleteItem } = this.props
     return (
       <Fragment>
-        <button onClick={getItems}>Get all</button>
+        {/*<button onClick={getItems}>Get all</button>
         <button onClick={() => getItems({ id: 2 })}>Get with id=2</button>
         <button onClick={() => createItem({ itemData: { name: '1', price: 2 } })}>Create item</button>
-        <button onClick={() => deleteItem({ id: 3 })}>Delete with id=3</button>
+        <button onClick={() => deleteItem({ id: 3 })}>Delete with id=3</button>*/}
       </Fragment>
     )
   }
