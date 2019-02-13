@@ -1,4 +1,5 @@
 import produce from 'immer'
+// import fc from 'fast-check'
 import eventSelectors from './selectors'
 import { initialState } from './reducer'
 import { mockEventsData } from './fakeData'
@@ -24,3 +25,13 @@ describe('EVENTS SELECTORS', () => {
 
   test.todo('eventSelectedFactory')
 })
+
+/*
+fc.assert(fc.property(fc.string(), fc.string(), fc.string(), (a, b, c) => {
+  expect(contains(b, a + b + c)).toBe(true);
+}))
+
+test('should produce ordered array', fc.assert(fc.property(fc.array(fc.integer()), data => {
+  const sorted = sort(data);
+  for (let idx = 1; idx < sorted.length; ++idx) expect(sorted[idx - 1]).toBeLessThanOrEqual(sorted[idx]);
+})))*/
