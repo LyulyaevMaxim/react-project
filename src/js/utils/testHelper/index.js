@@ -1,4 +1,4 @@
-import { set, has, cloneDeep } from 'lodash'
+import { set, has, cloneDeep } from 'lodash-es'
 
 export function errorsMapCreator(settings) {
   if (!Array.isArray(settings) || !settings.length) throw new Error(`'settings' should be an 'array'`)

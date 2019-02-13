@@ -28,8 +28,13 @@
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
     "importHelpers": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
+    "skipLibCheck": true,
     "baseUrl": "./",
+    "types": ["jest", "node"],
+    "typeRoots": [
+      "src/node_modules/@types"
+    ],
     "paths": {
       "~components/*": ["src/js/components/*"],
       "~store/*": ["src/js/store/*"],
@@ -39,9 +44,10 @@
       "~css/*": ["src/css/*"],
       "~img/*": ["src/img/*"],
       "modernizr$": [".modernizrrc.js"],
-      "~types/*": ["src/js/types/*"]
+      "~types/*": ["src/js/types/*"],
+      "~backend/*": ["backend/*"]
     }
   },
   "include": ["src/js/**/*"],
-  "exclude": ["/**/node_modules"]
+  "exclude": ["**/node_modules/**/*"]
 }

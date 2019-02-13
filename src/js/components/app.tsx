@@ -6,6 +6,7 @@ import { initialPath } from '~constants'
 import '~css/index.pcss'
 import { IRoute } from '~types/index'
 import Header from '~components/header'
+import { withLanguage } from '~modules/contexts/language'
 
 const ContactForm: React.ComponentType<{}> = Loadable({
   loader: () => import('~components/contact-form' /* webpackChunkName: "components->contact-form" */),
@@ -53,17 +54,22 @@ const routes: IRoute[] = [
 
 const PageNotFound = () => <h1>404</h1>
 
-const App = () => (
-  <React.Fragment>
-    <Header {...{ routes }} />
-    <Switch>
-      {routes.map(({ path, component, isExact, title }) => (
-        <Route {...{ path, component, exact: isExact, key: `route-${title}` }} />
-      ))}
-      <Route component={PageNotFound} />
-    </Switch>
-    <ContactForm />
-  </React.Fragment>
-)
+@withLanguage()
+class App extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Header {...{ routes }} />
+        <Switch>
+          {routes.map(({ path, component, isExact, title }) => (
+            <Route {...{ path, component, exact: isExact, key: `route-${title}` }} />
+          ))}
+          <Route component={PageNotFound} />
+        </Switch>
+        <ContactForm />
+      </React.Fragment>
+    )
+  }
+}
 
 export default hot(App)

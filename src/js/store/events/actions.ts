@@ -1,7 +1,6 @@
-import { Dispatch } from 'redux'
 import * as IActions from './actions.d'
-import { ActionTypes } from './reducer'
-import { IEventNew } from './reducer.d'
+import { IEventNew, ActionTypes } from './reducer.d'
+import { Dispatch } from 'redux'
 import { requestCreator, requestTypes } from '~utils/request-creator'
 import { API_URL } from '~constants'
 

@@ -1,6 +1,5 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { set, cloneDeep } from 'lodash'
 import { testsCreator } from '~utils/testHelper'
 import { requestCreator, requestTypes, requestStatuses } from './index'
 

@@ -6,7 +6,7 @@ const path = require('path'),
 
 module.exports = (baseConfig, env, defaultConfig) => {
   defaultConfig.module.rules[0] = {
-    test: /\.(js|jsx)$/,
+    test: /\.(ts|js)x?$/,
     exclude: /node_modules/,
     loaders: [
       {

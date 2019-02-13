@@ -1,6 +1,5 @@
 import { selectorsCreator, selectorFactoriesCreator } from './index'
 import { testsCreator } from '~utils/testHelper'
-import { set, cloneDeep } from 'lodash'
 
 describe('selectorsCreator', () => {
   testsCreator({

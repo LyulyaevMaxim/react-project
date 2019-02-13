@@ -1,22 +1,10 @@
+import * as I from './index.d'
 import React from 'react'
 import { connect } from 'react-redux'
-import { IStore } from '~store/index'
-import { IEvent } from '~store/events/reducer.d'
-import * as eventsSelectors from '~store/events/selectors'
+import eventsSelectors from '~store/events/selectors'
 import styles from '../styles.pcss'
 
-interface IOwnProps {
-  eventId: IEvent['eventId']
-  eventsPlaces: IStore['events']['places']
-  handleSelected
-}
-
-interface IReduxProps {
-  eventData: IEvent
-  isSelected: boolean
-}
-
-function EventLine(props: IReduxProps & IOwnProps) {
+function EventLine(props: I.IReduxProps & I.IOwnProps) {
   const { eventId, name, date, place } = props.eventData,
     { optionsMap } = props.eventsPlaces,
     lineId = `event-line-${eventId}`
@@ -46,14 +34,12 @@ function EventLine(props: IReduxProps & IOwnProps) {
   )
 }
 
-const mapStateToProps = (_, ownProps: IOwnProps) => {
+export default connect((_, ownProps: I.IOwnProps) => {
   const dataSelector = eventsSelectors.eventFactory(),
     checkedSelector = eventsSelectors.eventSelectedFactory(),
     { eventId } = ownProps
-  return (store: IStore): IReduxProps => ({
+  return (store: I.IStore): I.IReduxProps => ({
     eventData: dataSelector(store, { eventId }),
     isSelected: checkedSelector(store, { eventId }),
   })
-}
-
-export default connect(mapStateToProps)(EventLine)
+})(EventLine)

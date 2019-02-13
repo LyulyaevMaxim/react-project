@@ -1,3 +1,4 @@
+import * as I from './index.d'
 import React from 'react'
 import { connect } from 'react-redux'
 import produce from 'immer'
@@ -5,49 +6,21 @@ import { PopupPortal } from '~modules/popup'
 import Select from '~modules/select'
 import DatePicker from 'react-day-picker/DayPickerInput'
 import DatePickerLocalizaton, { formatDate, parseDate } from 'react-day-picker/moment'
-import * as eventsSelectors from '~store/events/selectors'
+import eventsSelectors from '~store/events/selectors'
 import * as eventsActions from '~store/events/actions'
-import styles from './styles.pcss'
-import { IStore } from '~store/index'
-import 'moment/locale/ru'
+import { withLanguage } from '~modules/contexts/language'
+import { flowRight } from 'lodash-es'
+import styles from '../styles.pcss'
 
-interface IPopupProps {
-  isOpen: boolean | null
-  handleOpen: any
-}
-
-PopupAddEvent.portalId = `popupAddEvent-${Math.random()}`
-PopupAddEvent.classList = [styles.popupAddEvent]
-
-function PopupAddEvent(props: IPopupProps) {
+function PopupAddEvent(props: I.IPopupProps) {
   return (
     <PopupPortal isOpen={props.isOpen} portalId={PopupAddEvent.portalId} classList={PopupAddEvent.classList}>
       <FormAddEvent handleOpen={props.handleOpen} />
     </PopupPortal>
   )
 }
-
-interface IReduxProps {
-  eventsPlaces: IStore['events']['places']
-  isSaving: IStore['events']['isSaving']
-}
-
-interface IDispatchProps {
-  saveEvent: any
-}
-
-interface IOwnProps {
-  handleOpen: IPopupProps['handleOpen']
-}
-
-type IProps = IOwnProps & IReduxProps & IDispatchProps
-
-interface IState {
-  fieldEventName: string
-  fieldEventDate: string
-  fieldEventPlace: string
-  errors: { [errorName: string]: Error }
-}
+PopupAddEvent.portalId = `popupAddEvent-${Math.random()}`
+PopupAddEvent.classList = [styles.popupAddEvent]
 
 enum fieldNames {
   eventName = 'fieldEventName',
@@ -57,14 +30,15 @@ enum fieldNames {
 
 const dateFormat = 'DD.MM.YYYY'
 
-class Form extends React.Component<IProps, IState> {
+class Form extends React.Component<I.IProps & { language: any }, I.IState> {
+  static displayName = 'FormAddEvent'
   defaultState = { fieldEventName: '', fieldEventDate: '', fieldEventPlace: '', errors: {} }
   state = this.defaultState
 
   componentDidCatch(error: Error) {
     this.handleError({ errorName: `componentDidCatch:${error.message}`, error })
   }
-  setStateProxy = (func: ((state: IState) => void)) => this.setState(produce(func))
+  setStateProxy = (func: (state: I.IState) => void) => this.setState(produce(func))
 
   readonly handleError = ({ errorName, error }: { errorName: string; error: Error }) =>
     this.setState({ errors: { ...this.state.errors, [errorName]: error } })
@@ -120,7 +94,7 @@ class Form extends React.Component<IProps, IState> {
               name: fieldNames.eventDate,
               onDayChange: this.onChangeDate,
               value: fieldEventDate,
-              dayPickerProps: { locale: 'ru', localeUtils: DatePickerLocalizaton },
+              dayPickerProps: { locale: this.props.language.activeLanguage, localeUtils: DatePickerLocalizaton },
               format: dateFormat,
               formatDate,
               parseDate,
@@ -157,15 +131,15 @@ class Form extends React.Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = (store: IStore): IReduxProps => ({
-    eventsPlaces: eventsSelectors.placesGetter(store),
-    isSaving: eventsSelectors.isSaving(store),
-  }),
-  mapDispatchToProps = { saveEvent: eventsActions.saveEvent }
-
-const FormAddEvent = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Form)
+const FormAddEvent = flowRight([
+  withLanguage(),
+  connect(
+    (store: I.IStore): I.IReduxProps => ({
+      eventsPlaces: eventsSelectors.placesGetter(store),
+      isSaving: eventsSelectors.isSaving(store),
+    }),
+    { saveEvent: eventsActions.saveEvent } as I.IDispatchProps
+  ),
+])(Form)
 
 export default PopupAddEvent

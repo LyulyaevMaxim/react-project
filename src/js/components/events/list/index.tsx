@@ -1,38 +1,11 @@
+import * as I from './index.d'
 import React from 'react'
 import { connect } from 'react-redux'
 import Loadable from 'react-loadable'
-import { IStore } from '~store/index'
-import * as eventsSelectors from '~store/events/selectors'
+import eventsSelectors from '~store/events/selectors'
 import * as eventsActions from '~store/events/actions'
 import EventLine from './line'
 import styles from './styles.pcss'
-
-interface IReduxProps {
-  isLoading: IStore['events']['isLoading']
-  isAllSelected: boolean
-  isAnyoneSelected: boolean
-  eventsList: IStore['events']['list']
-  eventsPlaces: IStore['events']['places']
-}
-
-interface IDispatchProps {
-  fetchEvents: any
-  fetchPlaces: any
-  selectedEvent: any
-  eventsSearch: any
-}
-
-type IProps = IReduxProps & IDispatchProps
-
-interface IState {
-  errors: Array<{ errorName: string; error: Error }>
-  isOpenPopupAddEvent: null | boolean
-  isOpenPopupDeleteEvents: null | boolean
-}
-enum shortPopupNames {
-  ADD_EVENT = 'AddEvent',
-  DELETE_EVENTS = 'DeleteEvents',
-}
 
 const PopupAddEvent = Loadable({
     loader: () => import('./popups/addEvent' /* webpackChunkName: "components-events-addEventPopup" */),
@@ -43,7 +16,12 @@ const PopupAddEvent = Loadable({
     loading: () => null,
   })
 
-class EventsList extends React.Component<IProps, IState> {
+enum shortPopupNames {
+  ADD_EVENT = 'AddEvent',
+  DELETE_EVENTS = 'DeleteEvents',
+}
+
+class EventsList extends React.Component<I.IProps, I.IState> {
   readonly state = { errors: [], isOpenPopupAddEvent: null, isOpenPopupDeleteEvents: null }
 
   componentDidMount(): void {
@@ -89,50 +67,50 @@ class EventsList extends React.Component<IProps, IState> {
       <React.Fragment>
         <table className={styles.table}>
           <thead>
-          <tr className={styles.functionalLine}>
-            <th>
-              <button onClick={this.handleTogglePopupAddEvent} className={styles.addEventButton} />
-              <button
-                onClick={this.handleTogglePopupDeleteEvents}
-                disabled={!isAnyoneSelected}
-                className={styles.deleteEventsButton}
-              />
-            </th>
-            <th>
-              <input placeholder={'Поиск'} onChange={this.handleSearch} className={styles.searchEventsButton} />
-            </th>
-          </tr>
-          <tr className={styles.line}>
-            <th className={styles.columnChecked}>
-              <input
-                {...{
-                  type: 'checkbox',
-                  id: 'events-all-checked',
-                  onChange: () => this.handleSelectedEvents({ isAll: true }),
-                  checked: isLoading === false && isAllSelected,
-                }}
-              />
-              <label htmlFor={'events-all-checked'} />
-            </th>
-            <th className={styles.columnName}>Название</th>
-            <th className={styles.columnDate}>Дата</th>
-            <th className={styles.columnPlace}>Место проведения</th>
-          </tr>
+            <tr className={styles.functionalLine}>
+              <th>
+                <button onClick={this.handleTogglePopupAddEvent} className={styles.addEventButton} />
+                <button
+                  onClick={this.handleTogglePopupDeleteEvents}
+                  disabled={!isAnyoneSelected}
+                  className={styles.deleteEventsButton}
+                />
+              </th>
+              <th>
+                <input placeholder={'Поиск'} onChange={this.handleSearch} className={styles.searchEventsButton} />
+              </th>
+            </tr>
+            <tr className={styles.line}>
+              <th className={styles.columnChecked}>
+                <input
+                  {...{
+                    type: 'checkbox',
+                    id: 'events-all-checked',
+                    onChange: () => this.handleSelectedEvents({ isAll: true }),
+                    checked: isLoading === false && isAllSelected,
+                  }}
+                />
+                <label htmlFor={'events-all-checked'} />
+              </th>
+              <th className={styles.columnName}>Название</th>
+              <th className={styles.columnDate}>Дата</th>
+              <th className={styles.columnPlace}>Место проведения</th>
+            </tr>
           </thead>
           <tbody>
-          {isLoading !== false || eventsPlaces.isLoading !== false ? (
-            <tr className={styles.warningLine}>
-              <td>Loading...</td>
-            </tr>
-          ) : this.props.eventsList.length ? (
-            this.props.eventsList.map(eventId => (
-              <EventLine {...{ eventId, eventsPlaces, handleSelected: this.handleSelectedEvents, key: eventId }} />
-            ))
-          ) : (
-            <tr className={styles.warningLine}>
-              <td>Мероприятия не найдены</td>
-            </tr>
-          )}
+            {isLoading !== false || eventsPlaces.isLoading !== false ? (
+              <tr className={styles.warningLine}>
+                <td>Loading...</td>
+              </tr>
+            ) : this.props.eventsList.length ? (
+              this.props.eventsList.map(eventId => (
+                <EventLine {...{ eventId, eventsPlaces, handleSelected: this.handleSelectedEvents, key: eventId }} />
+              ))
+            ) : (
+              <tr className={styles.warningLine}>
+                <td>Мероприятия не найдены</td>
+              </tr>
+            )}
           </tbody>
         </table>
         {PopupAddEvent && <PopupAddEvent isOpen={isOpenPopupAddEvent} handleOpen={this.handleTogglePopupAddEvent} />}
@@ -144,7 +122,7 @@ class EventsList extends React.Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = (store: IStore): IReduxProps => {
+const mapStateToProps = (store: I.IStore): I.IReduxProps => {
   const eventsList = eventsSelectors.eventsListGetter(store, { isSearchFilter: true }),
     selectedToRemoving = eventsSelectors.selectedToRemovingGetter(store)
   return {

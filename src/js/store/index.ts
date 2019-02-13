@@ -4,8 +4,7 @@ import { createBrowserHistory, History } from 'history'
 import thunk from 'redux-thunk'
 import productsReducer from './products/reducer'
 import productsTypes from './products/reducer.d'
-import eventsReducer from './events/reducer'
-import eventsTypes from './events/reducer.d'
+import { eventsReducer, IEvents } from './events/reducer'
 
 export const history: History = createBrowserHistory()
 
@@ -17,7 +16,7 @@ const isDev = process.env.NODE_ENV === `development`,
 export interface IStore {
   router: RouterState
   products: productsTypes.IState
-  events: eventsTypes.IState
+  events: IEvents.IState
 }
 
 export const store = createStore(

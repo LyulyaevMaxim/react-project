@@ -1,0 +1,17 @@
+{
+  "name": "react-project-storybook",
+  "description": "Storybook Configuration",
+  "author": "Maxim Lyulyaev",
+  "version": "1.0.0",
+  "repository": "https://LyulyaevMaxim@github.com/LyulyaevMaxim/react-project.git",
+  "license": "MIT",
+  "dependencies":  {
+    "@storybook/addon-actions": "^4.0.8",
+    "@storybook/addon-knobs": "^4.0.8",
+    "@storybook/addon-options": "^4.0.8",
+    "@storybook/addon-viewport": "^4.0.8",
+    "@storybook/addons": "^4.0.8",
+    "@storybook/react": "^4.0.8",
+    "storybook-readme": "^4.0.2"
+  }
+}

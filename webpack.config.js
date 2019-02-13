@@ -67,6 +67,7 @@ module.exports = (env, argv) => ({
       '~components': `${root}/src/js/components`,
       modernizr$: `${root}/.modernizrrc.js`,
       '~types': `${root}/src/js/types`,
+      '~backend': `${root}/backend`,
     },
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },
@@ -158,7 +159,7 @@ module.exports = (env, argv) => ({
       async: false,
       checkSyntacticErrors: false,
     }),
-    !isDev && new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
+    // !isDev && new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
     !isDev &&
       new LodashWebpackOptimize({
         chaining: false,
@@ -180,7 +181,7 @@ module.exports = (env, argv) => ({
       emitError: false,
     }),*/
     new webpack.WatchIgnorePlugin([/pcss\.d\.ts$/]),
-    !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
+    // !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
   ].filter(Boolean),
 
   module: {

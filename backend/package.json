@@ -1,16 +1,14 @@
 {
   "name": "react-project",
-  "description": "Server Configuration",
+  "description": "Backend Configuration",
   "author": "Maxim Lyulyaev",
   "version": "1.0.0",
   "repository": "https://LyulyaevMaxim@github.com/LyulyaevMaxim/react-project.git",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js"
+    "swagger": "docker run -e SWAGGER_JSON=/swagger.json swaggerapi/swagger-ui"
   },
-  "dependencies": {
-    "hapi": "^18.1.0",
-    "inert": "^5.1.2",
-    "pino": "^5.11.1"
+  "devDependencies": {
+    "swagger-ui": "^3.20.7"
   }
 }

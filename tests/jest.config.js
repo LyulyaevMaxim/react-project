@@ -9,6 +9,7 @@ module.exports = {
   testEnvironment: 'node',
   // testURL: => location.href
   runner: 'jest-runner',
+  preset: 'ts-jest/presets/js-with-babel',
   roots: [`${root}/src/js`],
   // "projects": [`${root}/pr1`, `${root}/pr2`]
   // moduleFileExtensions: ['js', 'jsx', 'json],
@@ -17,6 +18,7 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__mocks__/fileMock.js',
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '^lodash-es$': 'lodash'
   },
   resetModules: false,
   transform: {
@@ -26,7 +28,7 @@ module.exports = {
   collectCoverage: isProd,
   coverageDirectory: `./coverage/`,
   coverageReporters: ['json', 'lcov', 'text'],
-  collectCoverageFrom: [`${root}/src/js/*.{js,jsx}`, `!${root}/**/node_modules`],
+  collectCoverageFrom: [`${root}/src/js/*.(ts|js)x?`, `!${root}/**/node_modules`],
   coverageThreshold: {
     global: {
       branches: 80,
@@ -45,7 +47,7 @@ module.exports = {
   // clearMocks: false,
   // resetMocks: false,
   // restoreMocks: false,
-  setupTestFrameworkScriptFile: `./setupEnzyme.js`,
+  // setupFilesAfterEnv: [`./setupEnzyme.js`],
   // testPathIgnorePatterns: [],
   // resolver: `${root}/__tests__/resolver.js`,
 }
