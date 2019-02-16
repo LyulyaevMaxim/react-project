@@ -154,7 +154,7 @@ module.exports = (env, argv) => ({
     }),
     new ForkTsCheckerWebpackPlugin({
       tsconfig: `${root}/tsconfig.json`,
-      tslint: `${root}/tslint.json`,
+      tslint: `${root}/linters/tslint.json`,
       watch: [`${root}/src/js`],
       async: false,
       checkSyntacticErrors: false,

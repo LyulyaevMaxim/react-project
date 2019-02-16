@@ -1,5 +1,5 @@
 const path = require('path'),
-  root = path.resolve(__dirname, './')
+  root = path.resolve(__dirname, '../')
 
 module.exports = {
   parser: 'babel-eslint',
@@ -20,7 +20,7 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:promise/recommended',
-    'plugin:security/recommended',
+    // 'plugin:security/recommended',
     'plugin:you-dont-need-lodash-underscore/compatible',
     'plugin:react/recommended',
     'standard',
@@ -31,7 +31,7 @@ module.exports = {
     'prettier',
     'prettier/react',
   ],
-  plugins: ['import', 'promise', 'security', 'json', 'react', 'jest', 'prettier'],
+  plugins: ['import', 'promise', /*'security',*/ 'json', 'react', 'jest', 'prettier'],
   rules: {
     // 'prettier/prettier': 'error',
     'import/no-unresolved': 0,

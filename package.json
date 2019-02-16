@@ -1,22 +1,18 @@
 {
   "name": "react-project",
-  "description": "Fast and effective environment for frontend development",
+  "description": "Effective environment for frontend development",
   "repository": "https://LyulyaevMaxim@github.com/LyulyaevMaxim/react-project.git",
-  "author": "Maxim Lyulyaev",
+  "author": "Lyulyaev Maxim",
   "license": "MIT",
-  "browserslist": [
-    "> 1%",
-    "not ie 11",
-    "not op_mini all"
-  ],
   "private": true,
   "workspaces": [
     "./",
+    "./linters",
     "./tests",
     "./storybook"
   ],
   "scripts": {
-    "start": "yarn prettier-watch & cross-env NODE_ENV=development webpack-dev-server",
+    "start": "onchange '**/*.*' -- prettier --write {{changed}} & cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "server": "cd server && yarn start",
     "deploy": "cd server && now -d --public",
@@ -27,15 +23,19 @@
     "dockerbuild": "yarn version-increment && yarn build && sudo docker build -t lyulyaevma/react-project:$(cat version.num) . && sudo docker push lyulyaevma/react-project:$(cat version.num)",
     "install-packages": "yarn install && cd ./src && yarn install && cd ../server && yarn install",
     "upgrade-packages": "yarn upgrade-interactive --latest && cd ./src && yarn upgrade-interactive --latest && cd ../server && yarn upgrade-interactive --latest",
-    "lint:js": "eslint --fix src/js --ext .js,.jsx && tslint --project tsconfig.json --config tslint.json './src/js/**/*.{ts,tsx}' && tsc --noEmit",
-    "lint:css": "stylelint --fix src/**/*.{css,pcss} --cache --cache-location './node_modules/.stylelintcache'",
-    "prettier-watch": "onchange '**/*.*' -- prettier --write {{changed}}"
+    "lint:js": "eslint --fix src/js --ext .js,.jsx && tslint --project ./tsconfig.json --config ./linters/tslint.json ./src/js/**/*.{ts,tsx} && tsc --noEmit",
+    "lint:css": "stylelint --fix src/**/*.{css,pcss} --cache --cache-location ./node_modules/.stylelintcache"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "post-commit": "git update-index --again"
-    }
+  "browserslist": [
+    "> 1%",
+    "not ie 11",
+    "not op_mini all"
+  ],
+  "stylelint": {
+    "extends": "./linters/.stylelintrc.js"
+  },
+  "eslintConfig": {
+    "extends": "./linters/.eslintrc.js"
   },
   "lint-staged": {
     "src/js/**/*.{js,jsx,ts,tsx,json}": [
@@ -48,6 +48,12 @@
       "yarn lint:css",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-commit": "git update-index --again"
+    }
   },
   "dependencies": {
     "babel-loader": "^8.0.5",
@@ -125,57 +131,13 @@
     "postcss-selector-not": "^4.0.0",
     "postcss-svg": "^3.0.0",
     "typescript": "^3.2.4",
-    "typings-for-css-modules-loader": "^1.7.0"
-  },
-  "optionalDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.14.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-esnext": "^4.0.0",
-    "eslint-config-jest-enzyme": "^7.0.1",
-    "eslint-config-prettier": "^4.0.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-config-standard-react": "^7.0.2",
-    "eslint-import-resolver-webpack": "^0.11.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jest": "^22.3.0",
-    "eslint-plugin-json": "^1.3.2",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-security": "^1.4.0",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-you-dont-need-lodash-underscore": "^6.4.0",
+    "typings-for-css-modules-loader": "^1.7.0",
     "husky": "^1.3.1",
     "lint-staged": "^8.1.4",
-    "now": "^14.0.0",
     "onchange": "^5.2.0",
-    "prettier": "^1.16.4",
-    "stylelint": "^9.10.1",
-    "stylelint-at-rule-no-children": "^0.3.1",
-    "stylelint-color-format": "^0.2.0",
-    "stylelint-config-airbnb": "^0.0.0",
-    "stylelint-config-prettier": "^4.0.0",
-    "stylelint-config-recommended-scss": "^3.2.0",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-declaration-block-no-ignored-properties": "^1.1.0",
-    "stylelint-declaration-use-variable": "^1.7.0",
-    "stylelint-find-rules": "^2.0.0",
-    "stylelint-group-selectors": "^1.0.7",
-    "stylelint-high-performance-animation": "^1.1.1",
-    "stylelint-no-indistinguishable-colors": "^1.2.1",
-    "stylelint-no-unsupported-browser-features": "^3.0.2",
-    "stylelint-order": "^2.0.0",
-    "stylelint-scss": "^3.5.3",
-    "tslint": "^5.12.1",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-immutable": "^5.2.0",
-    "tslint-jest": "^1.0.5",
-    "tslint-plugin-prettier": "^2.0.1",
-    "tslint-react": "^3.6.0",
-    "tslint-sonarts": "^1.9.0"
+    "prettier": "^1.16.4"
+  },
+  "optionalDependencies": {
+    "now": "^14.0.0"
   }
 }

@@ -1,6 +1,6 @@
 /* you can run "yarn stylelint-find-rules" to find stylelint rules that are not unused, deprecated or invalid */
 const path = require('path'),
-  root = path.resolve(__dirname, './')
+  root = path.resolve(__dirname, '../')
 
 module.exports = {
   extends: ['stylelint-config-recommended-scss', 'stylelint-config-airbnb', 'stylelint-config-standard', 'stylelint-config-prettier'],
@@ -12,7 +12,7 @@ module.exports = {
     'stylelint-no-unsupported-browser-features',
     'stylelint-color-format',
     'stylelint-declaration-use-variable',
-    'stylelint-group-selectors', // only easy cases :(
+    // 'stylelint-group-selectors', // only easy cases :(
     'stylelint-at-rule-no-children',
   ],
   rules: {
@@ -35,7 +35,7 @@ module.exports = {
     'sh-waqar/declaration-use-variable': [['/color/', 'font-size', /*"z-index"*/
       { ignoreValues: ['inherit', 'transparent', 'currentColor'] },
     ]],
-    'plugin/stylelint-group-selectors': true,
+    // 'plugin/stylelint-group-selectors': true,
     'aditayvm/at-rule-no-children': [{ severity: 'warning' }],
     'order/order': ['custom-properties', 'dollar-variables', 'declarations', 'at-rules', 'rules'],
     'order/properties-alphabetical-order': true,
