@@ -74,7 +74,7 @@ module.exports = (env, argv) => ({
 
   plugins: [
     /* !isDev && new (require('hard-source-webpack-plugin'))(), */
-    !isDev && new CleanWebpackPlugin([distPath], { allowExternal: true }),
+    !isDev && new CleanWebpackPlugin(),
     isDev && new webpack.HotModuleReplacementPlugin(),
     new HappyPack({
       id: 'js',

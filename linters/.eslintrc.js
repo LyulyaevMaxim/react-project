@@ -31,7 +31,7 @@ module.exports = {
     'prettier',
     'prettier/react',
   ],
-  plugins: ['import', 'promise', /*'security',*/ 'json', 'react', 'jest', 'prettier'],
+  plugins: ['import', 'promise', /*'security',*/ 'json', 'react', 'react-hooks', 'jest', 'prettier'],
   rules: {
     // 'prettier/prettier': 'error',
     'import/no-unresolved': 0,
@@ -73,6 +73,8 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 1,
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     'jsx-a11y/click-events-have-key-events': 0,
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn'
   },
   settings: {
     'import/resolver': {
