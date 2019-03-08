@@ -74,7 +74,7 @@ let plugins = [
 ]
 
 if (isDev) {
-  plugins = [...plugins, `${root}/src/node_modules/react-hot-loader/babel`]
+  plugins = [...plugins, `${root}/src/node_modules/react-hot-loader/babel`, '@babel/plugin-transform-react-jsx-source']
 } else {
   plugins = [
     ...plugins,

@@ -8,7 +8,11 @@ const webpack = require('webpack'),
 const HtmlWebpackPlugin = require('html-webpack-plugin'),
   MiniCssExtractPlugin = require('mini-css-extract-plugin'),
   ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'),
-  PreloadWebpackPlugin = require('preload-webpack-plugin')
+  PreloadWebpackPlugin = require('preload-webpack-plugin'),
+  FaviconsWebpackPlugin = require('favicons-webpack-plugin'),
+  ImageminWebpackPlugin = require('imagemin-webpack-plugin').default,
+  ImageminWebP = require("imagemin-webp"),
+  CopyWebpackPlugin = require("copy-webpack-plugin")
 
 const TerserPlugin = require('terser-webpack-plugin'),
   OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
@@ -16,8 +20,9 @@ const TerserPlugin = require('terser-webpack-plugin'),
   WorkboxPlugin = require('workbox-webpack-plugin')
 
 const mode = process.env.NODE_ENV,
-  isDev = mode === 'development'
-console.log(`mode: ${mode}, isDev: ${isDev}`)
+  isDev = mode === 'development',
+  isProd = mode === 'production'
+console.log(`mode: ${mode}`)
 
 const root = path.resolve(__dirname, './'),
   distPath = `${root}/server/dist`,
@@ -35,11 +40,11 @@ module.exports = (env, argv) => ({
   mode,
   target: 'web',
   devtool: isDev ? 'eval-cheap-module-source-map' : 'none',
-  entry: [`${root}/src/js/index.tsx`],
+  entry: [isDev && 'react-devtools', `${root}/src/js/index.tsx`].filter(Boolean),
 
   output: {
-    filename: `${assetsPath}/js/[name]${isDev ? '' : '.[chunkhash]'}.js`,
-    chunkFilename: `${assetsPath}/js/[name]${isDev ? '' : '.[chunkhash]'}.js`,
+    filename: `${assetsPath}/js/[name]${isProd ? '.[chunkhash]' : ''}.js`,
+    chunkFilename: `${assetsPath}/js/[name]${isProd ? '.[chunkhash]' : ''}.js`,
     path: distPath,
     publicPath: initialPath,
   },
@@ -74,7 +79,7 @@ module.exports = (env, argv) => ({
 
   plugins: [
     /* !isDev && new (require('hard-source-webpack-plugin'))(), */
-    !isDev && new CleanWebpackPlugin(),
+    isProd && new CleanWebpackPlugin(),
     isDev && new webpack.HotModuleReplacementPlugin(),
     new HappyPack({
       id: 'js',
@@ -117,16 +122,16 @@ module.exports = (env, argv) => ({
       ],
     }),
     new MiniCssExtractPlugin({
-      filename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
-      chunkFilename: `${assetsPath}/css/[name]${isDev ? '' : '.[hash]'}.css`,
+      filename: `${assetsPath}/css/[name]${isProd ? '.[hash]' : ''}.css`,
+      chunkFilename: `${assetsPath}/css/[name]${isProd ? '.[hash]' : ''}.css`,
     }),
+    /*new MediaQuerySplittingPlugin(),*/
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: `${root}/src/html/index.html`,
-      favicon: `${root}/src/img/favicon/favicon.ico`,
       inject: true,
       cache: true,
-      [!isDev && 'minify']: {
+      [isProd && 'minify']: {
         minifyJS: true,
         minifyCSS: true,
         removeComments: true,
@@ -140,6 +145,27 @@ module.exports = (env, argv) => ({
         collapseBooleanAttributes: true,
       },
     }),
+    isProd &&
+      new FaviconsWebpackPlugin({
+        logo: `${root}/src/img/favicon/favicon.png`,
+        title: 'React Project',
+        prefix: `${assetsPath}/img/favicon-[hash]/`,
+        emitStats: false,
+        persistentCache: true,
+        inject: true,
+        icons: {
+          favicons: true,
+          android: true,
+          appleIcon: true,
+          appleStartup: true,
+          windows: true,
+          firefox: true,
+          yandex: false,
+          coast: false,
+          opengraph: false,
+          twitter: false,
+        },
+      }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'defer',
       preload: /\.js$/,
@@ -159,15 +185,15 @@ module.exports = (env, argv) => ({
       async: false,
       checkSyntacticErrors: false,
     }),
-    // !isDev && new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
-    !isDev &&
+    isProd && new webpack.ContextReplacementPlugin(/[\/\\]locale(s)?$/, /en|ru/),
+    isProd &&
       new LodashWebpackOptimize({
         chaining: false,
         shorthands: true,
         collections: true,
         paths: true,
       }),
-    !isDev &&
+    isProd &&
       new WorkboxPlugin.GenerateSW({
         cacheId: 'service-worker',
         swDest: `${distPath}/assets/js/sw.js`,
@@ -181,7 +207,18 @@ module.exports = (env, argv) => ({
       emitError: false,
     }),*/
     new webpack.WatchIgnorePlugin([/pcss\.d\.ts$/]),
-    // !isDev && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
+    isProd && new CopyWebpackPlugin([{
+      from: `${root}/src/img/**.png`,
+      to: `${assetsPath}/img/[name].webp`
+    }]),
+    isProd && new ImageminWebpackPlugin({
+      plugins: [
+        ImageminWebP({
+          quality: 90
+        })
+      ]
+    }),
+    // isProd && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
   ].filter(Boolean),
 
   module: {
@@ -197,12 +234,12 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.pcss$/,
-        loaders: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'happypack/loader?id=PostCSS'],
+        loaders: [isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'happypack/loader?id=PostCSS'],
       },
       {
         test: /\.css$/,
         use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -244,9 +281,9 @@ module.exports = (env, argv) => ({
     ],
   },
 
-  optimization: !isDev
+  optimization: isProd
     ? {
-        runtimeChunk: false,
+        runtimeChunk: true,
         namedModules: true,
         noEmitOnErrors: true,
         concatenateModules: true,
@@ -255,11 +292,15 @@ module.exports = (env, argv) => ({
           automaticNameDelimiter: '-',
           chunks: 'all',
           cacheGroups: {
+            commons: {
+              chunks: 'initial',
+              minChunks: 2,
+            },
             vendor: {
               name: 'vendor',
-              chunks: 'all',
-              test: /[\\/]node_modules[\\/]/,
-              priority: -10,
+              chunks: 'initial',
+              test: /node_modules/,
+              priority: 10,
             },
           },
         },
