@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import ThemeSelect from './themeSelect'
 import { IRoute } from '~types/index'
 import styles from './index.pcss'
+import { ReactComponent as IconCart } from '~img/icon-cart.svg'
 
 interface IProps {
   routes: IRoute[]
@@ -10,7 +11,9 @@ interface IProps {
 
 const Header = ({ routes }: IProps) => (
   <header className={styles.header}>
-    <h3 className={styles.headerTitle}>React Project</h3>
+    <h3 className={styles.headerTitle}>
+      React Project <IconCart />
+    </h3>
     <ThemeSelect />
     <nav className={styles.headerNav}>
       {routes.map(({ title, path, component }) => (

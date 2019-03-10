@@ -6,7 +6,7 @@ const distPath = './dist'
 const assetsPath = 'assets'
 
 const server = new Hapi.Server({
-  host: 'localhost',
+  host: '0.0.0.0',
   port: process.env.PORT || 5000,
   routes: {
     cors: true,

@@ -21,10 +21,10 @@ Promise.all(polyfills)
     ReactDOM.render(
       <Provider {...{ store }}>
         <ConnectedRouter {...{ history }}>
-          <App />
+          <App/>
         </ConnectedRouter>
       </Provider>,
-      document.getElementById('root') as HTMLElement
+      document.getElementById('root') as HTMLElement,
     )
   })
   .catch(error => console.error('Failed fetching polyfills', error))

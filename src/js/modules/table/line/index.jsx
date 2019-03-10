@@ -121,7 +121,15 @@ class TableLine extends React.Component {
 
       case 'img': {
         if (!columnValue) return null
-        return <LazyImage {...{ src: columnValue }} />
+        return (
+          <LazyImage
+            {...{
+              src: columnValue.src || columnValue,
+              placeholder: columnValue.preview,
+              sizes: columnValue.dimensions,
+            }}
+          />
+        )
       }
 
       case 'checkbox':

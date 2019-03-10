@@ -1,4 +1,6 @@
-/* Modernizr is the industry standard for feature detection tests — MDN */
+/* Modernizr is the industry standard for feature detection tests
+*  All polyfills on github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills
+* */
 import Modernizr from 'modernizr'
 declare var window: any
 

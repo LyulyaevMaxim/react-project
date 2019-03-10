@@ -26,7 +26,7 @@ class LazyImage extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { isLoad: true, isLoadError: false, isVisible: props.noLazyLoad }
+    this.state = { isLoading: props.noLazyLoad ? false : null, isError: false }
     this.imageRef = createRef()
   }
 
@@ -38,38 +38,56 @@ class LazyImage extends Component {
   observerCallback = (entries, observer) =>
     entries.forEach(entry => {
       if (entry.intersectionRatio > 0.8) {
-        this.setState({ isVisible: true })
+        this.setState({ isLoading: true })
         observer.unobserve(entry.target)
       }
     })
 
-  imageLoaded = () => this.setState({ isLoad: false })
+  imageLoaded = () => this.setState({ isLoading: false })
 
-  loadError = () => this.setState({ isLoad: false, isLoadError: true })
+  loadError = () => this.setState({ isLoading: false, isError: true })
+
+  getImage() {
+    const { adaptiveSrc, src, alt, placeholder, srcSet, noLazyLoad, ...props } = this.props
+    const { isLoading, isError } = this.state
+    if (isLoading === null || isError) return null
+
+    return (
+      <Fragment>
+        {isLoading !== false && placeholder && <img src={placeholder} className={styles.placeholder} alt={alt} />}
+        {adaptiveSrc.map(([media, srcSet]) => (
+          <source {...{ media, srcSet, ...props, alt, key: `image-${srcSet}` }} />
+        ))}
+        <img
+          src={src}
+          onLoad={this.imageLoaded}
+          onError={this.loadError}
+          alt={alt}
+          className={styles.image}
+          {...props}
+        />
+      </Fragment>
+    )
+  }
 
   render() {
-    const { adaptiveSrc, src, srcSet, alt, noLazyLoad, placeholder, ...props } = this.props
-    const { isVisible, isLoad, isLoadError } = this.state
-    // if (noLazyLoad) return <picture />
-    // if (typeof placeholder === 'function' && isLoad) return <Placeholder ref={this.imageRef} />
+    const { isLoading, isLoadError } = this.state
     return (
       <picture
         ref={this.imageRef}
         className={className([
           styles.picture,
-          isLoad && styles['is-load'],
+          isLoading && styles['is-loading'],
           isLoadError && styles['is-load-error'],
-          props.className,
+          this.props.className,
         ])}
+        style={{
+          color: 'red',
+          // backgroundImage: 'url(' + this.props.placeholder + ')',
+          // '--placeholder': encodeURIComponent(this.props.placeholder),
+        }}
       >
-        {isVisible && !isLoadError && (
-          <Fragment>
-            {adaptiveSrc.map(([media, srcSet]) => (
-              <source {...{ media, srcSet, ...props, alt, key: `image-${srcSet}` }} />
-            ))}
-            <img src={src} onLoad={this.imageLoaded} onError={this.loadError} alt={alt} {...props} />
-          </Fragment>
-        )}
+        {this.getImage()}
       </picture>
     )
   }

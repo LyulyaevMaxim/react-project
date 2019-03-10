@@ -12,11 +12,9 @@ module.exports = ({ file, options, env }) => ({
           { name: '~node_modules', toPath: 'src/node_modules' },
         ]
 
-        for (const { name, toPath } of alias) {
-          if (id.substr(0, name.length) === name) {
+        for (const { name, toPath } of alias)
+          if (id.substr(0, name.length) === name)
             return `${root}/${toPath}/${id.substr(name.length + 1)}`
-          }
-        }
 
         return path.resolve(basedir, id)
       },
@@ -33,13 +31,15 @@ module.exports = ({ file, options, env }) => ({
     'postcss-pxtorem': { rootValue: 16, mediaQuery: false },
     'postcss-scale': {},
     'css-mqpacker': { sort: true },
-    'postcss-preset-env': {},
-    'postcss-flexbugs-fixes': {},
-    autoprefixer: {
+    'postcss-preset-env': {
       browsers: require(`${root}/package.json`).browserslist,
-      grid: true,
-      flexbox: 'no-2009',
-      remove: true,
-    },
-  },
+      stage: 1,
+      preserve: true,
+      autoprefixer: {
+        grid: 'autoplace',
+        flexbox: 'no-2009',
+        remove: true
+      }
+    }
+  }
 })

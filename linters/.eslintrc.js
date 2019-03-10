@@ -13,6 +13,17 @@ module.exports = {
       jsx: true,
     },
   },
+  plugins: [
+    'import',
+    'promise',
+    /*'security',*/
+    'json',
+    'compat',
+    'react',
+    'react-hooks',
+    'jest',
+    'prettier'
+  ],
   extends: [
     'airbnb',
     // 'eslint:recommended',
@@ -23,6 +34,7 @@ module.exports = {
     // 'plugin:security/recommended',
     'plugin:you-dont-need-lodash-underscore/compatible',
     'plugin:react/recommended',
+    'plugin:compat/recommended',
     'standard',
     'standard-react',
     'plugin:jest/recommended',
@@ -31,9 +43,8 @@ module.exports = {
     'prettier',
     'prettier/react',
   ],
-  plugins: ['import', 'promise', /*'security',*/ 'json', 'react', 'react-hooks', 'jest', 'prettier'],
   rules: {
-    // 'prettier/prettier': 'error',
+    'compat/compat': 1,
     'import/no-unresolved': 0,
     'import/no-namespace': 0,
     'import/prefer-default-export': 0,

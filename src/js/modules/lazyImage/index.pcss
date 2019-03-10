@@ -1,5 +1,6 @@
 .picture {
-  &.is-load {
+  position: relative;
+  &.is-loading {
   }
   &.is-load-error {
     background-image: url('icon-offline.svg', param(--color hsl(146, 64%, 36%)));
@@ -7,5 +8,12 @@
     background-repeat: no-repeat;
     background-size: contain;
     padding-top: 100%;
+  }
+  .placeholder {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .image {
   }
 }

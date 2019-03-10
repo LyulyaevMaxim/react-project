@@ -11,8 +11,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
   PreloadWebpackPlugin = require('preload-webpack-plugin'),
   FaviconsWebpackPlugin = require('favicons-webpack-plugin'),
   ImageminWebpackPlugin = require('imagemin-webpack-plugin').default,
-  ImageminWebP = require("imagemin-webp"),
-  CopyWebpackPlugin = require("copy-webpack-plugin")
+  ImageminWebP = require('imagemin-webp'),
+  CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const TerserPlugin = require('terser-webpack-plugin'),
   OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
@@ -55,9 +55,8 @@ module.exports = (env, argv) => ({
     open: false,
     overlay: true,
     historyApiFallback: true,
-    // host: '127.0.0.1',
-    // port: '8080',
-    // compress: true,
+    host: '0.0.0.0',
+    port: '3000',
     clientLogLevel: 'info',
   },
 
@@ -145,28 +144,28 @@ module.exports = (env, argv) => ({
         collapseBooleanAttributes: true,
       },
     }),
-    isProd &&
-      new FaviconsWebpackPlugin({
-        logo: `${root}/src/img/favicon/favicon.png`,
-        title: 'React Project',
-        prefix: `${assetsPath}/img/favicon-[hash]/`,
-        emitStats: false,
-        persistentCache: true,
-        inject: true,
-        icons: {
-          favicons: true,
-          android: true,
-          appleIcon: true,
-          appleStartup: true,
-          windows: true,
-          firefox: true,
-          yandex: false,
-          coast: false,
-          opengraph: false,
-          twitter: false,
-        },
-      }),
+    new FaviconsWebpackPlugin({
+      logo: `${root}/src/img/favicon/favicon.png`,
+      title: 'React Project',
+      prefix: `${assetsPath}/img/favicon-[hash]/`,
+      emitStats: false,
+      persistentCache: true,
+      inject: true,
+      icons: {
+        favicons: true,
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        windows: true,
+        firefox: true,
+        yandex: false,
+        coast: false,
+        opengraph: false,
+        twitter: false,
+      },
+    }),
     new ScriptExtHtmlWebpackPlugin({
+      inline: ['runtime'], //webpack manifest
       defaultAttribute: 'defer',
       preload: /\.js$/,
     }),
@@ -207,17 +206,21 @@ module.exports = (env, argv) => ({
       emitError: false,
     }),*/
     new webpack.WatchIgnorePlugin([/pcss\.d\.ts$/]),
-    isProd && new CopyWebpackPlugin([{
-      from: `${root}/src/img/**.png`,
-      to: `${assetsPath}/img/[name].webp`
-    }]),
-    isProd && new ImageminWebpackPlugin({
-      plugins: [
-        ImageminWebP({
-          quality: 90
-        })
-      ]
-    }),
+    isProd &&
+      new CopyWebpackPlugin([
+        {
+          from: `${root}/src/img/**.png`,
+          to: `${assetsPath}/img/[name].webp`,
+        },
+      ]),
+    isProd &&
+      new ImageminWebpackPlugin({
+        plugins: [
+          ImageminWebP({
+            quality: 90,
+          }),
+        ],
+      }),
     // isProd && new (require('webpack-bundle-analyzer')).BundleAnalyzerPlugin(),
   ].filter(Boolean),
 
@@ -265,7 +268,14 @@ module.exports = (env, argv) => ({
         ],
       },
       {
-        test: /\.(svg|jpg|png)$/,
+        test: /.svg$/,
+        use: ['happypack/loader?id=js', '@svgr/webpack', 'url-loader'],
+        issuer: {
+          test: /\.(ts|js)x?$/,
+        },
+      },
+      {
+        test: /\.svg$/,
         include: `${root}/src/img`,
         use: [
           {
@@ -276,7 +286,27 @@ module.exports = (env, argv) => ({
               publicPath: `${initialPath}${assetsPath}/img`,
             },
           },
-        ].filter(Boolean),
+        ]
+      },
+      {
+        test: /\.(jpg|png)$/,
+        include: `${root}/src/img`,
+        use: [
+          {
+            loader: 'sqip-loader',
+            options: {
+              numberOfPrimitives: 20
+            }
+          },
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: `${assetsPath}/img`,
+              publicPath: `${initialPath}${assetsPath}/img`,
+            },
+          },
+        ]
       },
     ],
   },

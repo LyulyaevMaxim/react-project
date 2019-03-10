@@ -1,6 +1,6 @@
-import {IPaymentTypes, IProductGroups, IProduct} from './reducer.d'
+import { IPaymentTypes, IProductGroups, IProduct } from './reducer.d'
 
-export const paymentTypes : IPaymentTypes= {
+export const paymentTypes: IPaymentTypes = {
   options: [
     {
       value: 0,
