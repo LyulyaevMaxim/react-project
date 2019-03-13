@@ -5,9 +5,10 @@ const path = require('path'),
 module.exports = {
   extends: ['stylelint-config-recommended-scss', 'stylelint-config-airbnb', 'stylelint-config-standard', 'stylelint-config-prettier'],
   plugins: [
+    'stylelint-scss',
     'stylelint-order',
     'stylelint-declaration-block-no-ignored-properties',
-    'stylelint-no-indistinguishable-colors', //need will check
+    // 'stylelint-no-indistinguishable-colors', //need will check
     'stylelint-high-performance-animation',
     'stylelint-no-unsupported-browser-features',
     'stylelint-color-format',
@@ -17,7 +18,7 @@ module.exports = {
   ],
   rules: {
     'plugin/declaration-block-no-ignored-properties': true,
-    'plugin/stylelint-no-indistinguishable-colors': true,
+    // 'plugin/stylelint-no-indistinguishable-colors': true,
     'plugin/no-low-performance-animation-properties': [
       true,
       { ignoreProperties: ['color', 'background-color', 'border-color'] },
@@ -43,10 +44,11 @@ module.exports = {
     'selector-class-pattern': '^[a-z][a-zA-Z0-9]+$', //lowerCamelCase
     'block-no-empty': null,
     'at-rule-no-unknown': null,
-    'scss/at-rule-no-unknown': true,
+    // 'scss/at-rule-no-unknown': true,
     'max-nesting-depth': null,
-    'scss/dollar-variable-pattern': null,
+    // 'scss/dollar-variable-pattern': null,
     'no-descending-specificity': null,
+    'no-missing-end-of-source-newline': null,
     'comment-empty-line-before': null,
     'comment-whitespace-inside': null,
   },
