@@ -5,14 +5,14 @@ import produce from 'immer'
 import { PopupPortal } from '~modules/popup'
 import Select from '~modules/select'
 import DatePicker from 'react-day-picker/DayPickerInput'
-import DatePickerLocalizaton, { formatDate, parseDate } from 'react-day-picker/moment'
-import eventsSelectors from '~store/events/selectors'
+import DatePickerLocalizaton /*,{ formatDate, parseDate }*/ from 'react-day-picker/moment'
+import { eventsSelectors } from '~store/events/selectors'
 import * as eventsActions from '~store/events/actions'
 import { withLanguage } from '~modules/contexts/language'
 import { flowRight } from 'lodash-es'
 import styles from '../styles.pcss'
 
-function PopupAddEvent(props: I.IPopupProps) {
+export function PopupAddEvent(props: I.IPopupProps) {
   return (
     <PopupPortal isOpen={props.isOpen} portalId={PopupAddEvent.portalId} classList={PopupAddEvent.classList}>
       <FormAddEvent handleOpen={props.handleOpen} />
@@ -54,7 +54,7 @@ class Form extends React.Component<I.IProps & { language: any }, I.IState> {
     try {
       if (!(date instanceof Date)) throw new RangeError(`${fieldNames.eventDate}: Invalid date`)
       this.setStateProxy(state => {
-        state[fieldNames.eventDate] = formatDate(date, dateFormat)
+        // state[fieldNames.eventDate] = formatDate(date, dateFormat)
         delete state.errors[fieldNames.eventDate]
       })
     } catch (error) {
@@ -96,8 +96,8 @@ class Form extends React.Component<I.IProps & { language: any }, I.IState> {
               value: fieldEventDate,
               dayPickerProps: { locale: this.props.language.activeLanguage, localeUtils: DatePickerLocalizaton },
               format: dateFormat,
-              formatDate,
-              parseDate,
+              // formatDate,
+              // parseDate,
             }}
           />
           <Select
@@ -141,5 +141,3 @@ const FormAddEvent = flowRight([
     { saveEvent: eventsActions.saveEvent } as I.IDispatchProps
   ),
 ])(Form)
-
-export default PopupAddEvent

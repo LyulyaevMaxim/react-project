@@ -269,7 +269,7 @@ module.exports = (env, argv) => ({
       },
       {
         test: /.svg$/,
-        use: ['happypack/loader?id=js', '@svgr/webpack', 'url-loader'],
+        use: ['happypack/loader?id=js', '@svgr/webpack', 'url-loader' ],
         issuer: {
           test: /\.(ts|js)x?$/,
         },

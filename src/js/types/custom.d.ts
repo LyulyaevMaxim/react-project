@@ -1,5 +1,5 @@
 declare module '*.svg' {
   const content: any
-  const ReactComponent: React.ComponentType<{}>
+  const ReactComponent: any //: React.ComponentType<{ }>
   export { content as default, ReactComponent }
 }

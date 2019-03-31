@@ -19,7 +19,7 @@ const selectors = selectorsCreator([
   selectedToRemovingGetter: ISelectors['selectedToRemovingGetter']
 }
 
-export default {
+export const eventsSelectors = {
   ...selectors,
   eventsListGetter: ((store, flags = {}) => {
     const { data, list, UI } = store.events

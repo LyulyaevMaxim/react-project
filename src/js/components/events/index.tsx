@@ -3,11 +3,11 @@ import Loadable from 'react-loadable'
 import styles from './styles.pcss'
 
 const EventList = Loadable({
-  loader: () => import('./list' /* webpackChunkName: "components-events-list" */),
+  loader: () => import('./list' /* webpackChunkName: "components-events-list" */).then(module => module.EventsList),
   loading: () => null,
 })
 
-function Events() {
+export function Events() {
   return (
     <section className={styles.eventsWrapper}>
       {/*<header>
@@ -19,5 +19,3 @@ function Events() {
     </section>
   )
 }
-
-export default Events

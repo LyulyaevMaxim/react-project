@@ -2,17 +2,23 @@ import * as I from './index.d'
 import React from 'react'
 import { connect } from 'react-redux'
 import Loadable from 'react-loadable'
-import eventsSelectors from '~store/events/selectors'
+import { eventsSelectors } from '~store/events/selectors'
 import * as eventsActions from '~store/events/actions'
-import EventLine from './line'
+import { EventLine } from './line'
 import styles from './styles.pcss'
 
 const PopupAddEvent = Loadable({
-    loader: () => import('./popups/addEvent' /* webpackChunkName: "components-events-addEventPopup" */),
+    loader: () =>
+      import('./popups/addEvent' /* webpackChunkName: "components-events-addEventPopup" */).then(
+        module => module.PopupAddEvent
+      ),
     loading: () => null,
   }),
   PopupDeleteEvents = Loadable({
-    loader: () => import('./popups/deleteEvents' /* webpackChunkName: "components-events-deleteEventsPopup" */),
+    loader: () =>
+      import('./popups/deleteEvents' /* webpackChunkName: "components-events-deleteEventsPopup" */).then(
+        module => module.PopupDeleteEvents
+      ),
     loading: () => null,
   })
 
@@ -21,7 +27,7 @@ enum shortPopupNames {
   DELETE_EVENTS = 'DeleteEvents',
 }
 
-class EventsList extends React.Component<I.IProps, I.IState> {
+class List extends React.Component<I.IProps, I.IState> {
   readonly state = { errors: [], isOpenPopupAddEvent: null, isOpenPopupDeleteEvents: null }
 
   componentDidMount(): void {
@@ -141,7 +147,7 @@ const mapDispatchToProps = {
   eventsSearch: eventsActions.eventsSearch,
 }
 
-export default connect(
+export const EventsList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(EventsList)
+)(List)

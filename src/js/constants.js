@@ -1,5 +1,6 @@
 const isDev = process.env.NODE_ENV === `development`,
-  isTest = process.env.NODE_ENV === 'test'
+  isTest = process.env.NODE_ENV === 'test',
+  isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   initialPath: '/',
@@ -11,4 +12,5 @@ module.exports = {
   defaultLanguage: 'en',
   isDev,
   isTest,
+  isProd,
 }

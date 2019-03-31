@@ -34,7 +34,12 @@
     "member-access": false,
     "member-ordering": false,
     "no-extra-semicolon": false,
-    "no-use-of-empty-return-value": false
+    "no-use-of-empty-return-value": false,
+    "no-default-export": true,
+    "no-nested-template-literals": false
   },
-  "rulesDirectory": ["tslint-plugin-prettier"]
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "linterOptions": {
+    "exclude": ["../**/node_modules/**/*"]
+  }
 }

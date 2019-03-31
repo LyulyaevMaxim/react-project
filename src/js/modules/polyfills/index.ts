@@ -1,10 +1,10 @@
 /* Modernizr is the industry standard for feature detection tests
-*  All polyfills on github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills
-* */
+ *  All polyfills on github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills
+ * */
 import Modernizr from 'modernizr'
 declare var window: any
 
-export default [
+export const polyfills = [
   !window.IntersectionObserver &&
     import('intersection-observer' /* webpackChunkName: "polyfill->intersection-observer" */),
   !Modernizr.testProp('position', 'sticky ') &&

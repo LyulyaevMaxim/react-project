@@ -3,7 +3,8 @@ const path = require('path'),
   root = path.resolve(__dirname, '../')
 
 module.exports = {
-  extends: ['stylelint-config-recommended-scss', 'stylelint-config-airbnb', 'stylelint-config-standard', 'stylelint-config-prettier'],
+  processors: ["stylelint-processor-styled-components"],
+  extends: ['stylelint-config-recommended-scss', 'stylelint-config-airbnb', 'stylelint-config-styled-components', 'stylelint-config-standard', 'stylelint-config-prettier'],
   plugins: [
     'stylelint-scss',
     'stylelint-order',

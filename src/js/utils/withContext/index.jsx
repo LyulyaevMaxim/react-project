@@ -1,3 +1,4 @@
+/*
 import React from 'react'
 import hoistStatics from 'hoist-non-react-statics'
 import { MyContextProvider, MyContext } from '~components/contextExample/MyProvider'
@@ -22,3 +23,4 @@ const withContext = contextName => Component => {
 const AppProviders = props => <MyContextProvider>{props.children}</MyContextProvider>
 
 export { AppProviders as default, withContext }
+*/

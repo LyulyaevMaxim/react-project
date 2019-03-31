@@ -1,0 +1,12 @@
+{
+  "name": "styles-utils",
+  "description": "Utilities for working with the styles",
+  "version": "1.0.0",
+  "author": "Lyulyaev Maxim",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/core": "^10.0.9",
+    "@emotion/styled": "^10.0.9",
+    "babel-plugin-react-css-modules": "^5.2.1"
+  }
+}

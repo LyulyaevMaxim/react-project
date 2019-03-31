@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { PopupPortal } from '~modules/popup'
 import * as eventsActions from '~store/events/actions'
-import eventsSelectors from '~store/events/selectors'
+import { eventsSelectors } from '~store/events/selectors'
 import styles from '../styles.pcss'
 
 class FormDeleteEvents extends React.Component<I.IProps> {
@@ -49,9 +49,7 @@ class FormDeleteEvents extends React.Component<I.IProps> {
   }
 }
 
-const PopupDeleteEvents = connect(
+export const PopupDeleteEvents = connect(
   (store: I.IStore): I.IReduxProps => ({ isDeleting: eventsSelectors.isDeleting(store) }),
   { deleteEvents: eventsActions.deleteEvents } as I.IDispatchProps
 )(FormDeleteEvents)
-
-export default PopupDeleteEvents

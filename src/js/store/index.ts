@@ -2,9 +2,9 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import { connectRouter, routerMiddleware, RouterState } from 'connected-react-router'
 import { createBrowserHistory, History } from 'history'
 import thunk from 'redux-thunk'
-import productsReducer from './products/reducer'
+import { productsReducer } from './products/reducer'
 import productsTypes from './products/reducer.d'
-import { eventsReducer, IEvents } from './events/reducer'
+import { IEvents, eventsReducer } from './events/reducer'
 
 export const history: History = createBrowserHistory()
 
@@ -20,14 +20,10 @@ export interface IStore {
 }
 
 export const store = createStore(
-  combineReducers<IStore>({ router: connectRouter(history), products: productsReducer, events: eventsReducer }),
+  combineReducers({
+    router: connectRouter(history),
+    products: productsReducer,
+    events: eventsReducer,
+  }),
   enhancer
 )
-
-/* {...['auth', 'items', 'documents', 'roles', 'discounts', 'products'].reduce(
-  (accumulator, currentModule: string) => ({
-    ...accumulator,
-    [currentModule.substring(currentModule.lastIndexOf('/') + 1)]: require(`./${currentModule}/reducer`).default,
-  }),
-  { router: connectRouter(history) }
-),} */

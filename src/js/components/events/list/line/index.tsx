@@ -1,10 +1,10 @@
 import * as I from './index.d'
 import React from 'react'
 import { connect } from 'react-redux'
-import eventsSelectors from '~store/events/selectors'
+import { eventsSelectors } from '~store/events/selectors'
 import styles from '../styles.pcss'
 
-function EventLine(props: I.IReduxProps & I.IOwnProps) {
+function Line(props: I.IReduxProps & I.IOwnProps) {
   const { eventId, name, date, place } = props.eventData,
     { optionsMap } = props.eventsPlaces,
     lineId = `event-line-${eventId}`
@@ -34,7 +34,7 @@ function EventLine(props: I.IReduxProps & I.IOwnProps) {
   )
 }
 
-export default connect((_, ownProps: I.IOwnProps) => {
+export const EventLine = connect((_, ownProps: I.IOwnProps) => {
   const dataSelector = eventsSelectors.eventFactory(),
     checkedSelector = eventsSelectors.eventSelectedFactory(),
     { eventId } = ownProps
@@ -42,4 +42,4 @@ export default connect((_, ownProps: I.IOwnProps) => {
     eventData: dataSelector(store, { eventId }),
     isSelected: checkedSelector(store, { eventId }),
   })
-})(EventLine)
+})(Line)

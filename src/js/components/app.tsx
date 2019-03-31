@@ -5,13 +5,13 @@ import Loadable from 'react-loadable'
 import { initialPath } from '~constants'
 import '~css/index.pcss'
 import { IRoute } from '~types/index'
-import Header from '~components/header'
+import { Header } from '~components/header'
 import { withLanguage } from '~modules/contexts/language'
 
-const ContactForm: React.ComponentType<{}> = Loadable({
-  loader: () => import('~components/contact-form' /* webpackChunkName: "components->contact-form" */),
+/*const ContactForm: React.ComponentType<{}> = Loadable({
+  loader: () => import('~components/contact-form' /!* webpackChunkName: "components->contact-form" *!/),
   loading: () => null,
-})
+})*/
 
 const routes: IRoute[] = [
   {
@@ -28,7 +28,8 @@ const routes: IRoute[] = [
     path: `${initialPath}events`,
     isExact: true,
     component: Loadable({
-      loader: () => import('~components/events' /* webpackChunkName: "components-events" */),
+      loader: () =>
+        import('~components/events' /* webpackChunkName: "components-events" */).then(module => module.Events),
       loading: () => null,
     }),
   },
@@ -52,24 +53,22 @@ const routes: IRoute[] = [
   },
 ]
 
-const PageNotFound = () => <h1>404</h1>
-
+// const PageNotFound = () => <h1>404</h1>
+@hot
 @withLanguage()
-class App extends React.Component {
+export class App extends React.Component {
   render() {
     return (
       <React.Fragment>
         <Header {...{ routes }} />
-        <Switch>
+        {/*<Switch>
           {routes.map(({ path, component, isExact, title }) => (
             <Route {...{ path, component, exact: isExact, key: `route-${title}` }} />
           ))}
           <Route component={PageNotFound} />
         </Switch>
-        <ContactForm />
+        <ContactForm />*/}
       </React.Fragment>
     )
   }
 }
-
-export default hot(App)

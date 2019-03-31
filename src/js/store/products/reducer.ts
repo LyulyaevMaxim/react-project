@@ -1,16 +1,16 @@
 import produce from 'immer'
 import IActions from './actions.d'
-import {IProduct, IState} from './reducer.d'
+import { IProduct, IState } from './reducer.d'
 import { paymentTypes, productGroups, productsData } from './fakeData'
 
-const initialProduct: IProduct= {
+const initialProduct: IProduct = {
   productId: '',
   active: { value: false },
   name: { value: '' },
   description: { value: '' },
   productGroups: { value: [] },
   paymentTypes: { value: [] },
-  picture: {value: ''},
+  picture: { value: '' },
 }
 
 export enum ActionTypes {
@@ -50,7 +50,7 @@ const initialState: IState = {
   paymentTypes: { options: [], optionsMap: {}, isLoad: null },
 }
 
-export default (state: IState = initialState, action: IActions) =>
+export const productsReducer = (state: IState = initialState, action: IActions) =>
   produce<IState>(state, draft => {
     switch (action.type) {
       case ActionTypes.PRODUCTS_FETCH_REQUEST: {
@@ -99,7 +99,7 @@ export default (state: IState = initialState, action: IActions) =>
       case ActionTypes.PRODUCT_ADD: {
         const productId = String(state.unsavedList.length + 1)
         draft.unsavedList.push(productId)
-        draft.unsavedData[productId] = { ...initialProduct, productId  }
+        draft.unsavedData[productId] = { ...initialProduct, productId }
         break
       }
 
@@ -145,13 +145,13 @@ export default (state: IState = initialState, action: IActions) =>
     return draft
   })
 
-function productsNormalize({ products } : { products: Array<IProduct> }) {
+function productsNormalize({ products }: { products: Array<IProduct> }) {
   return products.reduce(
     (accumulator, product) => {
       accumulator.list.push(product.productId)
       accumulator.data[product.productId] = product
       return accumulator
     },
-    { list: [], data: {} } as {list: Array<IProduct['productId']>, data: {[key: string]: IProduct }}
+    { list: [], data: {} } as { list: Array<IProduct['productId']>; data: { [key: string]: IProduct } }
   )
 }
