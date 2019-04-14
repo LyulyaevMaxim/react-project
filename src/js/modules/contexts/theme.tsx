@@ -8,22 +8,23 @@ enum Themes {
 const getComponentName = Component => Component.displayName || Component.name || 'Component',
   breakpoints = { mobile: 320, tablet: 768, desktop: 1024, bigDesktop: 1440 },
   media = (() => {
-    const maxMobile = `(max-width: ${breakpoints.tablet - 1}px)`,
-      minTablet = `(min-width: ${breakpoints.tablet}px)`,
-      maxTablet = `(max-width: ${breakpoints.desktop - 1}px)`,
-      minDesktop = `(min-width: ${breakpoints.desktop}px)`,
-      maxDesktop = `(max-width: ${breakpoints.bigDesktop - 1}px)`,
-      minBigDesktop = `(min-width: ${breakpoints.bigDesktop}px)`
+    const maxMobile = `max-width: ${breakpoints.tablet - 1}px`,
+      minTablet = `min-width: ${breakpoints.tablet}px`,
+      maxTablet = `max-width: ${breakpoints.desktop - 1}px`,
+      minDesktop = `min-width: ${breakpoints.desktop}px`,
+      maxDesktop = `max-width: ${breakpoints.bigDesktop - 1}px`,
+      minBigDesktop = `min-width: ${breakpoints.bigDesktop}px`
 
     return {
-      maxMobile: `@media ${maxMobile}`,
-      tablet: `@media ${minTablet} and ${maxTablet}`,
-      minTablet: `@media ${minTablet}`,
-      maxTablet: `@media ${maxTablet}`,
-      desktop: `@media ${minDesktop} and ${maxDesktop}`,
-      minDesktop: `@media ${minDesktop}`,
-      maxDesktop: `@media ${maxDesktop}`,
-      minBigDesktop: `@media ${minBigDesktop}`,
+      maxMobile,
+      tablet: `@media (${minTablet}) and (${maxTablet})`,
+      minTablet,
+      maxTablet,
+      desktop: `@media (${minDesktop}) and (${maxDesktop})`,
+      minDesktop,
+      maxDesktop,
+      minBigDesktop,
+      is: size => window.matchMedia(size).matches,
     }
   })(),
   colors = {
@@ -55,9 +56,10 @@ export const ThemeContext = createContext({
   setTheme({ theme }: { theme: Themes }) {
     this.activeTheme = theme
   },
+  //only [active|set]Theme need keep in context?
   themes,
   breakpoints,
-  '@media': media,
+  media,
   colors,
   fonts: {
     family: {

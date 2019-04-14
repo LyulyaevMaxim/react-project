@@ -11,13 +11,12 @@ export enum hamburgerTypes {
 interface IHamburger {
   type: hamburgerTypes
   isActive: null | boolean
-  changeActive: (props: any) => void
-  css?: any
+  onClick: (props: any) => void
+  className?: any
 }
 
-export function Hamburger(props: IHamburger): React.ReactElement {
-  const { type, isActive = null, changeActive } = props,
-    onClick = React.useCallback(() => changeActive(!isActive), [isActive]),
+export const Hamburger: React.FC<IHamburger> = props => {
+  const { type, isActive = null, onClick } = props,
     /*theme = React.useContext(ThemeContext),*/
     styles = css`
       cursor: pointer;
@@ -67,5 +66,5 @@ export function Hamburger(props: IHamburger): React.ReactElement {
       })()}
     `
 
-  return <Icon onClick={onClick} css={[styles, props.css]} />
+  return <Icon onClick={onClick} css={[styles, props.className]} />
 }

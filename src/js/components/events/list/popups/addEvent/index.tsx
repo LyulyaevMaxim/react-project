@@ -38,7 +38,7 @@ class Form extends React.Component<I.IProps & { language: any }, I.IState> {
   componentDidCatch(error: Error) {
     this.handleError({ errorName: `componentDidCatch:${error.message}`, error })
   }
-  setStateProxy = (func: (state: I.IState) => void) => this.setState(produce(func))
+  setStateProxy = (func: (state: I.IState) => void) => null //this.setState(produce(func))
 
   readonly handleError = ({ errorName, error }: { errorName: string; error: Error }) =>
     this.setState({ errors: { ...this.state.errors, [errorName]: error } })

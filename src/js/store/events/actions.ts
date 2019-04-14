@@ -4,6 +4,8 @@ import { Dispatch } from 'redux'
 import { requestCreator, requestTypes } from '~utils/request-creator'
 import { API_URL } from '~constants'
 
+// type Action = ReturnType<typeof updateName>
+
 export const fetchEvents = () => (dispatch: Dispatch<IActions.IFetchEvents>) =>
   requestCreator(dispatch, {
     type: ActionTypes.EVENTS_FETCH,

@@ -5,6 +5,6 @@
   "author": "Maxim Lyulyaev",
   "license": "MIT",
   "dependencies": {
-    "react-day-picker": "^7.2.4"
+    "react-day-picker": "^7.3.0"
   }
 }

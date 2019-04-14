@@ -5,6 +5,6 @@
   "author": "Maxim Lyulyaev",
   "license": "MIT",
   "dependencies": {
-    "react-autosize-textarea": "^6.0.0"
+    "react-autosize-textarea": "^7.0.0"
   }
 }

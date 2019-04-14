@@ -37,6 +37,7 @@
     "no-use-of-empty-return-value": false,
     "no-default-export": true,
     "no-nested-template-literals": false
+    //    "strict-boolean-expressions": true
   },
   "rulesDirectory": ["tslint-plugin-prettier"],
   "linterOptions": {

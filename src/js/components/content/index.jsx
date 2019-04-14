@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Loadable from 'react-loadable'
+import { Helmet } from 'react-helmet'
 import styles from './index.pcss'
 
 const Button = Loadable({
@@ -27,6 +28,9 @@ class Content extends Component {
   render() {
     return (
       <main className={styles.main}>
+        <Helmet>
+          <title>Главная</title>
+        </Helmet>
         <h1 className={styles.h1}>React Project</h1>
         <p className={styles.p}>Демонстрация возможностей сборки</p>
         <h3 className={styles.h3}>О проекте:</h3>

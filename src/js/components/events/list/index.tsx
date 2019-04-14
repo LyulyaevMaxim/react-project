@@ -12,6 +12,7 @@ const PopupAddEvent = Loadable({
       import('./popups/addEvent' /* webpackChunkName: "components-events-addEventPopup" */).then(
         module => module.PopupAddEvent
       ),
+    render: () => null,
     loading: () => null,
   }),
   PopupDeleteEvents = Loadable({
@@ -19,6 +20,7 @@ const PopupAddEvent = Loadable({
       import('./popups/deleteEvents' /* webpackChunkName: "components-events-deleteEventsPopup" */).then(
         module => module.PopupDeleteEvents
       ),
+    render: () => null,
     loading: () => null,
   })
 
