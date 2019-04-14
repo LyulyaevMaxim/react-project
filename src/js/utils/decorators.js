@@ -39,10 +39,10 @@ export function debounce(fn, wait) {
   let timer
   return function debounced() {
     clearTimeout(timer)
-    const args = arguments
+    const arguments_ = arguments
     const that = this
     timer = setTimeout(() => {
-      fn.apply(that, args)
+      fn.apply(that, arguments_)
     }, wait)
   }
 }

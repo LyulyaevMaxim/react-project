@@ -5,10 +5,10 @@ import styles from './input.pcss'
 const getClass = require('~utils/react').className()
 
 class Input extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor(properties) {
+    super(properties)
     this.state = {
-      currentValue: props.value || '',
+      currentValue: properties.value || '',
       className: '',
     }
   }
@@ -21,16 +21,16 @@ class Input extends React.Component {
   }
 
   render() {
-    const { pattern, getValue, className: propsClass = '', ...props } = this.props
+    const { pattern, getValue, className: propertiesClass = '', ...properties } = this.props
     const { currentValue, className: stateClass = '' } = this.state
     return (
       <input
         {...{
-          ...props,
+          ...properties,
           value: currentValue,
           onChange: this.handleChange,
           onBlur: this.handleFocusOut,
-          className: getClass([styles['maxwell-input'], propsClass, stateClass && styles[stateClass]]),
+          className: getClass([styles['maxwell-input'], propertiesClass, stateClass && styles[stateClass]]),
         }}
       />
     )

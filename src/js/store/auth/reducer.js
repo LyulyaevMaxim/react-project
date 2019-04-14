@@ -1,5 +1,6 @@
 import { LOCAL_STORAGE_NAME } from '~constants'
 import { requestStatuses } from '~utils/request-creator'
+
 const { AUTH_SET } = require('./constants').default
 
 const initialState = {

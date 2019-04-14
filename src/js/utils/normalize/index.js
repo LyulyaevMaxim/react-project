@@ -11,22 +11,22 @@ export function normalizeEntity({ data, entities = 'field', key = 'id' }) {
 
 export const normalizeByField = ({ data = [], field = 'id' }) =>
   data.reduce(
-    (accumulator, el) => {
-      const fieldValue = get(el, field)
+    (accumulator, element) => {
+      const fieldValue = get(element, field)
       if (fieldValue) {
         accumulator.list.push(fieldValue)
-        accumulator.data[fieldValue] = el
+        accumulator.data[fieldValue] = element
       }
       return accumulator
     },
     { data: {}, list: [] }
   )
 
-export const deepRemoveFields = ({ obj = {}, fields = [] }) => {
+export const deepRemoveFields = ({ object = {}, fields = [] }) => {
   const res = {}
-  Object.getOwnPropertyNames(obj).forEach(field => {
+  Object.getOwnPropertyNames(object).forEach(field => {
     if (!fields.some(removeField => removeField === field)) {
-      res[field] = typeof obj[field] !== 'object' ? obj[field] : deepRemoveFields({ obj: obj[field], fields })
+      res[field] = typeof object[field] !== 'object' ? object[field] : deepRemoveFields({ obj: object[field], fields })
     }
   })
   return res

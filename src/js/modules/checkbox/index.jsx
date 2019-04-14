@@ -2,9 +2,9 @@ import React, { Fragment, Component } from 'react'
 import styles from './index.pcss'
 
 class Checkbox extends Component {
-  constructor(props) {
-    super(props)
-    const { handleChange, id } = props
+  constructor(properties) {
+    super(properties)
+    const { handleChange, id } = properties
     this.handleChange = handleChange ? ({ target }) => handleChange({ value: target.checked ? id : null }) : () => ({})
   }
 

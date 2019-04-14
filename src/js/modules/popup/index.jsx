@@ -5,22 +5,22 @@ import styles from './index.pcss'
 export class PopupPortal extends Component {
   static defaultId = 'modal-root'
 
-  constructor(props) {
-    super(props)
+  constructor(properties) {
+    super(properties)
     this.state = { hasError: false }
-    if (props.portalId && !document.getElementById(props.portalId)) {
+    if (properties.portalId && !document.getElementById(properties.portalId)) {
       this.el = document.createElement('div')
-      this.el.id = props.portalId
+      this.el.id = properties.portalId
     } else this.el = document.getElementById(PopupPortal.defaultId)
-    this.el.classList.add(styles.popup, styles['with-background'], ...props.classList)
+    this.el.classList.add(styles.popup, styles['with-background'], ...properties.classList)
   }
 
   componentDidMount() {
-    document.body.appendChild(this.el)
+    document.body.append(this.el)
   }
 
-  componentDidUpdate(prevProps) {
-    prevProps.isOpen !== this.props.isOpen && this.el.classList.toggle(styles['is-open'])
+  componentDidUpdate(previousProperties) {
+    previousProperties.isOpen !== this.props.isOpen && this.el.classList.toggle(styles['is-open'])
   }
 
   componentWillUnmount() {
@@ -37,11 +37,11 @@ export class PopupPortal extends Component {
   }
 }
 
-export function Popup({ popupClass, closeClass, closeId, ...props }) {
+export function Popup({ popupClass, closeClass, closeId, ...properties }) {
   const closePopup = ({ target }) => target.querySelector(`[class*='label-close']`).click()
   const handleSubmit = event => {
     event.preventDefault()
-    props.handleSubmit({ event })
+    properties.handleSubmit({ event })
     closePopup(event)
   }
 
@@ -58,7 +58,7 @@ export function Popup({ popupClass, closeClass, closeId, ...props }) {
           htmlFor: closeId,
         }}
       />
-      {props.children}
+      {properties.children}
     </form>
   )
 }

@@ -14,13 +14,13 @@ function getUserAgentInformation() {
 }
 
 function copyToBuffer({ value }) {
-  const tmp = document.createElement('INPUT')
+  const temporary = document.createElement('INPUT')
   const focus = document.activeElement
-  tmp.value = value
-  document.body.appendChild(tmp)
-  tmp.select()
+  temporary.value = value
+  document.body.append(temporary)
+  temporary.select()
   document.execCommand('copy')
-  document.body.removeChild(tmp)
+  document.body.removeChild(temporary)
   focus.focus()
 }
 
@@ -35,8 +35,8 @@ function getScrollWidth() {
     const outer = document.createElement('div')
     const inner = document.createElement('div')
     outer.style.overflow = 'scroll'
-    document.body.appendChild(outer)
-    outer.appendChild(inner)
+    document.body.append(outer)
+    outer.append(inner)
     const scrollbarWidth = outer.offsetWidth - inner.offsetWidth
     document.body.removeChild(outer)
     return scrollbarWidth

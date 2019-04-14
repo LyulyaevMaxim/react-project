@@ -3,13 +3,13 @@ import styles from './styles.pcss'
 
 const getClass = require('~utils/react').className()
 
-function Button({ text, type, children, className, isDisabled, isLink, ...props }) {
+function Button({ text, type, children, className, isDisabled, isLink, ...properties }) {
   return (
     <button
       {...{
         type: type || 'button',
         className: getClass([styles.button, isDisabled && styles.disabled, className]),
-        ...props,
+        ...properties,
       }}
     >
       {children || text}

@@ -23,27 +23,27 @@ class FormDemo extends Component {
       <main>
         <form className={styles.form}>
           <Input
-            placeholder="Иванов Иван Иванович"
             pattern="[A-zА-я]{2,}[\ ][A-zА-я]{2,}[\ ][A-zА-я]{2,}"
-            settings="isLetter"
+            placeholder="Иванов Иван Иванович"
             required
+            settings="isLetter"
           />
-          <Input type="email" placeholder="ivanovii@mail.ru" pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$" />
-          <Input placeholder="8 900 000 0000" pattern="\d{1}[\ ]\d{3}[\ ]\d{3}[\ ]\d{4}" settings="isPhone" required />
-          <Input placeholder="5200 0000 000" pattern="\d{4}[\ ]\d{4}[\ ]\d{3}" settings="isInn" />
+          <Input pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$" placeholder="ivanovii@mail.ru" type="email" />
+          <Input pattern="\d{1}[\ ]\d{3}[\ ]\d{3}[\ ]\d{4}" placeholder="8 900 000 0000" required settings="isPhone" />
+          <Input pattern="\d{4}[\ ]\d{4}[\ ]\d{3}" placeholder="5200 0000 000" settings="isInn" />
           <Input
-            placeholder="ivanovivan.ru"
             pattern="^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$"
+            placeholder="ivanovivan.ru"
           />
-          <Input placeholder="Любое число" pattern="\d{1,}" settings="isNumbers" />
+          <Input pattern="\d{1,}" placeholder="Любое число" settings="isNumbers" />
           <Input placeholder="Любой текст" />
 
           <div>
             <Input
-              pattern="\d{1,}"
-              settings="isNumbers"
-              placeholder="Отправляем число наружу"
               getValue={({ value }) => this.handleChange({ field: 'customInput', value })}
+              pattern="\d{1,}"
+              placeholder="Отправляем число наружу"
+              settings="isNumbers"
             />
             <p>Значение: {customInput}</p>
           </div>

@@ -2,10 +2,10 @@ import React from 'react'
 import DayPicker from 'react-day-picker'
 //import styles from './styles.pcss'
 
-function DatePicker(props) {
+function DatePicker(properties) {
   return (
     <DayPicker
-      {...{ ...props }}
+      {...{ ...properties }}
       //className="Range"
       // numberOfMonths={2}
       //fromMonth={}

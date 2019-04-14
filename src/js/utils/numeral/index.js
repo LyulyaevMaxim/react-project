@@ -24,5 +24,5 @@ export function compactlyRoundNumber({ number, numberOfSigns = 3, failback = 'N/
   const numberValue = parseFloat(number)
   return Number.isNaN(numberValue)
     ? failback
-    : numberValue.toFixed(+numberOfSigns).replace(/([0-9]+(\.[0-9]+[1-9])?)(\.?0+$)/, '$1')
+    : numberValue.toFixed(+numberOfSigns).replace(/(\d+(\.\d+[1-9])?)(\.?0+$)/, '$1')
 }

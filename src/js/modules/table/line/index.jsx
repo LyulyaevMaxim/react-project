@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { get, set } from 'lodash-es'
 import produce from 'immer'
 import loadable from 'react-loadable'
-import { LineConsumer } from '../index'
+import { LineConsumer } from '..'
 import styles from './index.pcss'
 
 const Select = loadable({
@@ -22,48 +22,48 @@ const Select = loadable({
 
 const className = require('~utils/react').className({ styles })
 
-const mapStateToProps = (_, props) => {
-  if (props.isTitleLine) return {}
+const mapStateToProperties = (_, properties) => {
+  if (properties.isTitleLine) return {}
   ;['dataFactory', 'unsavedDataFactory'].forEach(selector => {
-    if (typeof props.lineSelectors[selector] !== 'function') throw new Error(`Selector ${selector} is required`)
+    if (typeof properties.lineSelectors[selector] !== 'function') throw new Error(`Selector ${selector} is required`)
   })
-  const { lineSelectors: { dataFactory, unsavedDataFactory, ...lineSelectors } = {}, isUnsaved, id } = props
+  const { lineSelectors: { dataFactory, unsavedDataFactory, ...lineSelectors } = {}, isUnsaved, id } = properties
   const dataSelector = !isUnsaved ? dataFactory() : unsavedDataFactory()
   return store => ({
     data: dataSelector(store, { id }),
     ...Object.keys(lineSelectors).reduce(
-      (acc, selectorName) => ({ ...acc, [selectorName]: lineSelectors[selectorName](_, props) }),
+      (acc, selectorName) => ({ ...acc, [selectorName]: lineSelectors[selectorName](_, properties) }),
       {}
     ),
   })
 }
-const mapDispatchToProps = (dispatch, props) =>
-  props.isTitleLine ? {} : bindActionCreators(props.lineHandlers, dispatch)
+const mapDispatchToProperties = (dispatch, properties) =>
+  properties.isTitleLine ? {} : bindActionCreators(properties.lineHandlers, dispatch)
 
 @connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  mapStateToProperties,
+  mapDispatchToProperties,
   null,
   { forwardRef: true }
 )
 class TableLine extends React.Component {
-  constructor(props) {
-    super(props)
-    if (props.isTitleLine) return
+  constructor(properties) {
+    super(properties)
+    if (properties.isTitleLine) return
     this.state = {
-      isEdit: props.isUnsaved,
+      isEdit: properties.isUnsaved,
       isChanged: false,
-      data: props.data,
+      data: properties.data,
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (this.state && !this.state.isEdit && this.props.isSaved !== nextProps.isSaved) return null
+  shouldComponentUpdate(nextProperties) {
+    if (this.state && !this.state.isEdit && this.props.isSaved !== nextProperties.isSaved) return null
     return true
   }
 
-  componentDidUpdate(prevProps) {
-    if (!prevProps.isSaved && this.props.isSaved) {
+  componentDidUpdate(previousProperties) {
+    if (!previousProperties.isSaved && this.props.isSaved) {
       this.setState({ isChanged: false, isEdit: false })
     }
   }
@@ -221,8 +221,8 @@ class TableLine extends React.Component {
           <div>
             <Button
               className={className(['action-button', 'cancel-button'])}
-              onClick={this.handleCancel}
               isDisabled={!this.state.isChanged}
+              onClick={this.handleCancel}
             />
             <Button className={className(['action-button', 'delete-button'])} onClick={this.handleDelete} />
           </div>
@@ -232,6 +232,6 @@ class TableLine extends React.Component {
   }
 }
 
-export default React.forwardRef((props, ref) => (
-  <LineConsumer>{lineContext => <TableLine {...{ ...props, ...lineContext, ref }} />}</LineConsumer>
+export default React.forwardRef((properties, reference) => (
+  <LineConsumer>{lineContext => <TableLine {...{ ...properties, ...lineContext, reference }} />}</LineConsumer>
 ))

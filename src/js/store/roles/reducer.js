@@ -4,6 +4,7 @@ import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
 
 const { ROLES_GET, ROLE_CREATE, ROLE_DELETE, ROLE_UPDATE } = require('./constants').default
+
 const initialState = {
   loadingRoles: null,
   data: {},

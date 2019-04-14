@@ -3,26 +3,26 @@ import get from 'lodash/get'
 
 const emptyObject = {}
 
-const idGetter = (state, props) => props.id
-const itemsDataGetter = (state, props) => state.items.data
+const idGetter = (state, properties) => properties.id
+const itemsDataGetter = (state, properties) => state.items.data
 export const itemsListGetter = (state, { filterBy } = {}) => {
   const { list, data } = state.items
   if (filterBy) {
     let filteredList = [...list]
     filterBy.forEach(({ field, operation, value }) => {
-      filteredList = filteredList.filter(el => {
+      filteredList = filteredList.filter(element => {
         switch (operation) {
           case '>': {
-            return get(data[el], field) > value
+            return get(data[element], field) > value
           }
           case '<': {
-            return get(data[el], field) < value
+            return get(data[element], field) < value
           }
           case '=': {
-            return get(data[el], field) === value
+            return get(data[element], field) === value
           }
           case '!=': {
-            return get(data[el], field) !== value
+            return get(data[element], field) !== value
           }
           default:
             throw new Error(`Method don't know as work with your type of operation`, operation)
@@ -34,8 +34,8 @@ export const itemsListGetter = (state, { filterBy } = {}) => {
   return list
 }
 
-const shopIdGetter = (state, props) => props.storeId
-const itemsFromShopList = (state, props) => state.items.intoShops
+const shopIdGetter = (state, properties) => properties.storeId
+const itemsFromShopList = (state, properties) => state.items.intoShops
 
 export const itemSelectorFactory = () =>
   createSelector(itemsDataGetter, idGetter, (items, id) => items[id] || emptyObject)

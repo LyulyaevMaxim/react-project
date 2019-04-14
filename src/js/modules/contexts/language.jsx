@@ -30,8 +30,8 @@ export const LanguageContext = createContext({
 })
 
 export const withLanguage = (settings = {}) => Component => {
-  const ComponentWithLanguage = forwardRef((props, ref) => (
-    <LanguageContext.Consumer>{language => <Component {...{ ...props, ...ref, language }} />}</LanguageContext.Consumer>
+  const ComponentWithLanguage = forwardRef((properties, reference) => (
+    <LanguageContext.Consumer>{language => <Component {...{ ...properties, ...reference, language }} />}</LanguageContext.Consumer>
   ))
   ComponentWithLanguage.displayName = `withLanguage(${getComponentName(Component)})`
   return ComponentWithLanguage

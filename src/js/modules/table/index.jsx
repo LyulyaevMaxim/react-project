@@ -21,8 +21,8 @@ export const { Provider: LineProvider, Consumer: LineConsumer } = React.createCo
 })
 
 class Table extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor(properties) {
+    super(properties)
     this.linesMap = {}
     this.unsavedLinesMap = {}
     this.state = { hasError: false /*page: 1, pageSize: 50*/ }
@@ -33,9 +33,9 @@ class Table extends React.Component {
     tableDidMount && tableDidMount()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(previousProperties) {
     const { isSaveRun, linesList, unsavedLinesList } = this.props
-    if (prevProps.isSaveRun !== this.props.isSaveRun && isSaveRun) {
+    if (previousProperties.isSaveRun !== this.props.isSaveRun && isSaveRun) {
       this.props.tableUpdate &&
         this.props.tableUpdate({
           updated: linesList.reduce((acc, id) => {
@@ -55,17 +55,17 @@ class Table extends React.Component {
     if (isTitleLine) return <TableLine {...{ isTitleLine }} />
     if (!isUnsaved && this.props.isLoad !== false) return <div className='loader' />
 
-    const [list, refsMap] = !isUnsaved
+    const [list, referencesMap] = !isUnsaved
       ? [this.props.linesList, this.linesMap]
       : [this.props.unsavedLinesList, this.unsavedLinesMap]
 
     return list.map(id => {
-      if (!refsMap[id]) refsMap[id] = React.createRef()
+      if (!referencesMap[id]) referencesMap[id] = React.createRef()
       return (
         <TableLine
           {...{
             id,
-            ref: refsMap[id],
+            ref: referencesMap[id],
             isUnsaved,
             key: `product-${id}`,
           }}
@@ -115,23 +115,23 @@ class Table extends React.Component {
   }
 }
 
-const mapStateToProps = (store, props) => {
-  const tableSelectors = props.tableSelectors || {}
+const mapStateToProperties = (store, properties) => {
+  const tableSelectors = properties.tableSelectors || {}
   ;['isLoad', 'isSaveRun', 'linesList', 'unsavedLinesList'].forEach(selector => {
     if (typeof tableSelectors[selector] !== 'function') throw new Error(`Selector ${selector} is required`)
   })
   return {
-    isLoad: tableSelectors.isLoad(store, props),
-    isSaveRun: tableSelectors.isSaveRun(store, props),
-    linesList: tableSelectors.linesList(store, props),
-    unsavedLinesList: tableSelectors.unsavedLinesList(store, props),
+    isLoad: tableSelectors.isLoad(store, properties),
+    isSaveRun: tableSelectors.isSaveRun(store, properties),
+    linesList: tableSelectors.linesList(store, properties),
+    unsavedLinesList: tableSelectors.unsavedLinesList(store, properties),
   }
 }
 
-const mapDispatchToProps = (dispatch, { tableDidMount, ...props }) =>
-  bindActionCreators({ tableDidMount, ...props.tableHandlers }, dispatch)
+const mapDispatchToProperties = (dispatch, { tableDidMount, ...properties }) =>
+  bindActionCreators({ tableDidMount, ...properties.tableHandlers }, dispatch)
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProperties,
+  mapDispatchToProperties
 )(Table)

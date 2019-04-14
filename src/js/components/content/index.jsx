@@ -14,8 +14,8 @@ const Button = Loadable({
   })
 
 class Content extends Component {
-  constructor(props) {
-    super(props)
+  constructor(properties) {
+    super(properties)
     this.contactFormID = 'contact-form'
     this.state /* : Readonly<IState> */ = { isOpenContactForm: null }
   }
@@ -63,10 +63,10 @@ class Content extends Component {
   }
 }
 
-function ContactForm({ styles, ...props }) {
+function ContactForm({ styles, ...properties }) {
   return (
     <form>
-      <button className={styles.button} onClick={props.handleOpen}>
+      <button className={styles.button} onClick={properties.handleOpen}>
         Закрыть
       </button>
     </form>

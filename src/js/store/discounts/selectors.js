@@ -2,8 +2,8 @@ import { createSelector } from 'reselect'
 
 const emptyObject = {}
 
-const promotionIdGetter = (state, props) => props.promotionId
-export const promotionsDataGetter = (state, props) => state.promotions.data
+const promotionIdGetter = (state, properties) => properties.promotionId
+export const promotionsDataGetter = (state, properties) => state.promotions.data
 export const promotionsListGetter = (state, { sortBy, quantity }) => {
   if (sortBy) {
     const { list = [], data = {} } = state.promotions

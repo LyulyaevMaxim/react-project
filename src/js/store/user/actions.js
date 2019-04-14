@@ -1,4 +1,5 @@
 import { requestCreator, requestTypes } from '~utils/request-creator'
+
 const { USER_GET_DATA, USER_UPDATE } = require('./constants').default
 
 export function UserGetData({ uuid }) {

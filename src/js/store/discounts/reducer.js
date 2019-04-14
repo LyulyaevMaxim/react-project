@@ -4,6 +4,7 @@ import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
 
 const { PROMOTION_GET, PROMOTION_CREATE, PROMOTION_DELETE } = require('./constants').default
+
 const initialState = { data: {}, list: [] }
 
 export default produce((state = initialState, { type, payload = {}, toReducer = {} }) => {

@@ -19,7 +19,7 @@ class Textarea extends React.Component {
   }
 
   render() {
-    const { getValue, className, ...otherProps } = this.props
+    const { getValue, className, ...otherProperties } = this.props
     return (
       <div {...{ className: `${styles['maxwell-textarea-container']} ${className}` }}>
         <TextareaAutosize
@@ -31,7 +31,7 @@ class Textarea extends React.Component {
             maxRows: 10,
             onBlur: this.handleFocusOut,
             onKeyPress: this.handleKeyPress,
-            ...otherProps,
+            ...otherProperties,
           }}
         />
       </div>

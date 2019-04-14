@@ -1,5 +1,6 @@
 import { requestCreator, requestTypes } from '~utils/request-creator'
 import { API_URL_2 } from '~constants'
+
 const { ROLES_GET, ROLE_CREATE, ROLE_DELETE, ROLE_UPDATE } = require('./constants').default
 
 export const getRoles = (/*{roleId, roleName}*/) => (dispatch, getState) =>

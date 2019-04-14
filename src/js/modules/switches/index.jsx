@@ -31,10 +31,10 @@ class Switches extends Component {
       const handleClick = () => this.handleSwitch({ index })
       return (
         <label
-          htmlFor={`equipment-${index}`}
-          styleName={activeIndex === index ? 'active' : ''}
-          onClick={handleClick}
           key={`equipment-${index}`}
+          htmlFor={`equipment-${index}`}
+          onClick={handleClick}
+          styleName={activeIndex === index ? 'active' : ''}
         >
           {title}
         </label>
@@ -49,7 +49,7 @@ class Switches extends Component {
             {data.map(({ content, className }, index) => (
               <Fragment key={`equipment-${index}`}>
                 {switches[index]}
-                <input type='radio' name='equipment' id={`equipment-${index}`} defaultChecked={!index} />
+                <input defaultChecked={!index} id={`equipment-${index}`} name='equipment' type='radio' />
                 <switchable-block class={className}>{content}</switchable-block>
               </Fragment>
             ))}

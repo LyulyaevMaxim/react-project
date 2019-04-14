@@ -16,8 +16,8 @@ class ThemeSelect extends Component {
     value: ThemeSelect.themes[theme],
   }))
 
-  constructor(props) {
-    super(props)
+  constructor(properties) {
+    super(properties)
     this.state = {
       activeTheme: ThemeSelect.themes.light,
       toggleTheme: this.toggleTheme,
@@ -25,8 +25,8 @@ class ThemeSelect extends Component {
     document.body.classList.add(this.state.activeTheme)
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    document.body.classList.replace(prevState.activeTheme, this.state.activeTheme)
+  componentDidUpdate(previousProperties, previousState) {
+    document.body.classList.replace(previousState.activeTheme, this.state.activeTheme)
   }
 
   toggleTheme = ({ theme }) => this.setState({ activeTheme: theme })

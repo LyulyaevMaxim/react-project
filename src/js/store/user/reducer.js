@@ -4,6 +4,7 @@ import { normalizeEntity } from '~utils/normalize'
 import { removeElement } from '~utils/immutable'
 
 const { USERS_GET, USER_DELETE, USER_CREATE } = require('./constants').default
+
 const initialState = {
   data: {},
   list: [],
@@ -17,7 +18,7 @@ export default produce((state = initialState, { type, payload = {}, toReducer = 
 
     case USER_DELETE + requestStatuses.SUCCESS: {
       const { userId } = toReducer
-      const { [userId]: temp, ...data } = state.data
+      const { [userId]: temporary, ...data } = state.data
       return {
         ...state,
         data,

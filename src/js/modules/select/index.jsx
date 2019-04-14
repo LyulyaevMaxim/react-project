@@ -4,7 +4,7 @@ import styles from './index.pcss'
 
 Select.defaultOptions = []
 
-function Select({ onChange, className, ...props }) {
+function Select({ onChange, className, ...properties }) {
   const handleOnChange = value => onChange(value)
   return (
     <ReactSelect
@@ -15,7 +15,7 @@ function Select({ onChange, className, ...props }) {
         placeholder: 'Выбрать',
         options: Select.defaultOptions,
         onChange: handleOnChange,
-        ...props,
+        ...properties,
       }}
     />
   )

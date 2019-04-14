@@ -1,5 +1,6 @@
 import { defaultLanguage } from '~constants'
 import moment from 'moment'
+
 moment.locale(defaultLanguage)
 export { moment }
 

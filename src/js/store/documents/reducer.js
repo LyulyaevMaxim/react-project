@@ -2,6 +2,7 @@ import produce from 'immer'
 import { requestStatuses } from '~utils/request-creator'
 
 const { DOCUMENTS_GET } = require('./constants').default
+
 const initialState = {
   loadingDocuments: null,
   intoShops: {},

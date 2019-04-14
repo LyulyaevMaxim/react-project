@@ -3,6 +3,7 @@ import { requestStatuses } from '~utils/request-creator'
 import { normalizeEntity } from '~utils/normalize'
 
 const { ITEMS_GET_QUANTITY, ITEMS_GET } = require('./constants').default
+
 const initialState = {
   data: {},
   intoShops: {},

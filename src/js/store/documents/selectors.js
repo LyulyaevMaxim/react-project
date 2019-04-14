@@ -1,12 +1,12 @@
 import { createSelector } from 'reselect'
 import get from 'lodash/get'
 
-const idShop = (state, props) => props.shopId
-const documentsDataGetter = (state, props) => state.documents.data
-export const documentsIntoShopsListGetter = (state, props) => state.documents.intoShops
+const idShop = (state, properties) => properties.shopId
+const documentsDataGetter = (state, properties) => state.documents.data
+export const documentsIntoShopsListGetter = (state, properties) => state.documents.intoShops
 export const getDocumentsByShopId = (state, id) =>
   state.documents.intoShops[id] || state.documents.intoShops.ALL
-const typeFilter = (state, props) => get(props, 'documentsType', '')
+const typeFilter = (state, properties) => get(properties, 'documentsType', '')
 
 export const documentsFromShop = () =>
   createSelector(

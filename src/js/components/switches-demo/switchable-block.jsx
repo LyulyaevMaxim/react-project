@@ -18,9 +18,9 @@ class SwitchableBlock extends Component {
       <Fragment>
         {!!img.length && (
           <img
-            src={imgPatch}
-            className={`switchable-block-img ${!!imgPatch.length && 'loading'}`}
             alt=''
+            className={`switchable-block-img ${!!imgPatch.length && 'loading'}`}
+            src={imgPatch}
           />
         )}
         <switchable-block-text>

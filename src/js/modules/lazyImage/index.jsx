@@ -24,9 +24,9 @@ class LazyImage extends Component {
   */
   static networkOptions = { limitOfParallelDownload: null, delayBeforeTry: 1000 }
 
-  constructor(props) {
-    super(props)
-    this.state = { isLoading: props.noLazyLoad ? false : null, isError: false }
+  constructor(properties) {
+    super(properties)
+    this.state = { isLoading: properties.noLazyLoad ? false : null, isError: false }
     this.imageRef = createRef()
   }
 
@@ -48,23 +48,23 @@ class LazyImage extends Component {
   loadError = () => this.setState({ isLoading: false, isError: true })
 
   getImage() {
-    const { adaptiveSrc, src, alt, placeholder, srcSet, noLazyLoad, ...props } = this.props
+    const { adaptiveSource, source, alt, placeholder, sourceSet, noLazyLoad, ...properties } = this.props
     const { isLoading, isError } = this.state
     if (isLoading === null || isError) return null
 
     return (
       <Fragment>
-        {isLoading !== false && placeholder && <img src={placeholder} className={styles.placeholder} alt={alt} />}
-        {adaptiveSrc.map(([media, srcSet]) => (
-          <source {...{ media, srcSet, ...props, alt, key: `image-${srcSet}` }} />
+        {isLoading !== false && placeholder && <img alt={alt} className={styles.placeholder} src={placeholder} />}
+        {adaptiveSource.map(([media, sourceSet]) => (
+          <source {...{ media, sourceSet, ...properties, alt, key: `image-${sourceSet}` }} />
         ))}
         <img
-          src={src}
-          onLoad={this.imageLoaded}
-          onError={this.loadError}
           alt={alt}
           className={styles.image}
-          {...props}
+          onError={this.loadError}
+          onLoad={this.imageLoaded}
+          src={source}
+          {...properties}
         />
       </Fragment>
     )
