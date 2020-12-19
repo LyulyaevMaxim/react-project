@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink, NavLinkProps } from 'react-router-dom'
 // import ThemeSelect from './themeSelect'
 import { IRoute } from '~types/index'
-import { css, keyframes, useSpring, useTransition, animated } from '~utils/styled'
+import { css, keyframes, useSpring, useTransition, useChain, animated } from '~utils/styled'
 import { Hamburger, hamburgerTypes } from '~modules/hamburger'
 import { ThemeContext } from '~modules/contexts/theme'
 
@@ -14,7 +14,7 @@ const AnimatedNavLink = animated(
   React.forwardRef<HTMLAnchorElement, NavLinkProps>((props, ref) => {
     const refCallback = () => ref
     return (
-      <NavLink {...props} innerRef={refCallback} >
+      <NavLink {...props} innerRef={refCallback}>
         {props.children}
       </NavLink>
     )
@@ -26,13 +26,6 @@ export const Header: React.FC<IProps> = ({ routes }) => {
     theme = React.useContext(ThemeContext),
     isDesktop = theme.media.is(`(${theme.media.minDesktop})`),
     handleOpen = React.useCallback(() => changeOpen(!isOpen), [isOpen]),
-    handleClickLink = React.useCallback(
-      (event: React.SyntheticEvent<HTMLAnchorElement>) => {
-        event.stopPropagation()
-        /*if (!isDesktop) */ handleOpen()
-      },
-      [isOpen]
-    ),
     styles = (() => {
       const { activeTheme, themes, fonts, media } = theme
       return {
@@ -88,6 +81,7 @@ export const Header: React.FC<IProps> = ({ routes }) => {
               align-items: center;
               transition-property: transform;
               transition-duration: 0.3s;
+              transform: translateX(100%)
             }
 
             ul > li {
@@ -121,20 +115,9 @@ export const Header: React.FC<IProps> = ({ routes }) => {
     animations = {
       mountFromOpacity: useSpring({
         from: { filter: 'opacity(0)' },
-        to: {filter: 'opacity(1)'},
-        reset: true
-      }),
-      menu: useSpring({
-        transform: `translateX(${!isOpen ? 100 : 0}%)`,
+        to: { filter: 'opacity(1)' },
         reset: true,
       }),
-      menuLinks: useTransition(routes, route => route.title, {
-        from: { filter: 'opacity(0.0)' },
-        enter: { filter: 'opacity(1.1)' },
-        leave: { filter: 'opacity(0.1)' },
-        unique: true,
-        reset: true
-      })
     }
 
   return (
@@ -156,27 +139,53 @@ export const Header: React.FC<IProps> = ({ routes }) => {
           isActive={isOpen}
           onClick={handleOpen}
         />
-        {(isOpen !== null || isDesktop) && (
-          <React.Fragment>
-            <animated.ul style={animations.menu}>
-              {animations.menuLinks.map(({ item, props, key }) =>
-              <animated.li key={key} style={props}>
-                <NavLink to={item.path} onMouseEnter={item.component.preload} exact={true} onClick={handleClickLink}>
-                  {item.title}
-                </NavLink>
-              </animated.li>
-              )}
-              {/*{routes.map(({ title, path, component }) => (
-                <li key={title}>
-                  <NavLink to={path} onMouseEnter={component.preload} exact={true} onClick={handleClickLink}>
-                    {title}
-                  </NavLink>
-                </li>
-              ))}*/}
-            </animated.ul>
-          </React.Fragment>
-        )}
+        {(isOpen !== null || isDesktop) && <Menu {...{ routes, isOpen }} />}
       </nav>
     </header>
   )
+}
+
+const Menu = ({ routes, isOpen }) => {
+  const menuRef = React.useRef(),
+    // linksRef = React.useRef(),
+    animations = {
+      menu: useTransition(isOpen, item => item, {
+        ref: menuRef,
+        from: { transform: 'translateX(0)' },
+        enter: { transform: 'translateX(100%)' },
+        leave: { transform: 'translateX(100%)' },
+        update: { transform: 'translateX(100%)' },
+        // unique: true,
+        reset: true,
+      }),
+      /*menuLinks: useTransition(routes, route => route.title, {
+        ref: linksRef,
+        from: { filter: 'opacity(0)' },
+        enter: { filter: 'opacity(1)' },
+        leave: { filter: 'opacity(0)' },
+        trail: 400 / routes.length,
+        unique: true,
+        reset: true,
+      }),*/
+    },
+    handleClickLink = React.useCallback((event: React.SyntheticEvent<HTMLAnchorElement>) => {
+      event.stopPropagation()
+      // /!*if (!isDesktop) *!/ handleOpen()
+    }, [])
+
+  // useChain(isOpen ? [menuRef/*, linksRef*/] : [/*linksRef, */menuRef], [0, isOpen ? 0.1 : 0.6])
+console.log(animations.menu)
+  return animations.menu.map(({item,key, props, ...rest}) => {
+    console.log(rest)
+    return <animated.ul {...{key, style: props}} />
+  })
+
+      /*{animations.menuLinks.map(({ item, props, key }) => (
+        <animated.li style={props} key={key}>
+          <NavLink to={item.path} onMouseEnter={item.component.preload} exact={true} onClick={handleClickLink}>
+            {item.title}
+          </NavLink>
+        </animated.li>
+      ))}*/
+
 }

@@ -10,7 +10,8 @@ import { eventsSelectors } from '~store/events/selectors'
 import * as eventsActions from '~store/events/actions'
 import { withLanguage } from '~modules/contexts/language'
 import { flowRight } from 'lodash-es'
-import styles from '../styles.pcss'
+// import styles from '../styles.pcss'
+const styles: { [key: string]: string } = {}
 
 export function PopupAddEvent(props: I.IPopupProps) {
   return (

@@ -14,6 +14,7 @@ const presets = [
           loose: true,
           spec: true,
           useBuiltIns: 'usage',
+          corejs: 3,
           forceAllTransforms: true,
           debug: false,
         }
@@ -21,7 +22,7 @@ const presets = [
   ],
   ['@babel/preset-typescript', { isTSX: false, jsxPragma: 'React', allExtensions: false }],
   '@babel/preset-react',
-  '@emotion/babel-preset-css-prop'
+  '@emotion/babel-preset-css-prop',
 ].filter(Boolean)
 
 let plugins = [

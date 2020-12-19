@@ -1,7 +1,8 @@
 import React from 'react'
 import Loadable from 'react-loadable'
 import { Helmet } from 'react-helmet'
-import styles from './styles.pcss'
+// import styles from './styles.pcss'
+const styles: {[key: string]: string} = { }
 
 const EventList = Loadable({
   loader: () => import('./list' /* webpackChunkName: "components-events-list" */),

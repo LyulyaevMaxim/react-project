@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { PopupPortal } from '~modules/popup'
 import * as eventsActions from '~store/events/actions'
 import { eventsSelectors } from '~store/events/selectors'
-import styles from '../styles.pcss'
+// import styles from '../styles.pcss'
+const styles: {[key: string]: string} = { }
 
 class FormDeleteEvents extends React.Component<I.IProps> {
   static portalId = `popupDeleteEvents-${Math.random()}`

@@ -5,7 +5,7 @@ import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import { App } from '~components/app'
-import { store, history } from '~store/index'
+import { configureStore, history } from '~store/index'
 import { isProd } from '~constants'
 
 Promise.all(polyfills)
@@ -19,7 +19,7 @@ Promise.all(polyfills)
       })
 
     ReactDOM.render(
-      <Provider {...{ store }}>
+      <Provider store={configureStore()}>
         <ConnectedRouter {...{ history }}>
           <App />
         </ConnectedRouter>

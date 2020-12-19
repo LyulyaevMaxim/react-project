@@ -1,8 +1,6 @@
 const webpack = require('webpack'),
   CleanWebpackPlugin = require('clean-webpack-plugin'),
   path = require('path'),
-  HappyPack = require('happypack'),
-  happyThreadPool = HappyPack.ThreadPool({ size: 4 }),
   ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin'),
@@ -29,12 +27,30 @@ const root = path.resolve(__dirname, './'),
   initialPath = isDev ? '/' : require(`${root}/src/js/constants.js`).initialPath,
   assetsPath = 'assets'
 
-const cacheLoader = {
+const loaders = {
+  js: () => ({
+    loader: 'babel-loader',
+    options: {
+      cacheDirectory: true,
+      ...require(`${root}/babelrc`),
+    },
+  }),
+  files: ({ outputDirectory } = {}) => ({
+    loader: 'file-loader',
+    options: {
+      name: '[name].[ext]',
+      outputPath: `${assetsPath}/${outputDirectory}/`,
+      publicPath: `${initialPath}${assetsPath}/${outputDirectory}`,
+    },
+  }),
+}
+
+/*const cacheLoader = {
   loader: 'cache-loader',
   options: {
     cacheDirectory: `${root}/node_modules/.cache-loader`,
   },
-}
+}*/
 
 module.exports = (env, argv) => ({
   mode,
@@ -76,55 +92,19 @@ module.exports = (env, argv) => ({
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },
 
+  /*node: {
+    __dirname: true
+  },*/
+
   plugins: [
     /* !isDev && new (require('hard-source-webpack-plugin'))(), */
     isProd && new CleanWebpackPlugin(),
+    // new webpack.WatchIgnorePlugin([/pcss\.d\.ts$/]),
     isDev && new webpack.HotModuleReplacementPlugin(),
-    new HappyPack({
-      id: 'js',
-      threadPool: happyThreadPool,
-      loaders: [
-        cacheLoader,
-        {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-            ...require(`${root}/babelrc`),
-          },
-        },
-      ],
-    }),
-    new HappyPack({
-      id: 'PostCSS',
-      threadPool: happyThreadPool,
-      loaders: [
-        cacheLoader,
-        {
-          loader: require.resolve('typings-for-css-modules-loader'),
-          options: {
-            modules: true,
-            importLoaders: 1,
-            localIdentName: '[local]-[hash:base64:4]',
-            namedExport: true,
-            sourceMap: isDev,
-            // camelCase: true,
-            // exportOnlyLocals: true,
-          },
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            config: { path: `${root}/postcss.config.js` },
-            sourceMap: isDev && 'inline',
-          },
-        },
-      ],
-    }),
     new MiniCssExtractPlugin({
       filename: `${assetsPath}/css/[name]${isProd ? '.[hash]' : ''}.css`,
       chunkFilename: `${assetsPath}/css/[name]${isProd ? '.[hash]' : ''}.css`,
     }),
-    /*new MediaQuerySplittingPlugin(),*/
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: `${root}/src/html/index.html`,
@@ -177,13 +157,13 @@ module.exports = (env, argv) => ({
         if (/\.woff2$/.test(entry)) return 'font'
       },
     }),
-    new ForkTsCheckerWebpackPlugin({
+    /*new ForkTsCheckerWebpackPlugin({
       tsconfig: `${root}/tsconfig.json`,
       tslint: `${root}/linters/tslint.json`,
       watch: [`${root}/src/js`],
-      async: false,
-      checkSyntacticErrors: false,
-    }),
+      // async: false,
+      // checkSyntacticErrors: false,
+    }),*/
     isProd && new webpack.ContextReplacementPlugin(/[\/\\]locale(s)?$/, /en|ru/),
     isProd &&
       new LodashWebpackOptimize({
@@ -205,7 +185,7 @@ module.exports = (env, argv) => ({
       verbose: true,
       emitError: false,
     }),*/
-    new webpack.WatchIgnorePlugin([/pcss\.d\.ts$/]),
+
     isProd &&
       new CopyWebpackPlugin([
         {
@@ -233,11 +213,34 @@ module.exports = (env, argv) => ({
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        use: 'happypack/loader?id=js',
+        use: loaders.js(),
       },
       {
         test: /\.pcss$/,
-        loaders: [isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'happypack/loader?id=PostCSS'],
+        exclude: /node_modules/,
+        use: [
+          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          // cacheLoader,
+          /* {
+            loader: require.resolve('typings-for-css-modules-loader'),
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[local]-[hash:base64:4]',
+              namedExport: true,
+              sourceMap: isDev,
+              // camelCase: true,
+              // exportOnlyLocals: true,
+            },
+          },*/
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: { path: `${root}/postcss.config.js` },
+              sourceMap: isDev && 'inline',
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -256,20 +259,11 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.(woff2|woff)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: `${assetsPath}/fonts/`,
-              publicPath: `${initialPath}${assetsPath}/fonts`,
-            },
-          },
-        ],
+        use: loaders.files({ outputDirectory: 'fonts' })
       },
       {
         test: /.svg$/,
-        use: ['happypack/loader?id=js', '@svgr/webpack', 'url-loader' ],
+        use: [loaders.js(), '@svgr/webpack', 'url-loader'],
         issuer: {
           test: /\.(ts|js)x?$/,
         },
@@ -277,16 +271,7 @@ module.exports = (env, argv) => ({
       {
         test: /\.svg$/,
         include: `${root}/src/img`,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: `${assetsPath}/img`,
-              publicPath: `${initialPath}${assetsPath}/img`,
-            },
-          },
-        ]
+        use: loaders.files({ outputDirectory: 'img' })
       },
       {
         test: /\.(jpg|png)$/,
@@ -295,18 +280,11 @@ module.exports = (env, argv) => ({
           {
             loader: 'sqip-loader',
             options: {
-              numberOfPrimitives: 20
-            }
-          },
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: `${assetsPath}/img`,
-              publicPath: `${initialPath}${assetsPath}/img`,
+              numberOfPrimitives: 20,
             },
           },
-        ]
+          loaders.files({ outputDirectory: 'img' })
+        ],
       },
     ],
   },

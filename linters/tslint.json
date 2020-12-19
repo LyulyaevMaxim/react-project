@@ -10,8 +10,11 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "prettier": false,
     "no-constant-condition": true,
+    "no-default-export": true,
+    //"strict-boolean-expressions": true
+
+    "prettier": false,
     "import-name": false,
     "function-name": false,
     "no-console": false,
@@ -35,9 +38,7 @@
     "member-ordering": false,
     "no-extra-semicolon": false,
     "no-use-of-empty-return-value": false,
-    "no-default-export": true,
     "no-nested-template-literals": false
-    //    "strict-boolean-expressions": true
   },
   "rulesDirectory": ["tslint-plugin-prettier"],
   "linterOptions": {

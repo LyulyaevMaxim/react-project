@@ -9,6 +9,6 @@
     "swagger": "docker run -e SWAGGER_JSON=/swagger.json swaggerapi/swagger-ui"
   },
   "devDependencies": {
-    "swagger-ui": "^3.22.0"
+    "swagger-ui": "^3.22.1"
   }
 }
